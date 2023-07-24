@@ -19,8 +19,6 @@
 3. full_name : VARCHAR(100)
 4. phone_number : VARCHAR(20)
 5. address : VARCHAR(200)
-6. bio : TEXT
-7. website : VARCHAR(100)
 
 
 ## Table "orders"
