@@ -8,11 +8,11 @@ abstract class AbstractManager
     public function __construct()
     {
        $dbName = "kevincorvaisier_bddpro";
-       $host = "loacalhost";
+       $host = "127.0.0.1";
        $port = "3306";
        $username = "root";
        $password = "";
-       $connexionString = "mysql:host=$host;port=$port;dbname=$dbName";
+       $connexionString = "mysql:host=$host;charset=utf8;port=$port;dbname=$dbName";
        
        $this->db = new PDO(
            $connexionString,

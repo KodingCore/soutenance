@@ -14,15 +14,19 @@ class UserController extends AbstractController
     {
         if(!empty($_POST["username-email"]) && !empty($_POST["password"]))
         {
+
+
             $userTag = $_POST["username-email"];
             $pwd = $_POST["password"];
+
             $user = null;
-            if(str_contains($userTag, "@"))
-            {
+            if (filter_var($userTag, FILTER_VALIDATE_EMAIL)) {
+                // C'est une adresse e-mail
+                // Traiter l'entrée comme une adresse e-mail
                 $user = $this->userManager->getUserByEmail($userTag);
-            }
-            else
-            {
+            } else {
+                // Ce n'est pas une adresse e-mail, on suppose que c'est un nom d'utilisateur
+                // Traiter l'entrée comme un nom d'utilisateur
                 $user = $this->userManager->getUserByUsername($userTag);
             }
 
@@ -30,8 +34,16 @@ class UserController extends AbstractController
             {
                 if(password_verify($pwd, $user->getPasswordHash()))
                 {
-
+                    //connexion
                 }
+                else
+                {
+                    //password faux
+                }
+            }
+            else
+            {
+                //utilisateur inconnu dans la bdd
             }
         }
     }
@@ -40,11 +52,10 @@ class UserController extends AbstractController
     {
        if(!empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["password"]) && !empty($_POST["confirm-password"]))
        {
-            echo htmlentities($_POST["username"]);
-            //filter_var($inputValue, $filterType);
-            //FILTER_SANITIZE_STRING
-
-            //htmlentities(string $string);
+            // if(htmlentities($_POST["username"]) && )
+            // {
+            //     $user = $this->userManager->getUserByUsername($userTag);
+            // }
 
 
        }
