@@ -19,7 +19,7 @@ class InfoManager extends AbstractManager
         if($info)
         {
             $infoInstance = new Info($info["user_id"], $info["first_name"], $info["last_name"], $info["phone_number"], $info["address"], $info["town"], $info["zip"], $info["country"]);
-            $infoInstance->setInfoId($info["id"]);
+            $infoInstance->setInfoId($info["info_id"]);
             return $infoInstance;
         }
         else
@@ -36,7 +36,7 @@ class InfoManager extends AbstractManager
         $query = $this->db->prepare("INSERT INTO infos(user_id, first_name, last_name, phone_number, address, town, zip, country)
                                     VALUES(:user_id, :first_name, :last_name, :phone_number, :address, :town, :zip, :country)");
         $parameters = [
-            "user_id" => $_SESSION["user_id"],
+            "user_id" => $info->getUserId(),
             "first_name" => $info->getFirstName(),
             "last_name" => $info->getLastName(),
             "phone_number" => $info->getPhoneNumber(),

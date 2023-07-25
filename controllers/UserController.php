@@ -29,7 +29,7 @@ class UserController extends AbstractController
                 $user = $this->userManager->getUserByUsername($userTag);
             }
 
-            if($user != null)
+            if($user !== null)
             {
                 if(password_verify($pwd, $user->getPasswordHash()))
                 {
@@ -45,7 +45,7 @@ class UserController extends AbstractController
             }
             else
             {
-                $this->render("views/user/login.phtml", ["message" => "Username où email invalide"]);
+                $this->render("views/user/login.phtml", ["message" => "Username ou email invalide"]);
             }
         }
         else
@@ -122,14 +122,14 @@ class UserController extends AbstractController
                 $username = htmlentities($_POST["username"]);
                 $user->setUsername($username);
             }
-            if(isset($_POST["email"]))
+            if(isset($_POST["email"]) && !empty($_POST["email"]))
             {
                 if(filter_var($_POST["email"], FILTER_VALIDATE_EMAIL))
                 {
                     $user->setEmail($_POST["email"]);
                 }
             }
-            if(isset($_POST["password"]))
+            if(isset($_POST["password"]) && !empty($_POST["password"]))
             {
                 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
                 $user->setPasswordHash($password_hash);
@@ -143,37 +143,37 @@ class UserController extends AbstractController
                 $info = new Info($_SESSION["user_id"]);
                 $this->infoManager->insertInfo($info);
             }
-            if(isset($_POST["first_name"]))
+            if(isset($_POST["first_name"]) && !empty($_POST["first_name"]))
             {
                 $first_name = htmlentities($_POST["first_name"]);
                 $info->setFirstName($first_name);
             }
-            if(isset($_POST["last_name"]))
+            if(isset($_POST["last_name"]) && !empty($_POST["last_name"]))
             {
                 $last_name = htmlentities($_POST["last_name"]);
                 $info->setLastName($last_name);
             }
-            if(isset($_POST["phone_number"]))
+            if(isset($_POST["phone_number"]) && !empty($_POST["phone_number"]))
             {
                 $phone_number = htmlentities($_POST["phone_number"]);
                 $info->setPhoneNumber($phone_number);
             }
-            if(isset($_POST["address"]))
+            if(isset($_POST["address"]) && !empty($_POST["address"]))
             {
                 $address = htmlentities($_POST["address"]);
                 $info->setAddress($address);
             }
-            if(isset($_POST["town"]))
+            if(isset($_POST["town"]) && !empty($_POST["town"]))
             {
                 $town = htmlentities($_POST["town"]);
                 $info->setTown($town);
             }
-            if(isset($_POST["zip"]))
+            if(isset($_POST["zip"]) && !empty($_POST["zip"]))
             {
                 $zip = htmlentities($_POST["zip"]);
                 $info->setZip($zip);
             }
-            if(isset($_POST["country"]))
+            if(isset($_POST["country"]) && !empty($_POST["country"]))
             {
                 $country = htmlentities($_POST["country"]);
                 $info->setCountry($country);

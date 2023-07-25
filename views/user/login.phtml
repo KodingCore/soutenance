@@ -1,13 +1,13 @@
 <main>
     <?php
-    if(isset($this->data["message"]))
+    if(isset($this->data["message"])) //Si l'on à un message dans la data
     {
         ?>
-        <h2><?=$this->data["message"]; ?></h2>
+        <h2><?=$this->data["message"]; ?></h2> //On affiche le message
         <?php
     }
     ?>
-    <form action="index.php?route=login" method="POST">
+    <form action="index.php?route=login" method="POST"> //Formulaire de login
         <label for="username-email">Username / Email</label>
         <input type="text" name="username-email" id="username-email">
         <label for="password">Password</label> 
