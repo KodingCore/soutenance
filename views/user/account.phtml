@@ -1,14 +1,14 @@
 <main>
     <aside id="nav-lateral">
         <ul>
-            <li><a href="edit-profil">Edit profil</a></li>
+            <li><a href="#edit-profil">Edit profil</a></li>
             <li></li>
             <li></li>
         </ul>
     </aside>
     <section id="edit-profil">
         <h2>Profil</h2>
-        <form action="index.php?route=account" method="POST"> //Formulaire d'édition du profil (tbale users et infos)
+        <form action="index.php?route=account" method="POST"> <?php //Formulaire d'édition du profil (tbale users et infos)?>
             <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="<?=$this->data["user"]->getUsername();?>">
 
