@@ -1,13 +1,24 @@
 <main>
-    <form action="index.php?route=register" method="POST"> //Formulaire d'inscription
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <label for="confirm-password">Confirm password</label>
-        <input type="password" name="confirm-password" id="confirm-password">
-        <input type="submit" value="Register">
-    </form>
+    
+    <section>
+        <?php
+            if(isset($this->data["message"])) //Si l'on à un message dans la data
+            {
+                ?>
+                <span class="advert"><?=$this->data["message"]; ?></span> <?php //On affiche le message ?>
+                <?php
+            }
+        ?>
+        <form action="index.php?route=register" method="POST"> <?php //Formulaire d'inscription ?>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+            <label for="confirm-password">Confirm password</label>
+            <input type="password" name="confirm-password" id="confirm-password" required>
+            <input type="submit" value="Register">
+        </form>
+    </section>
 </main>

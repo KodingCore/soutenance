@@ -1,5 +1,4 @@
 <?php
-
 class User
 {
 
@@ -9,13 +8,13 @@ class User
     private string $password_hash;
     private string $role;
    
-    public function __construct(string $username, string $email, string $password_hash)
+    public function __construct(string $username, string $email, string $password_hash, string $role = "user")
     {
        $this->user_id = null;
        $this->username = $username;
        $this->email = $email;
        $this->password_hash = $password_hash;
-       $this->role = "user";
+       $this->role = $role;
     }
     
     public function getUserId() : ?int{  return $this->user_id;  }
@@ -32,5 +31,22 @@ class User
 
     public function getRole() : string{  return $this->role;  }
     public function setRole(string $role){   $this->role = $role;  }
+
+    /**
+ * Get the value of user_id
+     *
+     * @return  mixed
+     */
+    public function getUser_id()
+    {
+        return $this->user_id;
+    }
+
+    public function setPassword_hash($password_hash)
+    {
+        $this->password_hash = $password_hash;
+
+        return $this;
+    }
 }
 ?>

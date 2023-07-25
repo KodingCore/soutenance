@@ -81,31 +81,16 @@ class UserManager extends AbstractManager
         }
     }
 
-    public function insertUser(User $user): ? string
+    public function insertUser(User $user)
     {
-        if($this->getUserByEmail($user->getEmail()))
-        {
-            return "Un compte existe déjà à cette adresse";
-        }
-        else
-        {
-            if($this->getUserByUsername($user->getUsername()))
-            {
-                return "Ce pseudo est déjà pris";
-            }
-            else
-            {
-                $query = $this->db->prepare("INSERT INTO users (username, email, password_hash, role) VALUES(:username, :email, :password_hash, :role)");
-                $parameters = [
-                    "username" => $user->getUsername(),
-                    "email" => $user->getEmail(),
-                    "password_hash" => $user->getPasswordHash(),
-                    "role" => $user->getRole()
-                ];
-                $query->execute($parameters);
-                return null;
-            }
-        }
+        $query = $this->db->prepare("INSERT INTO users (username, email, password_hash, role) VALUES(:username, :email, :password_hash, :role)");
+        $parameters = [
+            "username" => $user->getUsername(),
+            "email" => $user->getEmail(),
+            "password_hash" => $user->getPasswordHash(),
+            "role" => $user->getRole()
+        ];
+        $query->execute($parameters);
     }
 
 

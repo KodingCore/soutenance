@@ -1,0 +1,92 @@
+$text-light: #050505;
+$background-light: #fafafa;
+$primary-light: #343357;
+$secondary-light: #ecdfec;
+$accent-light: #5f5fa0;
+
+$text-dark: #fafafa;
+$background-dark: #050505;
+$primary-dark: #343357;
+$secondary-dark: #201320;
+$accent-dark: #9f9fc6;
+
+
+html
+{
+    .lightmode{
+        background-color: $background-light;
+        color: $text-light;
+    }
+    .darkmode{
+        background-color: $background-dark;
+        color: $text-dark;
+    }
+    body
+    {
+        header
+        {
+            nav
+            {
+                width: 60%;
+                margin: auto 20px;
+                ul
+                {
+                    width: auto;
+                    display: flex;
+                    justify-content: space-evenly;
+                    list-style-type: none;
+
+                    li
+                    {
+                        a 
+                        {
+                            text-decoration: none;
+                            color: $text-light;   
+                        }
+                    }
+                }
+            }
+        }
+        main
+        {
+            aside
+            {
+
+            }
+            section
+            {
+                h2
+                {
+
+                }
+                form
+                {
+                    label
+                    {
+
+                    }
+                    input
+                    {
+
+                    }
+                    input[type="submit"]
+                    {
+                        width: 120px;
+                        height: 30px;
+                        border-radius: 10px;
+                        border:none;
+                        border-bottom: solid 1px;
+                        background-color: $secondary-light;
+                        color: $primary-light;
+                    }
+                    input[type="submit"]:hover
+                    {
+                        font-size: 0.90rem;
+                        outline: solid 1px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

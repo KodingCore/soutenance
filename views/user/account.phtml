@@ -2,8 +2,7 @@
     <aside id="nav-lateral">
         <ul>
             <li><a href="#edit-profil">Edit profil</a></li>
-            <li></li>
-            <li></li>
+            <li><a href="#orders">Orders</a></li>
         </ul>
     </aside>
     <section id="edit-profil">
@@ -17,6 +16,8 @@
 
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
+            <label for="confirm-password">Confirm password</label>
+            <input type="password" name="confirm-password" id="confirm-password">
 
             <label for="first_name">First name</label>
             <input type="text" id="first_name" name="first_name" placeholder="<?php if(isset($this->data["info"])){ echo $this->data["info"]->getFirstName(); } ?>">

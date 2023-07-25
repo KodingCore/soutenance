@@ -1,17 +1,19 @@
 <main>
-    <?php
-    if(isset($this->data["message"])) //Si l'on à un message dans la data
-    {
-        ?>
-        <h2><?=$this->data["message"]; ?></h2> //On affiche le message
+    <section>
         <?php
-    }
-    ?>
-    <form action="index.php?route=login" method="POST"> //Formulaire de login
-        <label for="username-email">Username / Email</label>
-        <input type="text" name="username-email" id="username-email">
-        <label for="password">Password</label> 
-        <input type="password" name="password" id="password">
-        <input type="submit" value="Log In">
-    </form>
+            if(isset($this->data["message"])) //Si l'on à un message dans la data
+            {
+                ?>
+                <span class="advert"><?=$this->data["message"]; ?></span> <?php //On affiche le message ?>
+                <?php
+            }
+        ?>
+        <form action="index.php?route=login" method="POST"> <?php //Formulaire de login ?>
+            <label for="username-email">Username / Email</label>
+            <input type="text" name="username-email" id="username-email" required>
+            <label for="password">Password</label> 
+            <input type="password" name="password" id="password" requires>
+            <input type="submit" value="Log In">
+        </form>
+    </section>
 </main>    

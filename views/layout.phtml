@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="assets/styles/css/reset.css">   -->
+    <link rel="stylesheet" href="assets/styles/css/revenge.css">    
+    <link rel="stylesheet" href="assets/styles/css/style.css">    
     <title>Koding Core</title>
 </head>
-<body>
+<body class="lightmode">
     <?php
     if(isset($_SESSION["user_id"])) //Si une session à été ouverte et la viriable "user_id" est défini
     {
         if(isset($_SESSION["role"])) //Si on lui à attribué un role
         {
+            
             if($_SESSION["role"] === "admin") //Si il à le role d'aministrateur
             {
                 require "views/roles-templates/admin/_header.phtml"; //On charge le header admin
