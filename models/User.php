@@ -9,13 +9,13 @@ class User
     private string $password_hash;
     private string $role;
    
-    public function __construct(string $username, string $email, string $password_hash, string $role)
+    public function __construct(string $username, string $email, string $password_hash)
     {
        $this->user_id = null;
        $this->username = $username;
        $this->email = $email;
        $this->password_hash = $password_hash;
-       $this->role = $role;
+       $this->role = "user";
     }
     
     public function getUserId() : ?int{  return $this->user_id;  }

@@ -7,20 +7,32 @@
 </head>
 <body>
     <?php
-    if(isset($_SESSION["user"]))
+    if(isset($_SESSION["user_id"]))
     {
-        require "views/roles-templates/user/connected/_header.phtml";
-    }
-    else if(isset($_SESSION["admin"]))
-    {
-        require "views/roles-templates/admin/_header.phtml";
+        if(isset($_SESSION["role"]))
+        {
+            if($_SESSION["role"] === "admin")
+            {
+                require "views/roles-templates/admin/_header.phtml";
+            }
+            else if($_SESSION["role"] === "user")
+            {
+                require "views/roles-templates/user/connected/_header.phtml";
+            }
+            
+        }
+        else
+        {
+            require "views/roles-templates/user/connected/_header.phtml";
+        }
+        
     }
     else
     {
         require "views/roles-templates/user/guest/_header.phtml";
     }
 
-    require $this->template;
+        require $this->template;
     ?>
 </body>
 </html>

@@ -1,7 +1,17 @@
-<form action="index.php?route=login" method="POST>
-    <label for="username-email">Username / Email</label>
-    <input type="text" name="username-email" id="username-email">
-    <label for="password">Password</label> 
-    <input type="password">
-    <input type="submit" value="Log In">
-</form>
+<main>
+    <?php
+    if(isset($this->data["message"]))
+    {
+        ?>
+        <h2><?=$this->data["message"]; ?></h2>
+        <?php
+    }
+    ?>
+    <form action="index.php?route=login" method="POST">
+        <label for="username-email">Username / Email</label>
+        <input type="text" name="username-email" id="username-email">
+        <label for="password">Password</label> 
+        <input type="password" name="password" id="password">
+        <input type="submit" value="Log In">
+    </form>
+</main>    

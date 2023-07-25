@@ -4,6 +4,9 @@ session_start();
 
 require "logics/Router.php";
 
+require "models/User.php";
+require "models/Info.php";
+
 require "managers/AbstractManager.php";
 require "managers/CotationManager.php";
 require "managers/InfoManager.php";

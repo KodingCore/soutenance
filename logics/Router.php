@@ -13,6 +13,16 @@ function checkRoute(string $route)
     {
         $userController->login();
     }
+    else if($route === "account")
+    {
+        $userController->changeUserInfo();
+    }
+    else if($route === "disconnect")
+    {
+        unset($_SESSION["user_id"]);
+        session_destroy();
+        $userController->render("views/general/homepage.phtml", []);
+    }
     else
     {
         $userController->render("views/general/homepage.phtml", []);
