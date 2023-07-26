@@ -6,9 +6,9 @@ class User
     private string $username;
     private string $email;
     private string $password_hash;
-    private string $role;
+    private int $role;
    
-    public function __construct(string $username, string $email, string $password_hash, string $role = "user")
+    public function __construct(string $username, string $email, string $password_hash, int $role = 0)
     {
        $this->user_id = null;
        $this->username = $username;
@@ -29,8 +29,8 @@ class User
     public function getPasswordHash() : string{  return $this->password_hash;  }
     public function setPasswordHash(string $password_hash){   $this->password_hash = $password_hash;  }
 
-    public function getRole() : string{  return $this->role;  }
-    public function setRole(string $role){   $this->role = $role;  }
+    public function getRole() : int{  return $this->role;  }
+    public function setRole(int $role){   $this->role = $role;  }
 
     /**
  * Get the value of user_id

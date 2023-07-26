@@ -1,10 +1,16 @@
+html {
+  scroll-behavior: smooth;
+}
 html .lightmode {
-  background-color: #fafafa;
+  background: linear-gradient(90deg, white, #fafafa);
   color: #050505;
 }
 html .darkmode {
-  background-color: #050505;
+  background: linear-gradient(90deg, black, #050505);
   color: #fafafa;
+}
+html body header {
+  display: flex;
 }
 html body header nav {
   width: 60%;

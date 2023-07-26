@@ -1,11 +1,11 @@
 $text-light: #050505;
-$background-light: #fafafa;
+$background-light: linear-gradient(90deg , white, #fafafa);
 $primary-light: #343357;
 $secondary-light: #ecdfec;
 $accent-light: #5f5fa0;
 
 $text-dark: #fafafa;
-$background-dark: #050505;
+$background-dark: linear-gradient(90deg, black, #050505);
 $primary-dark: #343357;
 $secondary-dark: #201320;
 $accent-dark: #9f9fc6;
@@ -13,18 +13,27 @@ $accent-dark: #9f9fc6;
 
 html
 {
+    scroll-behavior: smooth;
     .lightmode{
-        background-color: $background-light;
+        background: $background-light;
         color: $text-light;
     }
     .darkmode{
-        background-color: $background-dark;
+        background: $background-dark;
         color: $text-dark;
     }
     body
     {
         header
         {
+            display: flex;
+            #logo-kc
+            {
+                img
+                {
+
+                }
+            }
             nav
             {
                 width: 60%;

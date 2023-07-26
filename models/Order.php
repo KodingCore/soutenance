@@ -8,14 +8,16 @@ class Order
     private DateTime $order_date;
     private int $total_amount;
     private string $status;
+    private DateTime $payment_terms;
    
-    public function __construct(int $user_id, int $total_amount, string $status)
+    public function __construct(int $user_id, int $total_amount, string $status, DateTime $payment_terms)
     {
        $this->order_id = null;
        $this->user_id = $user_id;
        $this->order_date = //time Now
        $this->total_amount = $total_amount;
        $this->status = $status;
+       $this->payment_terms = $payment_terms;
     }
     
     public function getOrderId() : ?int{  return $this->order_id;  }
@@ -33,5 +35,7 @@ class Order
     public function getStatus() : string{  return $this->status;  }
     public function setStatus(string $status){   $this->status = $status;  }
 
+    public function getPaymentTerms() : DateTime{ return $this->payment_terms; }
+    public function setPaymentTerms($payment_terms){ $this->payment_terms = $payment_terms; }
 }
 ?>

@@ -13,6 +13,5 @@ abstract class AbstractController
 
        require "views/layout.phtml";
     }
-    
 }
 ?>  

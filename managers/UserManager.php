@@ -94,7 +94,7 @@ class UserManager extends AbstractManager
     }
 
 
-    public function editUser(User $user): ? string
+    public function editUser(User $user) : ? string
     {
         $sameUser = $this->getUserByEmail($user->getEmail());
 

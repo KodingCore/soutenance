@@ -17,5 +17,17 @@ class OrderManager extends AbstractManager
         return $ordersTab;
     }
     
+    public function insertOrder(Order $order)
+    {
+        $query = $this->db->prepare("INSERT INTO orders(user_id, order_date, total_amount, status, payment_terms) VALUES(:user_id, :order_date, :total_amount, :status, :payment_terms");
+        $parameters = [
+            "user_id" => $order->getUserId(),
+            "order_date" => $order->getOrderDate(),
+            "total_amount" => $order->getTotalAmount(),
+            "status" => $order->getStatus(),
+            "payment_terms" => $order->getPaymentTerms()
+        ];
+        $query->execute($parameters);
+    }
 }
 ?>

@@ -17,6 +17,10 @@ function checkRoute(string $route)
     {
         $userController->changeUserInfo();
     }
+    else if($route === "shop-window")
+    {
+        
+    }
     else if($route === "disconnect")
     {
         unset($_SESSION["user_id"]);
