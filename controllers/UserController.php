@@ -37,8 +37,8 @@ class UserController extends AbstractController
                     $_SESSION["user_id"] = $user->getUserId(); //*On set la variable de session user_id
                     $_SESSION["role"] = $user->getRole(); //*On set la variable de session role
                     $this->render("views/general/homepage.phtml", []); //*Retour sur la homepage
-                } else { $this->render("views/user/login.phtml", ["message" => "Password invalide"]);} //*Password invalide, on retourne sur la page login
-            } else { $this->render("views/user/login.phtml", ["message" => "Username ou email invalide"]);} //*email ou username invalide, on retourne sur la page login
+                } else { $this->render("views/user/login.phtml", ["champ" => "password", "message" => "Password invalide"]);} //*Password invalide, on retourne sur la page login
+            } else { $this->render("views/user/login.phtml", ["champ" => "email", "message" => "Username ou email invalide"]);} //*email ou username invalide, on retourne sur la page login
         } else { $this->render("views/user/login.phtml", []);} //*les POST ne sont pas set, on retourne à la page login
     }
 
@@ -84,7 +84,7 @@ class UserController extends AbstractController
                     $username = htmlentities($_POST["username"]);
                     $user->setUsername($username);
                 }else{
-                    $this->render("views/user/login.phtml", ["champ" => "username", "message" => "Nom d'utilisateur trop long (50 caractères maximum)"]);
+                    $this->render("views/user/account.phtml", ["champ" => "username", "message" => "Nom d'utilisateur trop long (50 caractères maximum)"]);
                 }
             }
             if (isset($_POST["email"]) && !empty($_POST["email"])) {
@@ -92,10 +92,10 @@ class UserController extends AbstractController
                     if (strlen($_POST["email"]) < 50){
                         $user->setEmail($_POST["email"]);
                     } else {
-                        $this->render("views/user/login.phtml", ["champ" => "email", "message" => "Email trop long (50 caractères maximum)"]);
+                        $this->render("views/user/account.phtml", ["champ" => "email", "message" => "Email trop long (50 caractères maximum)"]);
                     }
                 } else {
-                    $this->render("views/user/login.phtml", ["champ" => "email", "message" => "L'email n'est pas valide!"]);
+                    $this->render("views/user/account.phtml", ["champ" => "email", "message" => "L'email n'est pas valide!"]);
                 }
             }
             if (isset($_POST["password"]) && !empty($_POST["password"]) && isset($_POST["confirm-password"]) && !empty($_POST["confirm-password"]) && $_POST["password"] === $_POST["confirm-password"]) {
@@ -104,7 +104,7 @@ class UserController extends AbstractController
                     $password_hash = password_hash($password, PASSWORD_DEFAULT);
                     $user->setPasswordHash($password_hash);
                 } else {
-                    $this->render("views/user/login.phtml", ["champ" => "password", "message" => "Le password doit faire entre 20 et 50 caractères"]);
+                    $this->render("views/user/account.phtml", ["champ" => "password", "message" => "Le password doit faire entre 20 et 50 caractères"]);
                 }
                 
             }
@@ -117,46 +117,74 @@ class UserController extends AbstractController
                 $this->infoManager->insertInfo($info); //*Et on l'insert dans la BDD
             }
             if (isset($_POST["first_name"]) && !empty($_POST["first_name"])) {
-                $first_name = htmlentities($_POST["first_name"]);
-                $info->setFirstName($first_name);
+                $first_name = $_POST["first_name"];
+                if(strlen($first_name) < 50){
+                    $first_name = htmlentities($_POST["first_name"]);
+                    $info->setFirstName($first_name);
+                } else {
+                    $this->render("views/user/account.phtml", ["champ" => "first_name", "message" => "La longueur de chaine doit être inférieur à 50 caractères!"]);
+                }
             }
             if (isset($_POST["last_name"]) && !empty($_POST["last_name"])) {
-                $last_name = htmlentities($_POST["last_name"]);
-                $info->setLastName($last_name);
+                $last_name = $_POST["last_name"];
+                if(strlen($last_name) < 50){
+                    $last_name = htmlentities($_POST["last_name"]);
+                    $info->setLastName($last_name);
+                } else {
+                    $this->render("views/user/account.phtml", ["champ" => "last_name", "message" => "La longueur de chaine doit être inférieur à 50 caractères!"]);
+                }
+                
             }
             if (isset($_POST["phone_number"]) && !empty($_POST["phone_number"])) {
-                $phone_number = htmlentities($_POST["phone_number"]);
-                $info->setPhoneNumber($phone_number);
+                $phone_number = $_POST["phone_number"];
+                if(strlen($phone_number) < 50){
+                    $phone_number = htmlentities($_POST["phone_number"]);
+                    $info->setPhoneNumber($phone_number);
+                } else {
+                    $this->render("views/user/account.phtml", ["champ" => "phone_number", "message" => "La longueur de chaine doit être inférieur à 50 caractères!"]);
+                }
             }
             if (isset($_POST["address"]) && !empty($_POST["address"])) {
-                $address = htmlentities($_POST["address"]);
-                $info->setAddress($address);
+                $address = $_POST["address"];
+                if(strlen($address) < 50){
+                    $address = htmlentities($_POST["address"]);
+                    $info->setAddress($address);
+                } else {
+                    $this->render("views/user/account.phtml", ["champ" => "address", "message" => "La longueur de chaine doit être inférieur à 50 caractères!"]);
+                }
             }
             if (isset($_POST["town"]) && !empty($_POST["town"])) {
-                $town = htmlentities($_POST["town"]);
-                $info->setTown($town);
+                $town = $_POST["town"];
+                if(strlen($town) < 50){
+                    $town = htmlentities($_POST["town"]);
+                    $info->setTown($town);
+                } else {
+                    $this->render("views/user/account.phtml", ["champ" => "town", "message" => "La longueur de chaine doit être inférieur à 50 caractères!"]);
+                }
             }
             if (isset($_POST["zip"]) && !empty($_POST["zip"])) {
-                $zip = htmlentities($_POST["zip"]);
-                $info->setZip($zip);
+                $zip = $_POST["zip"];
+                if(strlen($zip) < 50){
+                    $zip = htmlentities($_POST["zip"]);
+                    $info->setZip($zip);
+                } else {
+                    $this->render("views/user/account.phtml", ["champ" => "zip", "message" => "La longueur de chaine doit être inférieur à 50 caractères!"]);
+                }
             }
-            if (isset($_POST["strlenry"]) && !empty($_POST["country"])) {
-                $country = htmlentities($_POST["country"]);
-                $info->setCountry($country);
+            if (isset($_POST["country"]) && !empty($_POST["country"])) {
+                $country = $_POST["country"];
+                if(strlen($country) < 50){
+                    $country = htmlentities($_POST["country"]);
+                    $info->setCountry($country);
+                } else {
+                    $this->render("views/user/account.phtml", ["champ" => "country", "message" => "La longueur de chaine doit être inférieur à 50 caractères!"]);
+                }
             }
             $this->infoManager->editInfo($info); //*Reset info BDD
 
-            $this->render("views/user/acstrlen.phtml", ["user" => $user, "info" => $info]);
+            $this->render("views/user/account.phtml", ["user" => $user, "info" => $info]);
         } else {
             $this->render("views/user/login.phtml", []);
-        }
-    }
-
-    private function controlPassword(string $password)
-    {
-        if(strlen($password) < 20)
-        {
-
         }
     }
 }

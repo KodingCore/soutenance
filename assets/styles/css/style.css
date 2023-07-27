@@ -1,13 +1,19 @@
-html {
-  scroll-behavior: smooth;
+.advert {
+  color: red;
 }
-html .lightmode {
+
+.lightmode {
   background: linear-gradient(90deg, white, #fafafa);
   color: #050505;
 }
-html .darkmode {
+
+.darkmode {
   background: linear-gradient(90deg, black, #050505);
   color: #fafafa;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 html body header {
   display: flex;
