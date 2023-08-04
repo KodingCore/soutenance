@@ -7,7 +7,7 @@ abstract class AbstractManager
 
     public function __construct()
     {
-       $dbName = "kevincorvaisier_bddpro";
+       $dbName = "kodingcore_bddpro";
        $host = "127.0.0.1";
        $port = "3306";
        $username = "root";
@@ -20,6 +20,5 @@ abstract class AbstractManager
            $password
        );
     }
-
 }
 ?>

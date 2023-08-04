@@ -11,8 +11,8 @@ class UserManager extends AbstractManager
         $usersTab = [];
         foreach($results as $user)
         {
-            $userInstance = new User($user["username"], $user["email"], $user["password_hash"], $user["role"]);
-            $userInstance->setUserId($user["user_id"]);
+            $userInstance = new User($user["username"], $user["first_name"], $user["last_name"], $user["email"], $user["tel"], $user["password_hash"], $user["role"]);
+            $userInstance->setUser_id($user["user_id"]);
         }
         return $usersTab;
     }
@@ -24,12 +24,11 @@ class UserManager extends AbstractManager
             "email" => $email
         ];
         $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        $user = $result;
+        $user = $query->fetch(PDO::FETCH_ASSOC);
         if($user)
         {
-            $userInstance = new User($user["username"], $user["email"], $user["password_hash"], $user["role"]);
-            $userInstance->setUserId($user["user_id"]);
+            $userInstance = new User($user["username"], $user["first_name"], $user["last_name"], $user["email"], $user["tel"], $user["password_hash"], $user["role"]);
+            $userInstance->setUser_id($user["user_id"]);
             return $userInstance;
         }
         else
@@ -46,12 +45,11 @@ class UserManager extends AbstractManager
             "username" => $username
         ];
         $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        $user = $result;
+        $user = $query->fetch(PDO::FETCH_ASSOC);
         if($user)
         {
-            $userInstance = new User($user["username"], $user["email"], $user["password_hash"], $user["role"]);
-            $userInstance->setUserId($user["user_id"]);
+            $userInstance = new User($user["username"], $user["first_name"], $user["last_name"], $user["email"], $user["tel"], $user["password_hash"], $user["role"]);
+            $userInstance->setUser_id($user["user_id"]);
             return $userInstance;
         }
         else
@@ -67,12 +65,11 @@ class UserManager extends AbstractManager
             "user_id" => $user_id
         ];
         $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        $user = $result;
+        $user = $query->fetch(PDO::FETCH_ASSOC);
         if($user)
         {
-            $userInstance = new User($user["username"], $user["email"], $user["password_hash"], $user["role"]);
-            $userInstance->setUserId($user["user_id"]);
+            $userInstance = new User($user["username"], $user["first_name"], $user["last_name"], $user["email"], $user["tel"], $user["password_hash"], $user["role"]);
+            $userInstance->setUser_id($user["user_id"]);
             return $userInstance;
         }
         else
@@ -83,49 +80,52 @@ class UserManager extends AbstractManager
 
     public function insertUser(User $user)
     {
-        $query = $this->db->prepare("INSERT INTO users (username, email, password_hash, role) VALUES(:username, :email, :password_hash, :role)");
+        $query = $this->db->prepare("INSERT INTO users (username, first_name, last_name, email, tel, password_hash, role) VALUES(:username, :first_name, :last_name, :email, :tel, :password_hash, :role)");
         $parameters = [
             "username" => $user->getUsername(),
+            "first_name" => $user->getFirst_name(),
+            "last_name" => $user->getLast_name(),
             "email" => $user->getEmail(),
-            "password_hash" => $user->getPasswordHash(),
+            "tel" => $user->getTel(),
+            "password_hash" => $user->getPassword_hash(),
             "role" => $user->getRole()
         ];
         $query->execute($parameters);
     }
 
 
-    public function editUser(User $user) : ? string
+    public function editUser(User $user)
     {
-        $sameUser = $this->getUserByEmail($user->getEmail());
-
-        if($sameUser)
+        $user_test = $this->getUserByEmail($user->getEmail());
+        if($user_test)
         {
-            if($sameUser->getUserId() !== $_SESSION["user_id"])
+            if($user_test->getUser_id() !== $_SESSION["user_id"])
             {
                 return "Un compte existe déjà à cette adresse";
             }
         }
 
-        $sameUser = $this->getUserByUsername($user->getUsername());
-        
-        if($sameUser)
+        $user_test = $this->getUserByUsername($user->getUsername());
+        if($user_test)
         {
-            if($sameUser->getUserId() !== $_SESSION["user_id"])
+            if($user_test->getUser_id() !== $_SESSION["user_id"])
             {
-                return "Ce pseudo est déjà pris";
+                return "Ce nom d'utilisateur est déjà pris";
             }
         }
 
-        $query = $this->db->prepare("UPDATE users SET username = :username, email = :email, password_hash = :password_hash, role = :role WHERE user_id = :user_id");
+        $query = $this->db->prepare("UPDATE users SET username = :username, first_name = :first_name, last_name = :last_name, email = :email, tel = :tel, password_hash = :password_hash, role = :role WHERE user_id = :user_id");
         $parameters = [
             "username" => $user->getUsername(),
+            "first_name" => $user->getFirst_name(),
+            "last_name" => $user->getLast_name(),
             "email" => $user->getEmail(),
-            "password_hash" => $user->getPasswordHash(),
+            "tel" => $user->getTel(),
+            "password_hash" => $user->getPassword_hash(),
             "role" => $user->getRole(),
             "user_id" => $_SESSION["user_id"]
         ];
         $query->execute($parameters);
-        return null;
     }
 }
 ?>
