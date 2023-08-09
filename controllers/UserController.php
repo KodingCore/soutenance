@@ -274,7 +274,43 @@ class UserController extends AbstractController
 
             if(!$error) //* Si pas d'erreur
             {
-                $info->setTel($tel); //* On reset le téléphone
+                $info->setTel($tel); //* On reset le numéro de téléphone
+                $info_change = true; //* Confirmation d'édition
+            }
+        }
+
+        if(!empty($_POST["address"])) //* Si on édite l'adresse
+        {
+            $address = htmlspecialchars($_POST["address"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
+            $error = $this->controlStrlen("Adresse", $address, 254); //* Validation de la longueur de chaine
+
+            if(!$error) //* Si pas d'erreur
+            {
+                $info->setAddress($address); //* On reset l'adresse
+                $info_change = true; //* Confirmation d'édition
+            }
+        }
+
+        if(!empty($_POST["zip"])) //* Si on édite le code postal
+        {
+            $zip = htmlspecialchars($_POST["zip"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
+            $error = $this->controlStrlen("Code postal", $zip, 14); //* Validation de la longueur de chaine
+
+            if(!$error) //* Si pas d'erreur
+            {
+                $info->setTel($zip); //* On reset le code postal
+                $info_change = true; //* Confirmation d'édition
+            }
+        }
+
+        if(!empty($_POST["city"])) //* Si on édite la ville
+        {
+            $city = htmlspecialchars($_POST["city"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
+            $error = $this->controlStrlen("Ville", $city, 99); //* Validation de la longueur de chaine
+
+            if(!$error) //* Si pas d'erreur
+            {
+                $info->setCity($city); //* On reset la ville
                 $info_change = true; //* Confirmation d'édition
             }
         }
