@@ -1,9 +1,3 @@
-<?php
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,6 +12,32 @@
             <div class="logo"></div>
         </div>
     </header>
+    <nav>
+        <?php
+            if(isset($_SESSION["user_id"]) && isset($_SESSION["role"]))
+            {
+                if($_SESSION["role"] === "admin")
+                {
+                    require 'admin/_navlist.phtml';
+                }
+                else
+                {
+                    require 'user/_navlist.phtml';
+                }   
+            }
+            else
+            {
+                require 'guest/_navlist.phtml';
+            }
+        ?>
+    </nav>
+    <main id="content">
+        <section>
+        <?php
+            require $this->template;
+        ?>
+        </section>
+    </main>
     
 </body>
 </html>

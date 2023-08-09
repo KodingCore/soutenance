@@ -1,0 +1,17 @@
+<?php
+    if(isset($this->data["message"])) //*Si on à un message dans la data
+    {
+        ?>
+        <span class="advert"><?=$this->data["message"]; ?></span>
+        <?php
+    }
+?>
+<form action="index.php?route=login" method="POST">
+    <label for="username_email">Username / Email</label>
+    <input type="text" name="username_email" id="username_email" required maxlength="100" onpaste="return false;">
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required maxlength="50" onpaste="return false;">
+
+    <input type="submit" value="Login">
+</form>

@@ -1,43 +1,23 @@
-<main id="content">
-    <section>
-        <?php
-            if(isset($this->data["message"])) //Si l'on à un message dans la data
-            {
-                ?>
-                <span class="advert"><?=$this->data["message"]; ?></span> <?php //On affiche le message ?>
-                <?php
-            }
+<?php
+    if(isset($this->data["message"])) //*Si on à un message dans la data
+    {
         ?>
-        <form action="index.php?route=register" method="POST"> <?php //Formulaire d'inscription ?>
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" required maxlength="50" onpaste="return false;">
-            <span class="error" aria-live="polite"></span>
+        <span class="advert"><?=$this->data["message"]; ?></span>
+        <?php
+    }
+?>
+<form action="index.php?route=register" method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" required maxlength="50" onpaste="return false;">
 
-            <label for="first_name">First name</label>
-            <input type="text" name="first_name" id="first_name" required maxlength="50" onpaste="return false;">
-            <span class="error" aria-live="polite"></span>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required maxlength="100" onpaste="return false;">
 
-            <label for="last_name">Last name</label>
-            <input type="text" name="last_name" id="last_name" required maxlength="50" onpaste="return false;">
-            <span class="error" aria-live="polite"></span>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required minlength="8" maxlength="50" onpaste="return false;">
 
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required maxlength="100" onpaste="return false;">
-            <span class="error" aria-live="polite"></span>
-
-            <label for="tel">Téléphone</label>
-            <input type="tel" name="tel" id="tel" required maxlength="15" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" onpaste="return false;">
-            <span class="error" aria-live="polite"></span>
-
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required minlength="8" maxlength="50" onpaste="return false;">
-            <span class="error" aria-live="polite"></span>
-
-            <label for="confirm-password">Confirm password</label>
-            <input type="password" name="confirm-password" id="confirm-password" required minlength="8" maxlength="50" onpaste="return false;">
-            <span class="error" aria-live="polite"></span>
-            
-            <input type="submit" value="Register">
-        </form>
-    </section>
-</main>
+    <label for="confirm_password">Confirm password</label>
+    <input type="password" name="confirm_password" id="confirm_password" required minlength="8" maxlength="50" onpaste="return false;">
+    
+    <input type="submit" value="Register">
+</form>

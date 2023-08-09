@@ -8,7 +8,7 @@ abstract class AbstractController
     public function render(string $view, array $values)
     {
         $this->template = $view;
-        $this-> data = $values;
+        $this->data = $values;
 
         require 'views/layout.phtml';
     }
