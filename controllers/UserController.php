@@ -128,6 +128,12 @@ class UserController extends AbstractController
                 $error = "Email ou username déjà utilisé";
             }
 
+            //* Validation de la forme d'un email
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) //* Si ce n'est pas une adresse e-mail
+            {
+                $error = "Ce n'est pas une adresse email valide";
+            } 
+
             //* Validation de la non-existance de l'email
             if($this->userManager->getUserByEmail($email))
             {
@@ -208,6 +214,12 @@ class UserController extends AbstractController
         {
             $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
             $error = $this->controlStrlen("Email", $email, 49); //* Validation de la longueur de chaine
+
+            //* Validation de la forme d'un email
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) //* Si ce n'est pas une adresse e-mail
+            {
+                $error = "Ce n'est pas une adresse email valide";
+            } 
 
             //* Validation de la non-existance de l'email
             if($this->userManager->getUserByEmail($email))
