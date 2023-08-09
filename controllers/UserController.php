@@ -156,15 +156,21 @@ class UserController extends AbstractController
                 //* On test si l'email d'enrégistrement est un email administrateur
                 foreach($adminEmails as $adminEmail)
                 {
-                    if($email === $adminEmail)
+                    if($email === $adminEmail) //* Si oui
                     {
-                        $role = "admin";
+                        $role = "admin"; //* On set le role sur "admin"
                     }
                 }
 
                 $password = password_hash($password, PASSWORD_DEFAULT); //* Hashage du password
+
                 $user = new User($username, $email, $password, $role); //* Instantiation d'un nouvel utilisateur
                 $this->userManager->insertUser($user); //* On insert l'utilisateur dans la BDD
+
+                $user = $this->userManager->getUserByEmail($email); //* On récupère l'utilisateur dans la BDD pour obtenir son ID
+                $info = new Info($user->getUserId()); //* Instantiation d'une info utilisateur à partir de son ID
+                $this->infoManager->insertInfo($info); //* On insert l'info dans la BDD
+
                 $this->render("views/user/login.phtml", []); //* On se rend sur la page de login
             }
         } else {

@@ -17,24 +17,16 @@ class InfoManager extends AbstractManager
         return $infosTab;
     }
 
-    public function getInfoByUserId(int $user_id) : ? Info
+    public function insertInfo(Info $info)
     {
-        $query = $this->db->prepare("SELECT * FROM infos WHERE user_id = :user_id");
+        $query = $this->db->prepare("INSERT INTO infos (user_id, first_name, last_name, tel) VALUES(:user_id, :fkrst_name, :last_name, :tel)");
         $parameters = [
-            "user_id" => $user_id
+            "user_id" => $info->getUserID(),
+            "first_name" => $info->getFirstName(),
+            "last_name" => $info->getLastName(),
+            "tel" => $info->getTel()
         ];
         $query->execute($parameters);
-        $info = $query->fetch(PDO::FETCH_ASSOC);
-        if($info)
-        {
-            $userInstance = new Info($user["username"], $user["email"], $user["password"], $user["role"]);
-            $userInstance->setUserId($user["user_id"]);
-            return $userInstance;
-        }
-        else
-        {
-            return null;
-        }
     }
 }
 ?>
