@@ -1,0 +1,41 @@
+<?php
+    if(isset($this->data["message"])) //*Si on à un message dans la data
+    {
+        ?>
+        <span class="advert"><?=$this->data["message"]; ?></span>
+        <?php
+    }
+    if(isset($this->data["user"]))
+    {
+        $user = $this->data["user"];
+    }
+    if(isset($this->data["info"]))
+    {
+        $info = $this->data["info"];
+    }
+?>
+<h1>Mon compte</h1>
+<form action="index.php?route=account" method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" placeholder=<?=$user->getUsername();?> maxlength="50" onpaste="return false;">
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" placeholder=<?=$user->getEmail();?> maxlength="50" onpaste="return false;">
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" minlength="8" maxlength="50" onpaste="return false;">
+
+    <label for="confirm_password">Confirm password</label>
+    <input type="password" name="confirm_password" id="confirm_password" minlength="8" maxlength="50" onpaste="return false;">
+
+    <label for="first_name">Prénom</label>
+    <input type="text" name="first_name" id="first_name" placeholder=<?=$info->getFirstName();?> maxlength="50" onpaste="return false;">
+
+    <label for="last_name">Nom</label>
+    <input type="text" name="last_name" id="last_name" placeholder=<?=$info->getLastName();?> maxlength="50" onpaste="return false;">
+
+    <label for="tel">Téléphone</label>
+    <input type="text" name="tel" id="tel" placeholder=<?=$info->getTel();?> maxlength="15" onpaste="return false;">
+    
+    <input type="submit" value="Editer mon profil">
+</form>

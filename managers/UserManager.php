@@ -96,7 +96,7 @@ class UserManager extends AbstractManager
         $user_test = $this->getUserByEmail($user->getEmail());
         if($user_test)
         {
-            if($user_test->getUserId() !== $_SESSION["user_id"])
+            if($user_test->getUserId() !== $user->getUserId())
             {
                 return "Un compte existe déjà à cette adresse";
             }
@@ -105,7 +105,7 @@ class UserManager extends AbstractManager
         $user_test = $this->getUserByUsername($user->getUsername());
         if($user_test)
         {
-            if($user_test->getUserId() !== $_SESSION["user_id"])
+            if($user_test->getUserId() !== $user->getUserId())
             {
                 return "Ce nom d'utilisateur est déjà pris";
             }
@@ -116,7 +116,7 @@ class UserManager extends AbstractManager
             "username" => $user->getUsername(),
             "email" => $user->getEmail(),
             "password" => $user->getPassword(),
-            "user_id" => $_SESSION["user_id"]
+            "user_id" => $user->getUserId()
         ];
         $query->execute($parameters);
     }

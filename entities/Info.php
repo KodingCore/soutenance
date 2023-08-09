@@ -15,11 +15,11 @@ class Info {
         $this->tel = $tel;
     }
 
-    public function getInfoId(): int { return $this->info_id; }
-    public function getUserId(): int { return $this->user_id; }
-    public function getFirstName(): string { return $this->first_name; }
-    public function getLastName(): string { return $this->last_name; }
-    public function getTel(): string { return $this->tel; }
+    public function getInfoId(): ? int { return $this->info_id; }
+    public function getUserId(): ? int { return $this->user_id; }
+    public function getFirstName(): ? string { return $this->first_name; }
+    public function getLastName(): ? string { return $this->last_name; }
+    public function getTel(): ? string { return $this->tel; }
 
     public function setInfoId(int $info_id): void { $this->info_id = $info_id; }
     public function setUserId(int $user_id): void { $this->user_id = $user_id; }

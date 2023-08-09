@@ -6,12 +6,13 @@
         <?php
     }
 ?>
+<h1>Créer un compte</h1>
 <form action="index.php?route=register" method="POST">
     <label for="username">Username</label>
     <input type="text" name="username" id="username" required maxlength="50" onpaste="return false;">
 
     <label for="email">Email</label>
-    <input type="email" name="email" id="email" required maxlength="100" onpaste="return false;">
+    <input type="email" name="email" id="email" required maxlength="50" onpaste="return false;">
 
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required minlength="8" maxlength="50" onpaste="return false;">
