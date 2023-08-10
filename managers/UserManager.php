@@ -3,18 +3,27 @@
 class UserManager extends AbstractManager
 {
     
-    public function index() : array
+    public function getUsers() : ? array
     {
         $query = $this->db->prepare("SELECT * FROM users");
         $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
-        $usersTab = [];
-        foreach($results as $user)
+        $users = $query->fetchAll(PDO::FETCH_ASSOC);
+        if($users)
         {
-            $userInstance = new User($user["username"], $user["email"], $user["password"], $user["role"]);
-            $userInstance->setUserId($user["user_id"]);
+            $usersTab = [];
+            foreach($users as $user)
+            {
+                $userInstance = new User($user["username"], $user["email"], $user["password"], $user["role"]);
+                $userInstance->setUserId($user["user_id"]);
+                array_push($usersTab, $userInstance);
+            }
+            return $usersTab;
         }
-        return $usersTab;
+        else
+        {
+            return null;
+        }
+        
     }
 
     public function getUserByEmail(string $email) : ? User

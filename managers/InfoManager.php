@@ -4,7 +4,7 @@ class InfoManager extends AbstractManager
 {
     
     
-    public function index() : array
+    public function getInfos() : array
     {
         $query = $this->db->prepare("SELECT * FROM infos");
         $query->execute();
@@ -67,5 +67,7 @@ class InfoManager extends AbstractManager
         ];
         $query->execute($parameters);
     }
+
+
 }
 ?>

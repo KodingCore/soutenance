@@ -24,4 +24,17 @@ abstract class AbstractController
             return null;
         }
     }
+
+    public function controlSpeChar(string $field, string $string) : ? string
+    {
+        $illegal = "#$%^&*()+=-[]';,./{}|:<>?~";
+        if (!strpbrk($string, $illegal)) 
+        {
+            return "Saisie du champ {$field} invalide (pas de caractères spéciaux)";
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

@@ -1,0 +1,71 @@
+<?php
+    $userManager = new UserManager();
+    $messageManager = new MessageManager();
+    $reviewManager = new ReviewManager();
+    $infoManager = new InfoManager();
+    $templateManager = new TemplateManager();
+    // $quotationManager = new QuotationManager();
+    // $imageManager = new ImageManager();
+    // $categoryManager = new CategoryManager();
+    // $appointmentManager = new AppointmentManager();
+?>
+
+<aside class="left-pannel">
+    <ul>
+        <li>
+            <a href="#" id="users-link">Users</a>
+            <a href="#" id="messages-link">Messages</a>
+            <a href="#" id="templates-link">Templates</a>
+            <a href="#" id="reviews-link">Reviews</a>
+        </li>
+    </ul>
+</aside>
+<main class="container">
+    <table id="users-table" class="hidden">
+        <thead>
+            <tr>
+                <th>username</th>
+                <th>email</th>
+                <th>role</th>
+                <th>prénom</th>
+                <th>nom</th>
+                <th>téléphone</th>
+                <th>adresse</th>
+            </tr>
+        </thead>
+    </table>
+    <table id="messages-table" class="hidden">
+        <thead>
+            <tr>
+                <th>sujet</th>
+                <th>text</th>
+                <th>username</th>
+                <th>date</th>
+            </tr>
+        </thead>
+    </table>
+    <table id="templates-table" class="hidden">
+        <thead>
+            <tr>
+                <th>nom</th>
+                <th>description</th>
+                <th>categorie</th>
+                <th>chemin de l'image</th>
+                <th>prix</th>
+                <th>date de création</th>
+                <th>date de mise à jour</th>
+            </tr>
+        </thead>
+    </table>
+    <table id="reviews-table" class="hidden">
+        <thead>
+            <tr>
+                <th>username</th>
+                <th>contenu</th>
+                <th>date de création</th>
+                <th>template</th>
+            </tr>
+        </thead>
+    </table>
+</main>
+<script type="module" src="assets/js/dashboard.js"></script>

@@ -17,6 +17,8 @@ require "managers/AbstractManager.php";
 require "managers/UserManager.php";
 require "managers/InfoManager.php";
 require "managers/MessageManager.php";
+require "managers/TemplateManager.php";
+require "managers/ReviewManager.php";
 
 require "controllers/AbstractController.php";
 require "controllers/HomepageController.php";

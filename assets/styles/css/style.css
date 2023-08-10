@@ -5,4 +5,8 @@
 [id*=error] {
   color: red;
   font-size: 1rem;
+}
+
+.hidden {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

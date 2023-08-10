@@ -116,6 +116,9 @@ class UserController extends AbstractController
             $error = $this->controlStrlen("Password", $password, 49);
             $error = $this->controlStrlen("Confirm password", $confirm_password, 49);
 
+            //* Control
+            $error = $this->controlSpeChar("Username", $username);
+
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)
             {
