@@ -1,3 +1,8 @@
 .erreur {
   outline: solid 2px red;
+}
+
+[id*=error] {
+  color: red;
+  font-size: 1rem;
 }/*# sourceMappingURL=style.css.map */

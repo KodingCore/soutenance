@@ -10,15 +10,19 @@
 <form action="index.php?route=register" method="POST" id="register_form">
     <label for="username">Username</label>
     <input type="text" name="username" id="username" required maxlength="50" onpaste="return false;">
+    <span id="error_username"></span>
 
     <label for="email">Email</label>
     <input type="email" name="email" id="email" required maxlength="50" onpaste="return false;">
+    <span id="error_email"></span>
 
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" required minlength="8" maxlength="50" onpaste="return false;">
+    <input type="password" name="password" id="password" required minlength="8" onpaste="return false;">
+    <span id="error_password"></span>
 
     <label for="confirm_password">Confirm password</label>
-    <input type="password" name="confirm_password" id="confirm_password" required minlength="8" maxlength="50" onpaste="return false;">
+    <input type="password" name="confirm_password" id="confirm_password" required minlength="8" onpaste="return false;">
+    <span id="error_confirm_password"></span>
     
     <input type="submit" value="Register">
 </form>
