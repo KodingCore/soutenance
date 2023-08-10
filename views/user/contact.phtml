@@ -1,0 +1,21 @@
+
+<?php
+    if(isset($this->data["message"])) //*Si on à un message dans la data
+    {
+        ?>
+        <span class="advert"><?=$this->data["message"]; ?></span>
+        <?php
+    }
+?>
+<main id="container">
+    <h1>Envoyer un message à l'administrateur</h1>
+    <form action="index.php?route=contact" method="POST" id="contact_form">
+        <label for="subject">Sujet</label>
+        <input type="text" name="subject" id="subject" autocomplete="off" required maxlength="50" onpaste="return false;">
+
+        <label for="content">Message</label>
+        <input type="text" name="content" id="content" autocomplete="off" required maxlength="2048" onpaste="return false;">
+
+        <input type="submit" value="Envoyer">
+    </form>
+</main>

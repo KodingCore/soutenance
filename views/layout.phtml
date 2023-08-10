@@ -15,7 +15,7 @@
     </header>
     <nav>
         <?php
-            if(isset($_SESSION["user_id"]) && isset($_SESSION["role"]))
+            if(isset($_SESSION["user_id"], $_SESSION["role"]))
             {
                 if($_SESSION["role"] === "admin")
                 {
@@ -32,13 +32,8 @@
             }
         ?>
     </nav>
-    <main id="content">
-        <section>
-        <?php
-            require $this->template;
-        ?>
-        </section>
-    </main>
-    <script type="module" src="assets/js/index.js"></script>
+    <?php
+        require $this->mainTemplate;
+    ?>
 </body>
 </html>

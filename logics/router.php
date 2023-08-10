@@ -4,6 +4,8 @@ function checkRoute($route)
 {
     $homepageController = new HomepageController();
     $userController = new UserController();
+    $contactController = new ContactController();
+    $dashboardController = new DashboardController();
 
     if($route === "login")
     {
@@ -19,17 +21,18 @@ function checkRoute($route)
     }
     else if($route === "contact")
     {
-
+        $contactController->sendMessage();
     }
     else if($route === "disconnect")
     {
         unset($_SESSION["user_id"]);
         unset($_SESSION["role"]);
+        session_destroy();
         $homepageController->index();
     }
     else if($route === "dashboard")
     {
-
+        $dashboardController->index();
     }
     else if($route === "shop")
     {

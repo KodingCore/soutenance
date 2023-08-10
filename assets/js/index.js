@@ -18,45 +18,38 @@ window.addEventListener("DOMContentLoaded", function(){
     //* regex >>> au moins une majuscule, un chiffre, un caractère spécial, et 8 caractères
     const passwordRegex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
 
-    checkRegex("username", champ_username, usernameRegex);
-    checkRegex("email", champ_email, emailRegex);
-    checkRegex("password", champ_password, passwordRegex);
-    checkRegex("confirm password", champ_confirm_password, passwordRegex);
+    checkRegex(champ_username, usernameRegex, "L'username", error_username);
+    checkRegex(champ_email, emailRegex,"L'email", error_email);
+    checkRegex(champ_password, passwordRegex,"Le password", error_password);
+    checkRegex(champ_confirm_password, passwordRegex, "La confirmation du password", error_confirm_password);
+
 
     champ_confirm_password.addEventListener("change", function(){
-        if(champ_confirm_password.value !== champ_password.value)
+        if(champ_confirm_password.value !== champ_password.value || champ_password.length === 0)
         {
             champ_confirm_password.classList.add("erreur");
+            error_confirm_password.textContent = "La confirmation du password doit être identique au password"
         }
         else
         {
             champ_confirm_password.classList.remove("erreur");
+            error_confirm_password.textContent = "";
         }
     })
 
-    champ_password.addEventListener("change", function(){
-        if(champ_confirm_password.value !== champ_password.value)
-        {
-            champ_confirm_password.classList.add("erreur");
-        }
-        else
-        {
-            champ_confirm_password.classList.remove("erreur");
-        }
-    })
-
-    function checkRegex(name, field, reg)
+    function checkRegex(input_field, reg, name, error_field)
     {
-        field.addEventListener("change", function(){
+        input_field.addEventListener("change", function(){
 
-            if(!reg.exec(field.value))
+            if(!reg.exec(input_field.value))
             {
-                field.classList.add("erreur");
-                error_username.textContent = "faux";
+                input_field.classList.add("erreur");
+                error_field.textContent = name + " n'est pas conforme";
             }
             else
             {
-                field.classList.remove("erreur");
+                input_field.classList.remove("erreur");
+                error_field.textContent = "";
             }
         })
     }
