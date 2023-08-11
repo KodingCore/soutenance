@@ -12,7 +12,7 @@ abstract class AbstractController
 
         require 'views/layout.phtml';
     }
-
+    
     public function controlStrlen(string $field, string $string, int $length) : ? string
     {
         if (strlen($string) > $length) 

@@ -4,16 +4,18 @@
 session_start();
 
 //fichier de regroupement de tout les requires
-require "logics/autoload.php";
+require "config/autoload.php";
 
-//Appel de la function checkRoute de router.php
+$router = new Router();
+
+//Appel de la function checkRoute de Router.php
 if(isset($_GET["route"]))
 {
-    checkRoute($_GET["route"]);
+    $router->checkRoute($_GET["route"]);
 }
 else
 {
-    checkRoute("");
+    $router->checkRoute("");
 }
 
 ?>

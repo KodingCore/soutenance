@@ -1,7 +1,5 @@
 <?php
 
-require "logics/router.php";
-
 require "entities/Appointment.php";
 require "entities/Category.php";
 require "entities/Image.php";
@@ -25,3 +23,5 @@ require "controllers/HomepageController.php";
 require "controllers/UserController.php";
 require "controllers/DashboardController.php";
 require "controllers/ContactController.php";
+
+require "services/Router.php";

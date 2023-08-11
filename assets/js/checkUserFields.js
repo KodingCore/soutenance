@@ -22,6 +22,8 @@ export function checkUserFields(form)
     checkRegex(champ_password, passwordRegex,"password", error_password);
     checkRegex(champ_confirm_password, passwordRegex, "confirm_password", error_confirm_password);
 
+    
+
     champ_password.addEventListener("change", function(){
         if(champ_confirm_password.value !== champ_password.value && champ_confirm_password.value.length > 0)
         {
@@ -53,8 +55,8 @@ export function checkUserFields(form)
         }
     })
 
-        function checkRegex(input_field, reg, name, error_field)
-        {
+    function checkRegex(input_field, reg, name, error_field)
+    {
         input_field.addEventListener("change", function(){
             if(!reg.exec(input_field.value))
             {
@@ -75,4 +77,11 @@ export function checkUserFields(form)
             }
         })
     }
+
+    form.addEventListener("submit", function(event){
+        if(error_username.value !== null || error_email.value !== null || champ_password.value !== null || error_confirm_password !== null)
+        {
+            event.preventDefault();
+        }
+    })
 }
