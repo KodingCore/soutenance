@@ -1,15 +1,12 @@
+import checkUserFields from './register.js';
+
 window.addEventListener("DOMContentLoaded", function(){
-
-    const form = document.getElementById("account_form");
-    checkUserFields(form);
-})
-
-function checkUserFields(form)
-{
-    const champ_username = form.elements["username"]; 
-    const champ_email = form.elements["email"];
-    const champ_password = form.elements["password"];
-    const champ_confirm_password = form.elements["confirm_password"];
+    const account_form = document.getElementById("account_form");
+    
+    const champ_username = account_form.elements["username"]; 
+    const champ_email = account_form.elements["email"];
+    const champ_password = account_form.elements["password"];
+    const champ_confirm_password = account_form.elements["confirm_password"];
 
     const error_username = document.getElementById("error_username");
     const error_email = document.getElementById("error_email"); 
@@ -27,6 +24,7 @@ function checkUserFields(form)
     checkRegex(champ_email, emailRegex,"email", error_email);
     checkRegex(champ_password, passwordRegex,"password", error_password);
     checkRegex(champ_confirm_password, passwordRegex, "confirm_password", error_confirm_password);
+
 
     champ_password.addEventListener("change", function(){
         if(champ_confirm_password.value !== champ_password.value && champ_confirm_password.value.length > 0)
@@ -59,9 +57,10 @@ function checkUserFields(form)
         }
     })
 
-        function checkRegex(input_field, reg, name, error_field)
-        {
+    function checkRegex(input_field, reg, name, error_field)
+    {
         input_field.addEventListener("change", function(){
+
             if(!reg.exec(input_field.value))
             {
                 input_field.classList.add("erreur");
@@ -81,4 +80,4 @@ function checkUserFields(form)
             }
         })
     }
-}
+})

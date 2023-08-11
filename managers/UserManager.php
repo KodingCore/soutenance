@@ -44,7 +44,6 @@ class UserManager extends AbstractManager
         {
             return null;
         }
-        
     }
 
     public function getUserByUsername(string $username) : ? User
@@ -99,7 +98,6 @@ class UserManager extends AbstractManager
         $query->execute($parameters);
     }
 
-
     public function editUser(User $user)
     {
         $user_test = $this->getUserByEmail($user->getEmail());
@@ -130,4 +128,3 @@ class UserManager extends AbstractManager
         $query->execute($parameters);
     }
 }
-?>

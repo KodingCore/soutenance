@@ -20,7 +20,7 @@ class ContactController extends AbstractController
     
             //* Validation des longueur de chaines
             $error = $this->controlStrlen("Message", $content, 2048);
-            $error = $this->controlStrlen("Objet", $subject, 49);
+            $error = $this->controlStrlen("Objet", $subject, 50);
 
             if ($error) //* Si il y a une erreur
             { 

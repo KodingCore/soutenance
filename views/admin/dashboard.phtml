@@ -59,21 +59,39 @@
     <table id="messages-table" class="hidden">
         <thead>
             <tr>
-                <th>sujet</th>
-                <th>text</th>
                 <th>username</th>
+                <th>username</th>
+                <th>sujet</th>
                 <th>date</th>
             </tr>
         </thead>
+        <tbody id="messages-body">
+            <?php
+            if($messageManager->getMessagesOrderedByDate())
+            {
+                $i = 0;
+                foreach($messageManager->getMessagesOrderedByDate() as $message)
+                {   
+                    $user = $userManager->getUserByUserId($message->getUserId());
+                    $username = $user->getUsername();
+            ?>
+                <tr>
+                    <td><a href="#" id="message <?=$i;?>"</td>
+                    <td><?=$user->getUsername();?></td>
+                    <td><?=$message->getSubject();?></td>
+                    <td><?=$message->getSendDate();?></td>
+                </tr>
+            <?php
+                }
+            }
+            ?>
+        </tbody>
     </table>
     <table id="templates-table" class="hidden">
         <thead>
             <tr>
                 <th>nom</th>
-                <th>description</th>
                 <th>categorie</th>
-                <th>chemin de l'image</th>
-                <th>prix</th>
                 <th>date de création</th>
                 <th>date de mise à jour</th>
             </tr>
@@ -83,7 +101,6 @@
         <thead>
             <tr>
                 <th>username</th>
-                <th>contenu</th>
                 <th>date de création</th>
                 <th>template</th>
             </tr>

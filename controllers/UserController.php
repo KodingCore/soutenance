@@ -12,7 +12,6 @@ class UserController extends AbstractController
         $this->infoManager = new InfoManager();
     }
 
-
     //** ---------------------------------- */
     //* Fonction de connexion de l'utilisateur
     //** ---------------------------------- */
@@ -23,17 +22,15 @@ class UserController extends AbstractController
             //* Variable de récolte d'érreur
             $error = null;
 
-            //* Contre mesure d'injection de code
+            //* Contre-mesure d'injection de code
             $userTag = htmlspecialchars($_POST["username_email"], ENT_QUOTES, 'UTF-8');
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
 
             $user = null;
 
             //* Validation de la longueur du champ username_email
-            $error = $this->controlStrlen("Email / Username", $userTag, 49);
-
-            //* Validation de la longueur du champ password
-            $error = $this->controlStrlen("Password", $password, 49);
+            $error = $this->controlStrlen("Email / Username", $userTag, 50);
+            $error = $this->controlStrlen("Password", $password, 50);
 
             //* Validation de la saisie d'identification
             if (filter_var($userTag, FILTER_VALIDATE_EMAIL)) //* Si c'est une adresse e-mail
@@ -96,7 +93,7 @@ class UserController extends AbstractController
             //* Variable de récolte d'erreur
             $error = null;
 
-            //* On set par défaut une variable roole sur "user"
+            //* On set par défaut une variable role sur "user"
             $role = "user";
 
             //* tableau des emails Admin
@@ -104,21 +101,19 @@ class UserController extends AbstractController
                 "kcorvais@gmail.com"
             ];
             
-            //* Contre mesure d'injection de code
+            //* Contre-mesure d'injection de code
             $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8');
             $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8');
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
             $confirm_password = htmlspecialchars($_POST["confirm_password"], ENT_QUOTES, 'UTF-8');
+            $error = $this->controlSpeChar("Username", $username);
     
             //* Validation des longueur de chaines
-            $error = $this->controlStrlen("Username", $username, 49);
-            $error = $this->controlStrlen("Email", $email, 49);
-            $error = $this->controlStrlen("Password", $password, 49);
-            $error = $this->controlStrlen("Confirm password", $confirm_password, 49);
-
-            //* Control de caratères spéciaux
-            $error = $this->controlSpeChar("Username", $username);
-
+            $error = $this->controlStrlen("Username", $username, 50);
+            $error = $this->controlStrlen("Email", $email, 50);
+            $error = $this->controlStrlen("Password", $password, 50);
+            $error = $this->controlStrlen("Confirm password", $confirm_password, 50);
+            
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)
             {
@@ -150,7 +145,6 @@ class UserController extends AbstractController
             } 
             else //* Les champs sont valides
             {
-
                 //* On test si l'email d'enrégistrement est un email administrateur
                 foreach($adminEmails as $adminEmail)
                 {
@@ -169,7 +163,7 @@ class UserController extends AbstractController
                 $info = new Info($user->getUserId()); //* Instantiation d'une info utilisateur à partir de son ID
                 $this->infoManager->insertInfo($info); //* On insert l'info dans la BDD
 
-                $this->render("views/guest/login.phtml", []); //* On se rend sur la page de login
+                $this->render("views/guest/login.phtml", ["message" => "Compte créer avec succès"]); //* Compte créer, on se rend sur la page de login
             }
         } 
         else 
@@ -198,8 +192,9 @@ class UserController extends AbstractController
         if (!empty($_POST["username"])) //* Si on édite le username
         {
             
-            $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
-            $error = $this->controlStrlen("Username", $username, 49); //* Validation de la longueur de chaine
+            $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
+
+            $error = $this->controlStrlen("Username", $username, 50); //* Validation de la longueur de chaine
 
             //* Validation de la non-existance du username
             if($this->userManager->getUserByUsername($username))
@@ -216,8 +211,9 @@ class UserController extends AbstractController
 
         if(!empty($_POST["email"])) //* Si on édite l'email
         {
-            $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
-            $error = $this->controlStrlen("Email", $email, 49); //* Validation de la longueur de chaine
+            $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
+
+            $error = $this->controlStrlen("Email", $email, 50); //* Validation de la longueur de chaine
 
             //* Validation de la forme d'un email
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) //* Si ce n'est pas une adresse e-mail
@@ -240,10 +236,13 @@ class UserController extends AbstractController
 
         if(!empty($_POST["password"]) && !empty($_POST["confirm_password"]))  //* Si on édite le password
         {
-            $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
-            $confirm_password = htmlspecialchars($_POST["confirm_password"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
-            $error = $this->controlStrlen("Password", $password, 49); //* Validation de la longueur de chaine
-            $error = $this->controlStrlen("Confirm password", $confirm_password, 49); //* Validation de la longueur de chaine
+             //* Contre-mesures d'injection de code
+            $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
+            $confirm_password = htmlspecialchars($_POST["confirm_password"], ENT_QUOTES, 'UTF-8');
+
+            //* Validation des longueurs de chaines
+            $error = $this->controlStrlen("Password", $password, 50);
+            $error = $this->controlStrlen("Confirm password", $confirm_password, 50);
 
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)
@@ -261,8 +260,9 @@ class UserController extends AbstractController
 
         if(!empty($_POST["first_name"])) //* Si on édite le first_name
         {
-            $first_name = htmlspecialchars($_POST["first_name"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
-            $error = $this->controlStrlen("Prénom", $first_name, 49); //* Validation de la longueur de chaine
+            $first_name = htmlspecialchars($_POST["first_name"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
+
+            $error = $this->controlStrlen("Prénom", $first_name, 50); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {
@@ -273,8 +273,9 @@ class UserController extends AbstractController
 
         if(!empty($_POST["last_name"])) //* Si on édite le last_name
         {
-            $last_name = htmlspecialchars($_POST["last_name"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
-            $error = $this->controlStrlen("Nom", $last_name, 49); //* Validation de la longueur de chaine
+            $last_name = htmlspecialchars($_POST["last_name"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
+
+            $error = $this->controlStrlen("Nom", $last_name, 50); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {
@@ -285,10 +286,16 @@ class UserController extends AbstractController
 
         if(!empty($_POST["tel"])) //* Si on édite le numéro de téléphone
         {
-            $tel = $_POST["tel"];
-            //* Control de caratères spéciaux
-            $error = $this->controlSpeChar("Téléphone", $tel);
-            $error = $this->controlStrlen("Téléphone", $tel, 14); //* Validation de la longueur de chaine
+            $tel = htmlspecialchars($_POST["tel"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
+
+            if(!is_nan($tel)) //* On test si il n'y à que des chiffres
+            {
+                $error = "Le numéro de téléphone ne doit contenir que des chiffres";
+            }
+
+            $error = $this->controlSpeChar("Téléphone", $tel); //* Control de caratères spéciaux
+            
+            $error = $this->controlStrlen("Téléphone", $tel, 10); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {
@@ -299,10 +306,10 @@ class UserController extends AbstractController
 
         if(!empty($_POST["address"])) //* Si on édite l'adresse
         {
-            $address = $_POST["address"];
-            //* Control de caratères spéciaux
-            $error = $this->controlSpeChar("Adresse", $address);
-            $error = $this->controlStrlen("Adresse", $address, 254); //* Validation de la longueur de chaine
+            $address = htmlspecialchars($_POST["address"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
+
+            $error = $this->controlSpeChar("Adresse", $address); //* Control de caratères spéciaux
+            $error = $this->controlStrlen("Adresse", $address, 255); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {
@@ -313,10 +320,11 @@ class UserController extends AbstractController
 
         if(!empty($_POST["zip"])) //* Si on édite le code postal
         {
-            $zip = $_POST["zip"];
-            //* Control de caratères spéciaux
-            $error = $this->controlSpeChar("Code postal", $zip);
-            $error = $this->controlStrlen("Code postal", $zip, 14); //* Validation de la longueur de chaine
+            $zip = htmlspecialchars($_POST["zip"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
+
+            $error = $this->controlSpeChar("Code postal", $zip); //* Control de caratères spéciaux
+            
+            $error = $this->controlStrlen("Code postal", $zip, 15); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {
@@ -327,10 +335,11 @@ class UserController extends AbstractController
 
         if(!empty($_POST["city"])) //* Si on édite la ville
         {
-            $city = $_POST["city"];
-            //* Control de caratères spéciaux
-            $error = $this->controlSpeChar("Ville", $city);
-            $error = $this->controlStrlen("Ville", $city, 99); //* Validation de la longueur de chaine
+            $city = htmlspecialchars($_POST["city"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
+
+            $error = $this->controlSpeChar("Ville", $city); //* Control de caratères spéciaux
+            
+            $error = $this->controlStrlen("Ville", $city, 100); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {

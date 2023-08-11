@@ -4,7 +4,7 @@
 session_start();
 
 //fichier de regroupement de tout les requires
-require "logics/requires.php";
+require "logics/autoload.php";
 
 //Appel de la function checkRoute de router.php
 if(isset($_GET["route"]))

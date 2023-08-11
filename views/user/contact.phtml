@@ -11,10 +11,10 @@
     <h1>Envoyer un message à l'administrateur</h1>
     <form action="index.php?route=contact" method="POST" id="contact_form">
         <label for="subject">Sujet</label>
-        <input type="text" name="subject" id="subject" autocomplete="off" required maxlength="50" onpaste="return false;">
+        <input type="text" name="subject" id="subject" autocomplete="off" required minlength="4" maxlength="50">
 
         <label for="content">Message</label>
-        <input type="text" name="content" id="content" autocomplete="off" required maxlength="2048" onpaste="return false;">
+        <textarea id="content" name="content" placeholder="Votre texte ici..." required minlength="10" maxlength="2048"></textarea>
 
         <input type="submit" value="Envoyer">
     </form>

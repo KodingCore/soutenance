@@ -1,6 +1,6 @@
 <?php
 
-function checkRoute($route)
+function checkRoute($route) : void
 {
     $homepageController = new HomepageController();
     $userController = new UserController();
