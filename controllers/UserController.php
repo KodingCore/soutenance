@@ -116,7 +116,7 @@ class UserController extends AbstractController
             $error = $this->controlStrlen("Password", $password, 49);
             $error = $this->controlStrlen("Confirm password", $confirm_password, 49);
 
-            //* Control
+            //* Control de caratères spéciaux
             $error = $this->controlSpeChar("Username", $username);
 
             //* Validation de l'égalité des saisies password et confirm_password
@@ -197,6 +197,7 @@ class UserController extends AbstractController
 
         if (!empty($_POST["username"])) //* Si on édite le username
         {
+            
             $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
             $error = $this->controlStrlen("Username", $username, 49); //* Validation de la longueur de chaine
 
@@ -261,7 +262,7 @@ class UserController extends AbstractController
         if(!empty($_POST["first_name"])) //* Si on édite le first_name
         {
             $first_name = htmlspecialchars($_POST["first_name"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
-            $error = $this->controlStrlen("Email", $first_name, 49); //* Validation de la longueur de chaine
+            $error = $this->controlStrlen("Prénom", $first_name, 49); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {
@@ -273,7 +274,7 @@ class UserController extends AbstractController
         if(!empty($_POST["last_name"])) //* Si on édite le last_name
         {
             $last_name = htmlspecialchars($_POST["last_name"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
-            $error = $this->controlStrlen("Email", $last_name, 49); //* Validation de la longueur de chaine
+            $error = $this->controlStrlen("Nom", $last_name, 49); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {
@@ -284,7 +285,9 @@ class UserController extends AbstractController
 
         if(!empty($_POST["tel"])) //* Si on édite le numéro de téléphone
         {
-            $tel = htmlspecialchars($_POST["tel"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
+            $tel = $_POST["tel"];
+            //* Control de caratères spéciaux
+            $error = $this->controlSpeChar("Téléphone", $tel);
             $error = $this->controlStrlen("Téléphone", $tel, 14); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
@@ -296,7 +299,9 @@ class UserController extends AbstractController
 
         if(!empty($_POST["address"])) //* Si on édite l'adresse
         {
-            $address = htmlspecialchars($_POST["address"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
+            $address = $_POST["address"];
+            //* Control de caratères spéciaux
+            $error = $this->controlSpeChar("Adresse", $address);
             $error = $this->controlStrlen("Adresse", $address, 254); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
@@ -308,19 +313,23 @@ class UserController extends AbstractController
 
         if(!empty($_POST["zip"])) //* Si on édite le code postal
         {
-            $zip = htmlspecialchars($_POST["zip"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
+            $zip = $_POST["zip"];
+            //* Control de caratères spéciaux
+            $error = $this->controlSpeChar("Code postal", $zip);
             $error = $this->controlStrlen("Code postal", $zip, 14); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur
             {
-                $info->setTel($zip); //* On reset le code postal
+                $info->setZip($zip); //* On reset le code postal
                 $info_change = true; //* Confirmation d'édition
             }
         }
 
         if(!empty($_POST["city"])) //* Si on édite la ville
         {
-            $city = htmlspecialchars($_POST["city"], ENT_QUOTES, 'UTF-8'); //* Contre mesure d'injection de code
+            $city = $_POST["city"];
+            //* Control de caratères spéciaux
+            $error = $this->controlSpeChar("Ville", $city);
             $error = $this->controlStrlen("Ville", $city, 99); //* Validation de la longueur de chaine
 
             if(!$error) //* Si pas d'erreur

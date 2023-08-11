@@ -26,13 +26,35 @@
             <tr>
                 <th>username</th>
                 <th>email</th>
-                <th>role</th>
                 <th>prénom</th>
                 <th>nom</th>
                 <th>téléphone</th>
                 <th>adresse</th>
+                <th>role</th>
             </tr>
         </thead>
+        <tbody id="users-body">
+            <?php
+            if($userManager->getUsers())
+            {
+                foreach($userManager->getUsers() as $user)
+                {   
+                    $info = $infoManager->getInfoByUserId($user->getUserId());
+            ?>
+                <tr>
+                    <td><?=$user->getUsername();?></td>
+                    <td><?=$user->getEmail();?></td>
+                    <td><?=$info->getFirstName();?></td>
+                    <td><?=$info->getLastName();?></td>
+                    <td><?=$info->getTel();?></td>
+                    <td><?=$info->getAddress()." ".$info->getZip().", ".$info->getCity()?></td>
+                    <td><?=$user->getRole();?></td>
+                </tr>
+            <?php
+                }
+            }
+            ?>
+        </tbody>
     </table>
     <table id="messages-table" class="hidden">
         <thead>

@@ -28,7 +28,7 @@ abstract class AbstractController
     public function controlSpeChar(string $field, string $string) : ? string
     {
         $illegal = "#$%^&*()+=-[]';,./{}|:<>?~";
-        if (!strpbrk($string, $illegal)) 
+        if (strpbrk($string, $illegal)) 
         {
             return "Saisie du champ {$field} invalide (pas de caractères spéciaux)";
         }

@@ -35,7 +35,7 @@ class Info {
     public function setFirstName(string $first_name): void { $this->first_name = $first_name; }
     public function setLastName(string $last_name): void { $this->last_name = $last_name; }
     public function setTel(string $tel): void { $this->tel = $tel; }
-    public function setAddress(): ? string { return $this->address; }
-    public function setZip(): ? string { return $this->zip; }
-    public function setCity(): ? string { return $this->city; }
+    public function setAddress(string $address): void { $this->address = $address; }
+    public function setZip(string $zip): void { $this->zip = $zip; }
+    public function setCity(string $city): void { $this->city = $city; }
 }

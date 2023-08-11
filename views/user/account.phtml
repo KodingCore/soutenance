@@ -34,11 +34,11 @@
         <?php 
             if(!$info->getFirstName())
             {
-                ?> placeholder= <?="Votre prénom";
+                echo 'placeholder="Votre prénom"';
             }
             else
             {
-                ?> value= <?=$info->getFirstName();
+                echo 'value="' . $info->getFirstName() . '"';
             }
         ?> 
         maxlength="50" onpaste="return false;">
@@ -48,11 +48,11 @@
         <?php 
             if(!$info->getLastName())
             {
-                ?> placeholder= <?="Votre nom";
+                echo 'placeholder="Votre nom"';
             }
             else
             {
-                ?> value= <?=$info->getLastName();
+                echo 'value="' . $info->getLastName() . '"';
             }
         ?> 
         maxlength="50" onpaste="return false;">
@@ -62,11 +62,11 @@
         <?php 
             if(!$info->getTel())
             {
-                ?> placeholder= <?="XXXXXXXXXX";
+                echo 'placeholder="xxxxxxxxxx"';
             }
             else
             {
-                ?> value= <?=$info->getTel();
+                echo 'value="' . $info->getTel() . '"';
             }
         ?>
         maxlength="15" onpaste="return false;">
@@ -76,11 +76,11 @@
         <?php 
             if(!$info->getAddress())
             {
-                ?> placeholder= <?="Votre adresse";
+                echo 'placeholder="Votre adresse"';
             }
             else
             {
-                ?> value= <?=$info->getAddress();
+                echo 'value="' . $info->getAddress() . '"';
             }
         ?>
         maxlength="255" onpaste="return false;">
@@ -90,11 +90,11 @@
         <?php 
             if(!$info->getZip())
             {
-                ?> placeholder= <?="XXXXX";
+                echo 'placeholder="xxxxx"';
             }
             else
             {
-                ?> value= <?=$info->getZip();
+                echo 'value="' . $info->getZip() . '"';
             }
         ?>
         maxlength="15" onpaste="return false;">
@@ -104,11 +104,11 @@
         <?php 
             if(!$info->getCity())
             {
-                ?> placeholder= <?="Votre ville";
+                echo 'placeholder="Votre ville"';
             }
             else
             {
-                ?> value= <?=$info->getCity();
+                echo 'value="' . $info->getCity() . '"';
             }
         ?>
         maxlength="100" onpaste="return false;">
