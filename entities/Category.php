@@ -1,12 +1,12 @@
 <?php
 
 class Category {
-    private int $category_id;
+    private ?int $category_id;
     private string $name;
     private string $description;
     
-    public function __construct(int $category_id, string $name, string $description) {
-        $this->category_id = $category_id;
+    public function __construct(string $name, string $description) {
+        $this->category_id = null;
         $this->name = $name;
         $this->description = $description;
     }

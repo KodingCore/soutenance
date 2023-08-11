@@ -24,12 +24,11 @@
     <table id="users-table" class="hidden">
         <thead>
             <tr>
+                <th>X</th>
                 <th>username</th>
                 <th>email</th>
                 <th>prénom</th>
                 <th>nom</th>
-                <th>téléphone</th>
-                <th>adresse</th>
                 <th>role</th>
             </tr>
         </thead>
@@ -37,20 +36,21 @@
             <?php
             if($userManager->getUsers())
             {
+                $i = 0;
                 foreach($userManager->getUsers() as $user)
                 {   
                     $info = $infoManager->getInfoByUserId($user->getUserId());
             ?>
                 <tr>
+                    <td><a href="#" id="user <?=$i;?>">user <?=$i;?></a></td>
                     <td><?=$user->getUsername();?></td>
                     <td><?=$user->getEmail();?></td>
                     <td><?=$info->getFirstName();?></td>
                     <td><?=$info->getLastName();?></td>
-                    <td><?=$info->getTel();?></td>
-                    <td><?=$info->getAddress()." ".$info->getZip().", ".$info->getCity()?></td>
                     <td><?=$user->getRole();?></td>
                 </tr>
             <?php
+                $i++;
                 }
             }
             ?>
@@ -59,7 +59,7 @@
     <table id="messages-table" class="hidden">
         <thead>
             <tr>
-                <th>username</th>
+                <th>X</th>
                 <th>username</th>
                 <th>sujet</th>
                 <th>date</th>
@@ -76,12 +76,13 @@
                     $username = $user->getUsername();
             ?>
                 <tr>
-                    <td><a href="#" id="message <?=$i;?>"</td>
+                    <td><a href="#" id="message <?=$i;?>">message <?=$i;?></a></td>
                     <td><?=$user->getUsername();?></td>
                     <td><?=$message->getSubject();?></td>
                     <td><?=$message->getSendDate();?></td>
                 </tr>
             <?php
+                $i++;
                 }
             }
             ?>
@@ -90,21 +91,67 @@
     <table id="templates-table" class="hidden">
         <thead>
             <tr>
+                <th>X</th>
                 <th>nom</th>
-                <th>categorie</th>
+                <th>catégorie</th>
                 <th>date de création</th>
                 <th>date de mise à jour</th>
             </tr>
         </thead>
+        <tbody id="templates-body">
+            <?php
+            if($templateManager->getTemplatesOrderedByCreationDate())
+            {
+                $i = 0;
+                foreach($templateManager->getTemplatesOrderedByCreationDate() as $template)
+                {   
+                    $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
+            ?>
+                <tr>
+                    <td><a href="#" id="template <?=$i;?>">template <?=$i;?></a></td>
+                    <td><?=$template->getName();?></td>
+                    <td><?=$template->getDescription();?></td>
+                    <td><?=$template->getSendDate();?></td>
+                    <td><?=$template->getSendDate();?></td>
+                </tr>
+            <?php
+                $i++;
+                }
+            }
+            ?>
+        </tbody>
     </table>
     <table id="reviews-table" class="hidden">
         <thead>
             <tr>
+                <th>X</th>
                 <th>username</th>
                 <th>date de création</th>
                 <th>template</th>
             </tr>
         </thead>
+        <tbody id="reviews-body">
+            <?php
+            if($messageManager->getMessagesOrderedByDate())
+            {
+                $i = 0;
+                foreach($messageManager->getMessagesOrderedByDate() as $message)
+                {   
+                    $user = $userManager->getUserByUserId($message->getUserId());
+                    $username = $user->getUsername();
+            ?>
+                <tr>
+                    <td><a href="#" id="message <?=$i;?>">message <?=$i;?></a></td>
+                    <td><?=$user->getUsername();?></td>
+                    <td><?=$message->getSubject();?></td>
+                    <td><?=$message->getSendDate();?></td>
+                </tr>
+            <?php
+                $i++;
+                }
+            }
+            ?>
+        </tbody>
     </table>
 </main>
 <script type="module" src="assets/js/dashboard.js"></script>
