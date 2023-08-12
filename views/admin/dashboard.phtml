@@ -21,10 +21,15 @@
     </ul>
 </aside>
 <main class="container">
+    <label for="data-selection">Rechercher par :</label>
+    <select name="data-selection" id="data-selection"></select>
+    <label for="searchbar">Valeur :</label> 
+    <input id="searchbar" type="text" name="searchbar" placeholder="Search..">
+
     <table id="users-table" class="hidden">
         <thead>
             <tr>
-                <th>X</th>
+                <th>N°</th>
                 <th>username</th>
                 <th>email</th>
                 <th>prénom</th>
@@ -42,7 +47,7 @@
                     $info = $infoManager->getInfoByUserId($user->getUserId());
             ?>
                 <tr>
-                    <td><a href="#" id="user <?=$i;?>">user <?=$i;?></a></td>
+                    <td><a href="#" id="user <?=$i;?>"><?=$i;?></a></td>
                     <td><?=$user->getUsername();?></td>
                     <td><?=$user->getEmail();?></td>
                     <td><?=$info->getFirstName();?></td>
@@ -59,7 +64,7 @@
     <table id="messages-table" class="hidden">
         <thead>
             <tr>
-                <th>X</th>
+                <th>N°</th>
                 <th>username</th>
                 <th>sujet</th>
                 <th>date</th>
@@ -76,7 +81,7 @@
                     $username = $user->getUsername();
             ?>
                 <tr>
-                    <td><a href="#" id="message <?=$i;?>">message <?=$i;?></a></td>
+                    <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
                     <td><?=$user->getUsername();?></td>
                     <td><?=$message->getSubject();?></td>
                     <td><?=$message->getSendDate();?></td>
@@ -91,7 +96,7 @@
     <table id="templates-table" class="hidden">
         <thead>
             <tr>
-                <th>X</th>
+                <th>N°</th>
                 <th>nom</th>
                 <th>catégorie</th>
                 <th>date de création</th>
@@ -108,11 +113,11 @@
                     $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
             ?>
                 <tr>
-                    <td><a href="#" id="template <?=$i;?>">template <?=$i;?></a></td>
+                    <td><a href="#" id="template <?=$i;?>"><?=$i;?></a></td>
                     <td><?=$template->getName();?></td>
                     <td><?=$template->getDescription();?></td>
-                    <td><?=$template->getSendDate();?></td>
-                    <td><?=$template->getSendDate();?></td>
+                    <td><?=$template->getCreatedAt();?></td>
+                    <td><?=$template->getUpdatedAt();?></td>
                 </tr>
             <?php
                 $i++;
@@ -124,7 +129,7 @@
     <table id="reviews-table" class="hidden">
         <thead>
             <tr>
-                <th>X</th>
+                <th>N°</th>
                 <th>username</th>
                 <th>date de création</th>
                 <th>template</th>
@@ -141,7 +146,7 @@
                     $username = $user->getUsername();
             ?>
                 <tr>
-                    <td><a href="#" id="message <?=$i;?>">message <?=$i;?></a></td>
+                    <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
                     <td><?=$user->getUsername();?></td>
                     <td><?=$message->getSubject();?></td>
                     <td><?=$message->getSendDate();?></td>

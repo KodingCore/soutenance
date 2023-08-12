@@ -8,7 +8,9 @@ export function checkUserFields(form)
     const error_username = document.getElementById("error_username");
     const error_email = document.getElementById("error_email"); 
     const error_password = document.getElementById("error_password"); 
-    const error_confirm_password = document.getElementById("error_confirm_password"); 
+    const error_confirm_password = document.getElementById("error_confirm_password");
+
+    let error = false;
 
     //* regex >>> au moins une lettre ou un chiffre
     const usernameRegex = new RegExp("^[A-Za-z][A-Za-z0-9_]{0,49}$");
@@ -22,23 +24,24 @@ export function checkUserFields(form)
     checkRegex(champ_password, passwordRegex,"password", error_password);
     checkRegex(champ_confirm_password, passwordRegex, "confirm_password", error_confirm_password);
 
-    
-
     champ_password.addEventListener("change", function(){
         if(champ_confirm_password.value !== champ_password.value && champ_confirm_password.value.length > 0)
         {
             champ_confirm_password.classList.add("erreur");
             error_confirm_password.textContent = "La confirmation du password doit être identique au password";
+            error = true;
         }
         else if(champ_password.value.length < 8 && champ_password.value.length > 0)
         {
             champ_password.classList.add("erreur");
             error_password.textContent = "La password doit contenir au moins 8 caractères";
+            error = true;
         }
         else
         {
             champ_confirm_password.classList.remove("erreur");
             error_confirm_password.textContent = "";
+            error = false;
         }
     })
 
@@ -47,11 +50,13 @@ export function checkUserFields(form)
         {
             champ_confirm_password.classList.add("erreur");
             error_confirm_password.textContent = "La confirmation du password doit être identique au password";
+            error = true;
         }
         else
         {
             champ_confirm_password.classList.remove("erreur");
             error_confirm_password.textContent = "";
+            error = false;
         }
     })
 
@@ -64,22 +69,25 @@ export function checkUserFields(form)
                 if(name !== "password")
                 {
                     error_field.textContent = name + " non-conforme";
+                    error = true
                 }
                 else if(input_field.length > 0)
                 {
                     error_field.textContent = "Le password doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial";
+                    error = true;
                 }
             }
             else
             {
                 input_field.classList.remove("erreur");
                 error_field.textContent = "";
+                error = false;
             }
         })
     }
 
     form.addEventListener("submit", function(event){
-        if(error_username.value !== null || error_email.value !== null || champ_password.value !== null || error_confirm_password !== null)
+        if(error)
         {
             event.preventDefault();
         }

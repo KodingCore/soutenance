@@ -23,7 +23,6 @@ class UserManager extends AbstractManager
         {
             return null;
         }
-        
     }
 
     public function getUserByEmail(string $email) : ? User
