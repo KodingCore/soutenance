@@ -179,11 +179,9 @@ class UserController extends AbstractController
     public function account() 
     {
 
-        //* Variable de récolte d'erreur
-        $error = null;
+        $error = null; //* Variable de récolte d'erreur
 
-        //* Booléen de changement d'informations
-        $info_change = false;
+        $info_change = false; //* Booléen de changement d'informations
 
         //* Récuperation des informations du compte
         $user = $this->userManager->getUserByUserId($_SESSION["user_id"]);
