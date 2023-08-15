@@ -5,7 +5,7 @@ class MessageManager extends AbstractManager
     
     public function getMessagesOrderedByDate() : ? array
     {
-        $query = $this->db->prepare("SELECT * FROM messages ORDER BY send_date DESC");
+        $query = $this->db->prepare("SELECT * FROM messages ORDER BY send_date_time DESC");
         $query->execute();
         $messages = $query->fetchAll(PDO::FETCH_ASSOC);
         if($messages)
@@ -13,7 +13,7 @@ class MessageManager extends AbstractManager
             $messagesTab = [];
             foreach($messages as $message)
             {
-                $messageInstance = new Message($message["subject"], $message["content"], $message["user_id"], $message["send_date"]);
+                $messageInstance = new Message($message["user_id"], $message["subject"], $message["content"], $message["send_date_time"]);
                 $messageInstance->setMessageId($message["message_id"]);
                 array_push($messagesTab, $messageInstance);
             }
@@ -25,19 +25,24 @@ class MessageManager extends AbstractManager
         }
     }
 
-    public function getMessageByUserId(int $user_id) : ? Message
+    public function getMessagesByUserId(int $user_id) : ? Message
     {
         $query = $this->db->prepare("SELECT * FROM messages WHERE user_id = :user_id");
         $parameters = [
             "user_id" => $user_id
         ];
         $query->execute($parameters);
-        $message = $query->fetch(PDO::FETCH_ASSOC);
-        if($message)
+        $messages = $query->fetchAll(PDO::FETCH_ASSOC);
+        if($messages)
         {
-            $messageInstance = new Message($message["subject"], $message["content"], $message["user_id"], $message["send_date"]);
-            $messageInstance->setMessageId($message["message_id"]);
-            return $messageInstance;
+            $messagesTab = [];
+            foreach($messages as $message)
+            {
+                $messageInstance = new Message($message["user_id"], $message["subject"], $message["content"], $message["send_date_time"]);
+                $messageInstance->setMessageId($message["message_id"]);
+                array_push($messagesTab, $messageInstance);
+            }
+            return $messagesTab;
         }
         else
         {
@@ -47,12 +52,12 @@ class MessageManager extends AbstractManager
 
     public function insertMessage(Message $message)
     {
-        $query = $this->db->prepare("INSERT INTO messages (subject, content, user_id, send_date) VALUES(:subject, :content, :user_id, :send_date)");
+        $query = $this->db->prepare("INSERT INTO messages (user_id, subject, content, send_date_time) VALUES(:user_id, :subject, :content, :send_date_time)");
         $parameters = [
+            "user_id" => $message->getUserId(),
             "subject" => $message->getSubject(),
             "content" => $message->getContent(),
-            "user_id" => $message->getUserId(),
-            "send_date" => $message->getSendDate()
+            "send_date_time" => $message->getSendDateTime()
         ];
         $query->execute($parameters);
     }
@@ -68,12 +73,12 @@ class MessageManager extends AbstractManager
 
     public function editMessage(Message $message)
     {
-        $query = $this->db->prepare("UPDATE messages SET username = :username, email = :email, password = :password WHERE user_id = :user_id");
+        $query = $this->db->prepare("UPDATE messages SET user_id = :user_id, subject = :subject, content = :content, send_date = :send_date WHERE message_id = :message_id");
         $parameters = [
+            "user_id" => $message->getUserId(),
             "subject" => $message->getSubject(),
             "content" => $message->getContent(),
-            "user_id" => $message->getUserId(),
-            "send_date" => $message->getSendDate()
+            "send_date" => $message->getSendDateTime()
         ];
         $query->execute($parameters);
     }

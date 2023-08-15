@@ -2,7 +2,6 @@
 
 require "entities/Appointment.php";
 require "entities/Category.php";
-require "entities/Image.php";
 require "entities/Info.php";
 require "entities/Message.php";
 require "entities/Quotation.php";

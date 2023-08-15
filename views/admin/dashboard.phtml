@@ -9,7 +9,9 @@
     // $categoryManager = new CategoryManager();
     // $appointmentManager = new AppointmentManager();
 ?>
-
+<!-- ------------------------------------------------------------------------------------- -->
+<!-- ----------------PANNEAU GAUCHE DES LIENS VERS LES TABLES DE CONTROL------------------ -->
+<!-- ------------------------------------------------------------------------------------- -->
 <aside class="left-pannel">
     <ul>
         <li>
@@ -20,52 +22,78 @@
         </li>
     </ul>
 </aside>
+
+<!-- ------------------------------------------------------------------------------------- -->
+<!-- --------------------------------PARTIE PRINCIPALE(VIEW)------------------------------ -->
+<!-- ------------------------------------------------------------------------------------- -->
 <main class="container">
-    <label for="data-selection">Rechercher par :</label>
-    <select name="data-selection" id="data-selection"></select>
-    <label for="searchbar">Valeur :</label> 
-    <input id="searchbar" type="text" name="searchbar" placeholder="Search..">
+
+    <!-- --------------------------- -->
+    <!-- ----SECTION DE RECHERCHE--- -->
+    <!-- --------------------------- -->
+    <section id="search">
+        <label for="data-selection">Rechercher par :</label>
+        <select name="data-selection" id="data-selection"></select>
+        <label for="searchbar">Valeur :</label> 
+        <input id="searchbar" type="text" name="searchbar" placeholder="Search..">
+    </section>
+    
+    <!-- --------------------------- -->
+    <!-- ---SECTION UTILISATEURS---- -->
+    <!-- --------------------------- -->
     <section id="users-section" class="hidden">
         <h2>Panneau de control des utilisateurs</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Téléphone</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
-            <tbody id="users-body">
-                <?php
-                if($userManager->getUsers())
-                {
-                    $i = 0;
-                    foreach($userManager->getUsers() as $user)
-                    {   
-                        $info = $infoManager->getInfoByUserId($user->getUserId());
-                ?>
+        <section id="user-view">
+            <h3>Listing</h3>
+            <table>
+                <thead>
                     <tr>
-                        <td><a href="#" id="user <?=$i;?>"><?=$i;?></a></td>
-                        <td><?=$user->getUsername();?></td>
-                        <td><?=$user->getEmail();?></td>
-                        <td><?=$info->getFirstName();?></td>
-                        <td><?=$info->getLastName();?></td>
-                        <td><?=$info->getTel();?></td>
-                        <td><?=$user->getRole();?></td>
+                        <th>N°</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Téléphone</th>
+                        <th>Role</th>
                     </tr>
-                <?php
-                    $i++;
+                </thead>
+                <tbody id="users-body">
+                    <?php
+                    if($userManager->getUsers())
+                    {
+                        $i = 0;
+                        foreach($userManager->getUsers() as $user)
+                        {   
+                            $info = $infoManager->getInfoByUserId($user->getUserId());
+                    ?>
+                        <tr>
+                            <td><a href="#" id="user <?=$i;?>"><button><?=$i;?></button></a></td>
+                            <td><?=$user->getUsername();?></td>
+                            <td><?=$user->getEmail();?></td>
+                            <td><?=$info->getFirstName();?></td>
+                            <td><?=$info->getLastName();?></td>
+                            <td><?=$info->getTel();?></td>
+                            <td><?=$user->getRole();?></td>
+                        </tr>
+                    <?php
+                        $i++;
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </section>
+        <section id="user-control" class="hidden">
+            <h3>Détails</h3>
+            <p>Username : <?=$user->getUsername();?></p>
+        </section>
     </section>
+                    
+    <!-- --------------------------- -->
+    <!-- ------SECTION MESSAGES----- -->
+    <!-- --------------------------- -->
     <section id="messages-section" class="hidden">
+    
         <h2>Panneau de control des messages</h2>
         <table>
             <thead>
@@ -87,7 +115,7 @@
                         $username = $user->getUsername();
                 ?>
                     <tr>
-                        <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
+                        <td><a href="#" id="message<?=$i;?>"><?=$i;?></a></td>
                         <td><?=$user->getUsername();?></td>
                         <td><?=$message->getSubject();?></td>
                         <td><?=$message->getSendDate();?></td>
@@ -100,6 +128,10 @@
             </tbody>
         </table>
     </section>
+
+    <!-- --------------------------- -->
+    <!-- -----SECTION TEMPLATES----- -->
+    <!-- --------------------------- -->
     <section id="templates-section" class="hidden">
         <h2>Panneau de control des templates</h2>
         <table>
@@ -136,6 +168,10 @@
             </tbody>
         </table>
     </section>
+
+    <!-- --------------------------- -->
+    <!-- -------SECTION REVIEWS----- -->
+    <!-- --------------------------- -->
     <section id="reviews-section" class="hidden">
         <h2>Panneau de control des reviews</h2>
         <table>
@@ -144,24 +180,24 @@
                     <th>N°</th>
                     <th>Username</th>
                     <th>Sujet</th>
-                    <th>Date de création</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody id="reviews-body">
                 <?php
-                if($messageManager->getMessagesOrderedByDate())
+                if($reviewManager->getReviewsOrderedByDate())
                 {
                     $i = 0;
-                    foreach($messageManager->getMessagesOrderedByDate() as $message)
+                    foreach($reviewManager->getReviewsOrderedByDate() as $review)
                     {   
-                        $user = $userManager->getUserByUserId($message->getUserId());
+                        $user = $userManager->getUserByUserId($review->getUserId());
                         $username = $user->getUsername();
                 ?>
                     <tr>
                         <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
                         <td><?=$user->getUsername();?></td>
-                        <td><?=$message->getSubject();?></td>
-                        <td><?=$message->getSendDate();?></td>
+                        <td><?=$review->getSubject();?></td>
+                        <td><?=$review->getSendDate();?></td>
                     </tr>
                 <?php
                     $i++;
@@ -171,6 +207,5 @@
             </tbody>
         </table>
     </section>
-    
 </main>
 <script type="module" src="assets/js/dashboard.js"></script>

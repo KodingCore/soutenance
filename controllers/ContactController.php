@@ -35,7 +35,7 @@ class ContactController extends AbstractController
                 $sqlDateTime = $dateTime->format('Y-m-d H:i:s');
 
                 //* Instantiation d'un objet Message
-                $message = new Message($subject, $content, $_SESSION["user_id"], $sqlDateTime);
+                $message = new Message($_SESSION["user_id"], $subject, $content, $sqlDateTime);
 
                 $this->messageManager->insertMessage($message); //* On insert le message dans la BDD
 

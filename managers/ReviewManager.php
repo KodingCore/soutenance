@@ -13,7 +13,7 @@ class ReviewManager extends AbstractManager
             $reviewsTab = [];
             foreach($reviews as $review)
             {
-                $reviewInstance = new Review($review["content"], $review["user_id"], $review["send_date"], $review["template_id"]);
+                $reviewInstance = new Review($review["user_id"], $review["template_id"], $review["content"], $review["send_date"]);
                 $reviewInstance->setReviewId($review["review_id"]);
                 array_push($reviewsTab, $reviewInstance);
             }
@@ -35,7 +35,7 @@ class ReviewManager extends AbstractManager
         $review = $query->fetch(PDO::FETCH_ASSOC);
         if($review)
         {
-            $reviewInstance = new Review($review["content"], $review["user_id"], $review["send_date"], $review["template_id"]);
+            $reviewInstance = new Review($review["user_id"], $review["template_id"], $review["content"], $review["send_date"]);
             $reviewInstance->setReviewId($review["review_id"]);
             return $reviewInstance;
         }
@@ -47,12 +47,12 @@ class ReviewManager extends AbstractManager
 
     public function insertReview(Review $review)
     {
-        $query = $this->db->prepare("INSERT INTO reviews (content, user_id, send_date, template_id) VALUES(:content, :user_id, :send_date, :template_id)");
+        $query = $this->db->prepare("INSERT INTO reviews (user_id, template_id, content, send_date) VALUES(:user_id, :template_id, :content, :send_date)");
         $parameters = [
-            "content" => $review->getContent(),
             "user_id" => $review->getUserId(),
-            "send_date" => $review->getSendDate(),
-            "template_id" => $review->getTemplateId()
+            "template_id" => $review->getTemplateId(),
+            "content" => $review->getContent(),
+            "send_date" => $review->getSendDate()
         ];
         $query->execute($parameters);
     }
@@ -68,12 +68,12 @@ class ReviewManager extends AbstractManager
 
     public function editReview(Review $review)
     {
-        $query = $this->db->prepare("UPDATE reviews SET content = :content, user_id = :user_id, send_date = :send_date, template_id = :template_id WHERE review_id = :review_id");
+        $query = $this->db->prepare("UPDATE reviews SET user_id = :user_id, template_id = :template_id, content = :content, send_date = :send_date WHERE review_id = :review_id");
         $parameters = [
-            "content" => $review->getContent(),
             "user_id" => $review->getUserId(),
-            "send_date" => $review->getSendDate(),
-            "template_id" => $review->getTemplateId()
+            "template_id" => $review->getTemplateId(),
+            "content" => $review->getContent(),
+            "send_date" => $review->getSendDate()
         ];
         $query->execute($parameters);
     }

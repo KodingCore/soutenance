@@ -1,13 +1,15 @@
 window.addEventListener("DOMContentLoaded", function()
 {
+    console.log("yo");
     initDashboard();
+    
 })
 
 
-//** ------------------------------------------------- */
-//* Fonction d'initialisation des tables ,et
-//* d'écoute de click dans les liens de la nav de control 
-//** ------------------------------------------------- */
+//** ------------------------------------- */
+//* Fonction d'initialisation et d'écoute de
+//* click dans les liens de la nav de control 
+//** ------------------------------------- */
 function initDashboard()
 {
     const links = [
@@ -40,10 +42,12 @@ function toggleTables(sections, section)
 {
     sections.forEach(function(sect)
     {
+        
         if(section === sect)
         {
+            
             sect.classList.remove("hidden");
-            let table = sect.getElementByTag("table");
+            let table = sect.querySelector("table");
             initOptionsSelector(table);
             searchParams(table);
         }

@@ -41,9 +41,17 @@ class Router
             session_destroy();
             $this->homepageController->index();
         }
-        else if($route === "dashboard")
+        else if($route === "dashboard" && isset($_SESSION["role"]))
         {
-            $this->dashboardController->index();
+            if($_SESSION["role"] === "admin")
+            {
+                $this->dashboardController->index();
+            }
+            else
+            {
+                $this->homepageController->index();
+            }
+            
         }
         else if($route === "shop")
         {
