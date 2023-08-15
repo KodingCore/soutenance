@@ -17,38 +17,39 @@ function initDashboard()
         document.getElementById("reviews-link")
     ];
 
-    const tables = [
-        document.getElementById("users-table"),
-        document.getElementById("messages-table"),
-        document.getElementById("templates-table"),
-        document.getElementById("reviews-table")
+    const sections = [
+        document.getElementById("users-section"),
+        document.getElementById("messages-section"),
+        document.getElementById("templates-section"),
+        document.getElementById("reviews-section")
     ];
 
     for(let i = 0; i < links.length; i++)
     {
         links[i].addEventListener("click", function(){
-            toggleTables(tables, tables[i]);
+            toggleTables(sections, sections[i]);
         })
     }
 }
 
 //** --------------------------------------------- */
-//* Cette fonction affiche/cache les tables, 
-//* en fonction du lien clické dans la nav de l'aside
+//* Cette fonction affiche/cache les sections, 
+//* en fonction du lien clické dans la nav de control
 //** --------------------------------------------- */
-function toggleTables(tables, table)
+function toggleTables(sections, section)
 {
-    tables.forEach(function(tab)
+    sections.forEach(function(sect)
     {
-        if(table === tab)
+        if(section === sect)
         {
-            tab.classList.remove("hidden");
-            initOptionsSelector(tab);
-            searchParams(tab);
+            sect.classList.remove("hidden");
+            let table = sect.getElementByTag("table");
+            initOptionsSelector(table);
+            searchParams(table);
         }
         else
         {
-            tab.classList.add("hidden");
+            sect.classList.add("hidden");
         }
     })
 }

@@ -25,138 +25,152 @@
     <select name="data-selection" id="data-selection"></select>
     <label for="searchbar">Valeur :</label> 
     <input id="searchbar" type="text" name="searchbar" placeholder="Search..">
-
-    <table id="users-table" class="hidden">
-        <thead>
-            <tr>
-                <th>N°</th>
-                <th>username</th>
-                <th>email</th>
-                <th>prénom</th>
-                <th>nom</th>
-                <th>role</th>
-            </tr>
-        </thead>
-        <tbody id="users-body">
-            <?php
-            if($userManager->getUsers())
-            {
-                $i = 0;
-                foreach($userManager->getUsers() as $user)
-                {   
-                    $info = $infoManager->getInfoByUserId($user->getUserId());
-            ?>
+    <section id="users-section" class="hidden">
+        <h2>Panneau de control des utilisateurs</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td><a href="#" id="user <?=$i;?>"><?=$i;?></a></td>
-                    <td><?=$user->getUsername();?></td>
-                    <td><?=$user->getEmail();?></td>
-                    <td><?=$info->getFirstName();?></td>
-                    <td><?=$info->getLastName();?></td>
-                    <td><?=$user->getRole();?></td>
+                    <th>N°</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Téléphone</th>
+                    <th>Role</th>
                 </tr>
-            <?php
-                $i++;
+            </thead>
+            <tbody id="users-body">
+                <?php
+                if($userManager->getUsers())
+                {
+                    $i = 0;
+                    foreach($userManager->getUsers() as $user)
+                    {   
+                        $info = $infoManager->getInfoByUserId($user->getUserId());
+                ?>
+                    <tr>
+                        <td><a href="#" id="user <?=$i;?>"><?=$i;?></a></td>
+                        <td><?=$user->getUsername();?></td>
+                        <td><?=$user->getEmail();?></td>
+                        <td><?=$info->getFirstName();?></td>
+                        <td><?=$info->getLastName();?></td>
+                        <td><?=$info->getTel();?></td>
+                        <td><?=$user->getRole();?></td>
+                    </tr>
+                <?php
+                    $i++;
+                    }
                 }
-            }
-            ?>
-        </tbody>
-    </table>
-    <table id="messages-table" class="hidden">
-        <thead>
-            <tr>
-                <th>N°</th>
-                <th>username</th>
-                <th>sujet</th>
-                <th>date</th>
-            </tr>
-        </thead>
-        <tbody id="messages-body">
-            <?php
-            if($messageManager->getMessagesOrderedByDate())
-            {
-                $i = 0;
-                foreach($messageManager->getMessagesOrderedByDate() as $message)
-                {   
-                    $user = $userManager->getUserByUserId($message->getUserId());
-                    $username = $user->getUsername();
-            ?>
+                ?>
+            </tbody>
+        </table>
+    </section>
+    <section id="messages-section" class="hidden">
+        <h2>Panneau de control des messages</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
-                    <td><?=$user->getUsername();?></td>
-                    <td><?=$message->getSubject();?></td>
-                    <td><?=$message->getSendDate();?></td>
+                    <th>N°</th>
+                    <th>Username</th>
+                    <th>Sujet</th>
+                    <th>Date</th>
                 </tr>
-            <?php
-                $i++;
+            </thead>
+            <tbody id="messages-body">
+                <?php
+                if($messageManager->getMessagesOrderedByDate())
+                {
+                    $i = 0;
+                    foreach($messageManager->getMessagesOrderedByDate() as $message)
+                    {   
+                        $user = $userManager->getUserByUserId($message->getUserId());
+                        $username = $user->getUsername();
+                ?>
+                    <tr>
+                        <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
+                        <td><?=$user->getUsername();?></td>
+                        <td><?=$message->getSubject();?></td>
+                        <td><?=$message->getSendDate();?></td>
+                    </tr>
+                <?php
+                    $i++;
+                    }
                 }
-            }
-            ?>
-        </tbody>
-    </table>
-    <table id="templates-table" class="hidden">
-        <thead>
-            <tr>
-                <th>N°</th>
-                <th>nom</th>
-                <th>catégorie</th>
-                <th>date de création</th>
-                <th>date de mise à jour</th>
-            </tr>
-        </thead>
-        <tbody id="templates-body">
-            <?php
-            if($templateManager->getTemplatesOrderedByCreationDate())
-            {
-                $i = 0;
-                foreach($templateManager->getTemplatesOrderedByCreationDate() as $template)
-                {   
-                    $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
-            ?>
+                ?>
+            </tbody>
+        </table>
+    </section>
+    <section id="templates-section" class="hidden">
+        <h2>Panneau de control des templates</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td><a href="#" id="template <?=$i;?>"><?=$i;?></a></td>
-                    <td><?=$template->getName();?></td>
-                    <td><?=$template->getDescription();?></td>
-                    <td><?=$template->getCreatedAt();?></td>
-                    <td><?=$template->getUpdatedAt();?></td>
+                    <th>N°</th>
+                    <th>Nom</th>
+                    <th>Catégorie</th>
+                    <th>Date de création</th>
+                    <th>Date de mise à jour</th>
                 </tr>
-            <?php
-                $i++;
+            </thead>
+            <tbody id="templates-body">
+                <?php
+                if($templateManager->getTemplatesOrderedByCreationDate())
+                {
+                    $i = 0;
+                    foreach($templateManager->getTemplatesOrderedByCreationDate() as $template)
+                    {   
+                        $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
+                ?>
+                    <tr>
+                        <td><a href="#" id="template <?=$i;?>"><?=$i;?></a></td>
+                        <td><?=$template->getName();?></td>
+                        <td><?=$template->getDescription();?></td>
+                        <td><?=$template->getCreatedAt();?></td>
+                        <td><?=$template->getUpdatedAt();?></td>
+                    </tr>
+                <?php
+                    $i++;
+                    }
                 }
-            }
-            ?>
-        </tbody>
-    </table>
-    <table id="reviews-table" class="hidden">
-        <thead>
-            <tr>
-                <th>N°</th>
-                <th>username</th>
-                <th>date de création</th>
-                <th>template</th>
-            </tr>
-        </thead>
-        <tbody id="reviews-body">
-            <?php
-            if($messageManager->getMessagesOrderedByDate())
-            {
-                $i = 0;
-                foreach($messageManager->getMessagesOrderedByDate() as $message)
-                {   
-                    $user = $userManager->getUserByUserId($message->getUserId());
-                    $username = $user->getUsername();
-            ?>
+                ?>
+            </tbody>
+        </table>
+    </section>
+    <section id="reviews-section" class="hidden">
+        <h2>Panneau de control des reviews</h2>
+        <table>
+            <thead>
                 <tr>
-                    <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
-                    <td><?=$user->getUsername();?></td>
-                    <td><?=$message->getSubject();?></td>
-                    <td><?=$message->getSendDate();?></td>
+                    <th>N°</th>
+                    <th>Username</th>
+                    <th>Sujet</th>
+                    <th>Date de création</th>
                 </tr>
-            <?php
-                $i++;
+            </thead>
+            <tbody id="reviews-body">
+                <?php
+                if($messageManager->getMessagesOrderedByDate())
+                {
+                    $i = 0;
+                    foreach($messageManager->getMessagesOrderedByDate() as $message)
+                    {   
+                        $user = $userManager->getUserByUserId($message->getUserId());
+                        $username = $user->getUsername();
+                ?>
+                    <tr>
+                        <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
+                        <td><?=$user->getUsername();?></td>
+                        <td><?=$message->getSubject();?></td>
+                        <td><?=$message->getSendDate();?></td>
+                    </tr>
+                <?php
+                    $i++;
+                    }
                 }
-            }
-            ?>
-        </tbody>
-    </table>
+                ?>
+            </tbody>
+        </table>
+    </section>
+    
 </main>
 <script type="module" src="assets/js/dashboard.js"></script>
