@@ -73,12 +73,12 @@ class MessageManager extends AbstractManager
 
     public function editMessage(Message $message)
     {
-        $query = $this->db->prepare("UPDATE messages SET user_id = :user_id, subject = :subject, content = :content, send_date = :send_date WHERE message_id = :message_id");
+        $query = $this->db->prepare("UPDATE messages SET user_id = :user_id, subject = :subject, content = :content, send_date_time = :send_date_time WHERE message_id = :message_id");
         $parameters = [
             "user_id" => $message->getUserId(),
             "subject" => $message->getSubject(),
             "content" => $message->getContent(),
-            "send_date" => $message->getSendDateTime()
+            "send_date_time" => $message->getSendDateTime()
         ];
         $query->execute($parameters);
     }

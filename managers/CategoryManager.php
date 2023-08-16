@@ -5,7 +5,7 @@ class CategoryManager extends AbstractManager
     
     public function getCategories() : ? array
     {
-        $query = $this->db->prepare("SELECT * FROM categories ORDER BY created_at DESC");
+        $query = $this->db->prepare("SELECT * FROM categories");
         $query->execute();
         $categories = $query->fetchAll(PDO::FETCH_ASSOC);
         if($categories)

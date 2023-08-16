@@ -8,7 +8,7 @@ class Review {
     private string $send_date;
     
 
-    public function __construct(string $content, int $user_id, int $template_id, string $send_date) {
+    public function __construct(int $user_id, int $template_id, string $content, string $send_date) {
         $this->review_id = null;
         $this->user_id = $user_id;
         $this->template_id = $template_id;
