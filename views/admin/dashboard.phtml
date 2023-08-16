@@ -32,8 +32,8 @@
     <!-- ----SECTION DE RECHERCHE--- -->
     <!-- --------------------------- -->
     <section id="search">
-        <label for="data-selection">Rechercher par :</label>
-        <select name="data-selection" id="data-selection"></select>
+        <label for="column-selection">Rechercher par :</label>
+        <select name="column-selection" id="column-selection"></select>
         <label for="searchbar">Valeur :</label> 
         <input id="searchbar" type="text" name="searchbar" placeholder="Search..">
     </section>
@@ -41,14 +41,14 @@
     <!-- --------------------------- -->
     <!-- ---SECTION UTILISATEURS---- -->
     <!-- --------------------------- -->
-    <section id="users-section" class="hidden">
+    <section id="users" class="hidden">
         <h2>Panneau de control des utilisateurs</h2>
-        <section id="user-view">
-            <h3>Listing</h3>
+        <section id="users-view">
+            <h3>Listing users</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>N°</th>
+                        <th>ID</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Prénom</th>
@@ -57,7 +57,7 @@
                         <th>Role</th>
                     </tr>
                 </thead>
-                <tbody id="users-body">
+                <tbody>
                 <?php
                     if($userManager->getUsers())
                     {
@@ -67,13 +67,13 @@
                             $info = $infoManager->getInfoByUserId($user->getUserId());
                     ?>
                         <tr>
-                            <td><button class="user-btn" id="<?=$i;?>"><?=$i;?></button></td>
-                            <td><?=$user->getUsername();?></td>
-                            <td><?=$user->getEmail();?></td>
-                            <td><?=$info->getFirstName();?></td>
-                            <td><?=$info->getLastName();?></td>
-                            <td><?=$info->getTel();?></td>
-                            <td><?=$user->getRole();?></td>
+                            <td class="data"><button class="row-btn" id="<?=$user->getUserId();?>"><?=$user->getUserId();?></button></td>
+                            <td class="data"><?=$user->getUsername();?></td>
+                            <td class="data"><?=$user->getEmail();?></td>
+                            <td class="data"><?=$info->getFirstName();?></td>
+                            <td class="data"><?=$info->getLastName();?></td>
+                            <td class="data"><?=$info->getTel();?></td>
+                            <td class="data"><?=$user->getRole();?></td>
                         </tr>
                         <?php
                             $i++;
@@ -83,79 +83,56 @@
                 </tbody>
             </table>
         </section>
-        <?php
-            if($userManager->getUsers())
-            {
-                $i = 0;
-                foreach($userManager->getUsers() as $user)
-                {   
-                    $info = $infoManager->getInfoByUserId($user->getUserId());
-            ?>
-        <section id="detail-user<?=$i;?>" class="hidden detail">
-            <h3>Détails</h3>
-            <p>Username : <?=$user->getUsername();?></p>
-            <p>Email : <?=$user->getEmail();?></p>
-            <p>Prénom : <?=$info->getFirstName();?></p>
-            <p>Nom de famille : <?=$info->getLastName();?></p>
-            <p>Téléphone : <?=$info->getTel();?></p>
-            <p>Adresse : <?=$info->getAddress().", ".$info->getZip()." ".$info->getCity();?></p>
-            <p>Rôle : <?=$user->getRole();?></p>
-        </section>
-        <?php
-                $i++;
-            }
-        }
-        ?>
-    </section>
-                    
+    </section>           
     <!-- --------------------------- -->
     <!-- ------SECTION MESSAGES----- -->
     <!-- --------------------------- -->
-    <section id="messages-section" class="hidden">
+    <section id="messages" class="hidden">
         <h2>Panneau de control des messages</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Username</th>
-                    <th>Sujet</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody id="messages-body">
-                <?php
-                if($messageManager->getMessagesOrderedByDate())
-                {
-                    $i = 0;
-                    foreach($messageManager->getMessagesOrderedByDate() as $message)
-                    {   
-                        $user = $userManager->getUserByUserId($message->getUserId());
-                        $username = $user->getUsername();
-                ?>
+        <section id="users-view">
+            <h3>Listing messages</h3>
+            <table>
+                <thead>
                     <tr>
-                        <td><a href="#" id="message<?=$i;?>"><?=$i;?></a></td>
-                        <td><?=$user->getUsername();?></td>
-                        <td><?=$message->getSubject();?></td>
-                        <td><?=$message->getSendDateTime();?></td>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Sujet</th>
+                        <th>Date</th>
                     </tr>
-                <?php
-                    $i++;
+                </thead>
+                <tbody id="messages-body">
+                    <?php
+                    if($messageManager->getMessagesOrderedByDate())
+                    {
+                        foreach($messageManager->getMessagesOrderedByDate() as $message)
+                        {   
+                            $user = $userManager->getUserByUserId($message->getUserId());
+                            $username = $user->getUsername();
+                    ?>
+                        <tr>
+                            <td class="data"><button class="row-btn" id="<?=$message->getMessageId();?>"><?=$message->getMessageId();?></button></td>
+                            <td class="data"><?=$user->getUsername();?></td>
+                            <td class="data"><?=$message->getSubject();?></td>
+                            <td class="data"><?=$message->getSendDateTime();?></td>
+                        </tr>
+                    <?php
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </section>
     </section>
 
     <!-- --------------------------- -->
     <!-- -----SECTION TEMPLATES----- -->
     <!-- --------------------------- -->
-    <section id="templates-section" class="hidden">
+    <section id="templates" class="hidden">
         <h2>Panneau de control des templates</h2>
         <table>
             <thead>
                 <tr>
-                    <th>N°</th>
+                    <th>ID</th>
                     <th>Nom</th>
                     <th>Catégorie</th>
                     <th>Date de création</th>
@@ -166,20 +143,18 @@
                 <?php
                 if($templateManager->getTemplatesOrderedByCreationDate())
                 {
-                    $i = 0;
                     foreach($templateManager->getTemplatesOrderedByCreationDate() as $template)
                     {   
                         $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
                 ?>
                     <tr>
-                        <td><a href="#" id="template <?=$i;?>"><?=$i;?></a></td>
-                        <td><?=$template->getName();?></td>
-                        <td><?=$template->getDescription();?></td>
-                        <td><?=$template->getCreatedAt();?></td>
-                        <td><?=$template->getUpdatedAt();?></td>
+                        <td class="data"><button class="row-btn" id="<?=$template->getTemplateId();?>"><?=$template->getTemplateId();?></button></td>
+                        <td class="data"><?=$template->getName();?></td>
+                        <td class="data"><?=$template->getDescription();?></td>
+                        <td class="data"><?=$template->getCreatedAt();?></td>
+                        <td class="data"><?=$template->getUpdatedAt();?></td>
                     </tr>
                 <?php
-                    $i++;
                     }
                 }
                 ?>
@@ -190,12 +165,12 @@
     <!-- --------------------------- -->
     <!-- -------SECTION REVIEWS----- -->
     <!-- --------------------------- -->
-    <section id="reviews-section" class="hidden">
+    <section id="reviews" class="hidden">
         <h2>Panneau de control des reviews</h2>
         <table>
             <thead>
                 <tr>
-                    <th>N°</th>
+                    <th>ID</th>
                     <th>Username</th>
                     <th>Sujet</th>
                     <th>Date</th>
@@ -212,10 +187,10 @@
                         $username = $user->getUsername();
                 ?>
                     <tr>
-                        <td><a href="#" id="message <?=$i;?>"><?=$i;?></a></td>
-                        <td><?=$user->getUsername();?></td>
-                        <td><?=$review->getSubject();?></td>
-                        <td><?=$review->getSendDate();?></td>
+                        <td class="data"><button class="row-btn" id="<?=$i;?>"><?=$i;?></button></td>
+                        <td class="data"><?=$user->getUsername();?></td>
+                        <td class="data"><?=$review->getSubject();?></td>
+                        <td class="data"><?=$review->getSendDate();?></td>
                     </tr>
                 <?php
                     $i++;
@@ -225,5 +200,6 @@
             </tbody>
         </table>
     </section>
+    <section id="details" class="hidden"></section> <!-- Section gérer par le javascript -->
 </main>
 <script type="module" src="assets/js/dashboard.js"></script>

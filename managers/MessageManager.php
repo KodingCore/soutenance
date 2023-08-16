@@ -2,6 +2,26 @@
 
 class MessageManager extends AbstractManager
 {
+
+    public function getMessageByMessageId(int $message_id) : ? Message
+    {
+        $query = $this->db->prepare("SELECT * FROM messages WHERE message_id = :message_id");
+        $parameters = [
+            "message_id" => $message_id
+        ];
+        $query->execute($parameters);
+        $message = $query->fetch(PDO::FETCH_ASSOC);
+        if($message)
+        {
+            $messageInstance = new Message($message["user_id"], $message["subject"], $message["content"], $message["send_date_time"]);
+            $messageInstance->setUserId($message["message_id"]);
+            return $messageInstance;
+        }
+        else
+        {
+            return null;
+        }
+    }
     
     public function getMessagesOrderedByDate() : ? array
     {

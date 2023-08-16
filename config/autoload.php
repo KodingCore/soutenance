@@ -22,5 +22,6 @@ require "controllers/HomepageController.php";
 require "controllers/UserController.php";
 require "controllers/DashboardController.php";
 require "controllers/ContactController.php";
+require "controllers/APIFetchController.php";
 
 require "services/Router.php";

@@ -7,6 +7,7 @@ class Router
     private UserController $userController;
     private ContactController $contactController;
     private DashboardController $dashboardController;
+    private APIFetchController $APIFetchController;
 
     public function __construct()
     {
@@ -14,6 +15,7 @@ class Router
         $this->userController = new UserController();
         $this->contactController = new ContactController();
         $this->dashboardController = new DashboardController();
+        $this->APIFetchController = new APIFetchController();
     }
 
     public function checkRoute($route) : void
@@ -62,6 +64,20 @@ class Router
         else if($route === "quote")
         {
 
+        }
+        else if($route === "users")
+        {
+            if(isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $this->APIFetchController->userById($id);
+            }
+        }
+        else if($route === "messages")
+        {
+            if(isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $this->APIFetchController->messageById($id);
+            }
         }
         else
         {
