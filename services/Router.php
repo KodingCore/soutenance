@@ -18,6 +18,8 @@ class Router
 
     public function checkRoute($route) : void
     {
+        $route = explode("\\", $route)[0];
+
         if($route === "login")
         {
             $this->userController->login();

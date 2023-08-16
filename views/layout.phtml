@@ -15,18 +15,18 @@
     </header>
     <nav>
         <?php
-            if(isset($_SESSION["user_id"], $_SESSION["role"]))
+            if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
             {
-                if($_SESSION["role"] === "admin")
+                if($_SESSION["role"] === "admin") //* Accès admin
                 {
                     require 'admin/_navlist.phtml';
                 }
-                else
+                else //* accès users
                 {
                     require 'user/_navlist.phtml';
                 }   
             }
-            else
+            else //* accès visiteurs
             {
                 require 'guest/_navlist.phtml';
             }

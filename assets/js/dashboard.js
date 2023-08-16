@@ -1,8 +1,7 @@
 window.addEventListener("DOMContentLoaded", function()
 {
-    console.log("yo");
     initDashboard();
-    
+    displayDetailsUsers();
 })
 
 
@@ -76,8 +75,6 @@ function initOptionsSelector(table)
     })
 }
 
-// function colloneSelected()
-
 function searchParams(table) //* paramètre de la table choisie
 {
     let searchbar = document.getElementById("searchbar"); //* get de l'input searchbar
@@ -118,6 +115,26 @@ function displayLine(table, colIndex, content)
                 }
             }
             i++;
+        })
+    })
+}
+
+//** --------------------------------------------- */
+//* Cette fonction affiche les détail de la sélection
+//** --------------------------------------------- */
+function displayDetailsUsers()
+{
+    let usersBtns = document.getElementsByClassName("user-btn");
+    let usersBtnsArray = Array.from(usersBtns);
+
+    usersBtnsArray.forEach(function(btnUser){
+        btnUser.addEventListener("click", function(){
+            usersBtnsArray.forEach(function(btnUser){
+                let othersDetail = document.getElementById("detail-user" + btnUser.id);
+                othersDetail.classList.add("hidden");
+            })
+            let detail = document.getElementById("detail-user" + btnUser.id);
+            detail.classList.remove("hidden");
         })
     })
 }

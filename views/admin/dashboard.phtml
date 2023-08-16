@@ -58,7 +58,7 @@
                     </tr>
                 </thead>
                 <tbody id="users-body">
-                    <?php
+                <?php
                     if($userManager->getUsers())
                     {
                         $i = 0;
@@ -67,7 +67,7 @@
                             $info = $infoManager->getInfoByUserId($user->getUserId());
                     ?>
                         <tr>
-                            <td><a href="#" id="user <?=$i;?>"><button><?=$i;?></button></a></td>
+                            <td><button class="user-btn" id="<?=$i;?>"><?=$i;?></button></td>
                             <td><?=$user->getUsername();?></td>
                             <td><?=$user->getEmail();?></td>
                             <td><?=$info->getFirstName();?></td>
@@ -75,18 +75,37 @@
                             <td><?=$info->getTel();?></td>
                             <td><?=$user->getRole();?></td>
                         </tr>
-                    <?php
-                        $i++;
+                        <?php
+                            $i++;
                         }
                     }
                     ?>
                 </tbody>
             </table>
         </section>
-        <section id="user-control" class="hidden">
+        <?php
+            if($userManager->getUsers())
+            {
+                $i = 0;
+                foreach($userManager->getUsers() as $user)
+                {   
+                    $info = $infoManager->getInfoByUserId($user->getUserId());
+            ?>
+        <section id="detail-user<?=$i;?>" class="hidden detail">
             <h3>Détails</h3>
             <p>Username : <?=$user->getUsername();?></p>
+            <p>Email : <?=$user->getEmail();?></p>
+            <p>Prénom : <?=$info->getFirstName();?></p>
+            <p>Nom de famille : <?=$info->getLastName();?></p>
+            <p>Téléphone : <?=$info->getTel();?></p>
+            <p>Adresse : <?=$info->getAddress().", ".$info->getZip()." ".$info->getCity();?></p>
+            <p>Rôle : <?=$user->getRole();?></p>
         </section>
+        <?php
+                $i++;
+            }
+        }
+        ?>
     </section>
                     
     <!-- --------------------------- -->
