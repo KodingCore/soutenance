@@ -22,11 +22,13 @@ class APIFetchController extends AbstractController
 
     public function categoryById(int $category_id)
     {
-        $message = $this->categoryManager->getCategoryByCategoryId($category_id);
+        $category = $this->categoryManager->getCategoryByCategoryId($category_id);
+        $categoryAttributs = $category->jsonSerialize();
+
+        $arrayResponse = $categoryAttributs;
 
         $response = [
-            "name" => $message->getName(), 
-            "description" => $message->getDescription()
+            "message" => $arrayResponse
         ];
         echo json_encode($response);
     }
@@ -36,11 +38,14 @@ class APIFetchController extends AbstractController
         $review = $this->reviewManager->getReviewByReviewId($review_id);
         $user = $this->userManager->getUserByUserId($review->getUserId());
         $template = $this->templateManager->getTemplateByTemplateId($review->getTemplateId());
+        $reviewAttributs = $review->jsonSerialize();
+        $userAttributs = $user->jsonSerialize();
+        $templateAttributs = $template->jsonSerialize();
+
+        $arrayResponse = array_replace($reviewAttributs, $userAttributs, $templateAttributs);
+
         $response = [
-            "username" => $user->getUsername(), 
-            "template" => $template->getName(),
-            "content" => $review->getContent(), 
-            "send_date" => $review->getSendDate()
+            "message" => $arrayResponse
         ];
         echo json_encode($response);
     }
@@ -49,13 +54,13 @@ class APIFetchController extends AbstractController
     {
         $message = $this->messageManager->getMessageByMessageId($message_id);
         $user = $this->userManager->getUserByUserId($message->getUserId());
+        $messageAttributs = $message->jsonSerialize();
+        $userAttributs = $user->jsonSerialize();
+
+        $arrayResponse = array_replace($messageAttributs, $userAttributs);
 
         $response = [
-            "username" => $user->getUsername(), 
-            "email" => $user->getEmail(),
-            "subject" => $message->getSubject(), 
-            "content" => $message->getContent(), 
-            "send_date_time" => $message->getSendDateTime()
+            "message" => $arrayResponse
         ];
         echo json_encode($response);
     }
@@ -66,42 +71,37 @@ class APIFetchController extends AbstractController
         $info = $this->infoManager->getInfoByUserId($user_id);
         $userAttributs = $user->jsonSerialize();
         $infoAttributs = $info->jsonSerialize();
+        
+        $arrayResponse = array_replace($userAttributs, $infoAttributs);
 
-        $response = [];
-
-        foreach ($userAttributs as $attribut) {
-            array_push($response, $attribut);
-        }
-        foreach ($infoAttributs as $attribut) {
-            array_push($response, $attribut);
-        }
+        $response = [
+            'user' => $arrayResponse
+        ];
+    
         echo json_encode($response);
     }
+
 
     public function templateById(int $template_id)
     {
         $template = $this->templateManager->getTemplateByTemplateId($template_id);
+        $templateAttributs = $template->jsonSerialize();
+        $arrayResponse = null;
         if($template->getCategoryId())
         {
             $category = $this->categoryManager->getCategoryByCategoryId($template->getCategoryId());
+            $categoryAttributs = $category->jsonSerialize();
+            $arrayResponse = array_replace($templateAttributs, $categoryAttributs);
+        }
+        else
+        {
+            $arrayResponse = $templateAttributs;
         }
         
-        $categoryName = null;
-        if(isset($category))
-        {
-            $categoryName = $category->getName();
-        }
-        $price = strval($template->getPrice());
-
         $response = [
-            "category_id" => $categoryName, 
-            "name" => $template->getName(), 
-            "description" => $template->getDescription(), 
-            "image_path" => $template->getImagePath(), 
-            "price" => $price, 
-            "created_at" => $template->getCreatedAt(),
-            "updated_at" => $template->getUpdatedAt()
+            'user' => $arrayResponse
         ];
-        echo json_encode($response);  
+    
+        echo json_encode($response);
     }
 }

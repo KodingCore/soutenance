@@ -176,16 +176,26 @@ function buttonsListener(sectionUsed)
         {
             let target = btn.id;
             let route = sectionUsed.id;
-            console.log(route + "  " + target);
             fetch(`index.php?route=${route}&id=${target}`)
             .then(response => response.json())
             .then(data => 
             {   
-                displayDetails(data, route, detailSection);
+                let dataExtract;
+                for(let key in data)
+                {
+                    dataExtract = data[key];
+                }
+                
+                displayDetails(dataExtract, route, detailSection);
             })
             .catch(error => console.error("Une erreur s'est produite", error));
         });
     });
+}
+
+function remakeRelationTable()
+{
+    
 }
 
 function displayDetails(data, route, detailSection)
