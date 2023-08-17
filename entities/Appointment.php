@@ -1,6 +1,7 @@
 <?php
 
-class Appointment {
+class Appointment implements JsonSerializable
+{
     private int $appointment_id;
     private int $user_id;
     private string $appointment_date;
@@ -28,4 +29,14 @@ class Appointment {
     public function setAppointmentDate(string $appointment_date): void { $this->appointment_date = $appointment_date; }
     public function setAppointmentTime(string $appointment_time): void { $this->appointment_time = $appointment_time; }
     public function setCommunicationPreference(string $communication_preference): void { $this->communication_preference = $communication_preference; }
+
+    public function jsonSerialize() {
+        return [
+            'appointment_id' => $this->appointment_id,
+            'user_id' => $this->user_id,
+            'appointment_date' => $this->appointment_date,
+            'appointment_time' => $this->appointment_time,
+            'communication_preference' => $this->communication_preference
+        ];
+    }
 }

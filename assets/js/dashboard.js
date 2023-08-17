@@ -15,22 +15,24 @@ function initDashboard()
         "user",
         "message",
         "template",
-        // "category",
+        "category",
         "review"
     ];
 
+    hideAddingForms();
+
     const links = [];
-    const sections = [];
+    const tablesSections = [];
     parts.forEach(function(part){
         links.push(document.getElementById(part + "-link"));
-        sections.push(document.getElementById(part));
+        tablesSections.push(document.getElementById(part));
     });
 
     for(let i = 0; i < links.length; i++)
     {
         links[i].addEventListener("click", function(){
-            toggleTables(sections, sections[i]);
-            buttonsListener(sections[i]);
+            toggleTables(tablesSections, tablesSections[i]);
+            buttonsListener(tablesSections[i]);
         })
     }
 
@@ -43,18 +45,28 @@ function initDashboard()
             displayForm(btn.id.split("-")[1]);
         })
     });
-    
+}
+
+function hideAddingForms()
+{
+    let addFormSections = document.getElementsByClassName("adding-section");
+    addFormSections = Array.from(addFormSections);
+    addFormSections.forEach(function(addingForm){
+        addingForm.classList.add("hidden");
+    })
 }
 
 //** -------------------------------------- */
 //*  afficher/cacher les sections, en fonction
 //*  du lien clické dans la nav de control
 //** -------------------------------------- */
-function toggleTables(sections, section)
+function toggleTables(tablesSections, tableSection)
 {
-    sections.forEach(function(sect)
+    hideAddingForms();
+
+    tablesSections.forEach(function(sect)
     {
-        if(section === sect)
+        if(tableSection === sect)
         {
             sect.classList.remove("hidden");
             let table = sect.querySelector("table");
@@ -156,7 +168,6 @@ function buttonsListener(sectionUsed)
     const btns = sectionUsed.getElementsByClassName("row-btn");
     const btnsArray = Array.from(btns);
     
-
     detailSection.classList.add("hidden");
 
     btnsArray.forEach(function(btn) 
@@ -165,11 +176,11 @@ function buttonsListener(sectionUsed)
         {
             let target = btn.id;
             let route = sectionUsed.id;
+            console.log(route + "  " + target);
             fetch(`index.php?route=${route}&id=${target}`)
             .then(response => response.json())
             .then(data => 
-            {
-                let detailSection = document.querySelector("#details");
+            {   
                 displayDetails(data, route, detailSection);
             })
             .catch(error => console.error("Une erreur s'est produite", error));
@@ -189,6 +200,7 @@ function displayDetails(data, route, detailSection)
             {   
                 detailSection.innerHTML = '<div id="detail-title"><h3>Détails ' + route + '</h3></div>';
             }
+
             if(key === "role")
             {
                 detailSection.innerHTML = detailSection.innerHTML + `
@@ -198,18 +210,28 @@ function displayDetails(data, route, detailSection)
             }
             else
             {
-                detailSection.innerHTML = detailSection.innerHTML + `
+                if(data[key] !== null)
+                {
+                    detailSection.innerHTML = detailSection.innerHTML + `
                     <p>${key} : ${data[key]}</p>
-                `;
+                    `;
+                }
+                else
+                {
+                    detailSection.innerHTML = detailSection.innerHTML + `
+                    <p>${key} : null</p>
+                    `;
+                }
+                
             }
         }
         i++;
     }
 }
 
-function displayForm(formName)
+function displayForm(name)
 {
-    const addingForm = document.querySelector("#add-" + formName + "-form");
+    const addingForm = document.querySelector("#add-" + name + "-form");
     addingForm.classList.remove("hidden");
     
 }

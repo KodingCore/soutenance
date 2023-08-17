@@ -25,6 +25,26 @@ class ReviewManager extends AbstractManager
         }
     }
 
+    public function getReviewByReviewId(int $review_id) : ? Review
+    {
+        $query = $this->db->prepare("SELECT * FROM reviews WHERE review_id = :review_id");
+        $parameters = [
+            "review_id" => $review_id
+        ];
+        $query->execute($parameters);
+        $review = $query->fetch(PDO::FETCH_ASSOC);
+        if($review)
+        {
+            $reviewInstance = new Review($review["user_id"], $review["template_id"], $review["content"], $review["send_date"]);
+            $reviewInstance->setReviewId($review["review_id"]);
+            return $reviewInstance;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public function getReviewByUserId(int $user_id) : ? Review
     {
         $query = $this->db->prepare("SELECT * FROM reviews WHERE user_id = :user_id");

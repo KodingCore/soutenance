@@ -2,22 +2,6 @@
 
 class TemplateManager extends AbstractManager
 {
-    public function getTemplateKeys() : ? array
-    {
-        $query = $this->db->prepare("SELECT * FROM templates LIMIT 1");
-        $query->execute();
-        $template = $query->fetch(PDO::FETCH_ASSOC);
-        if($template)
-        {
-            $keys = array_keys($template);
-            return $keys;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     
     public function getTemplatesOrderedByCreationDate() : ? array
     {
@@ -29,8 +13,10 @@ class TemplateManager extends AbstractManager
             $templatesTab = [];
             foreach($templates as $template)
             {
-                $templateInstance = new Template($template["category_id"], $template["name"], $template["description"], $template["image_path"], $template["price"], $template["created_at"], $template["updated_at"]);
+                $templateInstance = new Template($template["name"], $template["description"], $template["image_path"], $template["price"], $template["created_at"]);
                 $templateInstance->setTemplateId($template["template_id"]);
+                $templateInstance->setCategoryId($template["category_id"]);
+                $templateInstance->setUpdatedAt($template["updated_at"]);
                 array_push($templatesTab, $templateInstance);
             }
             return $templatesTab;
@@ -51,8 +37,9 @@ class TemplateManager extends AbstractManager
         $template = $query->fetch(PDO::FETCH_ASSOC);
         if($template)
         {
-            $templateInstance = new Template($template["category_id"], $template["name"], $template["description"], $template["image_path"], $template["price"], $template["created_at"]);
+            $templateInstance = new Template($template["name"], $template["description"], $template["image_path"], $template["price"], $template["created_at"]);
             $templateInstance->setTemplateId($template["template_id"]);
+            $templateInstance->setCategoryId($template["category_id"]);
             $templateInstance->setUpdatedAt($template["updated_at"]);
             return $templateInstance;
         }
@@ -64,12 +51,12 @@ class TemplateManager extends AbstractManager
 
     public function insertTemplate(Template $template)
     {
-        $query = $this->db->prepare("INSERT INTO templates (category_id, name, description, image_path, price, created_at) VALUES(:category_id, :name, :description, :image_path, :price, :created_at)");
+        $query = $this->db->prepare("INSERT INTO templates (name, description, image_path, price, created_at) VALUES(:name, :description, :image_path, :price, :created_at)");
         $parameters = [
-            "category_id" => $template->getCategoryId(),
             "name" => $template->getName(),
             "description" => $template->getDescription(),
             "image_path" => $template->getImagePath(),
+            "price" => $template->getPrice(),
             "created_at" => $template->getCreatedAt()
         ];
         $query->execute($parameters);
@@ -92,6 +79,7 @@ class TemplateManager extends AbstractManager
             "name" => $template->getName(),
             "description" => $template->getDescription(),
             "image_path" => $template->getImagePath(),
+            "price" => $template->getPrice(),
             "created_at" => $template->getCreatedAt(),
             "template_id" => $template->getTemplateId()
         ];

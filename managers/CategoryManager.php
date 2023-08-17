@@ -30,8 +30,7 @@ class CategoryManager extends AbstractManager
         $query = $this->db->prepare("INSERT INTO categories (name, description) VALUES(:name, :description)");
         $parameters = [
             "name" => $category->getName(),
-            "description" => $category->getDescription(),
-            "category_id" => $category->getCategoryId()
+            "description" => $category->getDescription()
         ];
         $query->execute($parameters);
     }

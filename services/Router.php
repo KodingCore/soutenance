@@ -49,7 +49,21 @@ class Router
         {
             if($_SESSION["role"] === "admin")
             {
-                $this->dashboardController->index();
+                if(isset($_GET["add"]))
+                {
+                    if($_GET["add"] === "template")
+                    {
+                        $this->dashboardController->addTemplate();
+                    }
+                    else if($_GET["add"] === "category")
+                    {
+                        $this->dashboardController->addCategory();
+                    }
+                }
+                else
+                {
+                    $this->dashboardController->index();
+                }
             }
             else
             {
@@ -85,9 +99,19 @@ class Router
                 $id = $_GET['id'];
                 $this->APIFetchController->templateById($id);
             }
-            else
-            {
-                $this->APIFetchController->templateKeys();
+        }
+        else if($route === "category" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
+        {
+            if(isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $this->APIFetchController->categoryById($id);
+            }
+        }
+        else if($route === "review" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
+        {
+            if(isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $this->APIFetchController->reviewById($id);
             }
         }
         else

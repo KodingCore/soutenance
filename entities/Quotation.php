@@ -1,6 +1,7 @@
 <?php
 
-class Quotation {
+class Quotation implements JsonSerializable
+{
     private int $quotation_id;
     private int $user_id;
     private int $template_id;
@@ -32,4 +33,15 @@ class Quotation {
     public function setQuotationDate(string $quotation_date): void { $this->quotation_date = $quotation_date; }
     public function setContent(string $content): void { $this->content = $content; }
     public function setExpirationDate(string $expiration_date): void { $this->expiration_date = $expiration_date; }
+
+    public function jsonSerialize() {
+        return [
+            'quotation_id' => $this->quotation_id,
+            'user_id' => $this->user_id,
+            'template_id' => $this->template_id,
+            'quotation_date' => $this->quotation_date,
+            'content' => $this->content,
+            'expiration_date' => $this->expiration_date
+        ];
+    }
 }

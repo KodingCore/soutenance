@@ -1,6 +1,7 @@
 <?php
 
-class Info {
+class Info implements JsonSerializable
+{
     private ?int $info_id;
     private int $user_id;
     private ?string $first_name;
@@ -38,4 +39,17 @@ class Info {
     public function setAddress(string $address): void { $this->address = $address; }
     public function setZip(string $zip): void { $this->zip = $zip; }
     public function setCity(string $city): void { $this->city = $city; }
+
+    public function jsonSerialize() {
+        return [
+            'info_id' => $this->info_id,
+            'user_id' => $this->user_id,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'tel' => $this->tel,
+            'address' => $this->address,
+            'zip' => $this->zip,
+            'city' => $this->city
+        ];
+    }
 }

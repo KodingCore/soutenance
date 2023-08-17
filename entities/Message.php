@@ -1,6 +1,7 @@
 <?php
 
-class Message {
+class Message implements JsonSerializable
+{
     private ?int $message_id;
     private int $user_id;
     private string $subject;
@@ -26,4 +27,14 @@ class Message {
     public function setSubject(string $subject): void { $this->subject = $subject; }
     public function setContent(string $content): void { $this->content = $content; }
     public function setSendDateTime(string $send_date_time): void { $this->send_date_time = $send_date_time; }
+
+    public function jsonSerialize() {
+        return [
+            'message_id' => $this->message_id,
+            'user_id' => $this->user_id,
+            'subject' => $this->subject,
+            'content' => $this->content,
+            'send_date_time' => $this->send_date_time
+        ];
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
-class Review {
+class Review implements JsonSerializable
+{
     private ?int $review_id;
     private int $user_id;
     private int $template_id;
@@ -29,5 +30,15 @@ class Review {
     public function setTemplateId(int $template_id) : void { $this->template_id = $template_id; }
     public function setContent(string $content): void { $this->content = $content; }
     public function setSendDate(string $send_date): void { $this->send_date = $send_date; }
+
+    public function jsonSerialize() {
+        return [
+            'review_id' => $this->review_id,
+            'user_id' => $this->user_id,
+            'template_id' => $this->template_id,
+            'content' => $this->content,
+            'send_date' => $this->send_date
+        ];
+    }
     
 }

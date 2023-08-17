@@ -17,6 +17,7 @@
             <a href="#" id="user-link">Users</a>
             <a href="#" id="message-link">Messages</a>
             <a href="#" id="template-link">Templates</a>
+            <a href="#" id="category-link">Catégories</a>
             <a href="#" id="review-link">Reviews</a>
         </li>
     </ul>
@@ -123,11 +124,11 @@
     <!-- --------------------------- -->
     <!-- -----SECTION TEMPLATES----- -->
     <!-- --------------------------- -->
-    <section id="template" class="hidden">
+    <section id="template" class="hidden"> 
         <h2>Panneau de control des templates</h2>
         <section>
             <h3>Listing templates</h3>
-            <button id="add-template-btn">Add a template</button>
+            <button id="add-template-btn">Ajouter une template</button>
             <table>
                 <thead>
                     <tr>
@@ -136,7 +137,6 @@
                         <th>Chemin de l'image</th>
                         <th>Prix</th>
                         <th>Date de création</th>
-                        <th>Date de mise à jour</th>
                         <th>Catégorie</th>
                     </tr>
                 </thead>
@@ -146,7 +146,10 @@
                     {
                         foreach($templateManager->getTemplatesOrderedByCreationDate() as $template)
                         {   
-                            $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
+                            if($template->getCategoryId() !== null)
+                            {
+                                $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
+                            }
                     ?>
                         <tr>
                             <td class="data"><button class="row-btn" id="<?=$template->getTemplateId();?>"><?=$template->getTemplateId();?></button></td>
@@ -154,8 +157,16 @@
                             <td class="data"><?=$template->getImagePath();?></td>
                             <td class="data"><?=$template->getPrice();?></td>
                             <td class="data"><?=$template->getCreatedAt();?></td>
-                            <td class="data"><?=$template->getUpdateddAt();?></td>
-                            <td class="data"><?=$category->getName();?></td>
+                            <td class="data"><?php
+                                if(isset($category))
+                                {
+                                    echo $category->getName();
+                                }
+                                else
+                                {
+                                    echo "null";
+                                }
+                            ?></td>
                         </tr>
                     <?php
                         }
@@ -170,96 +181,103 @@
     <!-- --------------------------- -->
     <section id="review" class="hidden">
         <h2>Panneau de control des reviews</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Sujet</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if($reviewManager->getReviewsOrderedByDate())
-                {
-                    foreach($reviewManager->getReviewsOrderedByDate() as $review)
-                    {   
-                        $user = $userManager->getUserByUserId($review->getUserId());
-                        $username = $user->getUsername();
-                ?>
+        <section>
+            <h3>Listing reviews</h3>
+            <table>
+                <thead>
                     <tr>
-                        <td class="data"><button class="row-btn" id="<?=$review->getReviewId();?>"<?=$review->getReviewId();?></button></td>
-                        <td class="data"><?=$user->getUsername();?></td>
-                        <td class="data"><?=$review->getSubject();?></td>
-                        <td class="data"><?=$review->getSendDate();?></td>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Sujet</th>
+                        <th>Date</th>
                     </tr>
-                <?php
+                </thead>
+                <tbody>
+                    <?php
+                    if($reviewManager->getReviewsOrderedByDate())
+                    {
+                        foreach($reviewManager->getReviewsOrderedByDate() as $review)
+                        {   
+                            $user = $userManager->getUserByUserId($review->getUserId());
+                            $username = $user->getUsername();
+                    ?>
+                        <tr>
+                            <td class="data"><button class="row-btn" id="<?=$review->getReviewId();?>"><?=$review->getReviewId();?></button></td>
+                            <td class="data"><?=$user->getUsername();?></td>
+                            <td class="data"><?=$review->getSubject();?></td>
+                            <td class="data"><?=$review->getSendDate();?></td>
+                        </tr>
+                    <?php
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </section>
     </section>
     <!-- ------------------------------ -->
     <!-- -------SECTION CATEGORIES----- -->
     <!-- ------------------------------ -->
     <section id="category" class="hidden">
         <h2>Panneau de control des catégories</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if($categoryManager->getCategories())
-                {
-                    foreach($categoryManager->getCategories() as $category)
-                    { 
-                ?>
+        <section>
+            <h3>Listing templates</h3>
+            <button id="add-category-btn">Ajouter une catégorie</button>
+            <table>
+                <thead>
                     <tr>
-                        <td class="data"><button class="row-btn" id="<?=$category->getCategoryId();?>"<?=$category->getCategoryId();?></button></td>
-                        <td class="data"><?=$category->getName();?></td>
+                        <th>ID</th>
+                        <th>Nom</th>
                     </tr>
-                <?php
+                </thead>
+                <tbody>
+                    <?php
+                    if($categoryManager->getCategories())
+                    {
+                        foreach($categoryManager->getCategories() as $category)
+                        { 
+                    ?>
+                        <tr>
+                            <td class="data"><button class="row-btn" id="<?=$category->getCategoryId();?>"><?=$category->getCategoryId();?></button></td>
+                            <td class="data"><?=$category->getName();?></td>
+                        </tr>
+                    <?php
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </section>
     </section>
     <section id="details" class="hidden"> 
     <!-- Section détails géré par javascript -->
     </section>
-    <section id="add-template-form" class="hidden">
+    <section id="add-template-form" class="adding-section" class="hidden">
         <h3>Ajouter une Template</h3>
-        <form action="index.php?route=dashboard" methode="POST">
+        <form action="index.php?route=dashboard&add=template" method="POST">
             <label for="name">Nom</label>
-            <input name="name" type="text" placeholder="Nom"/>
+            <input name="name" type="text" placeholder="Nom" required/>
 
             <label for="description">Description</label>
-            <input name="description" type="text" placeholder="Description"/>
+            <textarea name="description" placeholder="Votre texte ici..." required></textarea>
 
             <label for="image_path">Image</label>
-            <input name="image_path" type="text" placeholder="Chemin de l'image"/>
+            <input name="image_path" type="text" placeholder="Chemin de l'image" required/>
 
             <label for="price">Prix</label>
-            <input name="price" type="text" placeholder="Prix"/>
+            <input name="price" type="text" placeholder="Prix" required/>
 
             <input type="submit" value="Ajouter">
         </form>
     </section>
-    <section id="add-category-form" class="hidden">
+    <section id="add-category-form" class="adding-section" class="hidden">
         <h3>Ajouter une Catégorie</h3>
-        <form action="index.php?route=dashboard" methode="POST">
+        <form action="index.php?route=dashboard&add=category" method="POST">
             <label for="name">Nom</label>
-            <input name="name" type="text" placeholder="Nom"/>
+            <input name="name" type="text" placeholder="Nom" required/>
 
             <label for="description">Description</label>
-            <input name="description" type="text" placeholder="Description"/>
+            <textarea name="description" placeholder="Votre texte ici..." required></textarea>
 
             <input type="submit" value="Ajouter">
         </form>
