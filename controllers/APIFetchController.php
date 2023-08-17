@@ -64,7 +64,7 @@ class APIFetchController extends AbstractController
             "created_at" => $template->getCreatedAt(), 
             "updated_at" => $template->getUpdatedAt()
         ];
-        echo json_encode($response);
+        echo json_encode($response);   
     }
 
     public function templateKeys()

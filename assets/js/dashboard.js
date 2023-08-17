@@ -11,24 +11,20 @@ window.addEventListener("DOMContentLoaded", function()
 //** -------------------------------- */
 function initDashboard()
 {
-    const links = [ //* L'ordre est important ici
-        document.getElementById("users-link"),
-        document.getElementById("messages-link"),
-        document.getElementById("templates-link"),
-        document.getElementById("reviews-link")
+    const parts = [
+        "user",
+        "message",
+        "template",
+        // "category",
+        "review"
     ];
 
-    const sections = [ //* L'ordre est important ici
-        document.getElementById("users"),
-        document.getElementById("messages"),
-        document.getElementById("templates"),
-        document.getElementById("reviews")
-    ];
-
-    const addTemplateBtn = document.getElementById("add-template");
-    addTemplateBtn.addEventListener("click", function(){
-        displayForm("template");
-    })
+    const links = [];
+    const sections = [];
+    parts.forEach(function(part){
+        links.push(document.getElementById(part + "-link"));
+        sections.push(document.getElementById(part));
+    });
 
     for(let i = 0; i < links.length; i++)
     {
@@ -37,6 +33,17 @@ function initDashboard()
             buttonsListener(sections[i]);
         })
     }
+
+    const addBtns = [
+        document.getElementById("add-template-btn"),
+        document.getElementById("add-category-btn"),
+    ];
+    addBtns.forEach(function(btn){
+        btn.addEventListener("click", function(){
+            displayForm(btn.id.split("-")[1]);
+        })
+    });
+    
 }
 
 //** -------------------------------------- */
@@ -47,10 +54,8 @@ function toggleTables(sections, section)
 {
     sections.forEach(function(sect)
     {
-        
         if(section === sect)
         {
-            
             sect.classList.remove("hidden");
             let table = sect.querySelector("table");
             initOptionsSelector(table);
@@ -75,7 +80,8 @@ function initOptionsSelector(table)
     {
         columnSelection.removeChild(columnSelection.firstChild);
     }
-    theadsTab.forEach(function(thead){
+    theadsTab.forEach(function(thead)
+    {
         let option = document.createElement("option");
         option.textContent = thead.textContent;
         columnSelection.appendChild(option);
@@ -94,13 +100,15 @@ function searchParams(table) //* paramètre de la table choisie
     let colIndex; //* initialisation de la variable qui contient l'index de la colonne choisie
     let content; //* Variable du contenu de tête de colonne
 
-    select.addEventListener("change", function(){ //* Si l'option du select choisie à changée
+    select.addEventListener("change", function() //* Si l'option du select choisie à changée
+    {
         colIndex = select.selectedIndex; //* Récupèration de l'index de cette option
         content = searchbar.value.toLowerCase(); //* Définie le contenu en lowercase pour la comparaison
         displayLine(table, colIndex, content);
     })
 
-    searchbar.addEventListener("keyup", function(){ //* Si le texte de la searchbar est modifier
+    searchbar.addEventListener("keyup", function() //* Si le texte de la searchbar est modifier
+    {
         colIndex = select.selectedIndex; //* Récuperation de l'index de cette option
         content = searchbar.value.toLowerCase(); //* Définie le contenu en lowercase pour la comparaison
         displayLine(table, colIndex, content);
@@ -142,7 +150,8 @@ function displayLine(table, colIndex, content)
 //*  Ecoute les clicks de sélections de ligne
 //*  Puis appel la fonction d'affichage
 //** ------------------------------------- */
-function buttonsListener(sectionUsed) {
+function buttonsListener(sectionUsed) 
+{
     const detailSection = document.querySelector("#details");
     const btns = sectionUsed.getElementsByClassName("row-btn");
     const btnsArray = Array.from(btns);
@@ -150,15 +159,17 @@ function buttonsListener(sectionUsed) {
 
     detailSection.classList.add("hidden");
 
-    btnsArray.forEach(function(btn) {
-        btn.addEventListener("click", function() {
+    btnsArray.forEach(function(btn) 
+    {
+        btn.addEventListener("click", function() 
+        {
             let target = btn.id;
             let route = sectionUsed.id;
             fetch(`index.php?route=${route}&id=${target}`)
             .then(response => response.json())
-            .then(data => {
+            .then(data => 
+            {
                 let detailSection = document.querySelector("#details");
-                
                 displayDetails(data, route, detailSection);
             })
             .catch(error => console.error("Une erreur s'est produite", error));
@@ -176,56 +187,30 @@ function displayDetails(data, route, detailSection)
         {
             if(i === 0)
             {   
-                detailSection.innerHTML = '<div id="detail-title">' + '<h3>Détails ' + route + '</h3>' + '</div>';
+                detailSection.innerHTML = '<div id="detail-title"><h3>Détails ' + route + '</h3></div>';
             }
             if(key === "role")
             {
-                detailSection.innerHTML = detailSection.innerHTML + `<label for="role">Role :</label>
-                <input name="role" type="text" value="${data["role"]}"/>`;
+                detailSection.innerHTML = detailSection.innerHTML + `
+                    <label for="role">Role :</label>
+                    <input name="role" type="text" value="${data["role"]}"/>
+                `;
             }
             else
             {
-                detailSection.innerHTML = detailSection.innerHTML + `<p>${key} : ${data[key]}</p>`;
+                detailSection.innerHTML = detailSection.innerHTML + `
+                    <p>${key} : ${data[key]}</p>
+                `;
             }
         }
         i++;
     }
 }
 
-function fetchAllOf(formName)
-{
-    fetch(`index.php?route=${formName}`)
-    .then(response => response.json())
-    .then(data => {
-        return data;
-    })
-    .catch(error => console.error("Une erreur s'est produite", error));
-}
-
-function fetchOneOf(formName)
-{
-    fetch(`index.php?route=${formName}`)
-    .then(response => response.json())
-    .then(data => {
-        return data;
-    })
-    .catch(error => console.error("Une erreur s'est produite", error));
-}
-
 function displayForm(formName)
 {
-    const detailSection = document.querySelector("#details");
-    detailSection.classList.remove("hidden");
-
-    let data = fetchOneOf(formName);
-    detailSection.innerHTML = '<div id="detail-title">' + '<h3>Ajouter une ' + formName + '</h3>' + '</div>'
-    for(let key in data)
-    {
-        if (data.hasOwnProperty(key)) 
-        {
-            detailSection.innerHTML = detailSection.innerHTML +
-            '<label for="' + key + '">' + key + '</label>' +
-            '<input name="' + key + '" type="text" placeholder="' + key + '"/>'
-        }
-    }
+    const addingForm = document.querySelector("#add-" + formName + "-form");
+    addingForm.classList.remove("hidden");
+    
 }
+

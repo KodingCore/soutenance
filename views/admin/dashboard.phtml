@@ -14,10 +14,10 @@
 <aside class="left-pannel">
     <ul>
         <li>
-            <a href="#" id="users-link">Users</a>
-            <a href="#" id="messages-link">Messages</a>
-            <a href="#" id="templates-link">Templates</a>
-            <a href="#" id="reviews-link">Reviews</a>
+            <a href="#" id="user-link">Users</a>
+            <a href="#" id="message-link">Messages</a>
+            <a href="#" id="template-link">Templates</a>
+            <a href="#" id="review-link">Reviews</a>
         </li>
     </ul>
 </aside>
@@ -40,7 +40,7 @@
     <!-- --------------------------- -->
     <!-- ---SECTION UTILISATEURS---- -->
     <!-- --------------------------- -->
-    <section id="users" class="hidden">
+    <section id="user" class="hidden">
         <h2>Panneau de control des utilisateurs</h2>
         <section>
             <h3>Listing users</h3>
@@ -84,7 +84,7 @@
     <!-- --------------------------- -->
     <!-- ------SECTION MESSAGES----- -->
     <!-- --------------------------- -->
-    <section id="messages" class="hidden">
+    <section id="message" class="hidden">
         <h2>Panneau de control des messages</h2>
         <section>
             <h3>Listing messages</h3>
@@ -120,15 +120,14 @@
             </table>
         </section>
     </section>
-
     <!-- --------------------------- -->
     <!-- -----SECTION TEMPLATES----- -->
     <!-- --------------------------- -->
-    <section id="templates" class="hidden">
+    <section id="template" class="hidden">
         <h2>Panneau de control des templates</h2>
         <section>
             <h3>Listing templates</h3>
-            <button id="add-template">Add a template</button>
+            <button id="add-template-btn">Add a template</button>
             <table>
                 <thead>
                     <tr>
@@ -166,11 +165,10 @@
             </table>
         </section>
     </section>
-
     <!-- --------------------------- -->
     <!-- -------SECTION REVIEWS----- -->
     <!-- --------------------------- -->
-    <section id="reviews" class="hidden">
+    <section id="review" class="hidden">
         <h2>Panneau de control des reviews</h2>
         <table>
             <thead>
@@ -191,7 +189,7 @@
                         $username = $user->getUsername();
                 ?>
                     <tr>
-                        <td class="data"><button class="row-btn" id="<?=$review->getReviewId();?>"<?=$i;?></button></td>
+                        <td class="data"><button class="row-btn" id="<?=$review->getReviewId();?>"<?=$review->getReviewId();?></button></td>
                         <td class="data"><?=$user->getUsername();?></td>
                         <td class="data"><?=$review->getSubject();?></td>
                         <td class="data"><?=$review->getSendDate();?></td>
@@ -203,8 +201,68 @@
             </tbody>
         </table>
     </section>
+    <!-- ------------------------------ -->
+    <!-- -------SECTION CATEGORIES----- -->
+    <!-- ------------------------------ -->
+    <section id="category" class="hidden">
+        <h2>Panneau de control des catégories</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if($categoryManager->getCategories())
+                {
+                    foreach($categoryManager->getCategories() as $category)
+                    { 
+                ?>
+                    <tr>
+                        <td class="data"><button class="row-btn" id="<?=$category->getCategoryId();?>"<?=$category->getCategoryId();?></button></td>
+                        <td class="data"><?=$category->getName();?></td>
+                    </tr>
+                <?php
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+    </section>
     <section id="details" class="hidden"> 
     <!-- Section détails géré par javascript -->
+    </section>
+    <section id="add-template-form" class="hidden">
+        <h3>Ajouter une Template</h3>
+        <form action="index.php?route=dashboard" methode="POST">
+            <label for="name">Nom</label>
+            <input name="name" type="text" placeholder="Nom"/>
+
+            <label for="description">Description</label>
+            <input name="description" type="text" placeholder="Description"/>
+
+            <label for="image_path">Image</label>
+            <input name="image_path" type="text" placeholder="Chemin de l'image"/>
+
+            <label for="price">Prix</label>
+            <input name="price" type="text" placeholder="Prix"/>
+
+            <input type="submit" value="Ajouter">
+        </form>
+    </section>
+    <section id="add-category-form" class="hidden">
+        <h3>Ajouter une Catégorie</h3>
+        <form action="index.php?route=dashboard" methode="POST">
+            <label for="name">Nom</label>
+            <input name="name" type="text" placeholder="Nom"/>
+
+            <label for="description">Description</label>
+            <input name="description" type="text" placeholder="Description"/>
+
+            <input type="submit" value="Ajouter">
+        </form>
     </section>
 </main>
 <script type="module" src="assets/js/dashboard.js"></script>

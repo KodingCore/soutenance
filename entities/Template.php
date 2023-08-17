@@ -2,7 +2,7 @@
 
 class Template {
     private ?int $template_id;
-    private int $category_id;
+    private ?int $category_id;
     private string $name;
     private string $description;
     private string $image_path;
@@ -10,9 +10,9 @@ class Template {
     private string $created_at;
     private ?string $updated_at;
     
-    public function __construct(int $category_id, string $name, string $description, string $image_path, float $price, string $created_at) {
+    public function __construct(string $name, string $description, string $image_path, float $price, string $created_at) {
         $this->template_id = null;
-        $this->category_id = $category_id;
+        $this->category_id = null;
         $this->name = $name;
         $this->description = $description;
         $this->image_path = $image_path;

@@ -65,21 +65,21 @@ class Router
         {
 
         }
-        else if($route === "users" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
+        else if($route === "user" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
         {
             if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $this->APIFetchController->userAndInfoById($id);
             }
         }
-        else if($route === "messages" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
+        else if($route === "message" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
         {
             if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $this->APIFetchController->messageById($id);
             }
         }
-        else if($route === "templates" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
+        else if($route === "template" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
         {
             if(isset($_GET['id'])) {
                 $id = $_GET['id'];
