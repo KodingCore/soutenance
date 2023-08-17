@@ -55,4 +55,24 @@ class CategoryManager extends AbstractManager
         ];
         $query->execute($parameters);
     }
+
+    public function getCategoryByCategoryId(int $category_id) : ? Category
+    {
+        $query = $this->db->prepare("SELECT * FROM categories WHERE category_id = :category_id");
+        $parameters = [
+            "category_id" => $category_id
+        ];
+        $query->execute($parameters);
+        $category = $query->fetch(PDO::FETCH_ASSOC);
+        if($category)
+        {
+            $categoryInstance = new Category($category["name"], $category["description"]);
+            $categoryInstance->setCategoryId($category["category_id"]);
+            return $categoryInstance;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

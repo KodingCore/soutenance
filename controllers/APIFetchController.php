@@ -6,7 +6,7 @@ class APIFetchController extends AbstractController
     private $messageManager;
     private $userManager;
     private $infoManager;
-    private $reviewManager;
+    private $categoryManager;
     private $templateManager;
 
     public function __construct()
@@ -14,11 +14,11 @@ class APIFetchController extends AbstractController
         $this->messageManager = new MessageManager();
         $this->userManager = new UserManager();
         $this->infoManager = new InfoManager();
-        $this->reviewManager = new ReviewManager();
+        $this->categoryManager = new CategoryManager();
         $this->templateManager = new TemplateManager();
     }
 
-    public function messageById($message_id)
+    public function messageById(string $message_id)
     {
         $message = $this->messageManager->getMessageByMessageId($message_id);
         $user = $this->userManager->getUserByUserId($message->getUserId());
@@ -33,7 +33,7 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
-    public function userById($user_id)
+    public function userAndInfoById(string $user_id)
     {
         $user = $this->userManager->getUserByUserId($user_id);
         $info = $this->infoManager->getInfoByUserId($user_id);
@@ -51,4 +51,25 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
+    public function templateById(string $template_id)
+    {
+        $template = $this->templateManager->getTemplateByTemplateId($template_id);
+        $category = $this->categoryManager->getCategoryByCategoryId($template->getCategoryId());
+        $response = [
+            "category_name" => $category->getName(), 
+            "name" => $template->getName(), 
+            "description" => $template->getDescription(), 
+            "image_path" => $template->getImagePath(), 
+            "price" => $template->getPrice(), 
+            "created_at" => $template->getCreatedAt(), 
+            "updated_at" => $template->getUpdatedAt()
+        ];
+        echo json_encode($response);
+    }
+
+    public function templateKeys()
+    {
+        $keys = $this->templateManager->getTemplateKeys();
+        echo json_encode($keys);
+    }
 }

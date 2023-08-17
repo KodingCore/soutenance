@@ -2,6 +2,22 @@
 
 class TemplateManager extends AbstractManager
 {
+    public function getTemplateKeys() : ? array
+    {
+        $query = $this->db->prepare("SELECT * FROM templates LIMIT 1");
+        $query->execute();
+        $template = $query->fetch(PDO::FETCH_ASSOC);
+        if($template)
+        {
+            $keys = array_keys($template);
+            return $keys;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     
     public function getTemplatesOrderedByCreationDate() : ? array
     {
@@ -18,6 +34,27 @@ class TemplateManager extends AbstractManager
                 array_push($templatesTab, $templateInstance);
             }
             return $templatesTab;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getTemplateByTemplateId(int $template_id) : ? Template
+    {
+        $query = $this->db->prepare("SELECT * FROM templates WHERE template_id = :template_id");
+        $parameters = [
+            "template_id" => $template_id
+        ];
+        $query->execute($parameters);
+        $template = $query->fetch(PDO::FETCH_ASSOC);
+        if($template)
+        {
+            $templateInstance = new Template($template["category_id"], $template["name"], $template["description"], $template["image_path"], $template["price"], $template["created_at"]);
+            $templateInstance->setTemplateId($template["template_id"]);
+            $templateInstance->setUpdatedAt($template["updated_at"]);
+            return $templateInstance;
         }
         else
         {

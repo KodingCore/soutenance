@@ -5,8 +5,7 @@
     $infoManager = new InfoManager();
     $templateManager = new TemplateManager();
     // $quotationManager = new QuotationManager();
-    // $imageManager = new ImageManager();
-    // $categoryManager = new CategoryManager();
+    $categoryManager = new CategoryManager();
     // $appointmentManager = new AppointmentManager();
 ?>
 <!-- ------------------------------------------------------------------------------------- -->
@@ -43,7 +42,7 @@
     <!-- --------------------------- -->
     <section id="users" class="hidden">
         <h2>Panneau de control des utilisateurs</h2>
-        <section id="users-view">
+        <section>
             <h3>Listing users</h3>
             <table>
                 <thead>
@@ -61,7 +60,6 @@
                 <?php
                     if($userManager->getUsers())
                     {
-                        $i = 0;
                         foreach($userManager->getUsers() as $user)
                         {   
                             $info = $infoManager->getInfoByUserId($user->getUserId());
@@ -76,7 +74,6 @@
                             <td class="data"><?=$user->getRole();?></td>
                         </tr>
                         <?php
-                            $i++;
                         }
                     }
                     ?>
@@ -89,7 +86,7 @@
     <!-- --------------------------- -->
     <section id="messages" class="hidden">
         <h2>Panneau de control des messages</h2>
-        <section id="users-view">
+        <section>
             <h3>Listing messages</h3>
             <table>
                 <thead>
@@ -100,7 +97,7 @@
                         <th>Date</th>
                     </tr>
                 </thead>
-                <tbody id="messages-body">
+                <tbody>
                     <?php
                     if($messageManager->getMessagesOrderedByDate())
                     {
@@ -129,37 +126,45 @@
     <!-- --------------------------- -->
     <section id="templates" class="hidden">
         <h2>Panneau de control des templates</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Catégorie</th>
-                    <th>Date de création</th>
-                    <th>Date de mise à jour</th>
-                </tr>
-            </thead>
-            <tbody id="templates-body">
-                <?php
-                if($templateManager->getTemplatesOrderedByCreationDate())
-                {
-                    foreach($templateManager->getTemplatesOrderedByCreationDate() as $template)
-                    {   
-                        $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
-                ?>
+        <section>
+            <h3>Listing templates</h3>
+            <button id="add-template">Add a template</button>
+            <table>
+                <thead>
                     <tr>
-                        <td class="data"><button class="row-btn" id="<?=$template->getTemplateId();?>"><?=$template->getTemplateId();?></button></td>
-                        <td class="data"><?=$template->getName();?></td>
-                        <td class="data"><?=$template->getDescription();?></td>
-                        <td class="data"><?=$template->getCreatedAt();?></td>
-                        <td class="data"><?=$template->getUpdatedAt();?></td>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Chemin de l'image</th>
+                        <th>Prix</th>
+                        <th>Date de création</th>
+                        <th>Date de mise à jour</th>
+                        <th>Catégorie</th>
                     </tr>
-                <?php
+                </thead>
+                <tbody>
+                    <?php
+                    if($templateManager->getTemplatesOrderedByCreationDate())
+                    {
+                        foreach($templateManager->getTemplatesOrderedByCreationDate() as $template)
+                        {   
+                            $category = $categoryManager->getCategoryByCategoryId($template->getCategoryId());
+                    ?>
+                        <tr>
+                            <td class="data"><button class="row-btn" id="<?=$template->getTemplateId();?>"><?=$template->getTemplateId();?></button></td>
+                            <td class="data"><?=$template->getName();?></td>
+                            <td class="data"><?=$template->getImagePath();?></td>
+                            <td class="data"><?=$template->getPrice();?></td>
+                            <td class="data"><?=$template->getCreatedAt();?></td>
+                            <td class="data"><?=$template->getUpdateddAt();?></td>
+                            <td class="data"><?=$category->getName();?></td>
+                        </tr>
+                    <?php
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </section>
     </section>
 
     <!-- --------------------------- -->
@@ -176,30 +181,30 @@
                     <th>Date</th>
                 </tr>
             </thead>
-            <tbody id="reviews-body">
+            <tbody>
                 <?php
                 if($reviewManager->getReviewsOrderedByDate())
                 {
-                    $i = 0;
                     foreach($reviewManager->getReviewsOrderedByDate() as $review)
                     {   
                         $user = $userManager->getUserByUserId($review->getUserId());
                         $username = $user->getUsername();
                 ?>
                     <tr>
-                        <td class="data"><button class="row-btn" id="<?=$i;?>"><?=$i;?></button></td>
+                        <td class="data"><button class="row-btn" id="<?=$review->getReviewId();?>"<?=$i;?></button></td>
                         <td class="data"><?=$user->getUsername();?></td>
                         <td class="data"><?=$review->getSubject();?></td>
                         <td class="data"><?=$review->getSendDate();?></td>
                     </tr>
                 <?php
-                    $i++;
                     }
                 }
                 ?>
             </tbody>
         </table>
     </section>
-    <section id="details" class="hidden"></section> <!-- Section gérer par le javascript -->
+    <section id="details" class="hidden"> 
+    <!-- Section détails géré par javascript -->
+    </section>
 </main>
 <script type="module" src="assets/js/dashboard.js"></script>

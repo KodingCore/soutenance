@@ -4,10 +4,10 @@ window.addEventListener("DOMContentLoaded", function()
     
 })
 
-
 //** -------------------------------- */
 //*  Initialisation et écoute des clicks
 //*  dans les liens de la nav de control 
+//*  Et les boutons d'ajouts
 //** -------------------------------- */
 function initDashboard()
 {
@@ -25,15 +25,18 @@ function initDashboard()
         document.getElementById("reviews")
     ];
 
+    const addTemplateBtn = document.getElementById("add-template");
+    addTemplateBtn.addEventListener("click", function(){
+        displayForm("template");
+    })
+
     for(let i = 0; i < links.length; i++)
     {
         links[i].addEventListener("click", function(){
             toggleTables(sections, sections[i]);
-            displayDetails(sections[i]);
+            buttonsListener(sections[i]);
         })
     }
-
-    
 }
 
 //** -------------------------------------- */
@@ -52,10 +55,6 @@ function toggleTables(sections, section)
             let table = sect.querySelector("table");
             initOptionsSelector(table);
             searchParams(table);
-            if(section.id === "templates")
-            {
-                section.innerHTML = '<button id="add-template">Add a template</button>';
-            }
         }
         else
         {
@@ -139,59 +138,94 @@ function displayLine(table, colIndex, content)
     })
 }
 
-//** -------------------------------- */
-//*  Affiche les détails de la sélection
-//** -------------------------------- */
-function displayDetails(sectionUsed) {
-    let detailSection = document.querySelector("#details");
-    let btns = sectionUsed.getElementsByClassName("row-btn");
-    let btnsArray = Array.from(btns);
-    let route = sectionUsed.id;
+//** ------------------------------------- */
+//*  Ecoute les clicks de sélections de ligne
+//*  Puis appel la fonction d'affichage
+//** ------------------------------------- */
+function buttonsListener(sectionUsed) {
+    const detailSection = document.querySelector("#details");
+    const btns = sectionUsed.getElementsByClassName("row-btn");
+    const btnsArray = Array.from(btns);
+    
 
     detailSection.classList.add("hidden");
 
     btnsArray.forEach(function(btn) {
         btn.addEventListener("click", function() {
             let target = btn.id;
-            
+            let route = sectionUsed.id;
             fetch(`index.php?route=${route}&id=${target}`)
-                .then(response => response.json())
-                .then(data => {
-
-                    let i = 0;
-                    detailSection.classList.remove("hidden");
-                    
-
-                    for (let key in data) {
-                        
-                        if (data.hasOwnProperty(key)) {
-                            
-                            if(i === 0)
-                            {   
-                                detailSection.innerHTML = 
-                                '<div id="detail-title">' +
-                                    '<h3>Détails ' + route + '</h3>' +
-                                '</div>'
-                                ;
-                            }
-                            if(key === "role")
-                            {
-                                detailSection.innerHTML = detailSection.innerHTML +
-                                `<label for="role">Role :</label>
-                                <input name="role" type="text" value="${data["role"]}"/>`;
-                            }
-                            else
-                            {
-                                detailSection.innerHTML = detailSection.innerHTML +`
-                                    <p>${key} : ${data[key]}</p>
-                                `;
-                            }
-                            
-                            i++;
-                        }
-                    }
-                })
-                .catch(error => console.error("Une erreur s'est produite", error));
+            .then(response => response.json())
+            .then(data => {
+                let detailSection = document.querySelector("#details");
+                
+                displayDetails(data, route, detailSection);
+            })
+            .catch(error => console.error("Une erreur s'est produite", error));
         });
     });
+}
+
+function displayDetails(data, route, detailSection)
+{
+    detailSection.classList.remove("hidden");
+    let i = 0;      
+    for (let key in data) 
+    {
+        if (data.hasOwnProperty(key)) 
+        {
+            if(i === 0)
+            {   
+                detailSection.innerHTML = '<div id="detail-title">' + '<h3>Détails ' + route + '</h3>' + '</div>';
+            }
+            if(key === "role")
+            {
+                detailSection.innerHTML = detailSection.innerHTML + `<label for="role">Role :</label>
+                <input name="role" type="text" value="${data["role"]}"/>`;
+            }
+            else
+            {
+                detailSection.innerHTML = detailSection.innerHTML + `<p>${key} : ${data[key]}</p>`;
+            }
+        }
+        i++;
+    }
+}
+
+function fetchAllOf(formName)
+{
+    fetch(`index.php?route=${formName}`)
+    .then(response => response.json())
+    .then(data => {
+        return data;
+    })
+    .catch(error => console.error("Une erreur s'est produite", error));
+}
+
+function fetchOneOf(formName)
+{
+    fetch(`index.php?route=${formName}`)
+    .then(response => response.json())
+    .then(data => {
+        return data;
+    })
+    .catch(error => console.error("Une erreur s'est produite", error));
+}
+
+function displayForm(formName)
+{
+    const detailSection = document.querySelector("#details");
+    detailSection.classList.remove("hidden");
+
+    let data = fetchOneOf(formName);
+    detailSection.innerHTML = '<div id="detail-title">' + '<h3>Ajouter une ' + formName + '</h3>' + '</div>'
+    for(let key in data)
+    {
+        if (data.hasOwnProperty(key)) 
+        {
+            detailSection.innerHTML = detailSection.innerHTML +
+            '<label for="' + key + '">' + key + '</label>' +
+            '<input name="' + key + '" type="text" placeholder="' + key + '"/>'
+        }
+    }
 }
