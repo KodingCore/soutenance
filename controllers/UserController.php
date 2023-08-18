@@ -175,7 +175,6 @@ class UserController extends AbstractController
     //** -------------------------------------------------------------- */
     public function account() 
     {
-
         $error = null; //* Variable de récolte d'erreur
 
         $info_change = false; //* Booléen de changement d'informations
@@ -189,7 +188,7 @@ class UserController extends AbstractController
             
             $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
             $error = $this->controlSpeChar("Username", $username);
-            
+
             $error = $this->controlStrlen("Username", $username, 50); //* Validation de la longueur de chaine
 
             //* Validation de la non-existance du username

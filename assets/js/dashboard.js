@@ -33,7 +33,7 @@ function initDashboard()
     {
         links[i].addEventListener("click", function(){
             toggleTables(tablesSections, tablesSections[i]);
-            buttonsListener(tablesSections[i]);
+            detailButtonsListener(tablesSections[i]);
         })
     }
 
@@ -49,10 +49,9 @@ function initDashboard()
     });
 }
 
-//** -------------------------------------- */
-//*  
-//*  
-//** -------------------------------------- */
+//** ----------------------------------- */
+//*  Permet de chacher les sections d'ajout
+//** ----------------------------------- */
 function hideAddingForms()
 {
     let addFormSections = document.getElementsByClassName("adding-section");
@@ -62,10 +61,10 @@ function hideAddingForms()
     })
 }
 
-//** -------------------------------------- */
-//*  Afficher/cacher les sections, en fonction
+//** ------------------------------------ */
+//*  Affiche/cache les sections, en fonction
 //*  du lien clické dans la nav de control
-//** -------------------------------------- */
+//** ------------------------------------ */
 function toggleTables(tablesSections, tableSection)
 {
     hideAddingForms();
@@ -86,10 +85,10 @@ function toggleTables(tablesSections, tableSection)
     })
 }
 
-//** ----------------------------- */
+//** ------------------------------------ */
 //*  Initialise les options du select
-//*  en fonction de la categorie
-//** ----------------------------- */
+//*  en fonction de la categorie de la table
+//** ------------------------------------ */
 function initOptionsSelector(table)
 {
     const columnSelection = document.getElementById("column-selection"); //* Récuperation du select
@@ -106,12 +105,12 @@ function initOptionsSelector(table)
     })
 }
 
-//** --------------------------------------------- */
-//*  Écoute les relachement clavier dans la searchbar
+//** ---------------------------------------------- */
+//*  Écoute les relachements clavier dans la searchbar
 //*  et les changements d'options du selecteur
 //*  Calcul la colonne résultante
-//** --------------------------------------------- */
-function searchParams(table) //* paramètre de la table choisie
+//** ---------------------------------------------- */
+function searchParams(table)
 {
     let searchbar = document.getElementById("searchbar"); //* Récuperation de l'input searchbar
     let select = document.getElementById("column-selection"); //* Récuperation l'élément de selection
@@ -168,7 +167,7 @@ function displayLine(table, colIndex, content)
 //*  Ecoute les clicks de sélections de ligne
 //*  puis appel la fonction d'affichage
 //** ------------------------------------- */
-function buttonsListener(sectionUsed) 
+function detailButtonsListener(sectionUsed) 
 {
     const detailSection = document.querySelector("#details");
     const btns = sectionUsed.getElementsByClassName("row-btn");
@@ -199,15 +198,9 @@ function buttonsListener(sectionUsed)
     });
 }
 
-function remakeRelationTable()
-{
-    
-}
-
-//** -------------------------------------- */
-//*  
-//*  
-//** -------------------------------------- */
+//** ------------------------------------------- */
+//*  Affiche les détails d'une sélection du tableau
+//** ------------------------------------------- */
 function displayDetails(data, route, detailSection)
 {
     detailSection.classList.remove("hidden");
@@ -242,9 +235,14 @@ function displayDetails(data, route, detailSection)
                     <p>${key} : null</p>
                     `;
                 }
-                
             }
         }
         i++;
     }
+}
+
+
+function remakeRelationTable()
+{
+    
 }

@@ -54,5 +54,4 @@ class DashboardController extends AbstractController
         }
         $this->render("views/admin/dashboard.phtml", []);
     }
-    
 }
