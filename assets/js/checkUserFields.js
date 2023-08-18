@@ -52,12 +52,6 @@ export function checkUserFields(form)
                 error_password.textContent = "Le password doit contenir au moins " + minCharPswrd + " caractères";
                 error = true;
             }
-            // else
-            // {
-            //     champ_password.classList.remove("erreur");
-            //     error_password.textContent = "";
-            //     error = false;
-            // }
 
             //* Control de l'égalité entre le password et le confirm_password
             if(champ_confirm_password.value !== champ_password.value && champ_confirm_password.value.length > 0)
@@ -66,12 +60,6 @@ export function checkUserFields(form)
                 error_confirm_password.textContent = "La confirmation du password doit être identique au password";
                 error = true;
             }
-            // else
-            // {
-            //     champ_confirm_password.classList.remove("erreur");
-            //     error_confirm_password.textContent = "";
-            //     error = false;
-            // }
         })
     
         champ_confirm_password.addEventListener("change", function()
@@ -82,12 +70,11 @@ export function checkUserFields(form)
                 error_confirm_password.textContent = "La confirmation du password doit être identique au password";
                 error = true;
             }
-            // else
-            // {
-            //     champ_confirm_password.classList.remove("erreur");
-            //     error_confirm_password.textContent = "";
-            //     error = false;
-            // }
+            else
+            {
+                champ_confirm_password.classList.remove("erreur");
+                error_confirm_password.textContent = "";
+            }
         })
     }
 
