@@ -32,11 +32,11 @@ class Appointment implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            'appointment_id' => $this->appointment_id,
-            'user_id' => $this->user_id,
-            'appointment_date' => $this->appointment_date,
-            'appointment_time' => $this->appointment_time,
-            'communication_preference' => $this->communication_preference
+            "ID rendez-vous" => $this->appointment_id,
+            "ID utilisateur" => $this->user_id,
+            "Date du rendez-vous" => $this->appointment_date,
+            "Heure du rendez-vous" => $this->appointment_time,
+            "Préférence de communication" => $this->communication_preference
         ];
     }
 }

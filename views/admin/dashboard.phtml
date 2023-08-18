@@ -255,17 +255,17 @@
     <section id="add-template-form" class="adding-section" class="hidden">
         <h3>Ajouter une Template</h3>
         <form action="index.php?route=dashboard&add=template" method="POST">
-            <label for="name">Nom</label>
-            <input name="name" type="text" placeholder="Nom" required/>
+            <label for="template_name">Nom</label>
+            <input id="template_name" name="template_name" type="text" placeholder="Nom" required/>
 
-            <label for="description">Description</label>
-            <textarea name="description" placeholder="Votre texte ici..." required></textarea>
+            <label for="template_description">Description</label>
+            <textarea id="template_description" name="template_description" placeholder="Votre texte ici..." required></textarea>
 
             <label for="image_path">Image</label>
-            <input name="image_path" type="text" placeholder="Chemin de l'image" required/>
+            <input id="image_path" name="image_path" type="text" placeholder="Chemin de l'image" required/>
 
             <label for="price">Prix</label>
-            <input name="price" type="text" placeholder="Prix" required/>
+            <input id="price" name="price" type="text" placeholder="Prix" required/>
 
             <input type="submit" value="Ajouter">
         </form>
@@ -273,11 +273,11 @@
     <section id="add-category-form" class="adding-section" class="hidden">
         <h3>Ajouter une Catégorie</h3>
         <form action="index.php?route=dashboard&add=category" method="POST">
-            <label for="name">Nom</label>
-            <input name="name" type="text" placeholder="Nom" required/>
+            <label for="category_name">Nom</label>
+            <input id="category_name" name="category_name" type="text" placeholder="Nom" required/>
 
-            <label for="description">Description</label>
-            <textarea name="description" placeholder="Votre texte ici..." required></textarea>
+            <label for="category_description">Description</label>
+            <textarea id="category_description" name="category_description" placeholder="Votre texte ici..." required></textarea>
 
             <input type="submit" value="Ajouter">
         </form>

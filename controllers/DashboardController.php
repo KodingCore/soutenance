@@ -14,7 +14,6 @@ class DashboardController extends AbstractController
 
     public function index()
     {
-
         $this->render("views/admin/dashboard.phtml", []);
     }
 
@@ -22,10 +21,11 @@ class DashboardController extends AbstractController
     {
         if(!empty($_POST["name"]) && !empty($_POST["description"]) && !empty($_POST["image_path"]) && !empty($_POST["price"]))
         {
-            $name = $_POST["name"];
-            $description = $_POST["description"];
-            $image_path = $_POST["image_path"];
-            $price = $_POST["price"];
+            //* Contre-mesures d'injection de code
+            $name = htmlspecialchars($_POST["name"]);
+            $description = htmlspecialchars($_POST["description"]);
+            $image_path = htmlspecialchars($_POST["image_path"]);
+            $price = htmlspecialchars($_POST["price"]);
 
             //* Mise en forme de la date actuelle
             $timezone = new DateTimeZone('Europe/Paris');
@@ -45,8 +45,9 @@ class DashboardController extends AbstractController
     {
         if(!empty($_POST["name"]) && !empty($_POST["description"]))
         {
-            $name = $_POST["name"];
-            $description = $_POST["description"];
+            //* Contre-mesures d'injection de code
+            $name = htmlspecialchars($_POST["name"]);
+            $description = htmlspecialchars($_POST["description"]);
 
             $category = new Category($name, $description);
             $this->categoryManager->insertCategory($category);

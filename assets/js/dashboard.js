@@ -11,6 +11,7 @@ window.addEventListener("DOMContentLoaded", function()
 //** -------------------------------- */
 function initDashboard()
 {
+    //* Noms des parties controllées par le dashboard
     const parts = [
         "user",
         "message",
@@ -42,11 +43,16 @@ function initDashboard()
     ];
     addBtns.forEach(function(btn){
         btn.addEventListener("click", function(){
-            displayForm(btn.id.split("-")[1]);
+            const addingForm = document.querySelector("#add-" + btn.id.split("-")[1] + "-form");
+            addingForm.classList.remove("hidden");
         })
     });
 }
 
+//** -------------------------------------- */
+//*  
+//*  
+//** -------------------------------------- */
 function hideAddingForms()
 {
     let addFormSections = document.getElementsByClassName("adding-section");
@@ -57,7 +63,7 @@ function hideAddingForms()
 }
 
 //** -------------------------------------- */
-//*  afficher/cacher les sections, en fonction
+//*  Afficher/cacher les sections, en fonction
 //*  du lien clické dans la nav de control
 //** -------------------------------------- */
 function toggleTables(tablesSections, tableSection)
@@ -82,7 +88,7 @@ function toggleTables(tablesSections, tableSection)
 
 //** ----------------------------- */
 //*  Initialise les options du select
-//*  En fonction de la categorie
+//*  en fonction de la categorie
 //** ----------------------------- */
 function initOptionsSelector(table)
 {
@@ -102,7 +108,7 @@ function initOptionsSelector(table)
 
 //** --------------------------------------------- */
 //*  Écoute les relachement clavier dans la searchbar
-//*  Et les changements d'options du selecteur
+//*  et les changements d'options du selecteur
 //*  Calcul la colonne résultante
 //** --------------------------------------------- */
 function searchParams(table) //* paramètre de la table choisie
@@ -129,7 +135,7 @@ function searchParams(table) //* paramètre de la table choisie
 
 //** ------------------------------ */
 //*  Check le matching de la searchbar
-//*  Et affiche la ligne en fonction
+//*  et affiche la ligne en fonction
 //*  Cache les autres lignes
 //** ------------------------------ */
 function displayLine(table, colIndex, content)
@@ -160,7 +166,7 @@ function displayLine(table, colIndex, content)
 
 //** ------------------------------------- */
 //*  Ecoute les clicks de sélections de ligne
-//*  Puis appel la fonction d'affichage
+//*  puis appel la fonction d'affichage
 //** ------------------------------------- */
 function buttonsListener(sectionUsed) 
 {
@@ -198,6 +204,10 @@ function remakeRelationTable()
     
 }
 
+//** -------------------------------------- */
+//*  
+//*  
+//** -------------------------------------- */
 function displayDetails(data, route, detailSection)
 {
     detailSection.classList.remove("hidden");
@@ -215,7 +225,7 @@ function displayDetails(data, route, detailSection)
             {
                 detailSection.innerHTML = detailSection.innerHTML + `
                     <label for="role">Role :</label>
-                    <input name="role" type="text" value="${data["role"]}"/>
+                    <input name="role" id="role" type="text" value="${data["role"]}"/>
                 `;
             }
             else
@@ -238,11 +248,3 @@ function displayDetails(data, route, detailSection)
         i++;
     }
 }
-
-function displayForm(name)
-{
-    const addingForm = document.querySelector("#add-" + name + "-form");
-    addingForm.classList.remove("hidden");
-    
-}
-

@@ -28,10 +28,10 @@ class Tag implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            'tag_id' => $this->tag_id,
-            'user_id' => $this->user_id,
-            'template_id' => $this->template_id,
-            'tag_name' => $this->tag_name
+            "ID du tag" => $this->tag_id,
+            "ID de l'utilisateur" => $this->user_id,
+            "ID du template" => $this->template_id,
+            "Nom du tag" => $this->tag_name
         ];
     }
 }

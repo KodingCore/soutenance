@@ -33,11 +33,11 @@ class Review implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            'review_id' => $this->review_id,
-            'user_id' => $this->user_id,
-            'template_id' => $this->template_id,
-            'content' => $this->content,
-            'send_date' => $this->send_date
+            "ID du commentaire" => $this->review_id,
+            "ID de l'utilisateur" => $this->user_id,
+            "ID du template" => $this->template_id,
+            "Contenu" => $this->content,
+            "Date d'envoi" => $this->send_date
         ];
     }
     

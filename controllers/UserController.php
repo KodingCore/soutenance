@@ -30,7 +30,6 @@ class UserController extends AbstractController
 
             //* Validation de la longueur du champ username_email
             $error = $this->controlStrlen("Email / Username", $userTag, 50);
-            $error = $this->controlStrlen("Password", $password, 50);
 
             //* Validation de la saisie d'identification
             if (filter_var($userTag, FILTER_VALIDATE_EMAIL)) //* Si c'est une adresse e-mail
@@ -111,8 +110,6 @@ class UserController extends AbstractController
             //* Validation des longueur de chaines
             $error = $this->controlStrlen("Username", $username, 50);
             $error = $this->controlStrlen("Email", $email, 50);
-            $error = $this->controlStrlen("Password", $password, 50);
-            $error = $this->controlStrlen("Confirm password", $confirm_password, 50);
             
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)
@@ -191,7 +188,8 @@ class UserController extends AbstractController
         {
             
             $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
-
+            $error = $this->controlSpeChar("Username", $username);
+            
             $error = $this->controlStrlen("Username", $username, 50); //* Validation de la longueur de chaine
 
             //* Validation de la non-existance du username
@@ -234,13 +232,9 @@ class UserController extends AbstractController
 
         if(!empty($_POST["password"]) && !empty($_POST["confirm_password"]))  //* Si on édite le password
         {
-             //* Contre-mesures d'injection de code
+            //* Contre-mesures d'injection de code
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
             $confirm_password = htmlspecialchars($_POST["confirm_password"], ENT_QUOTES, 'UTF-8');
-
-            //* Validation des longueurs de chaines
-            $error = $this->controlStrlen("Password", $password, 50);
-            $error = $this->controlStrlen("Confirm password", $confirm_password, 50);
 
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)

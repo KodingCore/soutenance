@@ -30,11 +30,11 @@ class Message implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            'message_id' => $this->message_id,
-            'user_id' => $this->user_id,
-            'subject' => $this->subject,
-            'content' => $this->content,
-            'send_date_time' => $this->send_date_time
+            "ID du message" => $this->message_id,
+            "ID de l'utilisateur" => $this->user_id,
+            "Sujet" => $this->subject,
+            "Contenu" => $this->content,
+            "Date et heure d'envoi" => $this->send_date_time
         ];
     }
 }

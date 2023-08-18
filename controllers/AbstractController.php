@@ -25,11 +25,11 @@ abstract class AbstractController
         }
     }
 
-    public function controlSpeChar(string $field, string $string, array $exept = []) : ? string
+    public function controlSpeChar(string $field, string $string) : ? string
     {
-        $illegal = "#$%^&*()+=-[]';,./{}|:<>?~";
-        $illegal = preg_replace($exept, "", $illegal);
-        if (strpbrk($string, $illegal)) 
+        $regex = "/^[A-Za-z][A-Za-z0-9_]{0,49}$/";
+        
+        if(!preg_match($regex, $string))
         {
             return "Saisie du champ {$field} invalide (pas de caractères spéciaux)";
         }

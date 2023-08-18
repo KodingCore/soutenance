@@ -36,12 +36,12 @@ class Quotation implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            'quotation_id' => $this->quotation_id,
-            'user_id' => $this->user_id,
-            'template_id' => $this->template_id,
-            'quotation_date' => $this->quotation_date,
-            'content' => $this->content,
-            'expiration_date' => $this->expiration_date
+            "ID du devis" => $this->quotation_id,
+            "ID de l'utilisateur" => $this->user_id,
+            "ID du template" => $this->template_id,
+            "Date du devis" => $this->quotation_date,
+            "Contenu" => $this->content,
+            "Date d'expiration" => $this->expiration_date
         ];
     }
 }

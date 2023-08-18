@@ -42,14 +42,14 @@ class Info implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            'info_id' => $this->info_id,
-            'user_id' => $this->user_id,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'tel' => $this->tel,
-            'address' => $this->address,
-            'zip' => $this->zip,
-            'city' => $this->city
+            "ID des infos" => $this->info_id,
+            "ID de l'utilisateur" => $this->user_id,
+            "Prénom" => $this->first_name,
+            "Nom de famille" => $this->last_name,
+            "Téléphone" => $this->tel,
+            "Adresse" => $this->address,
+            "Code postal" => $this->zip,
+            "Ville" => $this->city
         ];
     }
 }

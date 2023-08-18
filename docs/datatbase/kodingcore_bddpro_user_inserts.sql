@@ -1,3 +1,4 @@
+USE kodingcore_bddpro;
 DROP PROCEDURE IF EXISTS InsertRealisticUsers;
 
 DELIMITER //
