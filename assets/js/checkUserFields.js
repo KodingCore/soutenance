@@ -5,66 +5,45 @@
 //** ---------------------------------------------- */
 export function checkUserFields(form)
 {
-    //* Initialisation des variables de champs
-    const champ_username = form.elements["username"]; 
-    const champ_email = form.elements["email"];
-    const champ_password = form.elements["password"];
-    const champ_confirm_password = form.elements["confirm_password"];
+    //* Initialisation des variables de champs de saisie
+    const champUsername = form.elements["username"]; 
+    const champEmail = form.elements["email"];
+    const champPassword = form.elements["password"];
+    const champConfirmPassword = form.elements["confirm_password"];
 
-    //* Initialisation des  elements d'affichages d'erreur
-    const error_username = document.getElementById("error_username");
-    const error_email = document.getElementById("error_email"); 
-    const error_password = document.getElementById("error_password"); 
-    const error_confirm_password = document.getElementById("error_confirm_password");
+    //* Initialisation des elements d'affichages d'erreur
+    const errorUsername = document.getElementById("error_username");
+    const errorEmail = document.getElementById("error_email"); 
+    const errorPassword = document.getElementById("error_password"); 
+    const errorConfirmPassword = document.getElementById("error_confirm_password");
 
-    let minCharPswrd = 12;
-    let errorUsername = false;
-    let errorEmail = false;
-    let errorPasword = false;
-    let errorConfirmPasword = false;
+    //* variable de minimum de caractères du mot de passe
+    const minCharPswrd = 12;
 
-    //* regex >>> au moins une lettre ou un chiffre
+    //* Initialisation des regex
     const usernameRegex = new RegExp("^[A-ZÀ-ÿa-z0-9-.]{2,50}$");
-    //* regex >>> au moins une lettre ou un chiffre au début, un arobase, une lettre ou un chiffre après l'arobase, un point, deux lettres ou deux chiffres à la fin
-    const emailRegex = new RegExp("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-    //* regex >>> au moins une majuscule, un chiffre, un caractère spécial, et 12 caractères
+    const emailRegex = new RegExp("^[\\w-.]{2,30}@([\\w-]{2,15}\\.)+[\\w-]{2,4}$");
     const passwordRegex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^.&*-]).{" + minCharPswrd + ",}$");
 
-    //* Control des différents champs
-    champ_username.addEventListener("change", function () {
-        checkRegex(champ_username, usernameRegex, "Username", error_username);
-    });
-    champ_email.addEventListener("change", function () {
-        checkRegex(champ_email, emailRegex, "Email", error_email);
-    });
-    champ_password.addEventListener("change", function () {
-        checkRegex(champ_password, passwordRegex, "Password", error_password);
-        passwordChecker();
-    });
-    champ_confirm_password.addEventListener("change", function () {
-        confirmPasswordChecker();
-    });
+    //* Appel de la fonction général de controls
+    globalControl();
 
-    //** ------------------------------------- */
-    //*  Analyse de la concordance entre 
-    //*  les entrées password et confirm_password
-    //*  Ainsi que de la longueuer de chaine
-    //** ------------------------------------- */
-    function passwordChecker()
+    //* Control général des champs de saisie
+    function globalControl()
     {
-
-        //* Control du minimum de 12 caractères
-        if(champ_password.value.length < minCharPswrd && champ_password.value.length > 0)
-        {
-            champ_password.classList.add("error");
-            error_password.textContent = "Le password doit contenir au moins " + minCharPswrd + " caractères";
-            errorPasword = true;
-            
-        }
-        else
-        {
-            errorPasword = false;
-        }
+        champUsername.addEventListener("change", function () {
+            checkRegex(champUsername, usernameRegex, "Username", errorUsername);
+        });
+        champEmail.addEventListener("change", function () {
+            checkRegex(champEmail, emailRegex, "Email", errorEmail);
+        });
+        champPassword.addEventListener("change", function () {
+            checkRegex(champPassword, passwordRegex, "Password", errorPassword);
+            confirmPasswordChecker();
+        });
+        champConfirmPassword.addEventListener("change", function () {
+            confirmPasswordChecker();
+        });
     }
 
     //** ------------------------------------- */
@@ -74,23 +53,20 @@ export function checkUserFields(form)
     function confirmPasswordChecker()
     {
         //* Control de l'égalité entre le password et le confirm_password
-        if(champ_confirm_password.value !== champ_password.value && champ_confirm_password.value.length > 0)
+        if(champConfirmPassword.value !== champPassword.value && champConfirmPassword.value.length > 0)
         {
-            champ_confirm_password.classList.add("error");
-            error_confirm_password.textContent = "La confirmation du password doit être identique au password";
-            errorConfirmPasword = true;
-            
+            champConfirmPassword.classList.add("error");
+            errorConfirmPassword.textContent = "La confirmation du password doit être identique au password";  
         }
         else
         {
-            champ_confirm_password.classList.remove("error");
-            error_confirm_password.textContent = "";
-            errorConfirmPasword = false;
+            champConfirmPassword.classList.remove("error");
+            errorConfirmPassword.textContent = "";
         }
     }
 
     //** ----------------------------------------------------- */
-    //*  check une chaine de caractères par un regex
+    //*  Check une chaine de caractères par un regex
     //*  Puis renvoie un message d'erreur si le test ne passe pas
     //** ----------------------------------------------------- */
     function checkRegex(input_field, reg, name, error_field)
@@ -108,7 +84,7 @@ export function checkUserFields(form)
             }
             else if(name === "Password")
             {
-                error_field.textContent = "Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial";
+                error_field.textContent = "Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères";
             }
         }
         else
@@ -121,7 +97,7 @@ export function checkUserFields(form)
     //* Empêche la soumition du formulaire s'il y a une erreur
     form.addEventListener("submit", function(event)
     {
-        if(error)
+        if(errorUsername.textContent || errorEmail.textContent || errorPassword.textContent || errorConfirmPassword.textContent)
         {
             event.preventDefault();
         }

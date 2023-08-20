@@ -5,11 +5,13 @@ class UserController extends AbstractController
 
     private UserManager $userManager;
     private InfoManager $infoManager;
+    private int $minCharPswrd;
 
     public function __construct()
     {
         $this->userManager = new UserManager();
         $this->infoManager = new InfoManager();
+        $this->minCharPswrd = 12;
     }
 
     //** ---------------------------------- */
@@ -27,9 +29,6 @@ class UserController extends AbstractController
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
 
             $user = null;
-
-            //* Validation de la longueur du champ username_email
-            $error = $this->controlStrlen("Email / Username", $userTag, 50);
 
             //* Validation de la saisie d'identification
             if (filter_var($userTag, FILTER_VALIDATE_EMAIL)) //* Si c'est une adresse e-mail
@@ -80,13 +79,11 @@ class UserController extends AbstractController
         }
     }
 
-
     //** ---------------------------------------------------------------------------- */
     //* Fonction d'enrégistrement de l'utilisateur (instantiation d'une class info vide)
     //** ---------------------------------------------------------------------------- */
     public function register() 
     {
-
         if (!empty($_POST["username"]) && !empty($_POST["email"]) && !empty($_POST["password"]) && !empty($_POST["confirm_password"]))
         {
             //* Variable de récolte d'erreur
@@ -96,43 +93,42 @@ class UserController extends AbstractController
             $role = "user";
 
             //* tableau des emails Admin
-            $adminEmails = [
-                "kcorvais@gmail.com"
-            ];
+            $adminEmails = ["kcorvais@gmail.com"];
             
             //* Contre-mesure d'injection de code
             $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8');
             $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8');
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
             $confirm_password = htmlspecialchars($_POST["confirm_password"], ENT_QUOTES, 'UTF-8');
-            $error = $this->controlSpeChar("Username", $username);
-    
-            //* Validation des longueur de chaines
-            $error = $this->controlStrlen("Username", $username, 50);
-            $error = $this->controlStrlen("Email", $email, 50);
-            
+
+            //* Tests regex
+            if(!preg_match('/^[A-ZÀ-ÿa-z0-9-.]{2,50}$/', $username))
+            {
+                $error = "Username invalide. Uniquement lettres, chiffres, '-', '.' et espaces, de 2 à 50 caractères.";
+            }
+            if(!preg_match('/^[\w\-\.]{2,30}@([\w\-]{2,15}\.)[\w\-]{2,4}$/', $email))
+            {
+                $error = "Email invalide. Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères.";
+            }
+            if(!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^.&*-]).{'.$this->minCharPswrd.',}$/', $password))
+            {
+                $error = "Password invalide. Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères";
+            }
+
+            //* Control de doublons
+            if($this->userManager->getUserByUsername($username))
+            {
+                $error =  "Email ou username déjà utilisé";
+            }
+            if($this->userManager->getUserByEmail($email))
+            {
+                $error = "Email ou username déjà utilisé";
+            }
+
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)
             {
                 $error = "Les champs de password sont différents";
-            }
-
-            //* Validation de la non-existance du username
-            if($this->userManager->getUserByUsername($username))
-            {
-                $error = "Email ou username déjà utilisé";
-            }
-
-            //* Validation de la forme d'un email
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) //* Si ce n'est pas une adresse e-mail
-            {
-                $error = "Ce n'est pas une adresse email valide";
-            } 
-
-            //* Validation de la non-existance de l'email
-            if($this->userManager->getUserByEmail($email))
-            {
-                $error = "Email ou username déjà utilisé";
             }
 
             if ($error) //* Si il y a une erreur
@@ -169,10 +165,9 @@ class UserController extends AbstractController
         }
     }
 
-
-    //** -------------------------------------------------------------- */
-    //*Cette fonction sert l'édition du profil utilisateur et de ses infos
-    //** -------------------------------------------------------------- */
+    //** ------------------------------------- */
+    //*  Fonction d'édition du profil utilisateur
+    //** ------------------------------------- */
     public function account() 
     {
         $error = null; //* Variable de récolte d'erreur
@@ -187,11 +182,14 @@ class UserController extends AbstractController
         {
             
             $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
-            $error = $this->controlSpeChar("Username", $username);
 
-            $error = $this->controlStrlen("Username", $username, 50); //* Validation de la longueur de chaine
+            //* Test regex
+            if(!preg_match('/^[A-ZÀ-ÿa-z0-9-.]{2,50}$/', $username))
+            {
+                $error = "Username invalide. Uniquement lettres, chiffres, '-', '.' et espaces, de 2 à 50 caractères.";
+            }
 
-            //* Validation de la non-existance du username
+            //* Control de doublon
             if($this->userManager->getUserByUsername($username))
             {
                 $error = "Email ou username déjà utilisé";
@@ -208,15 +206,13 @@ class UserController extends AbstractController
         {
             $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
 
-            $error = $this->controlStrlen("Email", $email, 50); //* Validation de la longueur de chaine
-
-            //* Validation de la forme d'un email
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) //* Si ce n'est pas une adresse e-mail
+            //* Test regex
+            if(!preg_match('/^[\w\-\.]{2,30}@([\w\-]{2,15}\.)[\w\-]{2,4}$/', $email))
             {
-                $error = "Ce n'est pas une adresse email valide";
-            } 
+                $error = "Email invalide. Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères.";
+            }
 
-            //* Validation de la non-existance de l'email
+            //* Control de doublon
             if($this->userManager->getUserByEmail($email))
             {
                 $error = "Email ou username déjà utilisé";
@@ -231,9 +227,14 @@ class UserController extends AbstractController
 
         if(!empty($_POST["password"]) && !empty($_POST["confirm_password"]))  //* Si on édite le password
         {
-            //* Contre-mesures d'injection de code
-            $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
-            $confirm_password = htmlspecialchars($_POST["confirm_password"], ENT_QUOTES, 'UTF-8');
+            $password = $_POST["password"];
+            $confirm_password = $_POST["confirm_password"];
+
+            //* Test regex
+            if(!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^.&*-]).{'.$this->minCharPswrd.',}$/', $password))
+            {
+                $error = "Password invalide. Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères";
+            }
 
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)
@@ -253,12 +254,14 @@ class UserController extends AbstractController
         {
             $first_name = htmlspecialchars($_POST["first_name"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
 
-            $error = $this->controlStrlen("Prénom", $first_name, 50); //* Validation de la longueur de chaine
-
-            if(!$error) //* Si pas d'erreur
+            if(preg_match('/^[A-ZÀ-ÿa-z-\s]{2,50}$/', $first_name)) //* Si pas d'erreur
             {
                 $info->setFirstName($first_name); //* On reset le first_name
                 $info_change = true; //* Confirmation d'édition
+            }
+            else
+            {
+                $error = "Prénom invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.";
             }
         }
 
@@ -266,12 +269,14 @@ class UserController extends AbstractController
         {
             $last_name = htmlspecialchars($_POST["last_name"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
 
-            $error = $this->controlStrlen("Nom", $last_name, 50); //* Validation de la longueur de chaine
-
-            if(!$error) //* Si pas d'erreur
+            if(preg_match('/^[A-ZÀ-ÿa-z-\s]{2,50}$/', $last_name)) //* Si pas d'erreur
             {
                 $info->setLastName($last_name); //* On reset le last_name
                 $info_change = true; //* Confirmation d'édition
+            }
+            else
+            {
+                $error = "Nom invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.";
             }
         }
 
@@ -279,19 +284,14 @@ class UserController extends AbstractController
         {
             $tel = htmlspecialchars($_POST["tel"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
 
-            if(!is_nan($tel)) //* On test si il n'y à que des chiffres
-            {
-                $error = "Le numéro de téléphone ne doit contenir que des chiffres";
-            }
-
-            $error = $this->controlSpeChar("Téléphone", $tel); //* Control de caratères spéciaux
-            
-            $error = $this->controlStrlen("Téléphone", $tel, 10); //* Validation de la longueur de chaine
-
-            if(!$error) //* Si pas d'erreur
+            if(preg_match('/^[0-9]{10,10}$/', $tel)) //* Si pas d'erreur
             {
                 $info->setTel($tel); //* On reset le numéro de téléphone
                 $info_change = true; //* Confirmation d'édition
+            }
+            else
+            {
+                $error = "Numéro de téléphone invalide. Uniquement des chiffres, 10 caractères.";
             }
         }
 
@@ -299,28 +299,29 @@ class UserController extends AbstractController
         {
             $address = htmlspecialchars($_POST["address"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
 
-            $error = $this->controlSpeChar("Adresse", $address); //* Control de caratères spéciaux
-            $error = $this->controlStrlen("Adresse", $address, 255); //* Validation de la longueur de chaine
-
-            if(!$error) //* Si pas d'erreur
+            if(preg_match('/^\d[0-9A-ZÀ-ÿa-z\s\-]{2,50}$/', $address)) //* Si pas d'erreur
             {
                 $info->setAddress($address); //* On reset l'adresse
                 $info_change = true; //* Confirmation d'édition
+            }
+            else
+            {
+                $error = "Address invalide. Uniquement lettres, chiffres, '-' et espaces, de 2 à 50 caractères. Commence par un numéro.";
             }
         }
 
         if(!empty($_POST["zip"])) //* Si on édite le code postal
         {
             $zip = htmlspecialchars($_POST["zip"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
-
-            $error = $this->controlSpeChar("Code postal", $zip); //* Control de caratères spéciaux
-            
-            $error = $this->controlStrlen("Code postal", $zip, 15); //* Validation de la longueur de chaine
-
-            if(!$error) //* Si pas d'erreur
+  
+            if(preg_match('/^[0-9]{2,15}$/', $zip)) //* Si pas d'erreur
             {
                 $info->setZip($zip); //* On reset le code postal
                 $info_change = true; //* Confirmation d'édition
+            }
+            else
+            {
+                $error = "Code postal invalide. Uniquement des chiffres, de 2 à 15 caractères.";
             }
         }
 
@@ -328,38 +329,37 @@ class UserController extends AbstractController
         {
             $city = htmlspecialchars($_POST["city"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
 
-            $error = $this->controlSpeChar("Ville", $city); //* Control de caratères spéciaux
-            
-            $error = $this->controlStrlen("Ville", $city, 100); //* Validation de la longueur de chaine
-
-            if(!$error) //* Si pas d'erreur
+            if(preg_match('/^[A-ZÀ-ÿa-z-\s]{2,50}$/', $city)) //* Si pas d'erreur
             {
                 $info->setCity($city); //* On reset la ville
                 $info_change = true; //* Confirmation d'édition
             }
-        }
-
-        if(!$error) //* Si il n'y à pas d'erreur
-        { 
-            //* On édite le profil
-            $this->userManager->editUser($user);
-            $this->infoManager->editInfo($info);
+            else
+            {
+                $error = "Ville invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.";
+            }
         }
 
         if($info_change) //* Si on a modifier les informations utlisateur
         {
-            //* On retourne à la page account aevc le message de confirmation
-            $this->render("views/user/account.phtml", ["message" => "Le profil à bien été mis à jour", "user" => $user, "info" => $info]);
-        }
-        else if($error) //* Si il y a un message d'erreur
-        {
-            //* On retourne à la page account aevc le message d'erreur
-            $this->render("views/user/account.phtml", ["message" => $error, "user" => $user, "info" => $info]);
+            if(!$error) //* Si il n'y à pas d'erreur
+            { 
+                //* On édite le profil
+                $this->userManager->editUser($user);
+                $this->infoManager->editInfo($info);
+                //* On retourne à la page account avec le message de confirmation
+                $this->render("views/user/account.phtml", ["message" => "Le profil à bien été mis à jour", "user" => $user, "info" => $info]);
+            }
+            else //* Si il y a un message d'erreur
+            {
+                //* On retourne à la page account aevc le message d'erreur
+                $this->render("views/user/account.phtml", ["message" => $error, "user" => $user, "info" => $info]);
+            }
+    
         }
         else
         {
             $this->render("views/user/account.phtml", ["user" => $user, "info" => $info]);
         }
-        
     }
 }
