@@ -25,31 +25,31 @@ class UserController extends AbstractController
             $error = null;
 
             //* Contre-mesure d'injection de code
-            $userTag = htmlspecialchars($_POST["username_email"], ENT_QUOTES, 'UTF-8');
+            $usernameEmail = htmlspecialchars($_POST["username_email"], ENT_QUOTES, 'UTF-8');
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
 
             $user = null;
 
             //* Validation de la saisie d'identification
-            if (filter_var($userTag, FILTER_VALIDATE_EMAIL)) //* Si c'est une adresse e-mail
+            if (filter_var($usernameEmail, FILTER_VALIDATE_EMAIL)) //* Si c'est une adresse e-mail
             {
-                $user = $this->userManager->getUserByEmail($userTag); //* On recherche l'utilisateur avec l'email
+                $user = $this->userManager->getUserByEmail($usernameEmail); //* On recherche l'utilisateur avec l'email
             } 
             else //* Si ce n'est pas une adresse e-mail
             {
-                $user = $this->userManager->getUserByUsername($userTag); //* On recherche l'utilisateur avec l'username
+                $user = $this->userManager->getUserByUsername($usernameEmail); //* On recherche l'utilisateur avec l'username
             }
 
             if(!$user) //* Si aucun utilisateur n'est enrégistré avec ces identifiants
             {
-                $error = "Email / username ou password invalide";
+                $error = ["Email où username invalide", "username_email"];
             }
 
             if (!$error) //* S'il n'y a pas d'erreur
             {
                 if (!password_verify($password, $user->getPassword())) //* Mais que le password est mauvais
                 {
-                    $error = "Email / username ou password invalide"; //* Password invalide
+                    $error = ["Password invalide", "password"]; //* Password invalide
                 }
             }
 
@@ -89,10 +89,10 @@ class UserController extends AbstractController
             //* Variable de récolte d'erreur
             $error = null;
 
-            //* On set par défaut une variable role sur "user"
+            //* Role "user" par défaut
             $role = "user";
 
-            //* tableau des emails Admin
+            //* Tableau des emails Admin
             $adminEmails = ["kcorvais@gmail.com"];
             
             //* Contre-mesure d'injection de code
@@ -101,34 +101,34 @@ class UserController extends AbstractController
             $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
             $confirm_password = htmlspecialchars($_POST["confirm_password"], ENT_QUOTES, 'UTF-8');
 
-            //* Tests regex
+            //* Validation regex
             if(!preg_match('/^[A-ZÀ-ÿa-z0-9-.]{2,50}$/', $username))
             {
-                $error = "Username invalide. Uniquement lettres, chiffres, '-', '.' et espaces, de 2 à 50 caractères.";
+                $error = ["Username invalide. Uniquement lettres, chiffres, '-', '.' et espaces, de 2 à 50 caractères.", "username"];
             }
             if(!preg_match('/^[\w\-\.]{2,30}@([\w\-]{2,15}\.)[\w\-]{2,4}$/', $email))
             {
-                $error = "Email invalide. Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères.";
+                $error = ["Email invalide. Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères.", "email"];
             }
             if(!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^.&*-]).{'.$this->minCharPswrd.',}$/', $password))
             {
-                $error = "Password invalide. Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères";
+                $error = ["Password invalide. Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères", "password"];
             }
 
-            //* Control de doublons
+            //* Validation de doublons
             if($this->userManager->getUserByUsername($username))
             {
-                $error =  "Email ou username déjà utilisé";
+                $error =  ["Email ou username déjà utilisé", "email"];
             }
             if($this->userManager->getUserByEmail($email))
             {
-                $error = "Email ou username déjà utilisé";
+                $error = ["Email ou username déjà utilisé", "email"];
             }
 
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)
             {
-                $error = "Les champs de password sont différents";
+                $error = ["Les champs de password sont différents", "confirm_password"];
             }
 
             if ($error) //* Si il y a une erreur
@@ -156,7 +156,7 @@ class UserController extends AbstractController
                 $info = new Info($user->getUserId()); //* Instantiation d'une info utilisateur à partir de son ID
                 $this->infoManager->insertInfo($info); //* On insert l'info dans la BDD
 
-                $this->render("views/guest/login.phtml", ["message" => "Compte créer avec succès"]); //* Compte créer, on se rend sur la page de login
+                $this->render("views/guest/login.phtml", ["message" => ["Compte créer avec succès", "general"]]); //* Compte créer, on se rend sur la page de login
             }
         } 
         else 
@@ -186,13 +186,13 @@ class UserController extends AbstractController
             //* Test regex
             if(!preg_match('/^[A-ZÀ-ÿa-z0-9-.]{2,50}$/', $username))
             {
-                $error = "Username invalide. Uniquement lettres, chiffres, '-', '.' et espaces, de 2 à 50 caractères.";
+                $error = ["Username invalide. Uniquement lettres, chiffres, '-', '.' et espaces, de 2 à 50 caractères.", "username"];
             }
 
             //* Control de doublon
-            if($this->userManager->getUserByUsername($username))
+            if($this->userManager->getUserByUsername($username) && $user->getUsername() !== $username)
             {
-                $error = "Email ou username déjà utilisé";
+                $error = ["Username déjà utilisé", "username"];
             }
 
             if(!$error) //* Si pas d'erreur
@@ -209,13 +209,13 @@ class UserController extends AbstractController
             //* Test regex
             if(!preg_match('/^[\w\-\.]{2,30}@([\w\-]{2,15}\.)[\w\-]{2,4}$/', $email))
             {
-                $error = "Email invalide. Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères.";
+                $error = ["Email invalide. Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères.", "email"];
             }
 
             //* Control de doublon
-            if($this->userManager->getUserByEmail($email))
+            if($this->userManager->getUserByEmail($email) && $user->getEmail() !== $email)
             {
-                $error = "Email ou username déjà utilisé";
+                $error = ["Email déjà utilisé", "email"];
             }
             
             if(!$error) //* Si pas d'erreur
@@ -233,13 +233,13 @@ class UserController extends AbstractController
             //* Test regex
             if(!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^.&*-]).{'.$this->minCharPswrd.',}$/', $password))
             {
-                $error = "Password invalide. Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères";
+                $error = ["Password invalide. Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères", "password"];
             }
 
             //* Validation de l'égalité des saisies password et confirm_password
             if($password != $confirm_password)
             {
-                $error = "Les champs de password sont différents";
+                $error = ["Les champs de password sont différents", "confirm_password"];
             }
 
             if(!$error) //* Si pas d'erreur
@@ -261,7 +261,7 @@ class UserController extends AbstractController
             }
             else
             {
-                $error = "Prénom invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.";
+                $error = ["Prénom invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.", "first_name"];
             }
         }
 
@@ -276,7 +276,7 @@ class UserController extends AbstractController
             }
             else
             {
-                $error = "Nom invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.";
+                $error = ["Nom invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.", "last_name"];
             }
         }
 
@@ -291,7 +291,7 @@ class UserController extends AbstractController
             }
             else
             {
-                $error = "Numéro de téléphone invalide. Uniquement des chiffres, 10 caractères.";
+                $error = ["Numéro de téléphone invalide. Uniquement des chiffres, 10 caractères.", "tel"];
             }
         }
 
@@ -306,7 +306,7 @@ class UserController extends AbstractController
             }
             else
             {
-                $error = "Address invalide. Uniquement lettres, chiffres, '-' et espaces, de 2 à 50 caractères. Commence par un numéro.";
+                $error = ["Address invalide. Uniquement lettres, chiffres, '-' et espaces, de 2 à 50 caractères. Commence par un numéro.", "address"];
             }
         }
 
@@ -321,7 +321,7 @@ class UserController extends AbstractController
             }
             else
             {
-                $error = "Code postal invalide. Uniquement des chiffres, de 2 à 15 caractères.";
+                $error = ["Code postal invalide. Uniquement des chiffres, de 2 à 15 caractères.", "zip"];
             }
         }
 
@@ -336,7 +336,7 @@ class UserController extends AbstractController
             }
             else
             {
-                $error = "Ville invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.";
+                $error = ["Ville invalide. Uniquement lettres, '-' et espaces, de 2 à 50 caractères.", "city"];
             }
         }
 
@@ -348,14 +348,13 @@ class UserController extends AbstractController
                 $this->userManager->editUser($user);
                 $this->infoManager->editInfo($info);
                 //* On retourne à la page account avec le message de confirmation
-                $this->render("views/user/account.phtml", ["message" => "Le profil à bien été mis à jour", "user" => $user, "info" => $info]);
+                $this->render("views/user/account.phtml", ["message" => ["Le profil à bien été mis à jour", "general"], "user" => $user, "info" => $info]);
             }
             else //* Si il y a un message d'erreur
             {
                 //* On retourne à la page account aevc le message d'erreur
                 $this->render("views/user/account.phtml", ["message" => $error, "user" => $user, "info" => $info]);
             }
-    
         }
         else
         {
