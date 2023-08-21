@@ -17,6 +17,9 @@ require "managers/MessageManager.php";
 require "managers/TemplateManager.php";
 require "managers/ReviewManager.php";
 require "managers/CategoryManager.php";
+require "managers/AppointmentManager.php";
+require "managers/QuotationManager.php";
+require "managers/TagManager.php";
 
 require "controllers/AbstractController.php";
 require "controllers/HomepageController.php";
@@ -24,5 +27,6 @@ require "controllers/UserController.php";
 require "controllers/DashboardController.php";
 require "controllers/ContactController.php";
 require "controllers/APIFetchController.php";
+require "controllers/NotFound.php";
 
-require "services/RouterRemake.php";
+require "services/Router.php";

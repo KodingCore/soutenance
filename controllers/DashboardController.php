@@ -14,7 +14,7 @@ class DashboardController extends AbstractController
 
     public function index()
     {
-        $this->render("views/admin/dashboardRemake.phtml", []);
+        $this->render("views/admin/dashboard.phtml", []);
     }
 
     public function addTemplate()
@@ -38,7 +38,7 @@ class DashboardController extends AbstractController
             $template = new Template($name, $description, $image_path, $price, $sqlDateTime);
             $this->templateManager->insertTemplate($template);
         }
-        $this->render("views/admin/dashboardRemake.phtml", []);
+        $this->render("views/admin/dashboard.phtml", []);
     }
 
     public function addCategory()
@@ -52,6 +52,6 @@ class DashboardController extends AbstractController
             $category = new Category($name, $description);
             $this->categoryManager->insertCategory($category);
         }
-        $this->render("views/admin/dashboardRemake.phtml", []);
+        $this->render("views/admin/dashboard.phtml", []);
     }
 }

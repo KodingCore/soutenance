@@ -13,9 +13,9 @@ if(isset($_GET["route"])) //* Si la variable route est définie
 {
     $router->checkRoute($_GET["route"]);
 }
-else //* Sinon on appel checkRoute sans valeur
+else //* Sinon on appel checkRoute sur la homepage
 {
-    $router->checkRoute("");
+    $router->checkRoute("homepage");
 }
 
 ?>

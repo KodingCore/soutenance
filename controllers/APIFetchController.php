@@ -9,6 +9,9 @@ class APIFetchController extends AbstractController
     private $categoryManager;
     private $templateManager;
     private $reviewManager;
+    private $appointmentManager;
+    private $quotationManager;
+    private $tagManager;
 
     public function __construct()
     {
@@ -18,6 +21,9 @@ class APIFetchController extends AbstractController
         $this->categoryManager = new CategoryManager();
         $this->templateManager = new TemplateManager();
         $this->reviewManager = new ReviewManager();
+        $this->appointmentManager = new AppointmentManager();
+        $this->quotationManager = new QuotationManager();
+        $this->tagManager = new TagManager();
     }
 
     public function getCategoryById(int $category_id)
@@ -190,15 +196,52 @@ class APIFetchController extends AbstractController
         $response = [
             'reviews' => $reviewsJsons
         ];
-        if($response)
-        {
-            echo json_encode($response);
-        }
-        else
-        {
-            echo json_encode([null]);
-        }
+        
+        echo json_encode($response);
     }
 
-    
+    public function getAllAppointments()
+    {
+        $appointments = $this->appointmentManager->getAppointments();
+        $appointmentsJsons = [];
+        foreach($appointments as $appointment)
+        {
+            array_push($appointmentsJsons, $appointment->jsonSerialize());
+        }
+        $response = [
+            'appointments' => $appointmentsJsons
+        ];
+
+        echo json_encode($response);
+    }
+
+    public function getAllQuotations()
+    {
+        $quotations = $this->quotationManager->getQuotations();
+        $quotationsJsons = [];
+        foreach($quotations as $quotation)
+        {
+            array_push($quotationsJsons, $quotation->jsonSerialize());
+        }
+        $response = [
+            'quotations' => $quotationsJsons
+        ];
+
+        echo json_encode($response);
+    }
+
+    public function getAllTags()
+    {
+        $tags = $this->tagManager->getTags();
+        $tagsJsons = [];
+        foreach($tags as $tag)
+        {
+            array_push($tagsJsons, $tag->jsonSerialize());
+        }
+        $response = [
+            'tags' => $tagsJsons
+        ];
+        
+        echo json_encode($response);
+    }
 }

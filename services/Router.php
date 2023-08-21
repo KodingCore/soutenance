@@ -2,12 +2,12 @@
 
 class Router
 {
-
     private HomepageController $homepageController;
     private UserController $userController;
     private ContactController $contactController;
     private DashboardController $dashboardController;
     private APIFetchController $APIFetchController;
+    private NotFound $notFound;
 
     public function __construct()
     {
@@ -16,13 +16,17 @@ class Router
         $this->contactController = new ContactController();
         $this->dashboardController = new DashboardController();
         $this->APIFetchController = new APIFetchController();
+        $this->notFound = new NotFound();
+
     }
 
     public function checkRoute($route) : void
     {
-        $route = explode("\\", $route)[0];
-
-        if($route === "login")
+        if($route === "homepage")
+        {
+            $this->homepageController->index();
+        }
+        else if($route === "login")
         {
             $this->userController->login();
         }
@@ -45,32 +49,6 @@ class Router
             session_destroy();
             $this->homepageController->index();
         }
-        else if($route === "dashboardRemake" && isset($_SESSION["role"]))
-        {
-            if($_SESSION["role"] === "admin")
-            {
-                if(isset($_GET["add"]))
-                {
-                    if($_GET["add"] === "template")
-                    {
-                        $this->dashboardController->addTemplate();
-                    }
-                    else if($_GET["add"] === "category")
-                    {
-                        $this->dashboardController->addCategory();
-                    }
-                }
-                else
-                {
-                    $this->dashboardController->index();
-                }
-            }
-            else
-            {
-                $this->homepageController->index();
-            }
-            
-        }
         else if($route === "shop")
         {
 
@@ -79,51 +57,64 @@ class Router
         {
 
         }
-        else if($route === "user" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
+        else if(isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
         {
-            if(isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $this->APIFetchController->userAndInfoById($id);
+            if($route === "dashboard")
+            {
+                $this->dashboardController->index();
             }
-        }
-        else if($route === "message" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
-        {
-            if(isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $this->APIFetchController->messageById($id);
+            else if($route === "user-link")
+            {
+                $this->APIFetchController->getAllUsers();
             }
-        }
-        else if($route === "template" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
-        {
-            if(isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $this->APIFetchController->templateById($id);
+            else if($route === "message-link")
+            {
+                $this->APIFetchController->getAllMessages();
             }
-        }
-        else if($route === "category" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
-        {
-            if(isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $this->APIFetchController->categoryById($id);
+            else if($route === "template-link")
+            {
+                $this->APIFetchController->getAllTemplates();
             }
-        }
-        else if($route === "review" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
-        {
-            if(isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $this->APIFetchController->reviewById($id);
+            else if($route === "category-link")
+            {
+                $this->APIFetchController->getAllCategories();
             }
-        }
-        else if($route === "change_role" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
-        {
-            if(isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $this->APIFetchController->changeRoleByUserId($id);
+            else if($route === "review-link")
+            {
+                $this->APIFetchController->getAllReviews();
+            }
+            else if($route === "appointment-link")
+            {
+                $this->APIFetchController->getAllAppointments();
+            }
+            else if($route === "quotation-link")
+            {
+                $this->APIFetchController->getAllQuotations();
+            }
+            else if($route === "tag-link")
+            {
+                $this->APIFetchController->getAlltags();
+            }
+            else if($route === "add-category")
+            {
+                $this->APIFetchController->getAllReviews();
+            }
+            else if($route === "add-template")
+            {
+                $this->APIFetchController->getAllReviews();
+            }
+            else if($route === "add-quotation")
+            {
+                $this->APIFetchController->getAllReviews();
+            }
+            else if($route === "add-appointment")
+            {
+                $this->APIFetchController->getAllReviews();
             }
         }
         else
         {
-            $this->homepageController->index();
+            $this->notFound->index();
         }
     }
 }
