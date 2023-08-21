@@ -76,6 +76,22 @@ class Router
             {
                 $this->APIFetchController->getAllReviews();
             }
+            else if($route === "add-category")
+            {
+                $this->APIFetchController->getAllReviews();
+            }
+            else if($route === "add-template")
+            {
+                $this->APIFetchController->getAllReviews();
+            }
+            else if($route === "add-quotation")
+            {
+                $this->APIFetchController->getAllReviews();
+            }
+            else if($route === "add-appointment")
+            {
+                $this->APIFetchController->getAllReviews();
+            }
         }
         else
         {

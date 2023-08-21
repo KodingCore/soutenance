@@ -2,14 +2,14 @@
 
 class Appointment implements JsonSerializable
 {
-    private int $appointment_id;
+    private ?int $appointment_id;
     private int $user_id;
     private string $appointment_date;
     private string $appointment_time;
     private string $communication_preference;
     
-    public function __construct(int $appointment_id, int $user_id, string $appointment_date, string $appointment_time, string $communication_preference) {
-        $this->appointment_id = $appointment_id;
+    public function __construct(int $user_id, string $appointment_date, string $appointment_time, string $communication_preference) {
+        $this->appointment_id = null;
         $this->user_id = $user_id;
         $this->appointment_date = $appointment_date;
         $this->appointment_time = $appointment_time;
@@ -32,11 +32,11 @@ class Appointment implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            "ID rendez-vous" => $this->appointment_id,
+            "ID" => $this->appointment_id,
             "ID utilisateur" => $this->user_id,
-            "Date du rendez-vous" => $this->appointment_date,
-            "Heure du rendez-vous" => $this->appointment_time,
-            "Préférence de communication" => $this->communication_preference
+            "Date" => $this->appointment_date,
+            "Heure" => $this->appointment_time,
+            "Préférence de com" => $this->communication_preference
         ];
     }
 }

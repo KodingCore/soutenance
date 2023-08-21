@@ -30,7 +30,7 @@ class User implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            "ID de l'utilisateur" => $this->user_id,
+            "ID" => $this->user_id,
             "Username" => $this->username,
             "Email" => $this->email,
             "Password" => $this->password,

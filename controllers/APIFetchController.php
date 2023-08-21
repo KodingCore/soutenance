@@ -20,7 +20,7 @@ class APIFetchController extends AbstractController
         $this->reviewManager = new ReviewManager();
     }
 
-    public function categoryById(int $category_id)
+    public function getCategoryById(int $category_id)
     {
         $category = $this->categoryManager->getCategoryByCategoryId($category_id);
         $categoryAttributs = $category->jsonSerialize();
@@ -33,7 +33,7 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
-    public function reviewById(int $review_id)
+    public function getReviewById(int $review_id)
     {
         $review = $this->reviewManager->getReviewByReviewId($review_id);
         $user = $this->userManager->getUserByUserId($review->getUserId());
@@ -50,7 +50,7 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
-    public function messageById(int $message_id)
+    public function getMessageById(int $message_id)
     {
         $message = $this->messageManager->getMessageByMessageId($message_id);
         $user = $this->userManager->getUserByUserId($message->getUserId());
@@ -65,7 +65,7 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
-    public function userAndInfoById(int $user_id)
+    public function getUserAndInfoById(int $user_id)
     {
         $user = $this->userManager->getUserByUserId($user_id);
         $info = $this->infoManager->getInfoByUserId($user_id);
@@ -81,7 +81,7 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
-    public function templateById(int $template_id)
+    public function getTemplateById(int $template_id)
     {
         $template = $this->templateManager->getTemplateByTemplateId($template_id);
         $templateAttributs = $template->jsonSerialize();
@@ -190,8 +190,15 @@ class APIFetchController extends AbstractController
         $response = [
             'reviews' => $reviewsJsons
         ];
-
-        echo json_encode($response);
+        if($response)
+        {
+            echo json_encode($response);
+        }
+        else
+        {
+            echo json_encode([null]);
+        }
     }
 
+    
 }

@@ -145,7 +145,7 @@ function searchParams(table)
 
 //** ------------------------------ */
 //*  Check le matching de la searchbar
-//*  et affiche la ligne en fonction
+//*  et affiche les lignes en fonction
 //*  Cache les autres lignes
 //** ------------------------------ */
 function displayLine(table, colIndex, content)
@@ -207,70 +207,6 @@ function detailButtonsListener(section)
                 .catch(error => console.error("Une erreur s'est produite", error));
         });
     });
-}
-
-//** ------------------------------------------- */
-//*  Affiche les détails d'une sélection du tableau
-//** ------------------------------------------- */
-function displayDetails(data, route, detailSection)
-{
-    detailSection.classList.remove("hidden");
-    let i = 0;      
-    for (let key in data) 
-    {
-        if (data.hasOwnProperty(key)) 
-        {
-            if(i === 0)
-            {   
-                detailSection.innerHTML = '<div id="detail-title"><h3>Détails ' + route + '</h3></div>';
-            }
-
-            if(key === "Rôle")
-            {
-                if(data["Rôle"] === "user")
-                {
-                    detailSection.innerHTML = detailSection.innerHTML + `
-                    <label>Role :</label>
-                    <label for="role" class="switch">
-                    <input type="checkbox" name="role" id="role">
-                    <span class="slider round"></span>
-                    </label>
-                    `;
-                }
-                else if(data["Rôle"] === "admin")
-                {
-                    detailSection.innerHTML = detailSection.innerHTML + `
-                    <label>Role :</label>
-                    <label for="role" class="switch">
-                    <input type="checkbox" name="role" id="role" checked>
-                    <span class="slider round"></span>
-                    </label>
-                    `;
-                }
-                let adminChecker = document.getElementById("role");
-                adminChecker.addEventListener("click", function(){
-                    alert(id);
-                    adminSliderChecker(data["ID de l'utilisateur"]);
-                });
-            }
-            else
-            {
-                if(data[key] !== null)
-                {
-                    detailSection.innerHTML = detailSection.innerHTML + `
-                    <p>${key} : ${data[key]}</p>
-                    `;
-                }
-                else
-                {
-                    detailSection.innerHTML = detailSection.innerHTML + `
-                    <p>${key} : null</p>
-                    `;
-                }
-            }
-        }
-        i++;
-    }
 }
 
 function adminSliderChecker(id)

@@ -44,14 +44,14 @@ class Template implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            "ID du template" => $this->template_id,
-            "ID de la catégorie" => $this->category_id,
-            "Nom de la catégorie" => $this->name,
-            "Description de la catégorie" => $this->description,
-            "Chemin de l'image" => $this->image_path,
+            "ID" => $this->template_id,
+            "ID catégorie" => $this->category_id,
+            "Nom" => $this->name,
+            "Description" => $this->description,
+            "Chemin image" => $this->image_path,
             "Prix" => $this->price,
-            "Date de création du template" => $this->created_at,
-            "Date de maj du template" => $this->updated_at
+            "Date création" => $this->created_at,
+            "Date maj" => $this->updated_at
         ];
     }
 }

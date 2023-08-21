@@ -2,15 +2,15 @@
 
 class Quotation implements JsonSerializable
 {
-    private int $quotation_id;
+    private ?int $quotation_id;
     private int $user_id;
     private int $template_id;
     private string $quotation_date;
     private string $content;
     private string $expiration_date;
     
-    public function __construct(int $quotation_id, int $user_id, int $template_id, string $quotation_date, string $content, string $expiration_date) {
-        $this->quotation_id = $quotation_id;
+    public function __construct(int $user_id, int $template_id, string $quotation_date, string $content, string $expiration_date) {
+        $this->quotation_id = null;
         $this->user_id = $user_id;
         $this->template_id = $template_id;
         $this->quotation_date = $quotation_date;
@@ -36,12 +36,12 @@ class Quotation implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            "ID du devis" => $this->quotation_id,
-            "ID de l'utilisateur" => $this->user_id,
-            "ID du template" => $this->template_id,
-            "Date du devis" => $this->quotation_date,
+            "ID" => $this->quotation_id,
+            "ID utilisateur" => $this->user_id,
+            "ID template" => $this->template_id,
+            "Date devis" => $this->quotation_date,
             "Contenu" => $this->content,
-            "Date d'expiration" => $this->expiration_date
+            "Date expiration" => $this->expiration_date
         ];
     }
 }
