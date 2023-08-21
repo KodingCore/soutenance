@@ -3,7 +3,7 @@
 class ReviewManager extends AbstractManager
 {
     
-    public function getReviewsOrderedByDate() : ? array
+    public function getReviews() : ? array
     {
         $query = $this->db->prepare("SELECT * FROM reviews ORDER BY send_date DESC");
         $query->execute();

@@ -23,7 +23,7 @@ class MessageManager extends AbstractManager
         }
     }
     
-    public function getMessagesOrderedByDate() : ? array
+    public function getMessages() : ? array
     {
         $query = $this->db->prepare("SELECT * FROM messages ORDER BY send_date_time DESC");
         $query->execute();

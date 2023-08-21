@@ -19,21 +19,18 @@ function initDashboard()
         "category",
         "review"
     ];
-
-    hideAddingForms();
-
     const links = [];
-    const tablesSections = [];
+    const sections = [];
     parts.forEach(function(part){
         links.push(document.getElementById(part + "-link"));
-        tablesSections.push(document.getElementById(part));
+        sections.push(document.getElementById(part));
     });
 
     for(let i = 0; i < links.length; i++)
     {
         links[i].addEventListener("click", function(){
-            toggleTables(tablesSections, tablesSections[i]);
-            detailButtonsListener(tablesSections[i]);
+            toggleTables(sections[i]);
+            detailButtonsListener(sections[i]);
         })
     }
 
@@ -49,6 +46,24 @@ function initDashboard()
     });
 }
 
+function hideAllTables()
+{
+    const parts = [
+        "user",
+        "message",
+        "template",
+        "category",
+        "review"
+    ];
+    const tablesSections = [];
+    parts.forEach(function(part){
+        tablesSections.push(document.getElementById(part));
+    });
+    tablesSections.forEach(function(table){
+        table.classList.add("hidden");
+    })
+}
+
 //** ----------------------------------- */
 //*  Permet de chacher les sections d'ajout
 //** ----------------------------------- */
@@ -62,27 +77,23 @@ function hideAddingForms()
 }
 
 //** ------------------------------------ */
-//*  Affiche/cache les sections, en fonction
+//*  Affiche les sections, en fonction
 //*  du lien clické dans la nav de control
 //** ------------------------------------ */
-function toggleTables(tablesSections, tableSection)
+function toggleTables(tableSection)
 {
+    hideAllTables();
     hideAddingForms();
 
-    tablesSections.forEach(function(sect)
-    {
-        if(tableSection === sect)
-        {
-            sect.classList.remove("hidden");
-            let table = sect.querySelector("table");
-            initOptionsSelector(table);
-            searchParams(table);
-        }
-        else
-        {
-            sect.classList.add("hidden");
-        }
-    })
+    tableSection.classList.remove("hidden");
+    let table = tableSection.querySelector("table");
+    initOptionsSelector(table);
+    searchParams(table);
+}
+
+function displayTable(table)
+{
+    
 }
 
 //** ------------------------------------ */
@@ -167,10 +178,10 @@ function displayLine(table, colIndex, content)
 //*  Ecoute les clicks de sélections de ligne
 //*  puis appel la fonction d'affichage
 //** ------------------------------------- */
-function detailButtonsListener(sectionUsed) 
+function detailButtonsListener(section) 
 {
     const detailSection = document.querySelector("#details");
-    const btns = sectionUsed.getElementsByClassName("row-btn");
+    const btns = section.getElementsByClassName("row-btn");
     const btnsArray = Array.from(btns);
     
     detailSection.classList.add("hidden");
@@ -180,20 +191,20 @@ function detailButtonsListener(sectionUsed)
         btn.addEventListener("click", function() 
         {
             let target = btn.id;
-            let route = sectionUsed.id;
+            let route = section.id;
             fetch(`index.php?route=${route}&id=${target}`)
-            .then(response => response.json())
-            .then(data => 
-            {   
-                let dataExtract;
-                for(let key in data)
-                {
-                    dataExtract = data[key];
-                }
-                
-                displayDetails(dataExtract, route, detailSection);
-            })
-            .catch(error => console.error("Une erreur s'est produite", error));
+                .then(response => response.json())
+                .then(data => 
+                {   
+                    let dataExtract;
+                    for(let key in data)
+                    {
+                        dataExtract = data[key];
+                    }
+
+                    displayDetails(dataExtract, route, detailSection);
+                })
+                .catch(error => console.error("Une erreur s'est produite", error));
         });
     });
 }
@@ -214,12 +225,33 @@ function displayDetails(data, route, detailSection)
                 detailSection.innerHTML = '<div id="detail-title"><h3>Détails ' + route + '</h3></div>';
             }
 
-            if(key === "role")
+            if(key === "Rôle")
             {
-                detailSection.innerHTML = detailSection.innerHTML + `
-                    <label for="role">Role :</label>
-                    <input name="role" id="role" type="text" value="${data["role"]}"/>
-                `;
+                if(data["Rôle"] === "user")
+                {
+                    detailSection.innerHTML = detailSection.innerHTML + `
+                    <label>Role :</label>
+                    <label for="role" class="switch">
+                    <input type="checkbox" name="role" id="role">
+                    <span class="slider round"></span>
+                    </label>
+                    `;
+                }
+                else if(data["Rôle"] === "admin")
+                {
+                    detailSection.innerHTML = detailSection.innerHTML + `
+                    <label>Role :</label>
+                    <label for="role" class="switch">
+                    <input type="checkbox" name="role" id="role" checked>
+                    <span class="slider round"></span>
+                    </label>
+                    `;
+                }
+                let adminChecker = document.getElementById("role");
+                adminChecker.addEventListener("click", function(){
+                    alert(id);
+                    adminSliderChecker(data["ID de l'utilisateur"]);
+                });
             }
             else
             {
@@ -241,8 +273,16 @@ function displayDetails(data, route, detailSection)
     }
 }
 
-
-function remakeRelationTable()
+function adminSliderChecker(id)
 {
     
+    fetch(`index.php?route=change_role&id=${id}`)
+        .then(() => {
+            console.log("Action effectuée avec succès.");
+        })
+        .catch(error => {
+            console.error("Une erreur s'est produite", error);
+        });
+    const table = document.getElementById("user");
+    toggleTables(table);
 }

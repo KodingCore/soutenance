@@ -126,4 +126,14 @@ class UserManager extends AbstractManager
         ];
         $query->execute($parameters);
     }
+
+    public function replaceRoleByUserId(int $user_id, string $role)
+    {
+        $query = $this->db->prepare("UPDATE users SET role = :role WHERE user_id = :user_id");
+        $parameters = [
+            "role" => $role,
+            "user_id" => $user_id
+        ];
+        $query->execute($parameters);
+    }
 }

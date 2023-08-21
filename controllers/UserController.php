@@ -253,7 +253,7 @@ class UserController extends AbstractController
         if(!empty($_POST["first_name"])) //* Si on édite le first_name
         {
             $first_name = htmlspecialchars($_POST["first_name"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
-
+            
             if(preg_match('/^[A-ZÀ-ÿa-z-\s]{2,50}$/', $first_name)) //* Si pas d'erreur
             {
                 $info->setFirstName($first_name); //* On reset le first_name
@@ -329,7 +329,7 @@ class UserController extends AbstractController
         {
             $city = htmlspecialchars($_POST["city"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
 
-            if(preg_match('/^[A-ZÀ-ÿa-z-\s]{2,50}$/', $city)) //* Si pas d'erreur
+            if(preg_match('/^[A-ZÀ-ÿa-z0-9-\s]{2,50}$/', $city)) //* Si pas d'erreur
             {
                 $info->setCity($city); //* On reset la ville
                 $info_change = true; //* Confirmation d'édition

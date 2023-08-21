@@ -1,0 +1,93 @@
+<?php
+    $userManager = new UserManager();
+    $messageManager = new MessageManager();
+    $reviewManager = new ReviewManager();
+    $infoManager = new InfoManager();
+    $templateManager = new TemplateManager();
+    // $quotationManager = new QuotationManager();
+    $categoryManager = new CategoryManager();
+    // $appointmentManager = new AppointmentManager();
+?>
+<!-- ------------------------------------------------------------------------------------- -->
+<!-- ----------------PANNEAU GAUCHE DES LIENS VERS LES TABLES DE CONTROL------------------ -->
+<!-- ------------------------------------------------------------------------------------- -->
+<aside class="left-pannel">
+    <ul>
+        <li>
+            <a href="#" id="user-link">Users</a>
+            <a href="#" id="message-link">Messages</a>
+            <a href="#" id="template-link">Templates</a>
+            <a href="#" id="category-link">Catégories</a>
+            <a href="#" id="review-link">Reviews</a>
+        </li>
+    </ul>
+</aside>
+
+<!-- ------------------------------------------------------------------------------------- -->
+<!-- --------------------------------PARTIE PRINCIPALE(VIEW)------------------------------ -->
+<!-- ------------------------------------------------------------------------------------- -->
+<main class="container">
+
+    <!-- --------------------------- -->
+    <!-- ----SECTION DE RECHERCHE--- -->
+    <!-- --------------------------- -->
+    <section id="search">
+        <label for="column-selection">Rechercher par :</label>
+        <select name="column-selection" id="column-selection"></select>
+        <label for="searchbar">Valeur :</label> 
+        <input id="searchbar" type="text" name="searchbar" placeholder="Search..">
+    </section>
+
+    <!-- ------------------------------ -->
+    <!-- -------SECTION CONTROL----- -->
+    <!-- ------------------------------ -->
+    <section id="control-section">
+        
+    </section>
+
+    <!-- ------------------------------ -->
+    <!-- -------SECTION DETAILS----- -->
+    <!-- ------------------------------ -->
+    <section id="details" class="hidden"> 
+    <!-- Section détails géré par javascript -->
+    </section>
+
+    <!-- ------------------------------ -->
+    <!-- -------SECTION ADD TEMPLATE----- -->
+    <!-- ------------------------------ -->
+    <section id="add-template-form" class="adding-section hidden">
+        <h3>Ajouter une Template</h3>
+        <form action="index.php?route=dashboard&add=template" method="POST">
+            <label for="template_name">Nom</label>
+            <input id="template_name" name="template_name" type="text" placeholder="Nom" required/>
+
+            <label for="template_description">Description</label>
+            <textarea id="template_description" name="template_description" placeholder="Votre texte ici..." required></textarea>
+
+            <label for="image_path">Image</label>
+            <input id="image_path" name="image_path" type="text" placeholder="Chemin de l'image" required/>
+
+            <label for="price">Prix</label>
+            <input id="price" name="price" type="text" placeholder="Prix" required/>
+
+            <input type="submit" value="Ajouter">
+        </form>
+    </section>
+
+    <!-- ------------------------------ -->
+    <!-- -------SECTION ADD CATEGORIES----- -->
+    <!-- ------------------------------ -->
+    <section id="add-category-form" class="adding-section hidden">
+        <h3>Ajouter une Catégorie</h3>
+        <form action="index.php?route=dashboard&add=category" method="POST">
+            <label for="category_name">Nom</label>
+            <input id="category_name" name="category_name" type="text" placeholder="Nom" required/>
+
+            <label for="category_description">Description</label>
+            <textarea id="category_description" name="category_description" placeholder="Votre texte ici..." required></textarea>
+
+            <input type="submit" value="Ajouter">
+        </form>
+    </section>
+</main>
+<script type="module" src="assets/js/dashboardRemake.js"></script>

@@ -45,7 +45,7 @@ class Router
             session_destroy();
             $this->homepageController->index();
         }
-        else if($route === "dashboard" && isset($_SESSION["role"]))
+        else if($route === "dashboardRemake" && isset($_SESSION["role"]))
         {
             if($_SESSION["role"] === "admin")
             {
@@ -112,6 +112,13 @@ class Router
             if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $this->APIFetchController->reviewById($id);
+            }
+        }
+        else if($route === "change_role" && isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
+        {
+            if(isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $this->APIFetchController->changeRoleByUserId($id);
             }
         }
         else

@@ -81,7 +81,6 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
-
     public function templateById(int $template_id)
     {
         $template = $this->templateManager->getTemplateByTemplateId($template_id);
@@ -104,4 +103,95 @@ class APIFetchController extends AbstractController
     
         echo json_encode($response);
     }
+
+    public function changeRoleByUserId(int $user_id)
+    {
+        $user = $this->userManager->getUserByUserId($user_id);
+        $basicRole = $user->getRole();
+
+        if($basicRole === "user")
+        {
+            $this->userManager->replaceRoleByUserId($user_id, "admin");
+        }
+        else
+        {
+            $this->userManager->replaceRoleByUserId($user_id, "user");
+        }
+    }
+
+    public function getAllUsers()
+    {
+        $users = $this->userManager->getUsers();
+        $usersJsons = [];
+        foreach($users as $user)
+        {
+            array_push($usersJsons, $user->jsonSerialize());
+        }
+        $response = [
+            'users' => $usersJsons
+        ];
+
+        echo json_encode($response);
+    }
+
+    public function getAllMessages()
+    {
+        $messages = $this->messageManager->getMessages();
+        $messagesJsons = [];
+        foreach($messages as $message)
+        {
+            array_push($messagesJsons, $message->jsonSerialize());
+        }
+        $response = [
+            'messages' => $messagesJsons
+        ];
+
+        echo json_encode($response);
+    }
+
+    public function getAllTemplates()
+    {
+        $templates = $this->templateManager->getTemplates();
+        $templatesJsons = [];
+        foreach($templates as $template)
+        {
+            array_push($templatesJsons, $template->jsonSerialize());
+        }
+        $response = [
+            'templates' => $templatesJsons
+        ];
+
+        echo json_encode($response);
+    }
+
+    public function getAllCategories()
+    {
+        $categories = $this->categoryManager->getCategories();
+        $categoriesJsons = [];
+        foreach($categories as $category)
+        {
+            array_push($categoriesJsons, $category->jsonSerialize());
+        }
+        $response = [
+            'categories' => $categoriesJsons
+        ];
+
+        echo json_encode($response);
+    }
+
+    public function getAllReviews()
+    {
+        $reviews = $this->reviewManager->getReviews();
+        $reviewsJsons = [];
+        foreach($reviews as $review)
+        {
+            array_push($reviewsJsons, $review->jsonSerialize());
+        }
+        $response = [
+            'reviews' => $reviewsJsons
+        ];
+
+        echo json_encode($response);
+    }
+
 }

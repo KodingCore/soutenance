@@ -3,7 +3,7 @@
 class TemplateManager extends AbstractManager
 {
     
-    public function getTemplatesOrderedByCreationDate() : ? array
+    public function getTemplates() : ? array
     {
         $query = $this->db->prepare("SELECT * FROM templates ORDER BY created_at DESC");
         $query->execute();

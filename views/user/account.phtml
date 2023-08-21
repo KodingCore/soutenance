@@ -2,7 +2,7 @@
     if(isset($this->data["message"]) && $this->data["message"][1] === "general") //* Si on à un message dans la data
     {
     ?>
-        <span class="succes"><?=$this->data["message"][0]; ?></span>
+        <span class="success"><?=$this->data["message"][0]; ?></span>
     <?php
     }
     if(isset($this->data["user"]))
@@ -19,47 +19,39 @@
     <form action="index.php?route=account" method="POST" id="account_form">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" value=<?=$user->getUsername(); ?> maxlength="50" onpaste="return false;">
-        <span id="error_username">
-        <?php
+        <span id="error_username"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "username")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value=<?=$user->getEmail(); ?> maxlength="50" onpaste="return false;">
-        <span id="error_email">
-        <?php
+        <span id="error_email"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "email")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password" minlength="8" maxlength="50" onpaste="return false;">
-        <span id="error_password">
-        <?php
+        <span id="error_password"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "password")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="confirm_password">Confirm password</label>
         <input type="password" name="confirm_password" id="confirm_password" minlength="8" maxlength="50" onpaste="return false;">
-        <span id="error_confirm_password">
-        <?php
+        <span id="error_confirm_password"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "confirm_password")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="first_name">Prénom</label>
         <input type="text" name="first_name" id="first_name" 
@@ -74,14 +66,12 @@
             }
         ?> 
         maxlength="50" onpaste="return false;">
-        <span id="error_first_name">
-        <?php
+        <span id="error_first_name"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "first_name")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="last_name">Nom</label>
         <input type="text" name="last_name" id="last_name"
@@ -96,14 +86,12 @@
             }
         ?> 
         maxlength="50" onpaste="return false;">
-        <span id="error_last_name">
-        <?php
+        <span id="error_last_name"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "last_name")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="tel">Téléphone</label>
         <input type="text" name="tel" id="tel"
@@ -118,14 +106,12 @@
             }
         ?>
         maxlength="10" onpaste="return false;">
-        <span id="error_tel">
-        <?php
+        <span id="error_tel"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "tel")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="address">Address</label>
         <input type="text" name="address" id="address"
@@ -140,14 +126,12 @@
             }
         ?>
         maxlength="255" onpaste="return false;">
-        <span id="error_address">
-        <?php
+        <span id="error_address"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "address")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="zip">Code Postal</label>
         <input type="text" name="zip" id="zip"
@@ -162,14 +146,12 @@
             }
         ?>
         maxlength="15" onpaste="return false;">
-        <span id="error_zip">
-        <?php
+        <span id="error_zip"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "zip")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
 
         <label for="city">Ville</label>
         <input type="text" name="city" id="city"
@@ -184,14 +166,12 @@
             }
         ?>
         maxlength="100" onpaste="return false;">
-        <span id="error_city">
-        <?php
+        <span id="error_city"><?php
             if(isset($this->data["message"]) && $this->data["message"][1] === "city")
             {
                 echo $this->data["message"][0];
             }
-        ?>
-        </span>
+        ?></span>
         
         <input type="submit" value="Éditer mon profil">
     </form>
