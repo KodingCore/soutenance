@@ -4,18 +4,26 @@ class InfoManager extends AbstractManager
 {
     
     
-    public function getInfos() : array
+    public function getInfos() : ? array
     {
         $query = $this->db->prepare("SELECT * FROM infos");
         $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
-        $infosTab = [];
-        foreach($results as $info)
+        $infos = $query->fetchAll(PDO::FETCH_ASSOC);
+        if($infos)
         {
-            $infoInstance = new Info($info["user_id"], $info["first_name"], $info["last_name"], $info["tel"], $info["address"], $info["zip"], $info["city"]);
-            $infoInstance->setInfoId($info["info_id"]);
+            $infosTab = [];
+            foreach($infos as $info)
+            {
+                $infoInstance = new Info($info["user_id"], $info["first_name"], $info["last_name"], $info["tel"], $info["address"], $info["zip"], $info["city"]);
+                $infoInstance->setInfoId($info["info_id"]);
+                array_push($infosTab, $infoInstance);
+            }
+            return $infosTab;
         }
-        return $infosTab;
+        else
+        {
+            return null;
+        }
     }
 
     public function insertInfo(Info $info)

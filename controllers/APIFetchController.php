@@ -140,6 +140,21 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
+    public function getAllInfos()
+    {
+        $infos = $this->infoManager->getInfos();
+        $infosJsons = [];
+        foreach($infos as $info)
+        {
+            array_push($infosJsons, $info->jsonSerialize());
+        }
+        $response = [
+            'infos' => $infosJsons
+        ];
+
+        echo json_encode($response);
+    }
+
     public function getAllMessages()
     {
         $messages = $this->messageManager->getMessages();

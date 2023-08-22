@@ -67,6 +67,10 @@ class Router
             {
                 $this->APIFetchController->getAllUsers();
             }
+            else if($route === "info-link")
+            {
+                $this->APIFetchController->getAllInfos();
+            }
             else if($route === "message-link")
             {
                 $this->APIFetchController->getAllMessages();

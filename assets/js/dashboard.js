@@ -1,8 +1,11 @@
 window.addEventListener("DOMContentLoaded", function()
 {
     initDashboard();
+    addingListener();
 })
-//* ----------------------------DATA INITIALISATION---------------------------
+
+//* -----------------------------DATA INITIALISATION-----------------------------
+
 //** -------------------------------- */
 //*  Initialisation et écoute des clicks
 //*  dans les liens de la nav de control
@@ -12,6 +15,7 @@ function initDashboard()
     //* Noms des parties controllées par le dashboard
     const controlNavLinks = [
         document.getElementById("user-link"),
+        document.getElementById("info-link"),
         document.getElementById("message-link"),
         document.getElementById("template-link"),
         document.getElementById("category-link"),
@@ -30,6 +34,30 @@ function initDashboard()
     })
 }
 
+//** -------------------------------- */
+//*  Initialisation et écoute des clicks
+//*  dans les liens de la nav d'ajout
+//** -------------------------------- */
+function addingListener()
+{
+    const addingNavLinks = [
+        document.getElementById("add-template"),
+        document.getElementById("add-category"),
+        document.getElementById("add-appointment"),
+        document.getElementById("add-quotation")
+    ];
+
+    //* Écoute des click dans la nav d'ajout
+    addingNavLinks.forEach(function(link){
+        link.addEventListener("click", function(){
+            //* Affichage de la section d'ajout
+            displayAddingSection(link);
+        })
+    })
+}
+
+//* -----------------------------CRÉATION DU TABLEAU-----------------------------
+
 //** ------------------------------ */
 //*  Reset la section de control
 //*  Reçoi la data et appel les 
@@ -45,7 +73,6 @@ function fetchingControlDatas(link)
             )
         .then(data => 
         {   
-            
             for(let key in data) //* pour chaques valeur de la data
             {
                 controlSection.innerHTML = ""; //* On reset la section de control
@@ -59,31 +86,14 @@ function fetchingControlDatas(link)
                 }
                 for(let object in data[key]) //* Pour chaques objet de la data
                 {
-                    console.log(data[key][object]);
-
                     let bodyRow = completeBodyTable(data[key][object]); //* On appel la fonction de création du body
-                    addControlBtns(bodyRow);
+                    createControlBtns(bodyRow);
                 }
             }
             initOptionsSelector();
             searchParams();
         })
         .catch(error => console.error("Une erreur s'est produite", error));
-}
-
-function addControlBtns(row)
-{
-    const editBtn = document.createElement("button");
-    editBtn.classList.add("edit-btn");
-    editBtn.id = "edit" + row.firstChild.textContent;
-    row.appendChild(editBtn);
-    editBtn.textContent = "Éditer";
-
-    const removeBtn = document.createElement("button");
-    removeBtn.classList.add("remove-btn");
-    removeBtn.id = "remove" + row.firstChild.textContent;
-    row.appendChild(removeBtn);
-    removeBtn.textContent = "Supprimer";
 }
 
 //** ------------------------------ */
@@ -97,7 +107,6 @@ function setControlTitle(section, title)
     controlTitle.textContent = "Panneau de control des " + title;
     section.appendChild(controlTitle);
 }
-//* --------------------------CRÉATION DU TABLEAU--------------------------------
 //** ------------------------------- */
 //*  Initialise la structure du tableau
 //** ------------------------------- */
@@ -152,7 +161,35 @@ function completeBodyTable(objectForCellsValues)
     return bodyRow;
 }
 
+//** ------------------------------- */
+//*  Crée les boutons de fin de lignes
+//*  pour éditer ou supprimer
+//** ------------------------------- */
+function createControlBtns(row)
+{
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("edit-btn");
+    editBtn.id = "edit" + row.firstChild.textContent;
+    row.appendChild(editBtn);
+    editBtn.textContent = "Éditer";
+    editBtn.addEventListener("click", function(){
+        const IdCol = row.getElementsByTagName("td")[0];
+        console.log(IdCol);
+    })
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove-btn");
+    removeBtn.id = "remove" + row.firstChild.textContent;
+    row.appendChild(removeBtn);
+    removeBtn.textContent = "Supprimer";
+    removeBtn.addEventListener("click", function(){
+        const IdCol = row.getElementsByTagName("td")[0];
+        console.log(IdCol);
+    })
+}
+
 //* -----------------------------------RECHERCHE---------------------------------
+
 //** ------------------------------- */
 //*  Initialise les options du select
 //*  en fonction de la class controllée
@@ -232,7 +269,13 @@ function displayLine(table, colIndex, content)
     })
 }
 
-//*  REAL END ---- REAL END ---- REAL END ---- REAL END ---- REAL END ---- REAL END 
-//* --------------------------------------------------------------------------------
-//* --------------------------------------------------------------------------------
-//* --------------------------------------------------------------------------------
+//* -------------------------AJOUT/EDITION/SUPPRESSION---------------------------
+
+function displayAddingSection(link)
+{
+    const addingSection = document.getElementById("add-edit-section");
+    if(link === "")
+    {
+
+    }
+}
