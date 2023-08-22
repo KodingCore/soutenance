@@ -294,6 +294,7 @@ class APIFetchController extends AbstractController
 
     public function deleteCategoryById($id)
     {
+        $this->templateManager->setCategoryIdToNullByCategoryId($id);
         $this->categoryManager->deleteCategoryByCategoryId($id);
     }
 

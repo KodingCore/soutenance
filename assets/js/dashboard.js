@@ -1,7 +1,6 @@
 window.addEventListener("DOMContentLoaded", function()
 {
     initDashboard();
-    addingListener();
 })
 
 //* -----------------------------DATA INITIALISATION-----------------------------
@@ -34,28 +33,6 @@ function initDashboard()
     })
 }
 
-//** -------------------------------- */
-//*  Initialisation et écoute des clicks
-//*  dans les liens de la nav d'ajout
-//** -------------------------------- */
-function addingListener()
-{
-    const addingNavLinks = [
-        document.getElementById("add-template"),
-        document.getElementById("add-category"),
-        document.getElementById("add-appointment"),
-        document.getElementById("add-quotation")
-    ];
-
-    //* Écoute des click dans la nav d'ajout
-    addingNavLinks.forEach(function(link){
-        link.addEventListener("click", function(){
-            //* Affichage de la section d'ajout
-            displayAddingSection(link);
-        })
-    })
-}
-
 //* -----------------------------CRÉATION DU TABLEAU-----------------------------
 
 //** ------------------------------ */
@@ -76,11 +53,11 @@ function fetchingControlDatas(link)
             for(let key in data) //* pour chaques valeur de la data
             {
                 controlSection.innerHTML = ""; //* On reset la section de control
-                const className = key; //* Ecriture du titre du control
-                setControlTitle(controlSection, className); //* Initialisation du titre de la section
+                setControlTitle(controlSection, key); //* Initialisation du titre de la section
+                createAddBtns(controlSection, key);
                 createStructureTable(controlSection); //* Création de la structure du tableau
 
-                for(let attributName in data[className][0]) //* Pour chaques clées des valeurs d'une data
+                for(let attributName in data[key][0]) //* Pour chaques clées des valeurs d'une data
                 {
                     completeHeaderTable(attributName); //* On défini le header du tableau
                 }
@@ -94,6 +71,25 @@ function fetchingControlDatas(link)
             searchParams();
         })
         .catch(error => console.error("Une erreur s'est produite", error));
+}
+
+function createAddBtns(controlSection, controlName)
+{
+    if(controlName === "templates" || controlName === "categories" || 
+        controlName === "appointments" || controlName === "quotations")
+    {
+        const addBtn = document.createElement("button");
+        addBtn.classList.add("add-btn");
+        addBtn.id = "add-" + controlName;
+        addBtn.textContent = "add " + controlName;
+        controlSection.appendChild(addBtn);
+
+        //* Écoute click d'ajout
+        addBtn.addEventListener("click", function(){
+            //* Affichage de la section d'ajout
+            addData(controlName);
+        })
+    }
 }
 
 //** ------------------------------ */
@@ -173,7 +169,7 @@ function createControlBtns(link, className, row)
     row.appendChild(editBtn);
     editBtn.textContent = "Éditer";
     editBtn.addEventListener("click", function(){
-        const IdCol = row.getElementsByTagName("td")[0];
+        editData(link, className);
     })
 
     const removeBtn = document.createElement("button");
@@ -270,12 +266,25 @@ function displayLine(table, colIndex, content)
 
 //* -------------------------AJOUT/EDITION/SUPPRESSION---------------------------
 
-function displayAddingSection(link)
+function addData(link, className)
 {
     const addingSection = document.getElementById("add-edit-section");
-    if(link === "")
+    addingSection.innerHTML = ""; //* On reset la section d'ajout / d'édition
+    if(className === "template")
     {
 
+    }
+    else if(className === "category")
+    {
+
+    }
+    else if(className === "appointment")
+    {
+        
+    }
+    else if(className === "quotation")
+    {
+        
     }
 }
 
@@ -288,5 +297,4 @@ function removeData(link, className, id)
         .catch(error => {
           console.error('Une erreur est survenue :', error);
         });
-        console.log(link);
 }

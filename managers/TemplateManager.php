@@ -49,7 +49,16 @@ class TemplateManager extends AbstractManager
         }
     }
 
-    public function insertTemplate(Template $template)
+    public function setCategoryIdToNullByCategoryId($category_id) : void
+    {
+        $query = $this->db->prepare("UPDATE templates SET category_id = null WHERE category_id = :category_id");
+        $parameters = [
+            "category_id" => $category_id
+        ];
+        $query->execute($parameters);
+    }
+
+    public function insertTemplate(Template $template) : void
     {
         $query = $this->db->prepare("INSERT INTO templates (name, description, image_path, price, created_at) VALUES(:name, :description, :image_path, :price, :created_at)");
         $parameters = [
@@ -62,7 +71,7 @@ class TemplateManager extends AbstractManager
         $query->execute($parameters);
     }
 
-    public function deleteTemplateByTemplateId(int $template_id)
+    public function deleteTemplateByTemplateId(int $template_id) : void
     {
         $query = $this->db->prepare("DELETE FROM templates WHERE template_id = :template_id");
         $parameters = [
