@@ -41,6 +41,26 @@ class InfoManager extends AbstractManager
         $query->execute($parameters);
     }
 
+    public function getInfoByInfoId(int $info_id) : ? Info
+    {
+        $query = $this->db->prepare("SELECT * FROM infos WHERE info_id = :info_id");
+        $parameters = [
+            "info_id" => $info_id
+        ];
+        $query->execute($parameters);
+        $info = $query->fetch(PDO::FETCH_ASSOC);
+        if($info)
+        {
+            $infoInstance = new Info($info["user_id"], $info["first_name"], $info["last_name"], $info["tel"], $info["address"], $info["zip"], $info["city"]);
+            $infoInstance->setInfoId($info["info_id"]);
+            return $infoInstance;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public function getInfoByUserId(int $user_id) : ? Info
     {
         $query = $this->db->prepare("SELECT * FROM infos WHERE user_id = :user_id");
@@ -76,6 +96,22 @@ class InfoManager extends AbstractManager
         $query->execute($parameters);
     }
 
+    public function deleteInfoByInfoId(int $info_id)
+    {
+        $query = $this->db->prepare("DELETE FROM infos WHERE info_id = :info_id");
+        $parameters = [
+            "info_id" => $info_id
+        ];
+        $query->execute($parameters);
+    }
 
+    public function deleteInfoByUserId(int $user_id)
+    {
+        $query = $this->db->prepare("DELETE FROM infos WHERE user_id = :user_id");
+        $parameters = [
+            "user_id" => $user_id
+        ];
+        $query->execute($parameters);
+    }
 }
 ?>

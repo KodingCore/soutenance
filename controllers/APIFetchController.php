@@ -259,4 +259,61 @@ class APIFetchController extends AbstractController
         
         echo json_encode($response);
     }
+
+    public function deleteUserById($id)
+    {
+        $this->infoManager->deleteInfoByUserId($id);
+        $this->appointmentManager->deleteAppointmentByUserId($id);
+        $this->messageManager->deleteMessageByUserId($id);
+        $this->quotationManager->deleteQuotationByUserId($id);
+        $this->reviewManager->deleteReviewByUserId($id);
+        $this->tagManager->deleteTagByUserId($id);
+        $this->userManager->deleteUserByUserId($id);
+    }
+
+    public function deleteInfoById($id)
+    {
+        $info = $this->infoManager->getInfoByInfoId($id);
+        $user = $this->userManager->getUserByUserId($info->getUserId());
+        $this->infoManager->deleteInfoByInfoId($id);
+        $this->userManager->deleteUserByUserId($user->getUserId());
+    }
+
+    public function deleteMessageById($id)
+    {
+        $this->messageManager->deleteMessageByMessageId($id);
+    }
+
+    public function deleteTemplateById($id)
+    {
+        $this->quotationManager->deleteQuotationByTemplateId($id);
+        $this->reviewManager->deleteReviewByTemplateId($id);
+        $this->tagManager->deleteTagByTemplateId($id);
+        $this->templateManager->deleteTemplateByTemplateId($id);
+    }
+
+    public function deleteCategoryById($id)
+    {
+        $this->categoryManager->deleteCategoryByCategoryId($id);
+    }
+
+    public function deleteReviewById($id)
+    {
+        $this->reviewManager->deleteReviewByReviewId($id);
+    }
+
+    public function deleteAppointmentById($id)
+    {
+        $this->appointmentManager->deleteAppointmentByAppointmentId($id);
+    }
+
+    public function deleteQuotationById($id)
+    {
+        $this->quotationManager->deleteQuotationByQuotationId($id);
+    }
+
+    public function deleteTagById($id)
+    {
+        $this->tagManager->deleteTagByTagId($id);
+    }
 }

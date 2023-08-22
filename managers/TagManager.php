@@ -45,6 +45,24 @@ class TagManager extends AbstractManager
         $query->execute($parameters);
     }
 
+    public function deleteTagByUserId(int $user_id)
+    {
+        $query = $this->db->prepare("DELETE FROM tags WHERE user_id = :user_id");
+        $parameters = [
+            "user_id" => $user_id
+        ];
+        $query->execute($parameters);
+    }
+
+    public function deleteTagByTemplateId(int $template_id)
+    {
+        $query = $this->db->prepare("DELETE FROM tags WHERE template_id = :template_id");
+        $parameters = [
+            "template_id" => $template_id
+        ];
+        $query->execute($parameters);
+    }
+
     public function editTag(Tag $tag)
     {
         $query = $this->db->prepare("UPDATE tags SET user_id = :user_id, template_id = :template_id, tag_name = :tag_name WHERE tag_id = :tag_id");

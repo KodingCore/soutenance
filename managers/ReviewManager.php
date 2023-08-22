@@ -86,6 +86,24 @@ class ReviewManager extends AbstractManager
         $query->execute($parameters);
     }
 
+    public function deleteReviewByUserId(int $user_id)
+    {
+        $query = $this->db->prepare("DELETE FROM reviews WHERE user_id = :user_id");
+        $parameters = [
+            "user_id" => $user_id
+        ];
+        $query->execute($parameters);
+    }
+
+    public function deleteReviewByTemplateId(int $template_id)
+    {
+        $query = $this->db->prepare("DELETE FROM reviews WHERE template_id = :template_id");
+        $parameters = [
+            "template_id" => $template_id
+        ];
+        $query->execute($parameters);
+    }
+
     public function editReview(Review $review)
     {
         $query = $this->db->prepare("UPDATE reviews SET user_id = :user_id, template_id = :template_id, content = :content, send_date = :send_date WHERE review_id = :review_id");

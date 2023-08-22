@@ -87,7 +87,7 @@ function fetchingControlDatas(link)
                 for(let object in data[key]) //* Pour chaques objet de la data
                 {
                     let bodyRow = completeBodyTable(data[key][object]); //* On appel la fonction de création du body
-                    createControlBtns(bodyRow);
+                    createControlBtns(link, link.id.split("-")[0], bodyRow);
                 }
             }
             initOptionsSelector();
@@ -165,7 +165,7 @@ function completeBodyTable(objectForCellsValues)
 //*  Crée les boutons de fin de lignes
 //*  pour éditer ou supprimer
 //** ------------------------------- */
-function createControlBtns(row)
+function createControlBtns(link, className, row)
 {
     const editBtn = document.createElement("button");
     editBtn.classList.add("edit-btn");
@@ -174,7 +174,6 @@ function createControlBtns(row)
     editBtn.textContent = "Éditer";
     editBtn.addEventListener("click", function(){
         const IdCol = row.getElementsByTagName("td")[0];
-        console.log(IdCol);
     })
 
     const removeBtn = document.createElement("button");
@@ -183,8 +182,8 @@ function createControlBtns(row)
     row.appendChild(removeBtn);
     removeBtn.textContent = "Supprimer";
     removeBtn.addEventListener("click", function(){
-        const IdCol = row.getElementsByTagName("td")[0];
-        console.log(IdCol);
+        const IdCol = row.getElementsByTagName("td")[0].textContent;
+        removeData(link, className, IdCol);
     })
 }
 
@@ -278,4 +277,16 @@ function displayAddingSection(link)
     {
 
     }
+}
+
+function removeData(link, className, id)
+{
+    fetch(`index.php?route=delete-${className}&id=${id}`)
+        .then(result => {
+            fetchingControlDatas(link);
+        })
+        .catch(error => {
+          console.error('Une erreur est survenue :', error);
+        });
+        console.log(link);
 }

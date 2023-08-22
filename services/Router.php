@@ -97,7 +97,43 @@ class Router
             }
             else if($route === "tag-link")
             {
-                $this->APIFetchController->getAlltags();
+                $this->APIFetchController->getAllTags();
+            }
+            else if($route === "delete-user")
+            {
+                $this->APIFetchController->deleteUserById($_GET["id"]);
+            }
+            else if($route === "delete-info")
+            {
+                $this->APIFetchController->deleteInfoById($_GET["id"]);
+            }
+            else if($route === "delete-message")
+            {
+                $this->APIFetchController->deleteMessageById($_GET["id"]);
+            }
+            else if($route === "delete-template")
+            {
+                $this->APIFetchController->deleteTemplateById($_GET["id"]);
+            }
+            else if($route === "delete-category")
+            {
+                $this->APIFetchController->deleteCategoryById($_GET["id"]);
+            }
+            else if($route === "delete-review")
+            {
+                $this->APIFetchController->deleteReviewById($_GET["id"]);
+            }
+            else if($route === "delete-appointment")
+            {
+                $this->APIFetchController->deleteAppointmentById($_GET["id"]);
+            }
+            else if($route === "delete-quotation")
+            {
+                $this->APIFetchController->deleteQuotationById($_GET["id"]);
+            }
+            else if($route === "delete-tag")
+            {
+                $this->APIFetchController->deleteTagById($_GET["id"]);
             }
             else if($route === "add-category")
             {

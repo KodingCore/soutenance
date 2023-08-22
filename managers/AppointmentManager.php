@@ -46,6 +46,15 @@ class AppointmentManager extends AbstractManager
         $query->execute($parameters);
     }
 
+    public function deleteAppointmentByUserId(int $user_id)
+    {
+        $query = $this->db->prepare("DELETE FROM appointments WHERE user_id = :user_id");
+        $parameters = [
+            "user_id" => $user_id
+        ];
+        $query->execute($parameters);
+    }
+
     public function editAppointment(Appointment $appointment)
     {
         $query = $this->db->prepare("UPDATE appointments SET user_id = :user_id, appointment_date = :appointment_date, appointment_time = :appointment_time, communication_preference = :communication_preference WHERE appointment_id = :appointment_id");

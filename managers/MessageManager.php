@@ -91,6 +91,15 @@ class MessageManager extends AbstractManager
         $query->execute($parameters);
     }
 
+    public function deleteMessageByUserId(int $user_id)
+    {
+        $query = $this->db->prepare("DELETE FROM messages WHERE user_id = :user_id");
+        $parameters = [
+            "user_id" => $user_id
+        ];
+        $query->execute($parameters);
+    }
+
     public function editMessage(Message $message)
     {
         $query = $this->db->prepare("UPDATE messages SET user_id = :user_id, subject = :subject, content = :content, send_date_time = :send_date_time WHERE message_id = :message_id");

@@ -47,6 +47,24 @@ class QuotationManager extends AbstractManager
         $query->execute($parameters);
     }
 
+    public function deleteQuotationByUserId(int $user_id)
+    {
+        $query = $this->db->prepare("DELETE FROM quotations WHERE user_id = :user_id");
+        $parameters = [
+            "user_id" => $user_id
+        ];
+        $query->execute($parameters);
+    }
+
+    public function deleteQuotationByTemplateId(int $template_id)
+    {
+        $query = $this->db->prepare("DELETE FROM quotations WHERE template_id = :template_id");
+        $parameters = [
+            "template_id" => $template_id
+        ];
+        $query->execute($parameters);
+    }
+
     public function editQuotation(Quotation $quotation)
     {
         $query = $this->db->prepare("UPDATE quotations SET user_id = :user_id, template_id = :template_id, quotation_date = :quotation_date, content = :content, expiration_date = :expiration_date WHERE quotation_id = :quotation_id");

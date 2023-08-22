@@ -136,4 +136,22 @@ class UserManager extends AbstractManager
         ];
         $query->execute($parameters);
     }
+
+    public function deleteUserByUserId(int $user_id)
+    {
+        $query = $this->db->prepare("DELETE FROM users WHERE user_id = :user_id");
+        $parameters = [
+            "user_id" => $user_id
+        ];
+        $query->execute($parameters);
+    }
+
+    public function deleteUserByInfoId(int $info_id)
+    {
+        $query = $this->db->prepare("DELETE FROM users WHERE info_id = :info_id");
+        $parameters = [
+            "info_id" => $info_id
+        ];
+        $query->execute($parameters);
+    }
 }
