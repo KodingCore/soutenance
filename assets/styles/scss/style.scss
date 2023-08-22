@@ -20,7 +20,7 @@
 .edit-btn
 {
   height: 1.25rem;
-  width: 3rem;
+  width: 3.5rem;
   margin-left: 0.75rem;
   background-color: blue;
   color: white;
@@ -60,9 +60,15 @@ tr, td, th
   white-space: nowrap;
 }
 
-tr td,th:first-child
+.col-id
 {
   min-width: 0;
-  max-width: 1.5rem;
+  max-width: 2.5rem;
+}
+
+.col-other
+{
+  min-width: 0;
+  max-width: 6rem;
 }
 

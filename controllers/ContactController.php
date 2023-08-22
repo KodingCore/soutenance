@@ -34,6 +34,7 @@ class ContactController extends AbstractController
             { 
                 //* Afficher l'erreur et rediriger vers le formulaire d'inscription
                 $this->render("views/guest/register.phtml", ["message" => $error]);
+
             } 
             else //* Les champs sont valides
             {   
