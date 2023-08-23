@@ -7,10 +7,10 @@ window.addEventListener("DOMContentLoaded", function()
 //* -----------------------------DATA INITIALISATION-----------------------------
 //* -----------------------------------------------------------------------------
 
-//** -------------------------------- */
+//** ----------------------------------- */
 //*  Initialisation et écoute des clicks
 //*  dans les liens de la nav de control
-//** -------------------------------- */
+//** ----------------------------------- */
 function initDashboard()
 {
     //* Noms des parties controllées par le dashboard
@@ -39,11 +39,11 @@ function initDashboard()
 //* -----------------------------CRÉATION DU TABLEAU-----------------------------
 //* -----------------------------------------------------------------------------
 
-//** ------------------------------ */
+//** --------------------------------- */
 //*  Reset la section de control
 //*  Reçoi la data et appel les 
 //*  fonctions de créations du tableau
-//** ------------------------------ */
+//** --------------------------------- */
 function fetchingControlDatas(link)
 {
     const controlSection = document.getElementById("control-section");
@@ -76,10 +76,10 @@ function fetchingControlDatas(link)
         .catch(error => console.error("Une erreur s'est produite", error));
 }
 
-//** ------------------------ */
+//** --------------------------- */
 //*  Crée un bouton d'ajout en
 //*  fonction du control choisit
-//** ------------------------ */
+//** --------------------------- */
 function createAddBtns(attributsNames, controlSection, link)
 {
     const controlName = link.id.split("-")[0];
@@ -100,9 +100,9 @@ function createAddBtns(attributsNames, controlSection, link)
     }
 }
 
-//** ------------------------------ */
+//** --------------------------------- */
 //*  Initialise le titre de la section
-//** ------------------------------ */
+//** --------------------------------- */
 function setControlTitle(section, title)
 {
     const controlTitle = document.createElement("h2");
@@ -111,9 +111,9 @@ function setControlTitle(section, title)
     controlTitle.textContent = "Panneau de control des " + title;
     section.appendChild(controlTitle);
 }
-//** ------------------------------- */
+//** ---------------------------------- */
 //*  Initialise la structure du tableau
-//** ------------------------------- */
+//** ---------------------------------- */
 function createStructureTable(section)
 {
     const controlTable = document.createElement("table");
@@ -133,9 +133,9 @@ function createStructureTable(section)
     bodyTable.id = "body-table";
 }
 
-//** -------------------------- */
+//** ----------------------------- */
 //*  Complète l'en-tête du tableau
-//** -------------------------- */
+//** ----------------------------- */
 function completeHeaderTable(headerCellName)
 {
     const rowHeader = document.getElementById("row-head");
@@ -155,9 +155,9 @@ function completeHeaderTable(headerCellName)
     headCell.appendChild(textNodeCell);
 }
 
-//** ------------------------- */
+//** ---------------------------- */
 //*  Complète le corps du tableau
-//** ------------------------- */
+//** ---------------------------- */
 function completeBodyTable(objectForCellsValues)
 {
     const bodyTable = document.getElementById("body-table");
@@ -183,25 +183,28 @@ function completeBodyTable(objectForCellsValues)
     return bodyRow;
 }
 
-//** ------------------------------ */
+//** --------------------------------- */
 //*  Crée les boutons de fin de lignes
 //*  pour éditer ou supprimer
-//** ------------------------------ */
+//** --------------------------------- */
 function createControlBtns(attributsNames, link, row)
 {
-    const editBtn = document.createElement("button");
     const className = link.id.split("-")[0];
-    editBtn.classList.add("edit-btn");
-    editBtn.id = "edit" + row.firstChild.textContent;
-    row.appendChild(editBtn);
-    editBtn.textContent = "Éditer";
-    editBtn.addEventListener("click", function(){
-        const idRow = row.getElementsByTagName("td")[0].textContent;
-        console.log(idRow);
-        //* Affichage de la section d'ajout / d'édition
-        displayAddEditForm(attributsNames, link, "edit", row);
-    })
-
+    if(className === "template" || className === "category" || className === "appointment" || className === "quotation" || className === "user")
+    {
+        const editBtn = document.createElement("button");
+        editBtn.classList.add("edit-btn");
+        editBtn.id = "edit" + row.firstChild.textContent;
+        row.appendChild(editBtn);
+        editBtn.textContent = "Éditer";
+        editBtn.addEventListener("click", function(){
+            const idRow = row.getElementsByTagName("td")[0].textContent;
+            console.log(idRow);
+            //* Affichage de la section d'ajout / d'édition
+            displayAddEditForm(attributsNames, link, "edit", row);
+        })
+    }
+    
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("remove-btn");
     removeBtn.id = "remove" + row.firstChild.textContent;
@@ -217,10 +220,10 @@ function createControlBtns(attributsNames, link, row)
 //* -----------------------------------RECHERCHE---------------------------------
 //* -----------------------------------------------------------------------------
 
-//** ------------------------------- */
+//** ---------------------------------- */
 //*  Initialise les options du select
 //*  en fonction de la class controllée
-//** ------------------------------- */
+//** ---------------------------------- */
 function initOptionsSelector()
 {
     const columnSelection = document.getElementById("column-selection"); //* Récuperation du select
@@ -237,11 +240,11 @@ function initOptionsSelector()
     })
 }
 
-//** ---------------------------------------------- */
+//** ------------------------------------------------- */
 //*  Écoute les relachements clavier dans la searchbar
 //*  et les changements d'options du selecteur
 //*  Calcul la colonne résultante
-//** ---------------------------------------------- */
+//** ------------------------------------------------- */
 function searchParams()
 {
     const taleau = document.getElementById("control-table");
@@ -265,11 +268,11 @@ function searchParams()
     })
 }
 
-//** ------------------------------ */
+//** --------------------------------- */
 //*  Check le matching de la searchbar
 //*  et affiche les lignes en fonction
 //*  Cache les autres lignes
-//** ------------------------------ */
+//** --------------------------------- */
 function displayLine(table, colIndex, content)
 {
     let tbody = table.querySelector("#body-table"); //* Récuperation de l'élément body de la table choisie
@@ -300,17 +303,17 @@ function displayLine(table, colIndex, content)
 //* -------------------------AJOUT/EDITION/SUPPRESSION---------------------------
 //* -----------------------------------------------------------------------------
 
-//** ------------------------------------- */
+//** ---------------------------------------- */
 //*  Génère le formulaire d'ajout
 //*  en récuperant en paramètres
 //*  les attributs de la calsse par le fatech
-//** ------------------------------------- */
+//** ---------------------------------------- */
 function displayAddEditForm(attributsNames, link, action, row = null) //* action >>> "edit" ou "add"
 {
     const addEditSection = document.getElementById("add-edit-section"); //* Variable contenant la section d'ajout / édition
     addEditSection.innerHTML = ""; //* On reset la section d'ajout / d'édition
 
-    const className = link.id.split("-")[0]; //* On récupère le nom de la classe en splitant le lien de la nav correspondant
+    const className = link.id.split("-")[0]; //* Récupération du nom de la classe en splitant le lien de la nav correspondante
 
     const addEditFormTitle = document.createElement("h2"); //* Création du titre de la section
     
@@ -333,22 +336,22 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
 
     for(let attribut in attributsNames)
     {
-        // if(i === 0 && action === "edit")
-        // {
-            // const cellsRow = row.getElementsByTagName("td");
-            // const fieldsetElement = document.createElement("fieldset");
-            // addEditForm.appendChild(fieldsetElement);
-// 
-            // const labelElement = document.createElement("label");
-            // labelElement.textContent = attribut;
-            // labelElement.setAttribute("for", "input-" + attribut)
-            // fieldsetElement.appendChild(labelElement);
-// 
-            // const idElement = document.createElement("p");
-            // idElement.textContent = cellsRow[0].textContent;
-            // fieldsetElement.appendChild(idElement);
-        // }
-        if(i !== 0)
+        if(i === 0 && action === "edit")
+        {
+            const idCell = row.getElementsByTagName("td")[0];
+            const fieldsetElement = document.createElement("fieldset");
+            addEditForm.appendChild(fieldsetElement);
+
+            const labelElement = document.createElement("label");
+            labelElement.textContent = attribut;
+            labelElement.setAttribute("for", "input-" + attribut)
+            fieldsetElement.appendChild(labelElement);
+
+            const idElement = document.createElement("p");
+            idElement.textContent = idCell.textContent;
+            fieldsetElement.appendChild(idElement);
+        }
+        if(i !== 0 && className !== "user")
         {
             const fieldsetElement = document.createElement("fieldset");
             addEditForm.appendChild(fieldsetElement);
@@ -390,29 +393,76 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
 
             if(action === "edit")
             {
-                //*  A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- 
+                const cellsRow = row.getElementsByTagName("td");
+                inputElement.value = cellsRow[i].textContent;
             }
 
             fieldsetElement.appendChild(inputElement);
 
             inputsElements.push(inputElement);
         }
+        if(i !== 0 && className === "user")
+        {
+            const cellsRow = row.getElementsByTagName("td");
+
+            const fieldsetElement = document.createElement("fieldset");
+            addEditForm.appendChild(fieldsetElement);
+
+            const labelElement = document.createElement("label");
+            
+            labelElement.textContent = attribut;
+            labelElement.setAttribute("for", "input-" + attribut)
+            fieldsetElement.appendChild(labelElement);
+
+            let element = null;
+            
+            if(attribut.toLowerCase().includes("rôle"))
+            {
+                element = document.createElement("input");
+                element.setAttribute("type", "checkbox");
+                if(cellsRow[i].textContent === "admin")
+                {
+                    element.setAttribute("checked", "");
+                }
+            }
+            else
+            {
+                element = document.createElement("p");
+                element.textContent = cellsRow[i].textContent;
+            }
+            fieldsetElement.appendChild(element);
+        }
         i++;
     }
-    const addBtn = document.createElement("button");
-    addBtn.textContent = "Ajouter";
-    addEditForm.appendChild(addBtn);
-
-    addBtn.addEventListener("click", function(event){
+    const addEditBtn = document.createElement("button");
+    if(action === "add")
+    {
+        addEditBtn.textContent = "Ajouter";
+    }
+    else if(action === "edit")
+    {
+        addEditBtn.textContent = "Éditer";
+    }
+    
+    addEditForm.appendChild(addEditBtn);
+    addEditBtn.addEventListener("click", function(event){
         event.preventDefault();
-        addData(className, inputsElements, link);
+        if(action === "add")
+        {
+            addData(className, inputsElements, link);
+        }
+        else if(action === "edit")
+        {
+            editData(className, inputsElements, link);
+        }
     })
 }
 
-//** ---------------------------- */
+
+//** ------------------------------- */
 //*  Ajoute la data si validation du
 //*  formaulaire d'ajout
-//** ---------------------------- */
+//** ------------------------------- */
 function addData(className, inputs, link)
 {
     let stringRoute = `index.php?route=add-${className}`;
@@ -430,9 +480,29 @@ function addData(className, inputs, link)
 }
 
 //** ------------------------------ */
+//*  Édite la data si validation du
+//*  formaulaire d'édition
+//** ------------------------------ */
+function editData(className, inputs, link)
+{
+    let stringRoute = `index.php?route=edit-${className}`;
+    for(let key in inputs)
+    {
+        stringRoute = stringRoute + `&${key}=${inputs[key].value}`;
+    }
+    fetch(stringRoute)
+        .then(result => {
+            fetchingControlDatas(link);
+        })
+        .catch(error => {
+            console.error('Une erreur est survenue :', error);
+        });
+}
+
+//** --------------------------------- */
 //*  Supprime la data par click sur le
 //*  bouton de suppression de la ligne
-//** ------------------------------ */
+//** --------------------------------- */
 function removeData(link, className, id)
 {
     fetch(`index.php?route=delete-${className}&id=${id}`)
