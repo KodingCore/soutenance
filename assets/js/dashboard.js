@@ -3,7 +3,9 @@ window.addEventListener("DOMContentLoaded", function()
     initDashboard();
 })
 
+//* -----------------------------------------------------------------------------
 //* -----------------------------DATA INITIALISATION-----------------------------
+//* -----------------------------------------------------------------------------
 
 //** -------------------------------- */
 //*  Initialisation et écoute des clicks
@@ -33,7 +35,9 @@ function initDashboard()
     })
 }
 
+//* -----------------------------------------------------------------------------
 //* -----------------------------CRÉATION DU TABLEAU-----------------------------
+//* -----------------------------------------------------------------------------
 
 //** ------------------------------ */
 //*  Reset la section de control
@@ -63,7 +67,7 @@ function fetchingControlDatas(link)
                 for(let object in data[key]) //* Pour chaques objet de la data
                 {
                     let bodyRow = completeBodyTable(data[key][object]); //* On appel la fonction de création du body
-                    createControlBtns(link, bodyRow);
+                    createControlBtns(data[key][0], link, bodyRow);
                 }
             }
             initOptionsSelector();
@@ -72,6 +76,10 @@ function fetchingControlDatas(link)
         .catch(error => console.error("Une erreur s'est produite", error));
 }
 
+//** ------------------------ */
+//*  Crée un bouton d'ajout en
+//*  fonction du control choisit
+//** ------------------------ */
 function createAddBtns(attributsNames, controlSection, link)
 {
     const controlName = link.id.split("-")[0];
@@ -86,8 +94,8 @@ function createAddBtns(attributsNames, controlSection, link)
 
         //* Écoute click d'ajout
         addBtn.addEventListener("click", function(){
-            //* Affichage de la section d'ajout
-            displayAddForm(attributsNames, controlName, link);
+            //* Affichage de la section d'ajout / d'édition
+            displayAddEditForm(attributsNames, link, "add");
         })
     }
 }
@@ -175,11 +183,11 @@ function completeBodyTable(objectForCellsValues)
     return bodyRow;
 }
 
-//** ------------------------------- */
+//** ------------------------------ */
 //*  Crée les boutons de fin de lignes
 //*  pour éditer ou supprimer
-//** ------------------------------- */
-function createControlBtns(link, row)
+//** ------------------------------ */
+function createControlBtns(attributsNames, link, row)
 {
     const editBtn = document.createElement("button");
     const className = link.id.split("-")[0];
@@ -188,7 +196,10 @@ function createControlBtns(link, row)
     row.appendChild(editBtn);
     editBtn.textContent = "Éditer";
     editBtn.addEventListener("click", function(){
-        editData(link, className);
+        const idRow = row.getElementsByTagName("td")[0].textContent;
+        console.log(idRow);
+        //* Affichage de la section d'ajout / d'édition
+        displayAddEditForm(attributsNames, link, "edit");
     })
 
     const removeBtn = document.createElement("button");
@@ -197,12 +208,14 @@ function createControlBtns(link, row)
     row.appendChild(removeBtn);
     removeBtn.textContent = "Supprimer";
     removeBtn.addEventListener("click", function(){
-        const IdCol = row.getElementsByTagName("td")[0].textContent;
-        removeData(link, className, IdCol);
+        const idRow = row.getElementsByTagName("td")[0].textContent;
+        removeData(link, className, idRow);
     })
 }
 
+//* -----------------------------------------------------------------------------
 //* -----------------------------------RECHERCHE---------------------------------
+//* -----------------------------------------------------------------------------
 
 //** ------------------------------- */
 //*  Initialise les options du select
@@ -283,19 +296,28 @@ function displayLine(table, colIndex, content)
     })
 }
 
+//* -----------------------------------------------------------------------------
 //* -------------------------AJOUT/EDITION/SUPPRESSION---------------------------
+//* -----------------------------------------------------------------------------
 
-function displayAddForm(attributsNames, className, link)
+//** ------------------------------------- */
+//*  Génère le formulaire d'ajout
+//*  en récuperant en paramètres
+//*  les attributs de la calsse par le fatech
+//** ------------------------------------- */
+function displayAddEditForm(attributsNames, link, action)
 {
-    const addingSection = document.getElementById("add-edit-section");
-    addingSection.innerHTML = ""; //* On reset la section d'ajout / d'édition
+    const addEditSection = document.getElementById("add-edit-section");
+    addEditSection.innerHTML = ""; //* On reset la section d'ajout / d'édition
 
-    const addingFormTitle = document.createElement("h2");
-    addingFormTitle.textContent = "Ajouter un(e) " + className;
-    addingSection.appendChild(addingFormTitle);
+    const className = link.id.split("-")[0];
 
-    const addingForm = document.createElement("form");
-    addingSection.appendChild(addingForm);
+    const addEditFormTitle = document.createElement("h2");
+    addEditFormTitle.textContent = "Ajouter un(e) " + className;
+    addEditSection.appendChild(addEditFormTitle);
+
+    const addEditForm = document.createElement("form");
+    addEditSection.appendChild(addEditForm);
 
     let i = 0;
     let inputsElements = [];
@@ -305,7 +327,7 @@ function displayAddForm(attributsNames, className, link)
         if(i !== 0)
         {
             const fieldsetElement = document.createElement("fieldset");
-            addingForm.appendChild(fieldsetElement);
+            addEditForm.appendChild(fieldsetElement);
 
             const labelElement = document.createElement("label");
             labelElement.textContent = attribut;
@@ -349,7 +371,7 @@ function displayAddForm(attributsNames, className, link)
     }
     const addBtn = document.createElement("button");
     addBtn.textContent = "Ajouter";
-    addingForm.appendChild(addBtn);
+    addEditForm.appendChild(addBtn);
 
     addBtn.addEventListener("click", function(event){
         event.preventDefault();
@@ -357,6 +379,10 @@ function displayAddForm(attributsNames, className, link)
     })
 }
 
+//** ---------------------------- */
+//*  Ajoute la data si validation du
+//*  formaulaire d'ajout
+//** ---------------------------- */
 function addData(className, inputs, link)
 {
     let stringRoute = `index.php?route=add-${className}`;
@@ -364,10 +390,8 @@ function addData(className, inputs, link)
     {
         stringRoute = stringRoute + `&${key}=${inputs[key].value}`;
     }
-    console.log(stringRoute);
     fetch(stringRoute)
         .then(result => {
-            console.log(result);
             fetchingControlDatas(link);
         })
         .catch(error => {
@@ -375,6 +399,10 @@ function addData(className, inputs, link)
         });
 }
 
+//** ------------------------------ */
+//*  Supprime la data par click sur le
+//*  bouton de suppression de la ligne
+//** ------------------------------ */
 function removeData(link, className, id)
 {
     fetch(`index.php?route=delete-${className}&id=${id}`)
