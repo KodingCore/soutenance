@@ -291,4 +291,32 @@ class APIFetchController extends AbstractController
         }
     }
 
+    public function editCategory()
+    {
+        if(!empty($_GET["id"] && !empty($_GET["0"]) && !empty($_GET["1"])))
+        {
+            $id = $_GET["id"];
+            $name = $_GET["0"];
+            $description = $_GET["1"];
+            $category = new Category($name, $description);
+            $category->setCategoryId($id);
+            $this->categoryManager->editCategory($category);
+        }
+    }
+
+    public function editTemplate()
+    {
+
+    }
+
+    public function editQuotation()
+    {
+
+    }
+
+    public function editAppointment()
+    {
+
+    }
+
 }

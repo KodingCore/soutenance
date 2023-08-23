@@ -151,6 +151,22 @@ class Router
             {
                 $this->APIFetchController->addAppointment();
             }
+            else if($route === "edit-category")
+            {
+                $this->APIFetchController->editCategory();
+            }
+            else if($route === "edit-template")
+            {
+                $this->APIFetchController->editTemplate();
+            }
+            else if($route === "edit-quotation")
+            {
+                $this->APIFetchController->editQuotation();
+            }
+            else if($route === "edit-appointment")
+            {
+                $this->APIFetchController->editAppointment();
+            }
         }
         else
         {
