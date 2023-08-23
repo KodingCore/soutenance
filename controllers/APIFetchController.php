@@ -306,17 +306,60 @@ class APIFetchController extends AbstractController
 
     public function editTemplate()
     {
-
+        if(!empty($_GET["0"]))
+        {
+            $category_id = $_GET["0"];
+        }
+        if(!empty($_GET["4"]))
+        {
+            $price = $_GET["4"];
+        }
+        if(!empty($_GET["6"]))
+        {
+            $updated_at = $_GET["6"];
+        }
+        if(!empty($_GET["id"]) && !empty($_GET["1"]) && !empty($_GET["2"]) && !empty($_GET["3"]) && !empty($_GET["5"]))
+        {
+            $id = $_GET["id"];
+            $name = $_GET["1"];
+            $description = $_GET["2"];
+            $image_path = $_GET["3"];
+            $created_at = $_GET["5"];
+            $template = new Template($category_id, $name, $description, $image_path, $price, $created_at, $updated_at);
+            $template->setTemplateId($id);
+            $this->templateManager->editTemplate($template);
+        }
     }
 
     public function editQuotation()
     {
-
+        if(!empty($_GET["id"]) && !empty($_GET["0"]) && !empty($_GET["1"]) && !empty($_GET["2"]) && !empty($_GET["3"]) && !empty($_GET["4"]))
+        {
+            $id = $_GET["id"];
+            $user_id = $_GET["0"];
+            $template_id = $_GET["1"];
+            $quotation_date = $_GET["2"];
+            $content = $_GET["3"];
+            $expiration_date = $_GET["4"];
+            $quotation = new Quotation($user_id, $template_id, $quotation_date, $content, $expiration_date);
+            $quotation->setQuotationId($id);
+            $this->quotationManager->editQuotation($quotation);
+        }
     }
 
     public function editAppointment()
     {
-
+        if(!empty($_GET["id"]) && !empty($_GET["0"]) && !empty($_GET["1"]) && !empty($_GET["2"]) && !empty($_GET["3"]))
+        {
+            $id = $_GET["id"];
+            $user_id = $_GET["0"];
+            $appointment_date = $_GET["1"];
+            $appointment_time = $_GET["2"];
+            $communication_preference = $_GET["3"];
+            $appointment = new Appointment($user_id, $appointment_date, $appointment_time, $communication_preference);
+            $appointment->setAppointmentId($id);
+            $this->appointmentManager->editAppointment($appointment);
+        }
     }
 
 }
