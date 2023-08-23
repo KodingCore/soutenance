@@ -426,7 +426,7 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
             if(element)
             {
                 fieldsetElement.appendChild(element);
-                inputsElements.push(element);
+                inputsElements.push(element); //* ----------------
             }
             else
             {
@@ -447,7 +447,6 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
     }
     
     addEditForm.appendChild(addEditBtn);
-    console.log(inputsElements);
 
     addEditBtn.addEventListener("click", function(event){
         event.preventDefault();
@@ -489,10 +488,27 @@ function addData(className, inputs, link)
 //** ------------------------------ */
 function editData(className, inputs, id, link)
 {
+    
+
     let stringRoute = `index.php?route=edit-${className}&id=${id}`;
     for(let key in inputs)
     {
-        stringRoute = stringRoute + `&${key}=${inputs[key].value}`;
+        if(className !== "user")
+        {
+            stringRoute = stringRoute + `&${key}=${inputs[key].value}`;
+        }
+        else
+        {
+            if(inputs[key].checked)
+            {
+                stringRoute = stringRoute + `&${key}=admin`;
+            }
+            else
+            {
+                stringRoute = stringRoute + `&${key}=user`;
+            }
+            
+        }
     }
     console.log(stringRoute);
     fetch(stringRoute)

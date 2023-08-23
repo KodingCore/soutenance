@@ -362,4 +362,14 @@ class APIFetchController extends AbstractController
         }
     }
 
+    public function editUser()
+    {
+        if(!empty($_GET["id"]) && !empty($_GET["0"]))
+        {
+            $id = $_GET["id"];
+            $role = $_GET["0"];
+            $this->userManager->editUserRoleById($id, $role);
+        }
+    }
+
 }

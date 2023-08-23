@@ -167,6 +167,10 @@ class Router
             {
                 $this->APIFetchController->editAppointment();
             }
+            else if($route === "edit-user")
+            {
+                $this->APIFetchController->editUser();
+            }
         }
         else
         {
