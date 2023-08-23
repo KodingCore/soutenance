@@ -101,55 +101,55 @@ class Router
             }
             else if($route === "delete-user")
             {
-                $this->APIFetchController->deleteUserById($_GET["id"]);
+                $this->APIFetchController->deleteUserById();
             }
             else if($route === "delete-info")
             {
-                $this->APIFetchController->deleteInfoById($_GET["id"]);
+                $this->APIFetchController->deleteInfoById();
             }
             else if($route === "delete-message")
             {
-                $this->APIFetchController->deleteMessageById($_GET["id"]);
+                $this->APIFetchController->deleteMessageById();
             }
             else if($route === "delete-template")
             {
-                $this->APIFetchController->deleteTemplateById($_GET["id"]);
+                $this->APIFetchController->deleteTemplateById();
             }
             else if($route === "delete-category")
             {
-                $this->APIFetchController->deleteCategoryById($_GET["id"]);
+                $this->APIFetchController->deleteCategoryById();
             }
             else if($route === "delete-review")
             {
-                $this->APIFetchController->deleteReviewById($_GET["id"]);
+                $this->APIFetchController->deleteReviewById();
             }
             else if($route === "delete-appointment")
             {
-                $this->APIFetchController->deleteAppointmentById($_GET["id"]);
+                $this->APIFetchController->deleteAppointmentById();
             }
             else if($route === "delete-quotation")
             {
-                $this->APIFetchController->deleteQuotationById($_GET["id"]);
+                $this->APIFetchController->deleteQuotationById();
             }
             else if($route === "delete-tag")
             {
-                $this->APIFetchController->deleteTagById($_GET["id"]);
+                $this->APIFetchController->deleteTagById();
             }
             else if($route === "add-category")
             {
-                $this->APIFetchController->getAllReviews();
+                $this->APIFetchController->addCategory();
             }
             else if($route === "add-template")
             {
-                $this->APIFetchController->getAllReviews();
+                $this->APIFetchController->addTemplate();
             }
             else if($route === "add-quotation")
             {
-                $this->APIFetchController->getAllReviews();
+                $this->APIFetchController->addQuotation();
             }
             else if($route === "add-appointment")
             {
-                $this->APIFetchController->getAllReviews();
+                $this->APIFetchController->addAppointment();
             }
         }
         else

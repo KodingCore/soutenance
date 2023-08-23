@@ -26,105 +26,6 @@ class APIFetchController extends AbstractController
         $this->tagManager = new TagManager();
     }
 
-    public function getCategoryById(int $category_id)
-    {
-        $category = $this->categoryManager->getCategoryByCategoryId($category_id);
-        $categoryAttributs = $category->jsonSerialize();
-
-        $arrayResponse = $categoryAttributs;
-
-        $response = [
-            "message" => $arrayResponse
-        ];
-        echo json_encode($response);
-    }
-
-    public function getReviewById(int $review_id)
-    {
-        $review = $this->reviewManager->getReviewByReviewId($review_id);
-        $user = $this->userManager->getUserByUserId($review->getUserId());
-        $template = $this->templateManager->getTemplateByTemplateId($review->getTemplateId());
-        $reviewAttributs = $review->jsonSerialize();
-        $userAttributs = $user->jsonSerialize();
-        $templateAttributs = $template->jsonSerialize();
-
-        $arrayResponse = array_replace($reviewAttributs, $userAttributs, $templateAttributs);
-
-        $response = [
-            "message" => $arrayResponse
-        ];
-        echo json_encode($response);
-    }
-
-    public function getMessageById(int $message_id)
-    {
-        $message = $this->messageManager->getMessageByMessageId($message_id);
-        $user = $this->userManager->getUserByUserId($message->getUserId());
-        $messageAttributs = $message->jsonSerialize();
-        $userAttributs = $user->jsonSerialize();
-
-        $arrayResponse = array_replace($messageAttributs, $userAttributs);
-
-        $response = [
-            "message" => $arrayResponse
-        ];
-        echo json_encode($response);
-    }
-
-    public function getUserAndInfoById(int $user_id)
-    {
-        $user = $this->userManager->getUserByUserId($user_id);
-        $info = $this->infoManager->getInfoByUserId($user_id);
-        $userAttributs = $user->jsonSerialize();
-        $infoAttributs = $info->jsonSerialize();
-        
-        $arrayResponse = array_replace($userAttributs, $infoAttributs);
-
-        $response = [
-            'user' => $arrayResponse
-        ];
-    
-        echo json_encode($response);
-    }
-
-    public function getTemplateById(int $template_id)
-    {
-        $template = $this->templateManager->getTemplateByTemplateId($template_id);
-        $templateAttributs = $template->jsonSerialize();
-        $arrayResponse = null;
-        if($template->getCategoryId())
-        {
-            $category = $this->categoryManager->getCategoryByCategoryId($template->getCategoryId());
-            $categoryAttributs = $category->jsonSerialize();
-            $arrayResponse = array_replace($templateAttributs, $categoryAttributs);
-        }
-        else
-        {
-            $arrayResponse = $templateAttributs;
-        }
-        
-        $response = [
-            'user' => $arrayResponse
-        ];
-    
-        echo json_encode($response);
-    }
-
-    public function changeRoleByUserId(int $user_id)
-    {
-        $user = $this->userManager->getUserByUserId($user_id);
-        $basicRole = $user->getRole();
-
-        if($basicRole === "user")
-        {
-            $this->userManager->replaceRoleByUserId($user_id, "admin");
-        }
-        else
-        {
-            $this->userManager->replaceRoleByUserId($user_id, "user");
-        }
-    }
-
     public function getAllUsers()
     {
         $users = $this->userManager->getUsers();
@@ -260,8 +161,9 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
-    public function deleteUserById($id)
+    public function deleteUserById()
     {
+        $id = $_GET["id"];
         $this->infoManager->deleteInfoByUserId($id);
         $this->appointmentManager->deleteAppointmentByUserId($id);
         $this->messageManager->deleteMessageByUserId($id);
@@ -271,50 +173,122 @@ class APIFetchController extends AbstractController
         $this->userManager->deleteUserByUserId($id);
     }
 
-    public function deleteInfoById($id)
+    public function deleteInfoById()
     {
+        $id = $_GET["id"];
         $info = $this->infoManager->getInfoByInfoId($id);
         $user = $this->userManager->getUserByUserId($info->getUserId());
         $this->infoManager->deleteInfoByInfoId($id);
         $this->userManager->deleteUserByUserId($user->getUserId());
     }
 
-    public function deleteMessageById($id)
+    public function deleteMessageById()
     {
+        $id = $_GET["id"];
         $this->messageManager->deleteMessageByMessageId($id);
     }
 
-    public function deleteTemplateById($id)
+    public function deleteTemplateById()
     {
+        $id = $_GET["id"];
         $this->quotationManager->deleteQuotationByTemplateId($id);
         $this->reviewManager->deleteReviewByTemplateId($id);
         $this->tagManager->deleteTagByTemplateId($id);
         $this->templateManager->deleteTemplateByTemplateId($id);
     }
 
-    public function deleteCategoryById($id)
+    public function deleteCategoryById()
     {
+        $id = $_GET["id"];
         $this->templateManager->setCategoryIdToNullByCategoryId($id);
         $this->categoryManager->deleteCategoryByCategoryId($id);
     }
 
-    public function deleteReviewById($id)
+    public function deleteReviewById()
     {
+        $id = $_GET["id"];
         $this->reviewManager->deleteReviewByReviewId($id);
     }
 
-    public function deleteAppointmentById($id)
+    public function deleteAppointmentById()
     {
+        $id = $_GET["id"];
         $this->appointmentManager->deleteAppointmentByAppointmentId($id);
     }
 
-    public function deleteQuotationById($id)
+    public function deleteQuotationById()
     {
+        $id = $_GET["id"];
         $this->quotationManager->deleteQuotationByQuotationId($id);
     }
 
-    public function deleteTagById($id)
+    public function deleteTagById()
     {
+        $id = $_GET["id"];
         $this->tagManager->deleteTagByTagId($id);
     }
+
+    public function addCategory()
+    {
+        if(!empty($_GET["0"]) && !empty($_GET["1"]))
+        {
+            $name = $_GET["0"];
+            $description = $_GET["1"];
+            $category = new Category($name, $description);
+            $this->categoryManager->insertCategory($category);
+        }
+    }
+
+    public function addTemplate()
+    {
+        if(!empty($_GET["0"]))
+        {
+            $category_id = $_GET["0"];
+        }
+        if(!empty($_GET["4"]))
+        {
+            $price = $_GET["4"];
+        }
+        if(!empty($_GET["6"]))
+        {
+            $updated_at = $_GET["6"];
+        }
+        if(!empty($_GET["1"]) && !empty($_GET["2"]) && !empty($_GET["3"]) && !empty($_GET["5"]))
+        {
+            $name = $_GET["1"];
+            $description = $_GET["2"];
+            $image_path = $_GET["3"];
+            $created_at = $_GET["5"];
+            $template = new Template($category_id, $name, $description, $image_path, $price, $created_at, $updated_at);
+            $this->templateManager->insertTemplate($template);
+        }
+    }
+
+    public function addQuotation()
+    {
+        if(!empty($_GET["0"]) && !empty($_GET["1"]) && !empty($_GET["2"]) && !empty($_GET["3"]) && !empty($_GET["4"]))
+        {
+            $user_id = $_GET["0"];
+            $template_id = $_GET["1"];
+            $quotation_date = $_GET["2"];
+            $content = $_GET["3"];
+            $expiration_date = $_GET["4"];
+            $quotation = new Quotation($user_id, $template_id, $quotation_date, $content, $expiration_date);
+            $this->quotationManager->insertQuotation($quotation);
+        }
+    }
+
+    public function addAppointment()
+    {
+        if(!empty($_GET["0"]) && !empty($_GET["1"]) && !empty($_GET["2"]) && !empty($_GET["3"]))
+        {
+            $user_id = $_GET["0"];
+            $appointment_date = $_GET["1"];
+            $appointment_time = $_GET["2"];
+            $communication_preference = $_GET["3"];
+            $appointment = new Appointment($user_id, $appointment_date, $appointment_time, $communication_preference);
+            $this->appointmentManager->insertAppointment($appointment);
+        }
+    }
+
 }

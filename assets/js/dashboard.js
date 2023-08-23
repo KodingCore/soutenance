@@ -54,7 +54,7 @@ function fetchingControlDatas(link)
             {
                 controlSection.innerHTML = ""; //* On reset la section de control
                 setControlTitle(controlSection, key); //* Initialisation du titre de la section 
-                createAddBtns(data[key][0], controlSection, key);
+                createAddBtns(data[key][0], controlSection, link);
                 createStructureTable(controlSection); //* Création de la structure du tableau
                 for(let attributName in data[key][0]) //* Pour chaques attributs de la classe
                 {
@@ -72,10 +72,11 @@ function fetchingControlDatas(link)
         .catch(error => console.error("Une erreur s'est produite", error));
 }
 
-function createAddBtns(attributsNames, controlSection, controlName)
+function createAddBtns(attributsNames, controlSection, link)
 {
-    if(controlName === "templates" || controlName === "categories" || 
-        controlName === "appointments" || controlName === "quotations")
+    const controlName = link.id.split("-")[0];
+    if(controlName === "template" || controlName === "category" || 
+        controlName === "appointment" || controlName === "quotation")
     {
         const addBtn = document.createElement("button");
         addBtn.classList.add("add-btn");
@@ -86,7 +87,7 @@ function createAddBtns(attributsNames, controlSection, controlName)
         //* Écoute click d'ajout
         addBtn.addEventListener("click", function(){
             //* Affichage de la section d'ajout
-            displayAddForm(attributsNames, controlName);
+            displayAddForm(attributsNames, controlName, link);
         })
     }
 }
@@ -284,7 +285,7 @@ function displayLine(table, colIndex, content)
 
 //* -------------------------AJOUT/EDITION/SUPPRESSION---------------------------
 
-function displayAddForm(attributsNames, className)
+function displayAddForm(attributsNames, className, link)
 {
     const addingSection = document.getElementById("add-edit-section");
     addingSection.innerHTML = ""; //* On reset la section d'ajout / d'édition
@@ -350,14 +351,28 @@ function displayAddForm(attributsNames, className)
     addBtn.textContent = "Ajouter";
     addingForm.appendChild(addBtn);
 
-    addBtn.addEventListener("click", function(){
-        addData(className, inputsElements);
+    addBtn.addEventListener("click", function(event){
+        event.preventDefault();
+        addData(className, inputsElements, link);
     })
 }
 
-function addData(className, inputs)
+function addData(className, inputs, link)
 {
-    //*  A faire --- A faire --- A faire --- A faire --- A faire --- A faire --- A faire --- A faire --- 
+    let stringRoute = `index.php?route=add-${className}`;
+    for(let key in inputs)
+    {
+        stringRoute = stringRoute + `&${key}=${inputs[key].value}`;
+    }
+    console.log(stringRoute);
+    fetch(stringRoute)
+        .then(result => {
+            console.log(result);
+            fetchingControlDatas(link);
+        })
+        .catch(error => {
+            console.error('Une erreur est survenue :', error);
+        });
 }
 
 function removeData(link, className, id)
