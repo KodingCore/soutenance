@@ -199,7 +199,7 @@ function createControlBtns(attributsNames, link, row)
         const idRow = row.getElementsByTagName("td")[0].textContent;
         console.log(idRow);
         //* Affichage de la section d'ajout / d'édition
-        displayAddEditForm(attributsNames, link, "edit");
+        displayAddEditForm(attributsNames, link, "edit", row);
     })
 
     const removeBtn = document.createElement("button");
@@ -305,25 +305,49 @@ function displayLine(table, colIndex, content)
 //*  en récuperant en paramètres
 //*  les attributs de la calsse par le fatech
 //** ------------------------------------- */
-function displayAddEditForm(attributsNames, link, action)
+function displayAddEditForm(attributsNames, link, action, row = null) //* action >>> "edit" ou "add"
 {
-    const addEditSection = document.getElementById("add-edit-section");
+    const addEditSection = document.getElementById("add-edit-section"); //* Variable contenant la section d'ajout / édition
     addEditSection.innerHTML = ""; //* On reset la section d'ajout / d'édition
 
-    const className = link.id.split("-")[0];
+    const className = link.id.split("-")[0]; //* On récupère le nom de la classe en splitant le lien de la nav correspondant
 
-    const addEditFormTitle = document.createElement("h2");
-    addEditFormTitle.textContent = "Ajouter un(e) " + className;
-    addEditSection.appendChild(addEditFormTitle);
+    const addEditFormTitle = document.createElement("h2"); //* Création du titre de la section
+    
+    if(action === "add") //* Si l'action est d'ajouter
+    {
+        addEditFormTitle.textContent = "Ajouter un(e) "; //* On set le text du titre pour l'ajout
+    }
+    else if(action === "edit") //* Si l'action est d'éditer
+    {
+        addEditFormTitle.textContent = "Éditer un(e) "; //* On set le text du titre pour l'édition
+    }
+    addEditFormTitle.textContent = addEditFormTitle.textContent + className; //* Ajout du nom de la classe au titre de la section
+    addEditSection.appendChild(addEditFormTitle); //* Ajout de l'élément de titre h2
 
-    const addEditForm = document.createElement("form");
-    addEditSection.appendChild(addEditForm);
+    const addEditForm = document.createElement("form"); //* Création du formulaire de la section
+    addEditSection.appendChild(addEditForm); //* Ajout du formulaire de la section
 
-    let i = 0;
-    let inputsElements = [];
+    let i = 0; //* itération
+    let inputsElements = []; //* Tableau vide qui contiendra les inputs du formulaire
 
     for(let attribut in attributsNames)
     {
+        // if(i === 0 && action === "edit")
+        // {
+            // const cellsRow = row.getElementsByTagName("td");
+            // const fieldsetElement = document.createElement("fieldset");
+            // addEditForm.appendChild(fieldsetElement);
+// 
+            // const labelElement = document.createElement("label");
+            // labelElement.textContent = attribut;
+            // labelElement.setAttribute("for", "input-" + attribut)
+            // fieldsetElement.appendChild(labelElement);
+// 
+            // const idElement = document.createElement("p");
+            // idElement.textContent = cellsRow[0].textContent;
+            // fieldsetElement.appendChild(idElement);
+        // }
         if(i !== 0)
         {
             const fieldsetElement = document.createElement("fieldset");
@@ -363,6 +387,12 @@ function displayAddEditForm(attributsNames, link, action)
                 inputElement.setAttribute("type", "text");
             }
             inputElement.id = "input-" + attribut;
+
+            if(action === "edit")
+            {
+                //*  A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- A FAIRE --- 
+            }
+
             fieldsetElement.appendChild(inputElement);
 
             inputsElements.push(inputElement);
