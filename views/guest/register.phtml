@@ -9,42 +9,46 @@
 <main class="container">
     <h1>Créer un compte</h1>
     <form action="index.php?route=register" method="POST" id="register_form">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" autocomplete="username" required maxlength="50" onpaste="return false;">
-        <span id="error_username"><?php
-            if(isset($this->data["message"]) && $this->data["message"][1] === "username")
-            {
-                echo $this->data["message"][0];
-            }
-        ?></span>
-
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" autocomplete="email" required maxlength="50" onpaste="return false;">
-        <span id="error_email"><?php
-            if(isset($this->data["message"]) && $this->data["message"][1] === "email")
-            {
-                echo $this->data["message"][0];
-            }
-        ?></span>
-
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" autocomplete="new-password" required minlength="12" onpaste="return false;">
-        <span id="error_password"><?php
-            if(isset($this->data["message"]) && $this->data["message"][1] === "password")
-            {
-                echo $this->data["message"][0];
-            }
-        ?></span>
-
-        <label for="confirm_password">Confirm password</label>
-        <input type="password" name="confirm_password" id="confirm_password" autocomplete="new-password" required minlength="12" onpaste="return false;">
-        <span id="error_confirm_password"><?php
-            if(isset($this->data["message"]) && $this->data["message"][1] === "confirm_password")
-            {
-                echo $this->data["message"][0];
-            }
-        ?></span>
-
+        <fieldset>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" autocomplete="username" required maxlength="50" onpaste="return false;">
+            <span id="error_username"><?php
+                if(isset($this->data["message"]) && $this->data["message"][1] === "username")
+                {
+                    echo $this->data["message"][0];
+                }
+            ?></span>
+        </fieldset>
+        <fieldset>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" autocomplete="email" required maxlength="50" onpaste="return false;">
+            <span id="error_email"><?php
+                if(isset($this->data["message"]) && $this->data["message"][1] === "email")
+                {
+                    echo $this->data["message"][0];
+                }
+            ?></span>
+        </fieldset>
+        <fieldset>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" autocomplete="new-password" required minlength="12" onpaste="return false;">
+            <span id="error_password"><?php
+                if(isset($this->data["message"]) && $this->data["message"][1] === "password")
+                {
+                    echo $this->data["message"][0];
+                }
+            ?></span>
+        </fieldset>
+        <fieldset>
+            <label for="confirm_password">Confirm password</label>
+            <input type="password" name="confirm_password" id="confirm_password" autocomplete="new-password" required minlength="12" onpaste="return false;">
+            <span id="error_confirm_password"><?php
+                if(isset($this->data["message"]) && $this->data["message"][1] === "confirm_password")
+                {
+                    echo $this->data["message"][0];
+                }
+            ?></span>
+        </fieldset>
         <input type="submit" value="Register">
     </form>
 </main>

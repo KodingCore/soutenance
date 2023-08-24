@@ -12,8 +12,6 @@
         <div id="top-header">
             <div class="logo"></div>
         </div>
-    </header>
-    <nav>
         <?php
             if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
             {
@@ -31,7 +29,7 @@
                 require 'guest/_navlist.phtml';
             }
         ?>
-    </nav>
+    </header>
     <?php
         require $this->template;
     ?>

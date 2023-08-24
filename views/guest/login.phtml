@@ -10,24 +10,26 @@
 <main class="container">
     <h1>Connexion</h1>
     <form action="index.php?route=login" method="POST" id="login_form">
-        <label for="username_email">Username / Email</label>
-        <input type="text" name="username_email" id="username_email" autocomplete="username" required maxlength="50" onpaste="return false;">
-        <span id="error_username_email"><?php
-            if(isset($this->data["message"]) && $this->data["message"][1] === "username_email")
-            {
-                echo $this->data["message"][0];
-            }
-        ?></span>
-
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" autocomplete="current-password" required maxlength="50" onpaste="return false;">
-        <span id="error_password"><?php
-            if(isset($this->data["message"]) && $this->data["message"][1] === "password")
-            {
-                echo $this->data["message"][0];
-            }
-        ?></span>
-
+        <fieldset>
+            <label for="username_email">Username / Email</label>
+            <input type="text" name="username_email" id="username_email" autocomplete="username" required maxlength="50" onpaste="return false;">
+            <span id="error_username_email"><?php
+                if(isset($this->data["message"]) && $this->data["message"][1] === "username_email")
+                {
+                    echo $this->data["message"][0];
+                }
+            ?></span>
+        </fieldset>
+        <fieldset>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" autocomplete="current-password" required maxlength="50" onpaste="return false;">
+            <span id="error_password"><?php
+                if(isset($this->data["message"]) && $this->data["message"][1] === "password")
+                {
+                    echo $this->data["message"][0];
+                }
+            ?></span>
+        </fieldset>
         <input type="submit" value="Login">
     </form>
 </main>
