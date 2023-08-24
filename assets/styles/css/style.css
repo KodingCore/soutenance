@@ -77,7 +77,18 @@ html body .container .background #tagline-container #tagline {
   font-size: 3.5vw;
   color: white;
 }
-
+html body .container #aside-access {
+  width: 12px;
+  height: 100px;
+  position: fixed;
+  display: flex;
+  left: 0;
+  top: 33vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(47, 85, 151);
+  border-radius: 0 5px 5px 0;
+}
 .success {
   color: green;
   font-size: 1rem;

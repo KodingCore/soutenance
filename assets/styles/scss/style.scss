@@ -101,6 +101,31 @@ html
           }
         }
       }
+      .presentation
+      {
+
+      }
+      .news
+      {
+
+      }
+      #aside-access
+      {
+        width: 12px;
+        height: 100px;
+        position: fixed;
+        display: flex;
+        left: 0;
+        top: 33vh;
+        justify-content: center;
+        align-items: center;
+        background-color: $text-color;
+        border-radius: 0 5px 5px 0;
+      }
+      .anchor-aside
+      {
+
+      }
     }
 
 
