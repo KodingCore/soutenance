@@ -37,7 +37,7 @@ class APIFetchController extends AbstractController
         $response = [
             'users' => $usersJsons
         ];
-
+        
         echo json_encode($response);
     }
 

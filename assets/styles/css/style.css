@@ -1,3 +1,83 @@
+html body {
+  font-family: "Kanit", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+html body header {
+  min-height: 50px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to left, rgb(47, 85, 151), rgb(47, 85, 151), rgb(143, 170, 220));
+}
+html body header .logo {
+  width: 80%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+}
+html body header .logo img {
+  width: 100%;
+  height: auto;
+}
+html body header .burger-container {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+html body header .navbar {
+  position: absolute;
+  height: auto;
+  right: 0;
+  text-align: center;
+}
+html body header .navbar #menu {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(143, 170, 220));
+}
+html body header .navbar #menu li {
+  padding: 9px;
+}
+html body header .navbar #menu li a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+html body header .navbar #menu li a:hover {
+  color: rgb(189, 90, 23);
+  text-decoration: underline;
+  font-weight: bold;
+}
+html body header .navbar #menu.active {
+  display: flex;
+  flex-direction: column;
+}
+html body .container .background {
+  height: 33vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../images/backgrounds/working-desk.jpg");
+  background-position-y: -3rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+html body .container .background #tagline-container {
+  padding: 0.75rem;
+  background-color: rgba(47, 85, 151, 0.6);
+  border-radius: 0 20px 0 20px;
+}
+html body .container .background #tagline-container #tagline {
+  margin: 0;
+  font-size: 3.5vw;
+  color: white;
+}
+
 .success {
   color: green;
   font-size: 1rem;
