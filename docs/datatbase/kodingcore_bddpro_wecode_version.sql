@@ -18,17 +18,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `kodingcore_bddpro`
+-- Base de données : `kevincorvaisier_kodingcore_bddpro`
 --
-CREATE DATABASE IF NOT EXISTS `kodingcore_bddpro`;
-USE `kodingcore_bddpro`;
+CREATE DATABASE IF NOT EXISTS `kevincorvaisier_kodingcore_bddpro`;
+USE `kevincorvaisier_kodingcore_bddpro`;
 
 DELIMITER $$
 --
 -- Procédures
 --
 DROP PROCEDURE IF EXISTS `InsertAppointments`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertAppointments` ()   BEGIN
+CREATE DEFINER=`kevincorvaisier`@`db.3wa.io` PROCEDURE `InsertAppointments` ()   BEGIN
     DECLARE i INT DEFAULT 1;
 
     WHILE i <= 10 DO
@@ -43,8 +43,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertAppointments` ()   BEGIN
     END WHILE;
 END$$
 
+-- Accord de privilèges EXECUTE sur la procédure InsertAppointments
+GRANT EXECUTE ON PROCEDURE `kevincorvaisier`.`InsertAppointments` TO 'kevincorvaisier'@'db.3wa.io';
+
 DROP PROCEDURE IF EXISTS `InsertInfos`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertInfos` ()   BEGIN
+CREATE DEFINER=`kevincorvaisier`@`db.3wa.io` PROCEDURE `InsertInfos` ()   BEGIN
     DECLARE i INT DEFAULT 1;
 
     WHILE i <= 20 DO
@@ -203,8 +206,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertInfos` ()   BEGIN
     END WHILE;
 END$$
 
+-- Accord de privilèges EXECUTE sur la procédure InsertInfos
+GRANT EXECUTE ON PROCEDURE `kevincorvaisier`.`InsertInfos` TO 'kevincorvaisier'@'db.3wa.io';
+
 DROP PROCEDURE IF EXISTS `InsertMessages`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertMessages` ()   BEGIN
+CREATE DEFINER=`kevincorvaisier`@`db.3wa.io` PROCEDURE `InsertMessages` ()   BEGIN
     DECLARE i INT DEFAULT 1;
 
     WHILE i <= 11 DO
@@ -262,8 +268,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertMessages` ()   BEGIN
     END WHILE;
 END$$
 
+-- Accord de privilèges EXECUTE sur la procédure InsertMessages
+GRANT EXECUTE ON PROCEDURE `kevincorvaisier`.`InsertMessages` TO 'kevincorvaisier'@'db.3wa.io';
+
 DROP PROCEDURE IF EXISTS `InsertQuotations`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertQuotations` ()   BEGIN
+CREATE DEFINER=`kevincorvaisier`@`db.3wa.io` PROCEDURE `InsertQuotations` ()   BEGIN
     DECLARE i INT DEFAULT 1;
 
     WHILE i <= 10 DO
@@ -279,8 +288,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertQuotations` ()   BEGIN
     END WHILE;
 END$$
 
+-- Accord de privilèges EXECUTE sur la procédure InsertQuotations
+GRANT EXECUTE ON PROCEDURE `kevincorvaisier`.`InsertQuotations` TO 'kevincorvaisier'@'db.3wa.io';
+
 DROP PROCEDURE IF EXISTS `InsertRealisticUsers`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertRealisticUsers` ()   BEGIN
+CREATE DEFINER=`kevincorvaisier`@`db.3wa.io` PROCEDURE `InsertRealisticUsers` ()   BEGIN
     DECLARE i INT DEFAULT 1;
 
     WHILE i <= 20 DO
@@ -344,8 +356,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertRealisticUsers` ()   BEGIN
     END WHILE;
 END$$
 
+-- Accord de privilèges EXECUTE sur la procédure InsertRealisticUsers
+GRANT EXECUTE ON PROCEDURE `kevincorvaisier`.`InsertRealisticUsers` TO 'kevincorvaisier'@'db.3wa.io';
+
 DROP PROCEDURE IF EXISTS `InsertReviews`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertReviews` ()   BEGIN
+CREATE DEFINER=`kevincorvaisier`@`db.3wa.io` PROCEDURE `InsertReviews` ()   BEGIN
     DECLARE i INT DEFAULT 1;
 
     WHILE i <= 10 DO
@@ -360,8 +375,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertReviews` ()   BEGIN
     END WHILE;
 END$$
 
+-- Accord de privilèges EXECUTE sur la procédure InsertReviews
+GRANT EXECUTE ON PROCEDURE `kevincorvaisier`.`InsertReviews` TO 'kevincorvaisier'@'db.3wa.io';
+
 DROP PROCEDURE IF EXISTS `InsertTags`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertTags` ()   BEGIN
+CREATE DEFINER=`kevincorvaisier`@`db.3wa.io` PROCEDURE `InsertTags` ()   BEGIN
     DECLARE i INT DEFAULT 1;
 
     WHILE i <= 10 DO
@@ -374,6 +392,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertTags` ()   BEGIN
         SET i = i + 1;
     END WHILE;
 END$$
+
+-- Accord de privilèges EXECUTE sur la procédure InsertTags
+GRANT EXECUTE ON PROCEDURE `kevincorvaisier`.`InsertTags` TO 'kevincorvaisier'@'db.3wa.io';
 
 DELIMITER ;
 
