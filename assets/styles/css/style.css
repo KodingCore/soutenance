@@ -57,7 +57,11 @@ html body header .navbar #menu.active {
   display: flex;
   flex-direction: column;
 }
-html body .container .background {
+html body .container {
+  width: 90%;
+  margin: 0 auto;
+}
+html body .container #heading-section {
   height: 33vw;
   display: flex;
   justify-content: center;
@@ -67,18 +71,18 @@ html body .container .background {
   background-repeat: no-repeat;
   background-size: cover;
 }
-html body .container .background #tagline-container {
+html body .container #heading-section #tagline-container {
   padding: 0.75rem;
   background-color: rgba(47, 85, 151, 0.6);
   border-radius: 0 20px 0 20px;
 }
-html body .container .background #tagline-container #tagline {
+html body .container #heading-section #tagline-container #tagline {
   margin: 0;
   font-size: 3.5vw;
   color: white;
 }
 html body .container #aside-access {
-  width: 12px;
+  width: 18px;
   height: 100px;
   position: fixed;
   display: flex;
