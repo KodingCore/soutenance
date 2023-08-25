@@ -35,7 +35,7 @@ class DashboardController extends AbstractController
             //* Mise en forme du prix en float
             $price = (float) $price;
 
-            $template = new Template($name, $description, $image_path, $price, $sqlDateTime);
+            $template = new Template(null, $name, $description, $image_path, $price, $sqlDateTime, null);
             $this->templateManager->insertTemplate($template);
         }
         $this->render("views/admin/dashboard.phtml", []);

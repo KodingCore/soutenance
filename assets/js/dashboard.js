@@ -426,7 +426,7 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
             if(element)
             {
                 fieldsetElement.appendChild(element);
-                inputsElements.push(element); //* ----------------
+                inputsElements.push(element);
             }
             else
             {
@@ -484,11 +484,11 @@ function addData(className, inputs, link)
 
 //** ------------------------------ */
 //*  Édite la data si validation du
-//*  formaulaire d'édition
+//*  formulaire d'édition
 //** ------------------------------ */
 function editData(className, inputs, id, link)
 {
-    
+    console.log(className + " " + inputs + " " + id + " " + link)
 
     let stringRoute = `index.php?route=edit-${className}&id=${id}`;
     for(let key in inputs)
