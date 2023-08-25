@@ -1,0 +1,247 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+html {
+  scroll-behavior: smooth;
+}
+html body {
+  margin: 0;
+  padding: 0;
+}
+html body header {
+  min-height: 50px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to left, rgb(47, 85, 151), rgb(47, 85, 151), rgb(143, 170, 220));
+}
+html body header .logo {
+  width: 80%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+}
+html body header .logo img {
+  width: 100%;
+  height: auto;
+}
+html body header .burger-container {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+html body header .navbar {
+  position: absolute;
+  height: auto;
+  right: 0;
+  text-align: center;
+}
+html body header .navbar #menu {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(143, 170, 220));
+  border-radius: 0 0 20px 20px;
+}
+html body header .navbar #menu li {
+  padding: 9px;
+}
+html body header .navbar #menu li a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+html body header .navbar #menu li a:hover {
+  color: rgb(255, 150, 81);
+  text-decoration: underline;
+  font-weight: bold;
+}
+html body header .navbar #menu.active {
+  display: flex;
+  flex-direction: column;
+}
+html body main {
+  width: 90%;
+  margin: 0 auto;
+}
+html body main #heading-section {
+  height: 33vw;
+  display: flex;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+html body main #heading-section #tagline-container {
+  margin-top: 10%;
+  height: 4rem;
+  padding: 1rem;
+  border-radius: 0 20px 0 20px;
+}
+html body main #heading-section #tagline-container #tagline {
+  margin: 0;
+  font-size: 3.5vw;
+}
+html body #left-aside-access {
+  width: 18px;
+  height: 100px;
+  position: fixed;
+  left: 0;
+  top: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, rgb(47, 85, 151) 5%, rgb(143, 170, 220));
+  border-radius: 0 5px 5px 0;
+}
+html body #left-aside-access:hover {
+  cursor: pointer;
+}
+html body #left-aside {
+  display: none;
+  width: auto;
+  height: auto;
+  position: fixed;
+  left: 0;
+  top: 20vh;
+  background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(143, 170, 220));
+  border-radius: 0 0 5px 0;
+}
+html body #left-aside ul {
+  list-style-type: none;
+  padding: 0;
+}
+html body #left-aside ul li {
+  padding: 9px;
+}
+html body #left-aside ul li a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+html body #left-aside ul li a:hover {
+  color: rgb(255, 150, 81);
+  text-decoration: underline;
+  font-weight: bold;
+}
+html body #left-aside.active {
+  display: flex;
+}
+html body .success {
+  color: green;
+  font-size: 1rem;
+}
+html body .error {
+  outline: solid 2px red;
+}
+html body [id*=error] {
+  color: red;
+  font-size: 1rem;
+}
+html body .hidden {
+  display: none;
+}
+html body .edit-btn {
+  height: 1.25rem;
+  width: 3.5rem;
+  margin-left: 0.75rem;
+  background-color: blue;
+  color: white;
+}
+html body .remove-btn {
+  height: 1.25rem;
+  width: 5rem;
+  margin-left: 0.75rem;
+  background-color: red;
+  color: white;
+}
+html body .edit-btn:hover {
+  background-color: rgb(56, 56, 107);
+}
+html body .remove-btn:hover {
+  background-color: rgb(131, 67, 67);
+}
+html body td {
+  padding-left: 0.5rem;
+  border-bottom: solid 1px black;
+}
+html body tr, html body td, html body th {
+  min-width: 7rem;
+  max-width: 10rem;
+  height: 1.25rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+html body .col-id {
+  min-width: 0;
+  max-width: 2.5rem;
+}
+html body .col-other {
+  min-width: 0;
+  max-width: 6rem;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+html h1, html h2, html h3 {
+  font-family: "Kanit", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+html #tagline {
+  font-family: "Kanit", sans-serif;
+  font-style: italic;
+  font-weight: 200;
+}
+
+.homepage-container #heading-section {
+  background-image: url("../../images/backgrounds/homepage-background.jpg");
+}
+.homepage-container #heading-section #tagline-container {
+  background-color: rgba(47, 85, 151, 0.9);
+}
+.homepage-container #heading-section #tagline-container #tagline {
+  color: white;
+}
+.shop-container #heading-section {
+  background-image: url("../../images/backgrounds/shop-background.jpg");
+}
+.shop-container #heading-section #tagline-container {
+  background-color: rgba(47, 85, 151, 0.9);
+}
+.shop-container #heading-section #tagline-container #tagline {
+  color: white;
+}
+
+.account-container #heading-section {
+  background-image: url("../../images/backgrounds/account-background.jpg");
+}
+.account-container #heading-section #tagline-container {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.account-container #heading-section #tagline-container #tagline {
+  color: rgb(47, 85, 151);
+}
+
+.dashboard-container #heading-section {
+  background-image: url("../../images/backgrounds/dashboard-background.jpg");
+}
+.dashboard-container #heading-section #tagline-container {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.dashboard-container #heading-section #tagline-container #tagline {
+  color: rgb(47, 85, 151);
+}
+
+.contact-container #heading-section {
+  background-image: url("../../images/backgrounds/contact-background.jpg");
+}
+.contact-container #heading-section #tagline-container {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.contact-container #heading-section #tagline-container #tagline {
+  color: rgb(47, 85, 151);
+}/*# sourceMappingURL=main.css.map */

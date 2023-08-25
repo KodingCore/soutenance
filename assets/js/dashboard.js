@@ -304,7 +304,7 @@ function displayLine(table, colIndex, content)
 //** ---------------------------------------- */
 //*  Génère le formulaire d'ajout
 //*  en récuperant en paramètres
-//*  les attributs de la calsse par le fatech
+//*  les attributs de la classe par le fatech
 //** ---------------------------------------- */
 function displayAddEditForm(attributsNames, link, action, row = null) //* action >>> "edit" ou "add"
 {

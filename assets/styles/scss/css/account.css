@@ -1,0 +1,23 @@
+.account-container {
+  width: 90%;
+  margin: 0 auto;
+}
+.account-container #heading-section {
+  height: 33vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../images/backgrounds/account-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.account-container #heading-section #tagline-container {
+  padding: 0.75rem;
+  background-color: white(47, 85, 151, 0.6);
+  border-radius: 0 20px 0 20px;
+}
+.account-container #heading-section #tagline-container #tagline {
+  margin: 0;
+  font-size: 3.5vw;
+  color: white;
+}/*# sourceMappingURL=account.css.map */

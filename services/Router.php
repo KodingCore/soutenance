@@ -3,6 +3,7 @@
 class Router
 {
     private HomepageController $homepageController;
+    private TemplateController $templateController;
     private UserController $userController;
     private ContactController $contactController;
     private DashboardController $dashboardController;
@@ -12,6 +13,7 @@ class Router
     public function __construct()
     {
         $this->homepageController = new HomepageController();
+        $this->templateController = new TemplateController();
         $this->userController = new UserController();
         $this->contactController = new ContactController();
         $this->dashboardController = new DashboardController();
@@ -51,7 +53,7 @@ class Router
         }
         else if($route === "shop")
         {
-
+            $this->templateController->index();
         }
         else if($route === "quote")
         {

@@ -1,0 +1,15 @@
+.contact-container
+{
+  #heading-section
+  {
+    background-image: url("../../images/backgrounds/contact-background.jpg");
+    #tagline-container
+    {
+      background-color: rgba(255, 255, 255, 0.9);
+      #tagline
+      {
+        color: $dark-blue;
+      }
+    }
+  }
+}

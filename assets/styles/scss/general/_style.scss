@@ -1,0 +1,176 @@
+$dark-blue: rgb(47,85,151);
+$light-blue: rgb(143,170,220);
+$alt-color: rgb(255, 150, 81);
+
+html
+{
+  scroll-behavior: smooth; // ne fonctionne pas
+
+  body
+  {
+    margin: 0;
+    padding: 0;
+    header
+    {
+      min-height: 50px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      background: linear-gradient(to left, $dark-blue, $dark-blue, $light-blue);
+      .logo
+      {
+        width: 80%;
+        max-width: 300px;
+        display: flex;
+        align-items: center;
+        img
+        {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .burger-container
+      {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .navbar
+      {
+        position: absolute;
+        height: auto;
+        right: 0;
+        text-align: center;
+        #menu
+        {
+          display: none;
+          margin: 0;
+          padding: 0;
+          list-style-type: none;
+          width: 100%;
+          background: linear-gradient(to bottom, $dark-blue, $light-blue);
+          border-radius: 0 0 20px 20px;
+          li
+          {
+            padding: 9px;
+            a
+            {
+              color: white;
+              font-size: 20px;
+              text-decoration: none;
+            }
+            a:hover
+            {
+              color: $alt-color;
+              text-decoration: underline;
+              font-weight: bold;
+            }
+          }
+        }
+        #menu.active
+        {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+    main
+    {
+      width: 90%;
+      margin: 0 auto;
+      #heading-section
+      {
+        height: 33vw;
+        display: flex;
+        justify-content: center;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        #tagline-container
+        {
+          margin-top: 10%;
+          height: 4rem;
+          padding: 1rem;
+          border-radius: 0 20px 0 20px;
+          #tagline
+          {
+            margin: 0;
+            font-size: 3.5vw;
+          }
+        }
+      }
+    }
+    #left-aside-access
+    {
+      width: 18px;
+      height: 100px;
+      position: fixed;
+      left: 0;
+      top: 20vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom right, $dark-blue 5%, $light-blue);
+      border-radius: 0 5px 5px 0;
+    }
+    #left-aside-access:hover
+    {
+      cursor: pointer;
+    }
+    #left-aside
+    {
+      display: none;
+      width: auto;
+      height: auto;
+      position: fixed;
+      left: 0;
+      top: 20vh;
+      background: linear-gradient(to bottom, $dark-blue, $light-blue);
+      border-radius: 0 0 5px 0;
+      ul
+      {
+        list-style-type: none;
+        padding: 0;          
+        li
+        {
+          padding: 9px;
+          a
+          {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+          }
+          a:hover
+          {
+            color: $alt-color;
+            text-decoration: underline;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    #left-aside.active
+    {
+      display: flex;
+    }
+    .success
+    {
+      color: green;
+      font-size: 1rem;
+    }
+    .error
+    {
+        outline: solid 2px red;
+    }
+    [id*="error"]
+    {
+        color: red;
+        font-size: 1rem;
+    }
+    
+  }
+}
+
+
+

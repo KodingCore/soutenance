@@ -7,8 +7,7 @@
     <link rel="icon" type="image/png" href="https://i.goopics.net/wovpgb.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,200&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles/css/style.css">
+    <link rel="stylesheet" href="assets/styles/css/main.css">
     <script src="https://kit.fontawesome.com/a2be3c71ec.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -37,6 +36,9 @@
             }
         ?>
     </header>
+    <div id="left-aside-access">
+        <i class="fa-solid fa-caret-right" style="color: #ffffff;"></i>
+    </div>
     <?php
         require $this->template;
         if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
@@ -56,4 +58,5 @@
             }
     ?>
 </body>
+<script src="../assets/js/index.js"></script>
 </html>
