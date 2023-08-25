@@ -24,21 +24,36 @@
             {
                 if($_SESSION["role"] === "admin") //* Accès admin
                 {
-                    require 'admin/_navlist.phtml';
+                    require 'admin/_header.phtml';
                 }
                 else //* accès users
                 {
-                    require 'user/_navlist.phtml';
+                    require 'user/_header.phtml';
                 }   
             }
             else //* accès visiteurs
             {
-                require 'guest/_navlist.phtml';
+                require 'guest/_header.phtml';
             }
         ?>
     </header>
     <?php
         require $this->template;
+        if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
+            {
+                if($_SESSION["role"] === "admin") //* Accès admin
+                {
+                    require 'admin/_footer.phtml';
+                }
+                else //* accès users
+                {
+                    require 'user/_footer.phtml';
+                }   
+            }
+            else //* accès visiteurs
+            {
+                require 'guest/_footer.phtml';
+            }
     ?>
 </body>
 </html>
