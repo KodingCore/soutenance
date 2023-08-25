@@ -24,9 +24,9 @@ class Category implements JsonSerializable
 
     public function jsonSerialize() {
         return [
-            "ID" => $this->category_id,
-            "Nom" => $this->name,
-            "Description" => $this->description
+            "category_id" => $this->category_id,
+            "name" => $this->name,
+            "description" => $this->description
         ];
     }
 }

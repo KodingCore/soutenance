@@ -344,7 +344,7 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
             idElement.textContent = attribut + ":" + idCell.textContent; //* On set le texte de l'élément p avec l'attribut et l'id
             fieldsetElement.appendChild(idElement);  //* On Ajoute le p
         }
-        if(i > 0 && className !== "user") //* Si l'ittération est supérieur à 0 et que la class n'est pas user
+        if(i > 0 && className !== "user") //* Si l'ittération est supérieur à 0 et que la classe n'est pas user
         {
             const fieldsetElement = document.createElement("fieldset");
             addEditForm.appendChild(fieldsetElement);
@@ -356,7 +356,7 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
 
             let inputElement = null;
             
-            if(attribut.toLowerCase().includes("contenu") || attribut.toLowerCase().includes("description"))
+            if(attribut.includes("content") || attribut.includes("description"))
             {
                 inputElement = document.createElement("textarea");
             }
@@ -365,15 +365,15 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
                 inputElement = document.createElement("input");
             }
             
-            if(attribut.toLowerCase().includes("id"))
+            if(attribut.includes("id"))
             {
                 inputElement.setAttribute("type", "number");
             }
-            else if(attribut.toLowerCase().includes("date"))
+            else if(attribut.includes("date") || attribut.includes("created_at") || attribut.includes("updated_at"))
             {
                 inputElement.setAttribute("type", "date");
             }
-            else if(attribut.toLowerCase().includes("heure"))
+            else if(attribut.includes("time") && !attribut.includes("date"))
             {
                 inputElement.setAttribute("type", "time");
             }
@@ -409,7 +409,7 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
             let element = null;
             let info = null;
             
-            if(attribut.toLowerCase().includes("rôle"))
+            if(attribut.toLowerCase().includes("role"))
             {
                 element = document.createElement("input");
                 element.setAttribute("type", "checkbox");
@@ -439,11 +439,11 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
     const addEditBtn = document.createElement("button");
     if(action === "add")
     {
-        addEditBtn.textContent = "Ajouter";
+        addEditBtn.textContent = "Add";
     }
     else if(action === "edit")
     {
-        addEditBtn.textContent = "Éditer";
+        addEditBtn.textContent = "Edit";
     }
     
     addEditForm.appendChild(addEditBtn);
@@ -452,11 +452,11 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
         event.preventDefault();
         if(action === "add")
         {
-            addData(className, inputsElements, link);
+            addData(className, inputsElements, attributsNames, link);
         }
         else if(action === "edit")
         {
-            editData(className, inputsElements, row.getElementsByTagName("td")[0].textContent, link);
+            editData(className, inputsElements, attributsNames, row.getElementsByTagName("td")[0].textContent, link);
         }
     })
 }
@@ -466,12 +466,26 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
 //*  Ajoute la data si validation du
 //*  formaulaire d'ajout
 //** ------------------------------- */
-function addData(className, inputs, link)
+function addData(className, inputs, attributsNames, link)
 {
+    let i = 0;
+    let attributs = [];
+
+    for(let att in attributsNames)
+    {
+        if(i > 0)
+        {
+            attributs.push(att);
+        }
+        i++;
+    }
+    i = 0;
+
     let stringRoute = `index.php?route=add-${className}`;
     for(let key in inputs)
     {
-        stringRoute = stringRoute + `&${key}=${inputs[key].value}`;
+        stringRoute = stringRoute + `&${attributs[i]}=${inputs[key].value}`;
+        i++;
     }
     fetch(stringRoute)
         .then(result => {
@@ -486,31 +500,42 @@ function addData(className, inputs, link)
 //*  Édite la data si validation du
 //*  formulaire d'édition
 //** ------------------------------ */
-function editData(className, inputs, id, link)
+function editData(className, inputs, attributsNames, id, link)
 {
-    console.log(className + " " + inputs + " " + id + " " + link)
+    let i = 0;
+    let attributs = [];
+
+    for(let att in attributsNames)
+    {
+        if(i > 0)
+        {
+            attributs.push(att);
+        }
+        i++;
+    }
+    i = 0;
 
     let stringRoute = `index.php?route=edit-${className}&id=${id}`;
     for(let key in inputs)
     {
         if(className !== "user")
         {
-            stringRoute = stringRoute + `&${key}=${inputs[key].value}`;
+            stringRoute = stringRoute + `&${attributs[i]}=${inputs[key].value}`;
+            console.log(stringRoute);
         }
         else
         {
             if(inputs[key].checked)
             {
-                stringRoute = stringRoute + `&${key}=admin`;
+                stringRoute = stringRoute + `&${attributs[i]}=admin`;
             }
             else
             {
-                stringRoute = stringRoute + `&${key}=user`;
+                stringRoute = stringRoute + `&${attributs[i]}=user`;
             }
-            
         }
+        i++;
     }
-    console.log(stringRoute);
     fetch(stringRoute)
         .then(result => {
             fetchingControlDatas(link);
