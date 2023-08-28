@@ -60,13 +60,22 @@ function fetchingControlDatas(link)
                 setControlTitle(controlSection, key); //* Initialisation du titre de la section 
                 createAddBtns(data[key][0], controlSection, link);
                 createStructureTable(controlSection); //* Création de la structure du tableau
+                let i = 0;
+                let tableI = []; //* Contient les itérations (colonnes) qui n'apparaissent pas dans le dashboard mobile
                 for(let attributName in data[key][0]) //* Pour chaques attributs de la classe
                 {
-                    completeHeaderTable(attributName); //* On défini le header du tableau
+                    if(attributName.includes("name") || attributName.includes("id") || attributName.includes("date") && !attributName.includes("update") && !attributName.includes("expiration"))
+                    {
+                        completeHeaderTable(attributName); //* On défini le header du tableau
+                        tableI.push(i);
+                    }
+                    i++;
                 }
+                i = 0;
                 for(let object in data[key]) //* Pour chaques objet de la data
                 {
-                    let bodyRow = completeBodyTable(data[key][object]); //* On appel la fonction de création du body
+                    
+                    let bodyRow = completeBodyTable(data[key][object], tableI); //* On appel la fonction de création du body
                     createControlBtns(data[key][0], link, bodyRow);
                 }
             }
@@ -158,27 +167,32 @@ function completeHeaderTable(headerCellName)
 //** ---------------------------- */
 //*  Complète le corps du tableau
 //** ---------------------------- */
-function completeBodyTable(objectForCellsValues)
+function completeBodyTable(objectForCellsValues, tableI)
 {
     const bodyTable = document.getElementById("body-table");
     const bodyRow = document.createElement("tr");
+    let i = 0;
 
     bodyTable.appendChild(bodyRow);
     for(let key in objectForCellsValues)
     {
-        const cell = document.createElement("td");
+        if(tableI.includes(i))
+        {
+            const cell = document.createElement("td");
         
-        if(key.toLowerCase().includes("id"))
-        {
-            cell.classList.add("col-id");
+            if(key.toLowerCase().includes("id"))
+            {
+                cell.classList.add("col-id");
+            }
+            else
+            {
+                cell.classList.add("col-other");
+            }
+            bodyRow.appendChild(cell);
+            const textNodeCell = document.createTextNode(objectForCellsValues[key]);
+            cell.appendChild(textNodeCell);
         }
-        else
-        {
-            cell.classList.add("col-other");
-        }
-        bodyRow.appendChild(cell);
-        const textNodeCell = document.createTextNode(objectForCellsValues[key]);
-        cell.appendChild(textNodeCell);
+        i++;
     }
     return bodyRow;
 }
@@ -196,7 +210,7 @@ function createControlBtns(attributsNames, link, row)
         editBtn.classList.add("edit-btn");
         editBtn.id = "edit" + row.firstChild.textContent;
         row.appendChild(editBtn);
-        editBtn.textContent = "Éditer";
+        editBtn.textContent = "Edit";
         editBtn.addEventListener("click", function(){
             //* Affichage de la section d'ajout / d'édition
             displayAddEditForm(attributsNames, link, "edit", row);
@@ -207,7 +221,7 @@ function createControlBtns(attributsNames, link, row)
     removeBtn.classList.add("remove-btn");
     removeBtn.id = "remove" + row.firstChild.textContent;
     row.appendChild(removeBtn);
-    removeBtn.textContent = "Supprimer";
+    removeBtn.textContent = "Suppr";
     removeBtn.addEventListener("click", function(){
         const idRow = row.getElementsByTagName("td")[0].textContent;
         removeData(link, className, idRow);
@@ -341,7 +355,7 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
             addEditForm.appendChild(fieldsetElement); //* On Ajoute le fieldset
 
             const idElement = document.createElement("p"); //* On crée un element p
-            idElement.textContent = attribut + ":" + idCell.textContent; //* On set le texte de l'élément p avec l'attribut et l'id
+            idElement.textContent = attribut + ": " + idCell.textContent; //* On set le texte de l'élément p avec l'attribut et l'id
             fieldsetElement.appendChild(idElement);  //* On Ajoute le p
         }
         if(i > 0 && className !== "user") //* Si l'ittération est supérieur à 0 et que la classe n'est pas user

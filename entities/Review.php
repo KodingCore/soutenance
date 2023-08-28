@@ -14,8 +14,7 @@ class Review implements JsonSerializable
         $this->user_id = $user_id;
         $this->template_id = $template_id;
         $this->content = $content;
-        $this->send_date = $send_date;
-        
+        $this->send_date = $send_date;  
     }
 
     public function getReviewId(): int { return $this->review_id; }

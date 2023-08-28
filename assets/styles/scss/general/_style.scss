@@ -1,6 +1,4 @@
-$dark-blue: rgb(47,85,151);
-$light-blue: rgb(143,170,220);
-$alt-color: rgb(255, 150, 81);
+@import '../general/vars';
 
 html
 {
@@ -13,7 +11,7 @@ html
     header
     {
       min-height: 50px;
-      padding: 15px;
+      padding: 16px;
       display: flex;
       justify-content: space-between;
       background: linear-gradient(to left, $dark-blue, $dark-blue, $light-blue);
@@ -42,6 +40,7 @@ html
         height: auto;
         right: 0;
         text-align: center;
+        z-index: 1;
         #menu
         {
           display: none;
@@ -75,6 +74,10 @@ html
         }
       }
     }
+    #heading-section
+    {
+      position: relative;
+    }
     main
     {
       width: 90%;
@@ -84,14 +87,15 @@ html
         height: 33vw;
         display: flex;
         justify-content: center;
+        text-align: center;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
         #tagline-container
         {
           margin-top: 10%;
-          height: 4rem;
-          padding: 1rem;
+          height: 20%;
+          padding: 0.5rem;
           border-radius: 0 20px 0 20px;
           #tagline
           {
@@ -99,6 +103,82 @@ html
             font-size: 3.5vw;
           }
         }
+      }
+      form
+      {
+        margin: 0 auto;
+        padding: 5px;
+        width: 260px;
+        background: linear-gradient(to bottom, $dark-blue, $dark-blue, $light-blue);
+        border-radius: 0 16px 0 16px;
+
+        p{
+          color: white;
+          font-weight: bold;
+          margin-left: 16px;
+        }
+        fieldset
+        {
+          margin-top: 5px;
+          border: none;
+
+          label
+          {
+            color: white;
+            margin: 16px 10px 0 16px;
+          }
+          input
+          {
+            width: 96%;
+            margin-top: 8px;
+            border-radius: 0 5px 0 5px;
+            box-shadow: 3px 3px 3px 0px $light-blue;
+          }
+          textarea
+          {
+            width: 96%;
+            height: 300px;
+            margin-top: 8px;
+            border-radius: 0 5px 0 5px;
+            box-shadow: 3px 3px 3px 0px $light-blue;
+            border: solid 1px black;
+          }
+        }
+        fieldset.textarea
+        {
+          height: 200px;
+          textarea
+          {
+            height: 80%;
+          }
+        }
+        input[type*="submit"]
+        {
+          width: $submit-width;
+          margin: $submit-margin;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+          box-shadow: 3px 3px 3px 0px $light-blue;
+          background: linear-gradient(to bottom, $light-blue, white, $light-blue);
+          border-radius: 0 5px 0 5px;
+          border: solid 1px black;
+          font-weight: bold;
+          color: $dark-blue;
+        }
+        button
+        {
+          width: $submit-width;
+          margin: $submit-margin;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+          box-shadow: 3px 3px 3px 0px $light-blue;
+          background: linear-gradient(to bottom, $light-blue, white, $light-blue);
+          border-radius: 0 5px 0 5px;
+          border: solid 1px black;
+          font-weight: bold;
+          color: $dark-blue;
+        }
+
       }
     }
     #left-aside-access
@@ -113,10 +193,15 @@ html
       align-items: center;
       background: linear-gradient(to bottom right, $dark-blue 5%, $light-blue);
       border-radius: 0 5px 5px 0;
+      z-index: 1;
     }
     #left-aside-access:hover
     {
       cursor: pointer;
+    }
+    #left-aside-access.hidden
+    {
+      display: none;
     }
     #left-aside
     {
@@ -154,6 +239,7 @@ html
     {
       display: flex;
     }
+    
     .success
     {
       color: green;
@@ -168,9 +254,39 @@ html
         color: red;
         font-size: 1rem;
     }
-    
-  }
-}
+    footer
+    {
+      width: 100%;
+      height: 136px;
+      margin-top: 2rem;
+      display: block;
+      background: linear-gradient(to bottom, $light-blue 10%, $dark-blue);
+      display: flex;
+      
+      nav
+      {
+        width: 100%;
+        height: 100%;
+        ul
+        {
+          list-style-type: none;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          li
+          {
+            margin-left: 1vw;
+            a
+            {
+              text-decoration: none;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }//body
+}//html
 
 
 

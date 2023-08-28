@@ -1,3 +1,5 @@
+@import '../general/vars.scss';
+
 .contact-container
 {
   #heading-section
@@ -11,5 +13,9 @@
         color: $dark-blue;
       }
     }
+  }
+  #left-aside-access
+  {
+    display: none;
   }
 }

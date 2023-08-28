@@ -1,3 +1,5 @@
+@import '../general/vars.scss';
+
 .dashboard-container
 {
   #heading-section
@@ -11,59 +13,102 @@
         color: $dark-blue;
       }
     }
+
   }
-  .hidden
+  #search-section
   {
-      display: none;
+    display: flex;
+
+    fieldset:first-child
+    {
+      margin: 0 auto;
+      border-radius: 0 5px 0 5px;
+      border-color: $dark-blue;
+      width: 30%;
+    }
+    fieldset:last-child
+    {
+      margin: 0 auto;
+      border-radius: 0 5px 0 5px;
+      border-color: $dark-blue;
+      width: 70%;
+    }
   }
-  .edit-btn
+  #control-section
   {
-    height: 1.25rem;
-    width: 3.5rem;
-    margin-left: 0.75rem;
-    background-color: blue;
-    color: white;
-  }
-  .remove-btn
-  {
-    height: 1.25rem;
-    width: 5rem;
-    margin-left: 0.75rem;
-    background-color: red;
-    color: white;
-  }
-  .edit-btn:hover
-  {
-    background-color: rgb(56, 56, 107);
-    cursor: pointer;
-  }
-  .remove-btn:hover
-  {
-    background-color: rgb(131, 67, 67);
-    cursor: pointer;
-  }
-  td
-  {
-    padding-left: 0.5rem;
-    border-bottom: solid 1px black;
-  }
-  tr, td, th
-  {
-    min-width: 7rem;
-    max-width: 10rem;
-    height: 1.25rem;
-    overflow:hidden;
-    white-space: nowrap;
-  }
-  .col-id
-  {
-    min-width: 0;
-    max-width: 2.5rem;
-  }
-  .col-other
-  {
-    min-width: 0;
-    max-width: 6rem;
-  }
+    
+    .add-btn
+    {
+      width: $submit-width;
+      margin: $submit-margin;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 3px 3px 3px 0px $light-blue;
+      background: linear-gradient(to bottom, $light-blue, white, $light-blue);
+      border-radius: 0 5px 0 5px;
+      border: solid 1px black;
+      font-weight: bold;
+      color: $dark-blue;
+    }
+    table
+    {
+      margin: 0 auto;
+      max-width: 100%;
+      border-radius: 0 16px 0 16px;
+      // border: solid 2px;
+      td
+      {
+        padding-left: 0.5rem;
+        border-bottom: solid 1px black;
+      }
+      tr, td, th
+      {
+        min-width: 7rem;
+        max-width: 10rem;
+        height: 1.25rem;
+        overflow:hidden;
+        white-space: nowrap;
+      }
   
+      .col-id
+      {
+        min-width: 0;
+        max-width: 2.5rem;
+      }
+      .col-other
+      {
+        min-width: 0;
+        max-width: 6rem;
+      }
+  
+  
+      .edit-btn
+      {
+        height: 1.25rem;
+        width: 3rem;
+        margin-left: 0.75rem;
+        background-color: blue;
+        color: white;
+      }
+      .remove-btn
+      {
+        height: 1.25rem;
+        width: 3rem;
+        margin-left: 0.75rem;
+        background-color: red;
+        color: white;
+      }
+  
+      .edit-btn:hover
+      {
+        background-color: rgb(56, 56, 107);
+        cursor: pointer;
+      }
+      .remove-btn:hover
+      {
+        background-color: rgb(131, 67, 67);
+        cursor: pointer;
+      }
+    }
+  }
 }
