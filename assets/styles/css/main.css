@@ -4,6 +4,10 @@ html {
   scroll-behavior: smooth;
 }
 html body {
+  background-image: url("../../images/backgrounds/views-back.svg");
+  background-color: rgb(255, 255, 255);
+  background-size: cover;
+  background-position: center;
   margin: 0;
   padding: 0;
 }
@@ -18,6 +22,14 @@ html body .btn {
   border: solid 1px black;
   font-weight: bold;
   color: rgb(47, 85, 151);
+}
+html body .btn:hover {
+  cursor: pointer;
+}
+html body .btn:active {
+  color: white;
+  box-shadow: 6px 6px 6px 0px rgb(143, 170, 220);
+  background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(47, 85, 151), white);
 }
 html body header {
   min-height: 50px;
@@ -289,12 +301,13 @@ html h4 {
   color: white;
 }
 .shop-container #templates-section .cards {
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 0.5rem;
   border-radius: 0 20px 0 20px;
   border: solid rgb(47, 85, 151);
   width: 75%;
   display: flex;
+  background-color: white;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -353,6 +366,8 @@ html h4 {
   margin: 0 auto;
   max-width: 100%;
   border-radius: 0 16px 0 16px;
+  border: solid 2px rgb(47, 85, 151);
+  padding: 1rem;
 }
 .dashboard-container #control-section table td {
   padding-left: 0.5rem;

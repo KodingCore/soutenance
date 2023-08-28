@@ -55,7 +55,8 @@
       margin: 0 auto;
       max-width: 100%;
       border-radius: 0 16px 0 16px;
-      // border: solid 2px;
+      border: solid 2px $dark-blue;
+      padding: 1rem;
       td
       {
         padding-left: 0.5rem;
