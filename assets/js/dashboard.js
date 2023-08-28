@@ -64,17 +64,16 @@ function fetchingControlDatas(link)
                 let tableI = []; //* Contient les itérations (colonnes) qui n'apparaissent pas dans le dashboard mobile
                 for(let attributName in data[key][0]) //* Pour chaques attributs de la classe
                 {
-                    if(attributName.includes("name") || attributName.includes("id") || attributName.includes("date") && !attributName.includes("update") && !attributName.includes("expiration"))
-                    {
+                    // if(attributName.includes("name") || attributName.includes("id") || attributName.includes("date") && !attributName.includes("update") && !attributName.includes("expiration"))
+                    // {
                         completeHeaderTable(attributName); //* On défini le header du tableau
                         tableI.push(i);
-                    }
+                    // }
                     i++;
                 }
                 i = 0;
                 for(let object in data[key]) //* Pour chaques objet de la data
                 {
-                    
                     let bodyRow = completeBodyTable(data[key][object], tableI); //* On appel la fonction de création du body
                     createControlBtns(data[key][0], link, bodyRow);
                 }
@@ -176,8 +175,8 @@ function completeBodyTable(objectForCellsValues, tableI)
     bodyTable.appendChild(bodyRow);
     for(let key in objectForCellsValues)
     {
-        if(tableI.includes(i))
-        {
+        // if(tableI.includes(i))
+        // {
             const cell = document.createElement("td");
         
             if(key.toLowerCase().includes("id"))
@@ -191,7 +190,7 @@ function completeBodyTable(objectForCellsValues, tableI)
             bodyRow.appendChild(cell);
             const textNodeCell = document.createTextNode(objectForCellsValues[key]);
             cell.appendChild(textNodeCell);
-        }
+        // }
         i++;
     }
     return bodyRow;
@@ -459,7 +458,7 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
     {
         addEditBtn.textContent = "Edit";
     }
-    
+    addEditBtn.classList.add("btn");
     addEditForm.appendChild(addEditBtn);
 
     addEditBtn.addEventListener("click", function(event){

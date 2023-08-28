@@ -1,3 +1,19 @@
+<?php
+    if(isset($this->data["templates"]))
+    {
+        $templates = $this->data["templates"];
+        $tabCategories = [];
+        foreach($templates as $template)
+        {
+            if(!in_array($template->getCategoryId(), $tabCategories))
+            {
+                array_push($tabCategories, $template->getCategoryId());
+            }
+        }
+    }
+
+?>
+
 <main id="shop-container" class="shop-container">
     <section id="heading-section">
         <div id="tagline-container">
@@ -7,6 +23,27 @@
         </div>
     </section>
     <h1>Vitrine</h1>
+    <section id="templates-section">
+    <?php
+        if(isset($this->data["templates"]))
+        {
+            $templates = $this->data["templates"];
+            foreach($templates as $template)
+            {
+                ?>
+                <article class="cards">
+                    <h3><?=$template->getName();?></h3>
+                    <img width="250" src="<?=$template->getImagePath()?>" alt="Image du template proposé">
+                    <p><?=$template->getDescription();?></p>
+                    <? if(isset($_SESSION["user_id"]))
+                    {
+                        ?> <button class="btn">Demander un devis</button> <?
+                    }
+                ?></article><?php
+            }
+        }
+    ?>
+    </section>
 </main>
 <aside id="left-aside">
     <ul>

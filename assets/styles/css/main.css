@@ -7,6 +7,18 @@ html body {
   margin: 0;
   padding: 0;
 }
+html body .btn {
+  width: 164px;
+  margin: 0 calc(50% - 82px);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
+  background: linear-gradient(to bottom, rgb(143, 170, 220), white, rgb(143, 170, 220));
+  border-radius: 0 5px 0 5px;
+  border: solid 1px black;
+  font-weight: bold;
+  color: rgb(47, 85, 151);
+}
 html body header {
   min-height: 50px;
   padding: 16px;
@@ -141,18 +153,6 @@ html body main form input[type*=submit] {
   font-weight: bold;
   color: rgb(47, 85, 151);
 }
-html body main form button {
-  width: 164px;
-  margin: 0 calc(50% - 82px);
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
-  background: linear-gradient(to bottom, rgb(143, 170, 220), white, rgb(143, 170, 220));
-  border-radius: 0 5px 0 5px;
-  border: solid 1px black;
-  font-weight: bold;
-  color: rgb(47, 85, 151);
-}
 html body #left-aside-access {
   width: 18px;
   height: 100px;
@@ -240,17 +240,34 @@ html body footer nav ul li a {
 }
 
 html {
+  font-size: 18px;
   font-family: "Roboto", sans-serif;
 }
 html h1, html h2, html h3 {
   font-family: "Kanit", sans-serif;
   font-style: normal;
   font-weight: 400;
+  color: rgb(47, 85, 151);
 }
 html #tagline {
   font-family: "Kanit", sans-serif;
   font-style: italic;
   font-weight: 200;
+}
+html h1 {
+  margin-left: 2rem;
+  text-decoration: underline;
+  font-size: 2.25rem;
+}
+html h2 {
+  font-size: 1.5rem;
+}
+html h3 {
+  margin: 0.5rem auto;
+  font-size: 1.35rem;
+}
+html h4 {
+  font-size: 1.2rem;
 }
 
 .homepage-container #heading-section {
@@ -270,6 +287,20 @@ html #tagline {
 }
 .shop-container #heading-section #tagline-container #tagline {
   color: white;
+}
+.shop-container #templates-section .cards {
+  margin: 0 auto;
+  padding: 0.5rem;
+  border-radius: 0 20px 0 20px;
+  border: solid rgb(47, 85, 151);
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.shop-container #templates-section .cards p {
+  text-align: center;
 }
 
 .account-container #heading-section {
@@ -333,6 +364,12 @@ html #tagline {
   height: 1.25rem;
   overflow: hidden;
   white-space: nowrap;
+}
+.dashboard-container #control-section table td, .dashboard-container #control-section table th {
+  display: none;
+}
+.dashboard-container #control-section table td:first-child, .dashboard-container #control-section table th:first-child, .dashboard-container #control-section table td:nth-child(2), .dashboard-container #control-section table th:nth-child(2), .dashboard-container #control-section table td:nth-child(3), .dashboard-container #control-section table th:nth-child(3) {
+  display: table-cell;
 }
 .dashboard-container #control-section table .col-id {
   min-width: 0;

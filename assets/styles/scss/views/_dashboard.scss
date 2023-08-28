@@ -69,6 +69,14 @@
         overflow:hidden;
         white-space: nowrap;
       }
+      td, th
+      {
+        display: none;
+      }
+      td:first-child, th:first-child, td:nth-child(2), th:nth-child(2), td:nth-child(3), th:nth-child(3) 
+      {
+        display:table-cell;
+      }
   
       .col-id
       {
