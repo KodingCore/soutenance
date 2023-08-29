@@ -50,7 +50,8 @@ function fetchingControlDatas(link)
 
     fetch(`index.php?route=${link.id}`)
         .then(response => 
-            response.json()
+            response.json(),
+            
             )
         .then(data => 
         {   
@@ -60,21 +61,13 @@ function fetchingControlDatas(link)
                 setControlTitle(controlSection, key); //* Initialisation du titre de la section 
                 createAddBtns(data[key][0], controlSection, link);
                 createStructureTable(controlSection); //* Création de la structure du tableau
-                let i = 0;
-                let tableI = []; //* Contient les itérations (colonnes) qui n'apparaissent pas dans le dashboard mobile
                 for(let attributName in data[key][0]) //* Pour chaques attributs de la classe
                 {
-                    // if(attributName.includes("name") || attributName.includes("id") || attributName.includes("date") && !attributName.includes("update") && !attributName.includes("expiration"))
-                    // {
-                        completeHeaderTable(attributName); //* On défini le header du tableau
-                        tableI.push(i);
-                    // }
-                    i++;
+                    completeHeaderTable(attributName); //* On défini le header du tableau
                 }
-                i = 0;
                 for(let object in data[key]) //* Pour chaques objet de la data
                 {
-                    let bodyRow = completeBodyTable(data[key][object], tableI); //* On appel la fonction de création du body
+                    let bodyRow = completeBodyTable(data[key][object]); //* On appel la fonction de création du body
                     createControlBtns(data[key][0], link, bodyRow);
                 }
             }
@@ -166,32 +159,27 @@ function completeHeaderTable(headerCellName)
 //** ---------------------------- */
 //*  Complète le corps du tableau
 //** ---------------------------- */
-function completeBodyTable(objectForCellsValues, tableI)
+function completeBodyTable(objectForCellsValues)
 {
     const bodyTable = document.getElementById("body-table");
     const bodyRow = document.createElement("tr");
-    let i = 0;
 
     bodyTable.appendChild(bodyRow);
     for(let key in objectForCellsValues)
     {
-        // if(tableI.includes(i))
-        // {
-            const cell = document.createElement("td");
-        
-            if(key.toLowerCase().includes("id"))
-            {
-                cell.classList.add("col-id");
-            }
-            else
-            {
-                cell.classList.add("col-other");
-            }
-            bodyRow.appendChild(cell);
-            const textNodeCell = document.createTextNode(objectForCellsValues[key]);
-            cell.appendChild(textNodeCell);
-        // }
-        i++;
+        const cell = document.createElement("td");
+
+        if(key.toLowerCase().includes("id"))
+        {
+            cell.classList.add("col-id");
+        }
+        else
+        {
+            cell.classList.add("col-other");
+        }
+        bodyRow.appendChild(cell);
+        const textNodeCell = document.createTextNode(objectForCellsValues[key]);
+        cell.appendChild(textNodeCell);
     }
     return bodyRow;
 }
@@ -267,6 +255,7 @@ function searchParams()
     select.addEventListener("change", function() //* Si l'option du select choisie à changée
     {
         colIndex = select.selectedIndex; //* Récupèration de l'index de cette option
+        options[select.selectedIndex].value;
         content = searchbar.value.toLowerCase(); //* Définie le contenu en lowercase pour la comparaison
         displayLine(taleau, colIndex, content);
     })

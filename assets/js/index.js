@@ -17,9 +17,14 @@ function leftAside()
     ]
     const url = window.location.href;
     let view = url.split("=")[1];
-    if(view.includes("#"))
+    
+    if(view !== undefined && view.includes("#"))
     {
         view = view.replace("#", "");
+    }
+    if(view === undefined)
+    {
+        view = "homepage";
     }
 
     if(!noLeftAsideViews.includes(view))

@@ -4,11 +4,14 @@ window.addEventListener("DOMContentLoaded", function(){
     const menu = document.getElementById("menu");
     const url = window.location.href;
     let view = url.split("=")[1];
-    if(view.includes("#"))
+    if(view !== undefined && view.includes("#"))
     {
         view = view.replace("#", "");
     }
-    console.log(`${view}-container`);
+    if(view === undefined)
+    {
+        view = "homepage";
+    }
     const mainContainer = document.getElementsByClassName(`${view}-container`)[0];
     const navbar = document.getElementsByClassName("navbar")[0];
     
