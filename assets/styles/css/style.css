@@ -229,11 +229,13 @@ html body main #main-header {
 html body main #main-header #tagline-container {
   margin-top: 10%;
   height: 20%;
-  padding: 0.5rem;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
   border-radius: 0 20px 0 20px;
 }
 html body main #main-header #tagline-container #tagline {
-  margin: 0;
+  margin: auto;
   font-size: 3.5vw;
 }
 
@@ -295,7 +297,7 @@ html #tagline {
 html h1 {
   margin-left: 2rem;
   text-decoration: underline;
-  font-size: 2.25rem;
+  font-size: 2rem;
 }
 html h2 {
   font-size: 1.5rem;
@@ -317,6 +319,33 @@ html h4 {
 .homepage-container #main-header #tagline-container #tagline {
   color: white;
 }
+.login-container #main-header {
+  background-image: url("../../images/backgrounds/login-background.jpg");
+}
+.login-container #main-header #tagline-container {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.login-container #main-header #tagline-container #tagline {
+  color: rgb(47, 85, 151);
+}
+.login-container #left-aside-access {
+  display: none;
+}
+
+.register-container #main-header {
+  background-image: url("../../images/backgrounds/register-background.jpg");
+  background-size: contain;
+}
+.register-container #main-header #tagline-container {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.register-container #main-header #tagline-container #tagline {
+  color: rgb(47, 85, 151);
+}
+.register-container #left-aside-access {
+  display: none;
+}
+
 .shop-container #main-header {
   background-image: url("../../images/backgrounds/shop-background.jpg");
 }
@@ -381,6 +410,9 @@ html h4 {
   border-radius: 0 16px 0 16px;
   border: solid 2px rgb(47, 85, 151);
   padding: 1rem;
+}
+.dashboard-container #control-section table tr.hidden {
+  display: none;
 }
 .dashboard-container #control-section table td {
   padding-left: 0.5rem;

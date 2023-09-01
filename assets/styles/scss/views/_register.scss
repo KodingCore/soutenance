@@ -1,0 +1,22 @@
+@import '../general/vars.scss';
+
+.register-container
+{
+  #main-header
+  {
+    background-image: url("../../images/backgrounds/register-background.jpg");
+    background-size: contain;
+    #tagline-container
+    {
+      background-color: rgba(255, 255, 255, 0.9);
+      #tagline
+      {
+        color: $dark-blue;
+      }
+    }
+  }
+  #left-aside-access
+  {
+    display: none;
+  }
+}

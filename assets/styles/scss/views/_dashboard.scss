@@ -42,6 +42,12 @@
       border-radius: 0 16px 0 16px;
       border: solid 2px $dark-blue;
       padding: 1rem;
+
+      tr.hidden //* Ceci sert à la recherche dans le dashboard et ne doit pas etre supprimer
+      {
+        display:none;
+      }
+
       td
       {
         padding-left: 0.5rem;

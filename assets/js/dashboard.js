@@ -47,7 +47,6 @@ function initDashboard()
 function fetchingControlDatas(link)
 {
     const controlSection = document.getElementById("control-section");
-    console.log(link.id);
     fetch(`index.php?route=${link.id}`)
         .then(response => 
             response.json()
@@ -73,10 +72,12 @@ function fetchingControlDatas(link)
             initOptionsSelector();
             searchParams();
         })
+
         .catch(error => 
-            console.error("Acune données dans cette table, " + error),
-            console.log("Acune données dans la table " + link.id.split("-")[0])
+            console.error("Acune données dans cette table, " + error)
             );
+        
+
 }
 
 //** --------------------------- */
@@ -230,15 +231,23 @@ function initOptionsSelector()
 {
     const columnSelection = document.getElementById("column-selection"); //* Récuperation du select
     const theadsTab = document.querySelectorAll("th"); //* Récuperation des en-têtes du tableau
+
     while(columnSelection.childElementCount > 0)
     {
         columnSelection.removeChild(columnSelection.firstChild);
     }
+    let i = 0;
     theadsTab.forEach(function(thead)
     {
-        const option = document.createElement("option");
-        option.textContent = thead.textContent;
-        columnSelection.appendChild(option);
+
+        //* Cette partie sera a modifier dans le cas d'un query DESKTOP
+        if(i < 3)
+        {
+            const option = document.createElement("option");
+            option.textContent = thead.textContent;
+            columnSelection.appendChild(option);
+        }
+        i++;
     })
 }
 
@@ -252,13 +261,13 @@ function searchParams()
     const taleau = document.getElementById("control-table");
     const searchbar = document.getElementById("searchbar"); //* Récuperation de l'input searchbar
     const select = document.getElementById("column-selection"); //* Récuperation l'élément de selection
+    
     let colIndex; //* initialisation de la variable qui contient l'index de la colonne choisie
     let content; //* Variable du contenu de tête de colonne
 
     select.addEventListener("change", function() //* Si l'option du select choisie à changée
     {
         colIndex = select.selectedIndex; //* Récupèration de l'index de cette option
-        options[select.selectedIndex].value;
         content = searchbar.value.toLowerCase(); //* Définie le contenu en lowercase pour la comparaison
         displayLine(taleau, colIndex, content);
     })
@@ -290,6 +299,7 @@ function displayLine(table, colIndex, content)
             if(content !== undefined) //* S'il y a un contenu
             {
                 let dataContent = data.textContent.toLowerCase(); //* Récuration de la data en lowercase
+
                 //* Si la data inclue ce qui est dans la searchbar, 
                 //* et que ceci se trouve dans la colonne qui est recherchée
                 if(dataContent.includes(content) && colIndex === i)  
@@ -526,7 +536,6 @@ function editData(className, inputs, attributsNames, id, link)
         if(className !== "user")
         {
             stringRoute = stringRoute + `&${attributs[i]}=${inputs[key].value}`;
-            console.log(stringRoute);
         }
         else
         {

@@ -27,11 +27,13 @@ html
         {
           margin-top: 10%;
           height: 20%;
-          padding: 0.5rem;
+          padding: 0 2rem;
+          display: flex;
+          justify-content: center;
           border-radius: 0 20px 0 20px;
           #tagline
           {
-            margin: 0;
+            margin: auto;
             font-size: 3.5vw;
           }
         }

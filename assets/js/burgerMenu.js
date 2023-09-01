@@ -19,7 +19,6 @@ window.addEventListener("DOMContentLoaded", function(){
     {
         view = "homepage";
     }
-    console.log("views recherchée : " + view);
     const mainContainer = document.getElementsByClassName(`${view}-container`)[0];
     const navbar = document.getElementsByClassName("navbar")[0];
     

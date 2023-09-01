@@ -43,7 +43,6 @@ function leftAside()
 
             leftAside.classList.toggle("active");
             leftAsideBtn.style.cssText = `left: ${leftAside.offsetWidth}px`;
-            console.log(leftAside.offsetWidth + " " + leftAsideBtn.offsetLeft);
             if(arrowLeftAsideBtn.classList.contains("fa-caret-right"))
             {
                 arrowLeftAsideBtn.classList.replace("fa-caret-right", "fa-caret-left");
