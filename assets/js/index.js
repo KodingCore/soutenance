@@ -30,7 +30,7 @@ function leftAside()
             view = view.split("#")[0];
         }
     }
-    if(view === undefined)
+    if(view === undefined || view === "disconnect")
     {
         view = "homepage";
     }

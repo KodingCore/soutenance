@@ -26,14 +26,14 @@ html
         #tagline-container
         {
           margin-top: 10%;
-          height: 20%;
-          padding: 0 2rem;
+          height: 30%;
           display: flex;
           justify-content: center;
+          align-items: center;
           border-radius: 0 20px 0 20px;
           #tagline
           {
-            margin: auto;
+            margin: 0 2rem;
             font-size: 3.5vw;
           }
         }

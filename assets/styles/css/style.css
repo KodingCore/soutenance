@@ -228,14 +228,14 @@ html body main #main-header {
 }
 html body main #main-header #tagline-container {
   margin-top: 10%;
-  height: 20%;
-  padding: 0 2rem;
+  height: 30%;
   display: flex;
   justify-content: center;
+  align-items: center;
   border-radius: 0 20px 0 20px;
 }
 html body main #main-header #tagline-container #tagline {
-  margin: auto;
+  margin: 0 2rem;
   font-size: 3.5vw;
 }
 
@@ -295,7 +295,7 @@ html #tagline {
   font-weight: 200;
 }
 html h1 {
-  margin-left: 2rem;
+  text-align: center;
   text-decoration: underline;
   font-size: 2rem;
 }

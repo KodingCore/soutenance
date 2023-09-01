@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", function(){
+    const title = document.getElementsByTagName("h1")[0];
     const header = document.getElementsByTagName("header")[0];
     const burgerIcon = document.getElementById("burger-icon");
     const menu = document.getElementById("menu");
@@ -15,10 +16,11 @@ window.addEventListener("DOMContentLoaded", function(){
             view = view.split("#")[0];
         }
     }
-    if(view === undefined)
+    if(view === undefined || title.textContent === "Accueil")
     {
         view = "homepage";
     }
+
     const mainContainer = document.getElementsByClassName(`${view}-container`)[0];
     const navbar = document.getElementsByClassName("navbar")[0];
     
@@ -31,5 +33,4 @@ window.addEventListener("DOMContentLoaded", function(){
     mainContainer.addEventListener("click", () => {
         menu.classList.remove("active");
     })
-    
 })

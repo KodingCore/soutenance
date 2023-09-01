@@ -26,7 +26,7 @@
     <form action="index.php?route=account" method="POST" id="account_form">
         <fieldset>
             <label for="username">Nom d'utilisateur</label>
-            <input type="text" name="username" id="username" value=<?=$user->getUsername(); ?> maxlength="50" onpaste="return false;">
+            <input type="text" name="username" id="username"  autocomplete="username" value=<?=$user->getUsername(); ?> maxlength="50" onpaste="return false;">
             <span id="error_username"><?php
                 if(isset($this->data["message"]) && $this->data["message"][1] === "username")
                 {
@@ -36,7 +36,7 @@
         </fieldset>
         <fieldset>
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" value=<?=$user->getEmail(); ?> maxlength="50" onpaste="return false;">
+            <input type="email" name="email" id="email" autocomplete="email" value=<?=$user->getEmail(); ?> maxlength="50" onpaste="return false;">
             <span id="error_email"><?php
                 if(isset($this->data["message"]) && $this->data["message"][1] === "email")
                 {
@@ -46,7 +46,7 @@
         </fieldset>
         <fieldset>
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" minlength="8" maxlength="50" onpaste="return false;">
+            <input type="password" name="password" id="password" autocomplete="new-password" minlength="8" maxlength="50" onpaste="return false;">
             <span id="error_password"><?php
                 if(isset($this->data["message"]) && $this->data["message"][1] === "password")
                 {
@@ -56,7 +56,7 @@
         </fieldset>
         <fieldset>
             <label for="confirm_password">Confirmation du password</label>
-            <input type="password" name="confirm_password" id="confirm_password" minlength="8" maxlength="50" onpaste="return false;">
+            <input type="password" name="confirm_password" id="confirm_password" autocomplete="new-password" minlength="8" maxlength="50" onpaste="return false;">
             <span id="error_confirm_password"><?php
                 if(isset($this->data["message"]) && $this->data["message"][1] === "confirm_password")
                 {
