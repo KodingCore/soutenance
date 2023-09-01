@@ -47,7 +47,7 @@ function initDashboard()
 function fetchingControlDatas(link)
 {
     const controlSection = document.getElementById("control-section");
-
+    // console.log(link.id);
     fetch(`index.php?route=${link.id}`)
         .then(response => 
             response.json(),
@@ -88,6 +88,7 @@ function createAddBtns(attributsNames, controlSection, link)
         controlName === "appointment" || controlName === "quotation")
     {
         const addBtn = document.createElement("button");
+        addBtn.classList.add("btn");
         addBtn.classList.add("add-btn");
         addBtn.id = "add-" + controlName;
         addBtn.textContent = "add " + controlName;

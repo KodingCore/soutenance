@@ -10,7 +10,7 @@ html
     background-color: rgba(255,255,255,1);
     background-size: cover;
     background-position: center;
-    .btn
+    .btn, input[type*="submit"]
     {
       width: $submit-width;
       margin: $submit-margin;
@@ -23,11 +23,12 @@ html
       font-weight: bold;
       color: $dark-blue;
     }
-    .btn:hover
+    .btn:hover, input[type*="submit"]:hover
     {
       cursor: pointer;
+      background: linear-gradient(to bottom, $light-blue, white, $dark-blue);
     }
-    .btn:active
+    .btn:active, input[type*="submit"]:active
     {
       color: white;
       box-shadow: 6px 6px 6px 0px $light-blue;
@@ -101,7 +102,7 @@ html
         }
       }
     }
-    #heading-section
+    #main-header
     {
       position: relative;
     }
@@ -110,7 +111,7 @@ html
       
       width: 90%;
       margin: 0 auto;
-      #heading-section
+      #main-header
       {
         height: 33vw;
         display: flex;
@@ -179,19 +180,6 @@ html
           {
             height: 80%;
           }
-        }
-        input[type*="submit"]
-        {
-          width: $submit-width;
-          margin: $submit-margin;
-          margin-top: 1rem;
-          margin-bottom: 1rem;
-          box-shadow: 3px 3px 3px 0px $light-blue;
-          background: linear-gradient(to bottom, $light-blue, white, $light-blue);
-          border-radius: 0 5px 0 5px;
-          border: solid 1px black;
-          font-weight: bold;
-          color: $dark-blue;
         }
       }
     }

@@ -39,13 +39,11 @@ function leftAside()
             if(arrowLeftAsideBtn.classList.contains("fa-caret-right"))
             {
                 arrowLeftAsideBtn.classList.replace("fa-caret-right", "fa-caret-left");
-
             }
             else
             {
                 arrowLeftAsideBtn.classList.replace("fa-caret-left", "fa-caret-right");
             }
-
         })
 
         mainContainer.addEventListener("click", () => {

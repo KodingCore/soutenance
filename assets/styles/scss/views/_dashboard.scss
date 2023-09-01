@@ -2,7 +2,7 @@
 
 .dashboard-container
 {
-  #heading-section
+  #main-header
   {
     background-image: url("../../images/backgrounds/dashboard-background.jpg");
     #tagline-container
@@ -36,24 +36,9 @@
   }
   #control-section
   {
-    
-    .add-btn
-    {
-      width: $submit-width;
-      margin: $submit-margin;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 3px 3px 3px 0px $light-blue;
-      background: linear-gradient(to bottom, $light-blue, white, $light-blue);
-      border-radius: 0 5px 0 5px;
-      border: solid 1px black;
-      font-weight: bold;
-      color: $dark-blue;
-    }
     table
     {
       margin: 0 auto;
-      max-width: 100%;
       border-radius: 0 16px 0 16px;
       border: solid 2px $dark-blue;
       padding: 1rem;
@@ -64,8 +49,6 @@
       }
       tr, td, th
       {
-        min-width: 7rem;
-        max-width: 10rem;
         height: 1.25rem;
         overflow:hidden;
         white-space: nowrap;

@@ -11,7 +11,7 @@ html body {
   margin: 0;
   padding: 0;
 }
-html body .btn {
+html body .btn, html body input[type*=submit] {
   width: 164px;
   margin: 0 calc(50% - 82px);
   margin-top: 0.5rem;
@@ -23,10 +23,11 @@ html body .btn {
   font-weight: bold;
   color: rgb(47, 85, 151);
 }
-html body .btn:hover {
+html body .btn:hover, html body input[type*=submit]:hover {
   cursor: pointer;
+  background: linear-gradient(to bottom, rgb(143, 170, 220), white, rgb(47, 85, 151));
 }
-html body .btn:active {
+html body .btn:active, html body input[type*=submit]:active {
   color: white;
   box-shadow: 6px 6px 6px 0px rgb(143, 170, 220);
   background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(47, 85, 151), white);
@@ -87,14 +88,14 @@ html body header .navbar #menu.active {
   display: flex;
   flex-direction: column;
 }
-html body #heading-section {
+html body #main-header {
   position: relative;
 }
 html body main {
   width: 90%;
   margin: 0 auto;
 }
-html body main #heading-section {
+html body main #main-header {
   height: 33vw;
   display: flex;
   justify-content: center;
@@ -103,13 +104,13 @@ html body main #heading-section {
   background-position: center;
   background-size: cover;
 }
-html body main #heading-section #tagline-container {
+html body main #main-header #tagline-container {
   margin-top: 10%;
   height: 20%;
   padding: 0.5rem;
   border-radius: 0 20px 0 20px;
 }
-html body main #heading-section #tagline-container #tagline {
+html body main #main-header #tagline-container #tagline {
   margin: 0;
   font-size: 3.5vw;
 }
@@ -152,18 +153,6 @@ html body main form fieldset.textarea {
 }
 html body main form fieldset.textarea textarea {
   height: 80%;
-}
-html body main form input[type*=submit] {
-  width: 164px;
-  margin: 0 calc(50% - 82px);
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
-  background: linear-gradient(to bottom, rgb(143, 170, 220), white, rgb(143, 170, 220));
-  border-radius: 0 5px 0 5px;
-  border: solid 1px black;
-  font-weight: bold;
-  color: rgb(47, 85, 151);
 }
 html body #left-aside-access {
   width: 18px;
@@ -282,22 +271,22 @@ html h4 {
   font-size: 1.2rem;
 }
 
-.homepage-container #heading-section {
+.homepage-container #main-header {
   background-image: url("../../images/backgrounds/homepage-background.jpg");
 }
-.homepage-container #heading-section #tagline-container {
+.homepage-container #main-header #tagline-container {
   background-color: rgba(47, 85, 151, 0.9);
 }
-.homepage-container #heading-section #tagline-container #tagline {
+.homepage-container #main-header #tagline-container #tagline {
   color: white;
 }
-.shop-container #heading-section {
+.shop-container #main-header {
   background-image: url("../../images/backgrounds/shop-background.jpg");
 }
-.shop-container #heading-section #tagline-container {
+.shop-container #main-header #tagline-container {
   background-color: rgba(47, 85, 151, 0.9);
 }
-.shop-container #heading-section #tagline-container #tagline {
+.shop-container #main-header #tagline-container #tagline {
   color: white;
 }
 .shop-container #templates-section .cards {
@@ -316,23 +305,23 @@ html h4 {
   text-align: center;
 }
 
-.account-container #heading-section {
+.account-container #main-header {
   background-image: url("../../images/backgrounds/account-background.jpg");
 }
-.account-container #heading-section #tagline-container {
+.account-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.account-container #heading-section #tagline-container #tagline {
+.account-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
 
-.dashboard-container #heading-section {
+.dashboard-container #main-header {
   background-image: url("../../images/backgrounds/dashboard-background.jpg");
 }
-.dashboard-container #heading-section #tagline-container {
+.dashboard-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.dashboard-container #heading-section #tagline-container #tagline {
+.dashboard-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
 .dashboard-container #search-section {
@@ -350,21 +339,8 @@ html h4 {
   border-color: rgb(47, 85, 151);
   width: 70%;
 }
-.dashboard-container #control-section .add-btn {
-  width: 164px;
-  margin: 0 calc(50% - 82px);
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
-  background: linear-gradient(to bottom, rgb(143, 170, 220), white, rgb(143, 170, 220));
-  border-radius: 0 5px 0 5px;
-  border: solid 1px black;
-  font-weight: bold;
-  color: rgb(47, 85, 151);
-}
 .dashboard-container #control-section table {
   margin: 0 auto;
-  max-width: 100%;
   border-radius: 0 16px 0 16px;
   border: solid 2px rgb(47, 85, 151);
   padding: 1rem;
@@ -374,8 +350,6 @@ html h4 {
   border-bottom: solid 1px black;
 }
 .dashboard-container #control-section table tr, .dashboard-container #control-section table td, .dashboard-container #control-section table th {
-  min-width: 7rem;
-  max-width: 10rem;
   height: 1.25rem;
   overflow: hidden;
   white-space: nowrap;
@@ -417,13 +391,13 @@ html h4 {
   cursor: pointer;
 }
 
-.contact-container #heading-section {
+.contact-container #main-header {
   background-image: url("../../images/backgrounds/contact-background.jpg");
 }
-.contact-container #heading-section #tagline-container {
+.contact-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.contact-container #heading-section #tagline-container #tagline {
+.contact-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
 .contact-container #left-aside-access {
