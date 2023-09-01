@@ -70,36 +70,7 @@
       .col-other
       {
         min-width: 0;
-        max-width: 6rem;
-      }
-  
-  
-      .edit-btn
-      {
-        height: 1.25rem;
-        width: 3rem;
-        margin-left: 0.75rem;
-        background-color: blue;
-        color: white;
-      }
-      .remove-btn
-      {
-        height: 1.25rem;
-        width: 3rem;
-        margin-left: 0.75rem;
-        background-color: red;
-        color: white;
-      }
-  
-      .edit-btn:hover
-      {
-        background-color: rgb(56, 56, 107);
-        cursor: pointer;
-      }
-      .remove-btn:hover
-      {
-        background-color: rgb(131, 67, 67);
-        cursor: pointer;
+        max-width: 3rem;
       }
     }
   }

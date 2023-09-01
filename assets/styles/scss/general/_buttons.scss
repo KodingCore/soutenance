@@ -1,0 +1,62 @@
+//*----------------------
+//* Import des variables
+//*----------------------
+@import '../general/vars';
+
+//*---------------------------------------------
+//* Boutons en général et inputs de type submit
+//*---------------------------------------------
+.btn, input[type*="submit"]
+{
+  width: $submit-width;
+  margin: $submit-margin;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 3px 3px 3px 0px $light-blue;
+  background: linear-gradient(to bottom, $light-blue, white, $light-blue);
+  border-radius: 0 5px 0 5px;
+  border: solid 1px black;
+  font-weight: bold;
+  color: $dark-blue;
+}
+.btn:hover, input[type*="submit"]:hover
+{
+  cursor: pointer;
+  background: linear-gradient(to bottom, $light-blue, white, $dark-blue);
+}
+.btn:active, input[type*="submit"]:active
+{
+  color: white;
+  box-shadow: 6px 6px 6px 0px $light-blue;
+  background: linear-gradient(to bottom, $dark-blue, $dark-blue, white);
+}
+
+//*--------------------------------------------
+//* Boutons d'édition/suppression du dashboard
+//*--------------------------------------------
+.edit-btn
+{
+  height: 1.25rem;
+  width: 3rem;
+  margin-left: 0.75rem;
+  background-color: blue;
+  color: white;
+}
+.remove-btn
+{
+  height: 1.25rem;
+  width: 3rem;
+  margin-left: 0.75rem;
+  background-color: red;
+  color: white;
+}
+.edit-btn:hover
+{
+  background-color: rgb(56, 56, 107);
+  cursor: pointer;
+}
+.remove-btn:hover
+{
+  background-color: rgb(131, 67, 67);
+  cursor: pointer;
+}

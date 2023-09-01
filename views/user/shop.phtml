@@ -28,7 +28,7 @@
                             <h3><?=$template->getName();?></h3>
                             <img width="250" src="<?=$template->getImagePath();?>" alt="Image du template proposé">
                             <p><?=$template->getDescription();?></p>
-                            <button class="btn">Demander un devis</button>
+                            <a href="index.php?route=quote-request&id=<?=$template->getTemplateId();?>"><button class="btn">Demander un devis</button></a>
                         </article>
                         <?php
                     }

@@ -25,7 +25,7 @@
     <h1>Mon compte</h1>
     <form action="index.php?route=account" method="POST" id="account_form">
         <fieldset>
-            <label for="username">Username</label>
+            <label for="username">Nom d'utilisateur</label>
             <input type="text" name="username" id="username" value=<?=$user->getUsername(); ?> maxlength="50" onpaste="return false;">
             <span id="error_username"><?php
                 if(isset($this->data["message"]) && $this->data["message"][1] === "username")
@@ -55,7 +55,7 @@
             ?></span>
         </fieldset>
         <fieldset>
-            <label for="confirm_password">Confirm password</label>
+            <label for="confirm_password">Confirmation du password</label>
             <input type="password" name="confirm_password" id="confirm_password" minlength="8" maxlength="50" onpaste="return false;">
             <span id="error_confirm_password"><?php
                 if(isset($this->data["message"]) && $this->data["message"][1] === "confirm_password")
@@ -128,7 +128,7 @@
             ?></span>
         </fieldset>
         <fieldset>
-            <label for="address">Address</label>
+            <label for="address">Adresse</label>
             <input type="text" name="address" id="address"
             <?php 
                 if(!$info->getAddress())

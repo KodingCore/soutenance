@@ -1,0 +1,63 @@
+//*----------------------
+//* Import des variables
+//*----------------------
+@import '../general/vars';
+
+#left-aside-access
+{
+  width: 18px;
+  height: 100px;
+  position: fixed;
+  left: 0;
+  top: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, $dark-blue 5%, $light-blue);
+  border-radius: 0 5px 5px 0;
+  z-index: 1;
+}
+#left-aside-access:hover
+{
+  cursor: pointer;
+}
+#left-aside-access.hidden
+{
+  display: none;
+}
+#left-aside
+{
+  display: none;
+  width: auto;
+  height: auto;
+  position: fixed;
+  left: 0;
+  top: 20vh;
+  background: linear-gradient(to bottom, $dark-blue, $light-blue);
+  border-radius: 0 0 5px 0;
+  ul
+  {
+    list-style-type: none;
+    padding: 0;          
+    li
+    {
+      padding: 9px;
+      a
+      {
+        color: white;
+        font-size: 20px;
+        text-decoration: none;
+      }
+      a:hover
+      {
+        color: $alt-color;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+  }
+}
+#left-aside.active
+{
+  display: flex;
+}

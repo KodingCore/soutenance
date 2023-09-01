@@ -4,14 +4,22 @@ window.addEventListener("DOMContentLoaded", function(){
     const menu = document.getElementById("menu");
     const url = window.location.href;
     let view = url.split("=")[1];
-    if(view !== undefined && view.includes("#"))
+    if(view !== undefined)
     {
-        view = view.replace("#", "");
+        if(view.includes("&"))
+        {
+            view = view.split("&")[0];
+        }
+        if(view.includes("#"))
+        {
+            view = view.split("#")[0];
+        }
     }
     if(view === undefined)
     {
         view = "homepage";
     }
+    console.log("views recherchée : " + view);
     const mainContainer = document.getElementsByClassName(`${view}-container`)[0];
     const navbar = document.getElementsByClassName("navbar")[0];
     

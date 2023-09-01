@@ -1,0 +1,71 @@
+//*----------------------
+//* Import des variables
+//*----------------------
+@import '../general/vars';
+
+header
+{
+  min-height: 50px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to left, $dark-blue, $dark-blue, $light-blue);
+  .logo
+  {
+    width: 80%;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    img
+    {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .burger-container
+  {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar
+  {
+    position: absolute;
+    height: auto;
+    right: 0;
+    text-align: center;
+    z-index: 1;
+    #menu
+    {
+      display: none;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      width: 100%;
+      background: linear-gradient(to bottom, $dark-blue, $light-blue);
+      border-radius: 0 0 20px 20px;
+      li
+      {
+        padding: 9px;
+        a
+        {
+          color: white;
+          font-size: 20px;
+          text-decoration: none;
+        }
+        a:hover
+        {
+          color: $alt-color;
+          text-decoration: underline;
+          font-weight: bold;
+        }
+      }
+    }
+    #menu.active
+    {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

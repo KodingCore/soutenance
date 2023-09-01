@@ -8,6 +8,7 @@ class Router
     private ContactController $contactController;
     private DashboardController $dashboardController;
     private APIFetchController $APIFetchController;
+    private QuoteRequestController $quoteRequestController;
     private NotFound $notFound;
 
     public function __construct()
@@ -18,6 +19,8 @@ class Router
         $this->contactController = new ContactController();
         $this->dashboardController = new DashboardController();
         $this->APIFetchController = new APIFetchController();
+        $this->quoteRequestController = new QuoteRequestController();
+
         $this->notFound = new NotFound();
 
     }
@@ -55,9 +58,9 @@ class Router
         {
             $this->templateController->index();
         }
-        else if($route === "quote")
+        else if($route === "quote-request")
         {
-
+            $this->quoteRequestController->index();
         }
         else if(isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
         {

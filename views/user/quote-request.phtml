@@ -1,0 +1,48 @@
+
+<?php
+    if(isset($this->data["message"])) //*Si on à un message dans la data
+    {
+        ?>
+        <span class="success"><?=$this->data["message"]; ?></span>
+        <?php
+    }
+?>
+<main class="quote-request-container" id="quote-request-container">
+    <header id="main-header">
+        <div id="tagline-container">
+            <p id="tagline">
+                Un formulaire pour un devis
+            </p>
+        </div>
+    </header>
+    <h1>Demande de devis</h1>
+    <p>Ce formulaire ne permet q'une simple approche de ce qui tendra vers un rendu final.</p>
+    <p>La relation client qu'offre notre service, affienera votre demande, pour vous offrir un site web sur mesure.</p>
+    <form action="index.php?route=quote-request" method="POST" id="quoation_form">
+        <fieldset>
+            <label for="template_name">Nom du template</label>
+            <input type="text" name="template_name" id="template_name" readonly value="nom du template">
+        </fieldset>
+        <fieldset>
+            <label for="category">Catégorie</label>
+            <input type="text" name="category" id="category" readonly value="nom de la catégorie">
+        </fieldset>
+        <fieldset>
+            <label for="inscription">Inscription / connexion</label>
+            <input type="checkbox" name="inscription" id="inscription">
+        </fieldset>
+        <fieldset>
+            <label for="buy">Achats / ventes où commandes</label>
+            <input type="checkbox" name="buy" id="buy">
+        </fieldset>
+        <fieldset>
+            <label for="frequency">Mises à jour fréquentes des produits / services (plus d'une fois par mois)</label>
+            <input type="checkbox" name="frequency" id="frequency">
+        </fieldset>
+        <fieldset class="textarea">
+            <label for="description">Description du projet (but, design...)</label>
+            <textarea id="description" name="description" placeholder="Votre description ici..." required minlength="10" maxlength="2048"></textarea>
+        </fieldset>
+        <input type="submit" value="Envoyer">
+    </form>
+</main>

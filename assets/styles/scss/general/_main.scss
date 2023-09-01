@@ -1,0 +1,44 @@
+html
+{
+  scroll-behavior: smooth;
+
+  body
+  {
+    margin: 0;
+    padding: 0;
+    background-image: url("../../images/backgrounds/views-back.svg");
+    background-color: rgba(255,255,255,1);
+    background-size: cover;
+    background-position: center;
+    main
+    {
+      width: 90%;
+      margin: 0 auto;
+      #main-header
+      {
+        height: 33vw;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        #tagline-container
+        {
+          margin-top: 10%;
+          height: 20%;
+          padding: 0.5rem;
+          border-radius: 0 20px 0 20px;
+          #tagline
+          {
+            margin: 0;
+            font-size: 3.5vw;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+

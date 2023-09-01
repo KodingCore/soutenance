@@ -47,11 +47,10 @@ function initDashboard()
 function fetchingControlDatas(link)
 {
     const controlSection = document.getElementById("control-section");
-    // console.log(link.id);
+    console.log(link.id);
     fetch(`index.php?route=${link.id}`)
         .then(response => 
-            response.json(),
-            
+            response.json()
             )
         .then(data => 
         {   
@@ -74,7 +73,10 @@ function fetchingControlDatas(link)
             initOptionsSelector();
             searchParams();
         })
-        .catch(error => console.error("Une erreur s'est produite", error));
+        .catch(error => 
+            console.error("Acune données dans cette table, " + error),
+            console.log("Acune données dans la table " + link.id.split("-")[0])
+            );
 }
 
 //** --------------------------- */

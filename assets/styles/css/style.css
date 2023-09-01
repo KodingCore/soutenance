@@ -116,16 +116,20 @@ form {
   padding: 5px;
   width: 260px;
   background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(47, 85, 151), rgb(143, 170, 220));
-  border-radius: 0 16px 0 16px p;
-  border-radius-color: white;
-  border-radius-font-weight: bold;
-  border-radius-margin-left: 16px;
+  border-radius: 0 16px 0 16px;
+}
+form p {
+  color: white;
+  font-weight: bold;
+  margin-left: 16px;
 }
 form fieldset {
   margin-top: 5px;
-  border: none label;
-  border-color: white;
-  border-margin: 16px 10px 0 16px;
+  border: none;
+}
+form fieldset label {
+  color: white;
+  margin: 16px 10px 0 16px;
 }
 form fieldset input {
   width: 96%;
@@ -413,4 +417,17 @@ html h4 {
 }
 .contact-container #left-aside-access {
   display: none;
-}/*# sourceMappingURL=main.css.map */
+}
+
+.quote-request-container #main-header {
+  background-image: url("../../images/backgrounds/quote-request-background.jpg");
+}
+.quote-request-container #main-header #tagline-container {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.quote-request-container #main-header #tagline-container #tagline {
+  color: rgb(47, 85, 151);
+}
+.quote-request-container #left-aside-access {
+  display: none;
+}/*# sourceMappingURL=style.css.map */

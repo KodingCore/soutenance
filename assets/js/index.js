@@ -13,14 +13,22 @@ function leftAside()
         "account",
         "shop",
         "login",
-        "register"
+        "register",
+        "quote-request"
     ]
     const url = window.location.href;
     let view = url.split("=")[1];
     
-    if(view !== undefined && view.includes("#"))
+    if(view !== undefined)
     {
-        view = view.replace("#", "");
+        if(view.includes("&"))
+        {
+            view = view.split("&")[0];
+        }
+        if(view.includes("#"))
+        {
+            view = view.split("#")[0];
+        }
     }
     if(view === undefined)
     {

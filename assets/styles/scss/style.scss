@@ -1,0 +1,16 @@
+@use 'general/header';
+@use 'general/left-aside';
+@use 'general/form';
+@use 'general/buttons';
+@use 'general/main';
+@use 'general/footer';
+@use 'general/error-succes-gestion';
+
+@use 'typo/typographie';
+
+@use 'views/homepage';
+@use 'views/shop';
+@use 'views/account';
+@use 'views/dashboard';
+@use 'views/contact';
+@use 'views/quote-request';

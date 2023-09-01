@@ -1,0 +1,14 @@
+.success
+{
+  color: green;
+  font-size: 1rem;
+}
+.error
+{
+    outline: solid 2px red;
+}
+[id*="error"]
+{
+    color: red;
+    font-size: 1rem;
+}

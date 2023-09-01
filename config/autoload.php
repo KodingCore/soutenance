@@ -28,6 +28,7 @@ require "controllers/UserController.php";
 require "controllers/DashboardController.php";
 require "controllers/ContactController.php";
 require "controllers/APIFetchController.php";
+require "controllers/QuoteRequestController.php";
 require "controllers/NotFound.php";
 
 require "services/Router.php";

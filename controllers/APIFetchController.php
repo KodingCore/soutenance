@@ -142,7 +142,6 @@ class APIFetchController extends AbstractController
         $response = [
             'quotations' => $quotationsJsons
         ];
-        
         echo json_encode($response);
     }
 
