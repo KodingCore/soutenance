@@ -30,7 +30,8 @@ function initDashboard()
     controlNavLinks.forEach(function(link){
         link.addEventListener("click", function(){
             //* Affichage du tableau
-            fetchingControlDatas(link);
+            const className = link.id.split("-")[0];
+            fetchingControlDatas(className);
         })
     })
 }
@@ -39,15 +40,15 @@ function initDashboard()
 //* -----------------------------CRÉATION DU TABLEAU-----------------------------
 //* -----------------------------------------------------------------------------
 
-//** --------------------------------- */
+//** ------------------------------------------------------ */
 //*  Reset la section de control
-//*  Reçoi la data et appel les 
-//*  fonctions de créations du tableau
-//** --------------------------------- */
-function fetchingControlDatas(link)
+//*  Reçoi la data 
+//*  Appel les fonctions de créations du tableau de control
+//** ------------------------------------------------------ */
+function fetchingControlDatas(className)
 {
     const controlSection = document.getElementById("control-section");
-    fetch(`index.php?route=${link.id}`)
+    fetch(`index.php?route=${className}-link`)
         .then(response => 
             response.json()
             )
@@ -57,7 +58,7 @@ function fetchingControlDatas(link)
             {
                 controlSection.innerHTML = ""; //* On reset la section de control
                 setControlTitle(controlSection, key); //* Initialisation du titre de la section 
-                createAddBtns(data[key][0], controlSection, link);
+                createAddBtns(data[key][0], controlSection, className);
                 createStructureTable(controlSection); //* Création de la structure du tableau
                 for(let attributName in data[key][0]) //* Pour chaques attributs de la classe
                 {
@@ -66,7 +67,7 @@ function fetchingControlDatas(link)
                 for(let object in data[key]) //* Pour chaques objet de la data
                 {
                     let bodyRow = completeBodyTable(data[key][object]); //* On appel la fonction de création du body
-                    createControlBtns(data[key][0], link, bodyRow);
+                    createControlBtns(data[key][0], className, bodyRow);
                 }
             }
             initOptionsSelector();
@@ -75,50 +76,48 @@ function fetchingControlDatas(link)
 
         .catch(error => 
             console.error("Acune données dans cette table, " + error)
-            );
-        
-
+        );
 }
 
-//** --------------------------- */
-//*  Crée un bouton d'ajout en
-//*  fonction du control choisit
-//** --------------------------- */
-function createAddBtns(attributsNames, controlSection, link)
-{
-    const controlName = link.id.split("-")[0];
-    if(controlName === "template" || controlName === "category" || 
-        controlName === "appointment" || controlName === "quotation")
-    {
-        const addBtn = document.createElement("button");
-        addBtn.classList.add("btn");
-        addBtn.classList.add("add-btn");
-        addBtn.id = "add-" + controlName;
-        addBtn.textContent = "add " + controlName;
-        controlSection.appendChild(addBtn);
-
-        //* Écoute click d'ajout
-        addBtn.addEventListener("click", function(){
-            //* Affichage de la section d'ajout / d'édition
-            displayAddEditForm(attributsNames, link, "add");
-        })
-    }
-}
-
-//** --------------------------------- */
-//*  Initialise le titre de la section
-//** --------------------------------- */
+//** -------------------------------------------- */
+//*  Initialise le titre de la section de control
+//** -------------------------------------------- */
 function setControlTitle(section, title)
 {
     const controlTitle = document.createElement("h2");
     
     controlTitle.id = "control-title";
-    controlTitle.textContent = "Panneau de control des " + title;
+    controlTitle.textContent = "Control " + title;
     section.appendChild(controlTitle);
 }
-//** ---------------------------------- */
-//*  Initialise la structure du tableau
-//** ---------------------------------- */
+
+//** --------------------------- */
+//*  Crée un bouton d'ajout pour
+//*  les tables qui le nécéssites
+//** --------------------------- */
+function createAddBtns(attributsNames, controlSection, className)
+{
+    if(className === "template" || className === "category" || 
+        className === "appointment" || className === "quotation")
+    {
+        const addBtn = document.createElement("button");
+        addBtn.classList.add("btn");
+        addBtn.classList.add("add-btn");
+        addBtn.id = "add-" + className;
+        addBtn.textContent = "add " + className;
+        controlSection.appendChild(addBtn);
+
+        //* Écoute click d'ajout
+        addBtn.addEventListener("click", function(){
+            //* Affichage de la section d'ajout / d'édition
+            displayAddEditForm(attributsNames, className, "add");
+        })
+    }
+}
+
+//** --------------------------------------------- */
+//*  Initialise la structure du tableau de control
+//** --------------------------------------------- */
 function createStructureTable(section)
 {
     const controlTable = document.createElement("table");
@@ -138,9 +137,9 @@ function createStructureTable(section)
     bodyTable.id = "body-table";
 }
 
-//** ----------------------------- */
-//*  Complète l'en-tête du tableau
-//** ----------------------------- */
+//** ---------------------------------------- */
+//*  Complète l'en-tête du tableau de control
+//** ---------------------------------------- */
 function completeHeaderTable(headerCellName)
 {
     const rowHeader = document.getElementById("row-head");
@@ -177,10 +176,7 @@ function completeBodyTable(objectForCellsValues)
         {
             cell.classList.add("col-id");
         }
-        else
-        {
-            cell.classList.add("col-other");
-        }
+
         bodyRow.appendChild(cell);
         const textNodeCell = document.createTextNode(objectForCellsValues[key]);
         cell.appendChild(textNodeCell);
@@ -188,13 +184,22 @@ function completeBodyTable(objectForCellsValues)
     return bodyRow;
 }
 
-//** --------------------------------- */
+//** ------------------------------------ */
 //*  Crée les boutons de fin de lignes
-//*  pour éditer ou supprimer
-//** --------------------------------- */
-function createControlBtns(attributsNames, link, row)
+//*  pour visualiser, éditer ou supprimer
+//** ------------------------------------ */
+function createControlBtns(attributsNames, className, row)
 {
-    const className = link.id.split("-")[0];
+
+    const viewBtn = document.createElement("button");
+    viewBtn.classList.add("view-btn");
+    viewBtn.id = "view" + row.firstChild.textContent;
+    row.appendChild(viewBtn);
+    viewBtn.textContent = "View";
+    viewBtn.addEventListener("click", function(){
+        displayAddEditForm(attributsNames, className, "view", row);
+    })
+
     if(className === "template" || className === "category" || className === "appointment" || className === "quotation" || className === "user")
     {
         const editBtn = document.createElement("button");
@@ -204,7 +209,7 @@ function createControlBtns(attributsNames, link, row)
         editBtn.textContent = "Edit";
         editBtn.addEventListener("click", function(){
             //* Affichage de la section d'ajout / d'édition
-            displayAddEditForm(attributsNames, link, "edit", row);
+            displayAddEditForm(attributsNames, className, "edit", row);
         })
     }
     
@@ -215,7 +220,7 @@ function createControlBtns(attributsNames, link, row)
     removeBtn.textContent = "Suppr";
     removeBtn.addEventListener("click", function(){
         const idRow = row.getElementsByTagName("td")[0].textContent;
-        removeData(link, className, idRow);
+        removeData(className, idRow);
     })
 }
 
@@ -223,10 +228,10 @@ function createControlBtns(attributsNames, link, row)
 //* -----------------------------------RECHERCHE---------------------------------
 //* -----------------------------------------------------------------------------
 
-//** ---------------------------------- */
+//** ----------------------------------- */
 //*  Initialise les options du select
-//*  en fonction de la class controllée
-//** ---------------------------------- */
+//*  en fonction de la classe controllée
+//** ----------------------------------- */
 function initOptionsSelector()
 {
     const columnSelection = document.getElementById("column-selection"); //* Récuperation du select
@@ -319,14 +324,12 @@ function displayLine(table, colIndex, content)
 //** ---------------------------------------- */
 //*  Génère le formulaire d'ajout
 //*  en récuperant en paramètres
-//*  les attributs de la classe par le fatech
+//*  les attributs de la classe par le fetch
 //** ---------------------------------------- */
-function displayAddEditForm(attributsNames, link, action, row = null) //* action >>> "edit" ou "add"
+function displayAddEditForm(attributsNames, className, action, row = null) //* action >>> "edit" ou "add"
 {
     const addEditSection = document.getElementById("add-edit-section"); //* Variable contenant la section d'ajout / édition
     addEditSection.innerHTML = ""; //* On reset la section d'ajout / d'édition
-
-    const className = link.id.split("-")[0]; //* Récupération du nom de la classe en splitant le lien de la nav correspondante
 
     const addEditFormTitle = document.createElement("h2"); //* Création du titre de la section
     
@@ -338,6 +341,11 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
     {
         addEditFormTitle.textContent = "Éditer un(e) "; //* On set le text du titre pour l'édition
     }
+    else
+    {
+        addEditFormTitle.textContent = "Visualiser un(e) "; //* On set le text du titre pour la visu
+    }
+
     addEditFormTitle.textContent = addEditFormTitle.textContent + className; //* Ajout du nom de la classe au titre de la section
     addEditSection.appendChild(addEditFormTitle); //* Ajout de l'élément de titre h2
 
@@ -347,68 +355,23 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
     let i = 0; //* itération
     let inputsElements = []; //* Tableau vide qui contiendra les inputs du formulaire
 
-    for(let attribut in attributsNames) //* Pour chaque attributs de la classe
+    for(let attributName in attributsNames) //* Pour chaque attributs de la classe
     {
-        if(i === 0 && action === "edit") //* Si l'iteration est à 0 (ID) et que l'action est d'éditer
-        {
-            const idCell = row.getElementsByTagName("td")[0]; //* On récupère la cellude de l'id
-            const fieldsetElement = document.createElement("fieldset"); //* On crée un element fieldset
-            addEditForm.appendChild(fieldsetElement); //* On Ajoute le fieldset
 
-            const idElement = document.createElement("p"); //* On crée un element p
-            idElement.textContent = attribut + ": " + idCell.textContent; //* On set le texte de l'élément p avec l'attribut et l'id
-            fieldsetElement.appendChild(idElement);  //* On Ajoute le p
-        }
-        if(i > 0 && className !== "user") //* Si l'ittération est supérieur à 0 et que la classe n'est pas user
+        //* Affichage de l'id si nous sommes en edit ou view
+        if(i === 0 && action === "edit" || i === 0 && action === "view")
         {
+            const idCell = row.getElementsByTagName("td")[0];
             const fieldsetElement = document.createElement("fieldset");
             addEditForm.appendChild(fieldsetElement);
 
-            const labelElement = document.createElement("label");
-            labelElement.textContent = attribut;
-            labelElement.setAttribute("for", "input-" + attribut)
-            fieldsetElement.appendChild(labelElement);
-
-            let inputElement = null;
-            
-            if(attribut.includes("content") || attribut.includes("description"))
-            {
-                inputElement = document.createElement("textarea");
-            }
-            else
-            {
-                inputElement = document.createElement("input");
-            }
-            
-            if(attribut.includes("id"))
-            {
-                inputElement.setAttribute("type", "number");
-            }
-            else if(attribut.includes("date") || attribut.includes("created_at") || attribut.includes("updated_at"))
-            {
-                inputElement.setAttribute("type", "date");
-            }
-            else if(attribut.includes("time") && !attribut.includes("date"))
-            {
-                inputElement.setAttribute("type", "time");
-            }
-            else
-            {
-                inputElement.setAttribute("type", "text");
-            }
-            inputElement.id = "input-" + attribut;
-
-            if(action === "edit")
-            {
-                const cellsRow = row.getElementsByTagName("td");
-                inputElement.value = cellsRow[i].textContent;
-            }
-
-            fieldsetElement.appendChild(inputElement);
-
-            inputsElements.push(inputElement);
+            const idElement = document.createElement("p");
+            idElement.textContent = attributName + ": " + idCell.textContent;
+            fieldsetElement.appendChild(idElement);
         }
-        if(i !== 0 && className === "user")
+
+        //* Affichage des inputs de la classe user
+        if(i > 0 && className === "user")
         {
             const cellsRow = row.getElementsByTagName("td");
 
@@ -417,20 +380,20 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
 
             const labelElement = document.createElement("label");
             
-            labelElement.textContent = attribut;
-            labelElement.setAttribute("for", "input-" + attribut)
+            labelElement.textContent = attributName;
+            labelElement.setAttribute("for", "input-" + attributName)
             fieldsetElement.appendChild(labelElement);
 
-            let element = null;
+            let inputElement = null;
             let info = null;
             
-            if(attribut.toLowerCase().includes("role"))
+            if(attributName.toLowerCase().includes("role"))
             {
-                element = document.createElement("input");
-                element.setAttribute("type", "checkbox");
+                inputElement = document.createElement("input");
+                inputElement.setAttribute("type", "checkbox");
                 if(cellsRow[i].textContent === "admin")
                 {
-                    element.setAttribute("checked", "");
+                    inputElement.setAttribute("checked", "");
                 }
             }
             else
@@ -438,6 +401,12 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
                 info = document.createElement("p");
                 info.textContent = cellsRow[i].textContent;
             }
+
+            if(action === "view")
+            {
+                inputElement.setAttribute("readonly", "");
+            }
+
             if(element)
             {
                 fieldsetElement.appendChild(element);
@@ -449,110 +418,166 @@ function displayAddEditForm(attributsNames, link, action, row = null) //* action
             }
             
         }
-        i++;
-    }
-    const addEditBtn = document.createElement("button");
-    if(action === "add")
-    {
-        addEditBtn.textContent = "Add";
-    }
-    else if(action === "edit")
-    {
-        addEditBtn.textContent = "Edit";
-    }
-    addEditBtn.classList.add("btn");
-    addEditForm.appendChild(addEditBtn);
 
-    addEditBtn.addEventListener("click", function(event){
-        event.preventDefault();
-        if(action === "add")
+        //* Affichage des inputs des autres classes
+        if(i > 0 && className !== "user")
         {
-            addData(className, inputsElements, attributsNames, link);
-        }
-        else if(action === "edit")
-        {
-            editData(className, inputsElements, attributsNames, row.getElementsByTagName("td")[0].textContent, link);
-        }
-    })
-}
+            const fieldsetElement = document.createElement("fieldset");
+            addEditForm.appendChild(fieldsetElement);
 
+            const labelElement = document.createElement("label");
+            let labelContent = attributName.slice(0, 18);
 
-//** ------------------------------- */
-//*  Ajoute la data si validation du
-//*  formaulaire d'ajout
-//** ------------------------------- */
-function addData(className, inputs, attributsNames, link)
-{
-    let i = 0;
-    let attributs = [];
+            labelElement.textContent = labelContent;
+            labelElement.setAttribute("for", "input-" + attributName)
+            fieldsetElement.appendChild(labelElement);
 
-    for(let att in attributsNames)
-    {
-        if(i > 0)
-        {
-            attributs.push(att);
-        }
-        i++;
-    }
-    i = 0;
-
-    let stringRoute = `index.php?route=add-${className}`;
-    for(let key in inputs)
-    {
-        stringRoute = stringRoute + `&${attributs[i]}=${inputs[key].value}`;
-        i++;
-    }
-    fetch(stringRoute)
-        .then(result => {
-            fetchingControlDatas(link);
-        })
-        .catch(error => {
-            console.error('Une erreur est survenue :', error);
-        });
-}
-
-//** ------------------------------ */
-//*  Édite la data si validation du
-//*  formulaire d'édition
-//** ------------------------------ */
-function editData(className, inputs, attributsNames, id, link)
-{
-    let i = 0;
-    let attributs = [];
-
-    for(let att in attributsNames)
-    {
-        if(i > 0)
-        {
-            attributs.push(att);
-        }
-        i++;
-    }
-    i = 0;
-
-    let stringRoute = `index.php?route=edit-${className}&id=${id}`;
-    for(let key in inputs)
-    {
-        if(className !== "user")
-        {
-            stringRoute = stringRoute + `&${attributs[i]}=${inputs[key].value}`;
-        }
-        else
-        {
-            if(inputs[key].checked)
+            let inputElement = null;
+            
+            if(attributName.includes("content") || attributName.includes("description"))
             {
-                stringRoute = stringRoute + `&${attributs[i]}=admin`;
+                inputElement = document.createElement("textarea");
             }
             else
             {
-                stringRoute = stringRoute + `&${attributs[i]}=user`;
+                inputElement = document.createElement("input");
+            }
+
+            if(action === "view")
+            {
+                inputElement.setAttribute("readonly", "");
+            }
+            
+            if(attributName.includes("id"))
+            {
+                inputElement.setAttribute("type", "number");
+            }
+            else if(attributName.includes("date") || attributName.includes("created_at") || attributName.includes("updated_at"))
+            {
+                if(attributName.includes("time"))
+                {
+                    inputElement.setAttribute("type", "datetime");
+                }
+                else
+                {
+                    inputElement.setAttribute("type", "date");
+                }
+                
+            }
+            else if(attributName.includes("time") && !attributName.includes("date"))
+            {
+                inputElement.setAttribute("type", "time");
+            }
+            else
+            {
+                inputElement.setAttribute("type", "text");
+            }
+            inputElement.id = "input-" + attributName;
+
+            if(action === "edit" || action === "view")
+            {
+                const cellsRow = row.getElementsByTagName("td");
+                inputElement.value = cellsRow[i].textContent;
+            }
+
+            fieldsetElement.appendChild(inputElement);
+
+            inputsElements.push(inputElement);
+        }
+
+        i++;
+    }
+
+    const addEditBtn = document.createElement("button");
+
+    if(action !== "view")
+    {
+        if(action === "add")
+        {
+            addEditBtn.textContent = "Add";
+        }
+        else if(action === "edit")
+        {
+            addEditBtn.textContent = "Edit";
+        }
+        addEditBtn.classList.add("btn");
+        addEditForm.appendChild(addEditBtn);
+
+        addEditBtn.addEventListener("click", function(event){
+            event.preventDefault();
+            if(action === "add")
+            {
+                addEditData(className, inputsElements, attributsNames);
+            }
+            else if(action === "edit")
+            {
+                addEditData(className, inputsElements, attributsNames, row.getElementsByTagName("td")[0].textContent);
+            }
+        })
+    }
+}
+
+//** ---------------------------------- */
+//*  Ajoute et édite la data si
+//*  validation du formulaire d'édition
+//** ---------------------------------- */
+function addEditData(className, inputs, attributsNames, id) //* Si l'id  est définis, nous sommes en Édition
+{
+    let i = 0;
+    let attributs = [];
+
+    for(let attributName in attributsNames)
+    {
+        if(i > 0)
+        {
+            attributs.push(attributName);
+        }
+        i++;
+    }
+    i = 0;
+
+    let stringRoute = '';
+
+    if(!id) //* add
+    {
+        stringRoute = `index.php?route=add-${className}`;
+    }
+    else //* edit
+    {
+        stringRoute = `index.php?route=edit-${className}&id=${id}`;
+    }
+    
+    for(let key in inputs)
+    {
+        if(!id) //* add
+        {
+            stringRoute = stringRoute + `&${attributs[i]}=${inputs[key].value}`;
+        }
+        else //* edit
+        {
+            if(className !== "user")
+            {
+                stringRoute = stringRoute + `&${attributs[i]}=${inputs[key].value}`;
+            }
+            else
+            {
+                if(inputs[key].checked)
+                {
+                    stringRoute = stringRoute + `&${attributs[i]}=admin`;
+                }
+                else
+                {
+                    stringRoute = stringRoute + `&${attributs[i]}=user`;
+                }
             }
         }
         i++;
     }
     fetch(stringRoute)
-        .then(result => {
-            fetchingControlDatas(link);
+        .then(function() 
+        {
+            fetchingControlDatas(className);
+            
         })
         .catch(error => {
             console.error('Une erreur est survenue :', error);
@@ -563,11 +588,11 @@ function editData(className, inputs, attributsNames, id, link)
 //*  Supprime la data par click sur le
 //*  bouton de suppression de la ligne
 //** --------------------------------- */
-function removeData(link, className, id)
+function removeData(className, id)
 {
     fetch(`index.php?route=delete-${className}&id=${id}`)
         .then(result => {
-            fetchingControlDatas(link);
+            fetchingControlDatas(className);
         })
         .catch(error => {
           console.error('Une erreur est survenue :', error);

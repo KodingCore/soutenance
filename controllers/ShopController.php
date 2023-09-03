@@ -1,6 +1,6 @@
 <?php
 
-class TemplateController extends AbstractController
+class ShopController extends AbstractController
 {
 
     private TemplateManager $templateManager;
@@ -16,7 +16,7 @@ class TemplateController extends AbstractController
    
     public function index()
     {
-        $templates = $this->templateManager->getTemplates();
+        $templates = $this->templateManager->getTemplatesOrderedByDate();
         $categories = $this->categoryManager->getCategories();
 
         $this->render("views/user/shop.phtml", ["templates" => $templates, "categories" => $categories]);

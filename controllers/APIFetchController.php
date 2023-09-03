@@ -73,7 +73,7 @@ class APIFetchController extends AbstractController
 
     public function getAllTemplates()
     {
-        $templates = $this->templateManager->getTemplates();
+        $templates = $this->templateManager->getTemplatesOrderedByDate();
         $templatesJsons = [];
         foreach($templates as $template)
         {
@@ -103,7 +103,7 @@ class APIFetchController extends AbstractController
 
     public function getAllReviews()
     {
-        $reviews = $this->reviewManager->getReviews();
+        $reviews = $this->reviewManager->getReviewsOrderedByDate();
         $reviewsJsons = [];
         foreach($reviews as $review)
         {
@@ -189,7 +189,7 @@ class APIFetchController extends AbstractController
 
     public function deleteTemplateById()
     {
-        $id = $_GET["id"];
+        $id = (int)$_GET["id"];
         $this->quotationManager->deleteQuotationByTemplateId($id);
         $this->reviewManager->deleteReviewByTemplateId($id);
         $this->tagManager->deleteTagByTemplateId($id);
@@ -198,7 +198,7 @@ class APIFetchController extends AbstractController
 
     public function deleteCategoryById()
     {
-        $id = $_GET["id"];
+        $id = (int)$_GET["id"];
         $this->templateManager->setCategoryIdToNullByCategoryId($id);
         $this->categoryManager->deleteCategoryByCategoryId($id);
     }
@@ -242,11 +242,11 @@ class APIFetchController extends AbstractController
     {
         if(!empty($_GET["category_id"]))
         {
-            $category_id = $_GET["category_id"];
+            $category_id = (int)$_GET["category_id"];
         }
         if(!empty($_GET["price"]))
         {
-            $price = $_GET["price"];
+            $price = (float)$_GET["price"];
         }
         if(!empty($_GET["updated_at"]))
         {
@@ -267,8 +267,8 @@ class APIFetchController extends AbstractController
     {
         if(!empty($_GET["user_id"]) && !empty($_GET["template_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]))
         {
-            $user_id = $_GET["user_id"];
-            $template_id = $_GET["template_id"];
+            $user_id = (int)$_GET["user_id"];
+            $template_id = (int)$_GET["template_id"];
             $quotation_date = $_GET["quotation_date"];
             $content = $_GET["content"];
             $expiration_date = $_GET["expiration_date"];
@@ -281,7 +281,7 @@ class APIFetchController extends AbstractController
     {
         if(!empty($_GET["user_id"]) && !empty($_GET["appointment_date"]) && !empty($_GET["appointment_time"]) && !empty($_GET["communication_preference"]))
         {
-            $user_id = $_GET["user_id"];
+            $user_id = (int)$_GET["user_id"];
             $appointment_date = $_GET["appointment_date"];
             $appointment_time = $_GET["appointment_time"];
             $communication_preference = $_GET["communication_preference"];
@@ -294,7 +294,7 @@ class APIFetchController extends AbstractController
     {
         if(!empty($_GET["id"] && !empty($_GET["name"]) && !empty($_GET["description"])))
         {
-            $id = $_GET["id"];
+            $id = (int)$_GET["id"];
             $name = $_GET["name"];
             $description = $_GET["description"];
             $category = new Category($name, $description);
@@ -307,11 +307,11 @@ class APIFetchController extends AbstractController
     {
         if(!empty($_GET["category_id"]))
         {
-            $category_id = $_GET["category_id"];
+            $category_id = (int)$_GET["category_id"];
         }
         if(!empty($_GET["price"]))
         {
-            $price = $_GET["price"];
+            $price = (float)$_GET["price"];
         }
         if(!empty($_GET["updated_at"]))
         {
@@ -319,7 +319,7 @@ class APIFetchController extends AbstractController
         }
         if(!empty($_GET["id"]) && !empty($_GET["name"]) && !empty($_GET["description"]) && !empty($_GET["image_path"]) && !empty($_GET["created_at"]))
         {
-            $id = $_GET["id"];
+            $id = (int)$_GET["id"];
             $name = $_GET["name"];
             $description = $_GET["description"];
             $image_path = $_GET["image_path"];
@@ -334,7 +334,7 @@ class APIFetchController extends AbstractController
     {
         if(!empty($_GET["id"]) && !empty($_GET["user_id"]) && !empty($_GET["template_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]))
         {
-            $id = $_GET["id"];
+            $id = (int)$_GET["id"];
             $user_id = $_GET["user_id"];
             $template_id = $_GET["template_id"];
             $quotation_date = $_GET["quotation_date"];
@@ -350,7 +350,7 @@ class APIFetchController extends AbstractController
     {
         if(!empty($_GET["id"]) && !empty($_GET["user_id"]) && !empty($_GET["appointment_date"]) && !empty($_GET["appointment_time"]) && !empty($_GET["communication_preference"]))
         {
-            $id = $_GET["id"];
+            $id = (int)$_GET["id"];
             $user_id = $_GET["user_id"];
             $appointment_date = $_GET["appointment_date"];
             $appointment_time = $_GET["appointment_time"];
@@ -365,7 +365,7 @@ class APIFetchController extends AbstractController
     {
         if(!empty($_GET["id"]) && !empty($_GET["role"]))
         {
-            $id = $_GET["id"];
+            $id = (int)$_GET["id"];
             $role = $_GET["role"];
             $this->userManager->editUserRoleById($id, $role);
         }

@@ -25,6 +25,10 @@
       border-radius: 0 5px 0 5px;
       border-color: $dark-blue;
       width: 30%;
+      input
+      {
+        width: 100%;
+      }
     }
     fieldset:last-child
     {
@@ -32,24 +36,32 @@
       border-radius: 0 5px 0 5px;
       border-color: $dark-blue;
       width: 70%;
+      input
+      {
+        width: 100%;
+      }
     }
   }
   #control-section
   {
+    overflow-x: auto;
+    width: 100%;
+    
     table
     {
       margin: 0 auto;
       border-radius: 0 16px 0 16px;
       border: solid 2px $dark-blue;
+      
       padding: 1rem;
-
-      tr.hidden //* Ceci sert à la recherche dans le dashboard et ne doit pas etre supprimer
+      tr:nth-child(even)
       {
-        display:none;
+        background-color: $light-blue;
       }
 
       td
       {
+        max-width: 3rem;
         padding-left: 0.5rem;
         border-bottom: solid 1px black;
       }
@@ -59,24 +71,10 @@
         overflow:hidden;
         white-space: nowrap;
       }
-      td, th
-      {
-        display: none;
-      }
-      td:first-child, th:first-child, td:nth-child(2), th:nth-child(2), td:nth-child(3), th:nth-child(3) 
-      {
-        display:table-cell;
-      }
-  
       .col-id
       {
         min-width: 0;
         max-width: 2.5rem;
-      }
-      .col-other
-      {
-        min-width: 0;
-        max-width: 3rem;
       }
     }
   }

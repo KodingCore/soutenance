@@ -71,6 +71,7 @@ export function checkUserFields(form)
     //** ----------------------------------------------------- */
     function checkRegex(input_field, reg, name, error_field)
     {
+
         if(!reg.exec(input_field.value))
         {
             input_field.classList.add("error");
@@ -86,6 +87,7 @@ export function checkUserFields(form)
             {
                 error_field.textContent = "Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères";
             }
+            error_field.classList.remove("hidden");
         }
         else
         {

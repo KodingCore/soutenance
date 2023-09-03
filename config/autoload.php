@@ -23,7 +23,7 @@ require "managers/TagManager.php";
 
 require "controllers/AbstractController.php";
 require "controllers/HomepageController.php";
-require "controllers/TemplateController.php";
+require "controllers/ShopController.php";
 require "controllers/UserController.php";
 require "controllers/DashboardController.php";
 require "controllers/ContactController.php";

@@ -3,7 +3,7 @@
 class Router
 {
     private HomepageController $homepageController;
-    private TemplateController $templateController;
+    private ShopController $shopController;
     private UserController $userController;
     private ContactController $contactController;
     private DashboardController $dashboardController;
@@ -14,7 +14,7 @@ class Router
     public function __construct()
     {
         $this->homepageController = new HomepageController();
-        $this->templateController = new TemplateController();
+        $this->shopController = new ShopController();
         $this->userController = new UserController();
         $this->contactController = new ContactController();
         $this->dashboardController = new DashboardController();
@@ -56,11 +56,16 @@ class Router
         }
         else if($route === "shop")
         {
-            $this->templateController->index();
+            $this->shopController->index();
         }
         else if($route === "quote-request")
         {
-            $this->quoteRequestController->index();
+            if(isset($_GET["template_id"]))
+            {
+                $template_id = $_GET["template_id"];
+                $this->quoteRequestController->index($template_id);
+            }
+            
         }
         else if(isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
         {

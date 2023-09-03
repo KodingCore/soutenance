@@ -1,4 +1,7 @@
 <main id="homepage-container" class="homepage-container">
+    <!-- --------------------------- -->
+    <!-- -----HEADER-----HEADER----- -->
+    <!-- --------------------------- -->
     <header id="main-header">
         <div id="tagline-container">
             <p id="tagline">
@@ -6,6 +9,9 @@
             </p>
         </div>
     </header>
+    <!-- --------------------------- -->
+    <!-- -----HEADER-----HEADER----- -->
+    <!-- --------------------------- -->
     <h1>Accueil</h1>
     <section id="presentation">
         <h2>Qui sommes nous?</h2>
@@ -15,41 +21,59 @@
             professionnels des solutions de Développement web et logiciel innovantes et sur mesure.
         </p>
     </section>
-    <section id="news">
-        <h2>Nouveautés</h2>
-        <article>
-            <h3>Title</h3>
-            <img src="" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus consequuntur sapiente recusandae fugiat repellat nisi quae ab provident sit. Culpa dolorem maiores sed, porro suscipit nam itaque placeat ratione hic, architecto natus. Reprehenderit, doloremque enim! Saepe, ad, tempora, aspernatur minus harum illo maiores dolores fugiat necessitatibus quis sed provident unde!</p>
+    <h2>Dernières templates</h2>
+    <section id="templates-section">   
+    <?php
+    if(isset($this->data["templates"]))
+    {
+        $templates = $this->data["templates"];
+        foreach ($templates as $key => $template) 
+        {
+    ?>
+        <article class="template-card">
+            <header>
+                <h3><?= $template->getName(); ?></h3>
+            </header>
+                <img src="<?= $template->getImagePath() ?>" alt="Image du template <?= $template->getName() ?>">
+            <footer>
+                <p><?= $template->getDescription() ?></p>
+                <p><?= $template->getCreatedAt() ?></p>
+            </footer>
         </article>
-        <article>
-            <h3>Title</h3>
-            <img src="" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus consequuntur sapiente recusandae fugiat repellat nisi quae ab provident sit. Culpa dolorem maiores sed, porro suscipit nam itaque placeat ratione hic, architecto natus. Reprehenderit, doloremque enim! Saepe, ad, tempora, aspernatur minus harum illo maiores dolores fugiat necessitatibus quis sed provident unde!</p>
-        </article>
-        <article>
-            <h3>Title</h3>
-            <img src="" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus consequuntur sapiente recusandae fugiat repellat nisi quae ab provident sit. Culpa dolorem maiores sed, porro suscipit nam itaque placeat ratione hic, architecto natus. Reprehenderit, doloremque enim! Saepe, ad, tempora, aspernatur minus harum illo maiores dolores fugiat necessitatibus quis sed provident unde!</p>
-        </article>
-        <article>
-            <h3>Title</h3>
-            <img src="" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus consequuntur sapiente recusandae fugiat repellat nisi quae ab provident sit. Culpa dolorem maiores sed, porro suscipit nam itaque placeat ratione hic, architecto natus. Reprehenderit, doloremque enim! Saepe, ad, tempora, aspernatur minus harum illo maiores dolores fugiat necessitatibus quis sed provident unde!</p>
-        </article>
-        <article>
-            <h3>Title</h3>
-            <img src="" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus consequuntur sapiente recusandae fugiat repellat nisi quae ab provident sit. Culpa dolorem maiores sed, porro suscipit nam itaque placeat ratione hic, architecto natus. Reprehenderit, doloremque enim! Saepe, ad, tempora, aspernatur minus harum illo maiores dolores fugiat necessitatibus quis sed provident unde!</p>
-        </article>
-        <article>
-            <h3>Title</h3>
-            <img src="" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus consequuntur sapiente recusandae fugiat repellat nisi quae ab provident sit. Culpa dolorem maiores sed, porro suscipit nam itaque placeat ratione hic, architecto natus. Reprehenderit, doloremque enim! Saepe, ad, tempora, aspernatur minus harum illo maiores dolores fugiat necessitatibus quis sed provident unde!</p>
-        </article>
+    <?php
+        }   
+    }
+    ?>
     </section>
-    <section id="reviews">
-        <h2>Avis clients</h2>
+
+    <h2>Avis clients</h2>
+    <section id="reviews-section">
+    <?php
+    if(isset($this->data["reviews"]) && isset($this->data["templates"]))
+    {
+        $reviews = $this->data["reviews"];
+        $i = 0;
+        foreach ($reviews as $key => $review) 
+        {   
+        ?>
+
+        <article class="review-card">
+        <?php
+            if(isset($this->data["users_reviews"]))
+            {
+                $users_reviews = $this->data["users_reviews"];
+                ?><p><?= $users_reviews[$i]->getUsername(); ?></p><?php
+            }
+            ?>
+            <p><?= $template->getName(); ?></p>
+            <p><?= $review->getSendDate(); ?></p>
+            <p><?= $review->getContent(); ?></p>
+        </article>
+        <?php
+        $i++;
+        }   
+    }
+    ?>
     </section>
 </main>
 <!-- ------------------------------------------------------------------------------------- -->
@@ -58,7 +82,7 @@
 <aside id="left-aside">
     <ul>
         <li><a href="#presentation">Présentation</a></li>
-        <li><a href="#news">Nouveautés</a></li>
-        <li><a href="#reviews">Avis-clients</a></li>
+        <li><a href="#templates-section">Dernières templates</a></li>
+        <li><a href="#reviews-section">Avis-clients</a></li>
     </ul>
 </aside>

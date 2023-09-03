@@ -20,22 +20,34 @@
     <p>La relation client qu'offre notre service, affienera votre demande, pour vous offrir un site web sur mesure.</p>
     <form action="index.php?route=quote-request" method="POST" id="quoation_form">
         <fieldset>
-            <label for="template_name">Nom du template</label>
-            <input type="text" name="template_name" id="template_name" readonly value="nom du template">
+            <label for="template_name">Exmple de template</label>
+            <input type="text" name="template_name" id="template_name" readonly value="<?php
+                if(isset($this->data["template"]))
+                {
+                    $template = $this->data["template"];
+                    echo $template->getName();
+                }
+            ?>">
         </fieldset>
         <fieldset>
             <label for="category">Catégorie</label>
-            <input type="text" name="category" id="category" readonly value="nom de la catégorie">
+            <input type="text" name="category" id="category" readonly value="<?php
+                if(isset($this->data["category"]))
+                {
+                    $category = $this->data["category"];
+                    echo $category->getName();
+                }
+            ?>">
         </fieldset>
-        <fieldset>
+        <fieldset class="checkbox-field">
             <label for="inscription">Inscription / connexion</label>
             <input type="checkbox" name="inscription" id="inscription">
         </fieldset>
-        <fieldset>
+        <fieldset class="checkbox-field">
             <label for="buy">Achats / ventes</label>
             <input type="checkbox" name="buy" id="buy">
         </fieldset>
-        <fieldset>
+        <fieldset class="checkbox-field">
             <label for="frequency">Mises à jour fréquentes des produits / services (plus d'une fois par mois)</label>
             <input type="checkbox" name="frequency" id="frequency">
         </fieldset>

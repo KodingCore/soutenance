@@ -17,18 +17,25 @@
         {
             $category_name = $category->getName();
             ?>
-            <section id="<?=$category_name?>-section">
+            <h2><?=$category_name?></h2>
+            <section id="section-<?=$category_name?>-section">
+                
                 <?php
                 foreach($templates as $template)
                 {
                     if($template->getCategoryId() === $category->getCategoryId())
                     {
                         ?>
-                        <article class="cards">
-                            <h3><?=$template->getName();?></h3>
-                            <img width="250" src="<?=$template->getImagePath();?>" alt="Image du template proposé">
-                            <p><?=$template->getDescription();?></p>
-                            <a href="index.php?route=quote-request&id=<?=$template->getTemplateId();?>"><button class="btn">Demander un devis</button></a>
+                        <article class="template-card">
+                            <header>
+                                <h3><?= $template->getName(); ?></h3>
+                            </header>
+                                <img src="<?= $template->getImagePath() ?>" alt="Image du template <?= $template->getName() ?>">
+                            <footer>
+                                <p><?= $template->getDescription() ?></p>
+                                <p><?= $template->getCreatedAt() ?></p>
+                                <a href="index.php?route=quote-request&template_id=<?=$template->getTemplateId();?>"><button class="btn">Demander un devis</button></a>
+                            </footer>
                         </article>
                         <?php
                     }
@@ -45,7 +52,7 @@
 <aside id="left-aside">
     <ul>
         <li><a href="#presentation">Présentation</a></li>
-        <li><a href="#news">Nouveautés</a></li>
+        <li><a href="#templates-section">Nouveautés</a></li>
         <li><a href="#reviews">Avis-clients</a></li>
     </ul>
 </aside>

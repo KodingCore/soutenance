@@ -23,6 +23,7 @@ form
     label
     {
       color: white;
+      
       margin: 16px 10px 0 16px;
     }
     input
@@ -31,6 +32,13 @@ form
       margin-top: 8px;
       border-radius: 0 5px 0 5px;
       box-shadow: 3px 3px 3px 0px $light-blue;
+    }
+    input[type="checkbox"]
+    {
+      width: 96%;
+      margin-top: 8px;
+      border-radius: 0;
+      box-shadow: none;
     }
     textarea
     {
@@ -41,6 +49,23 @@ form
       box-shadow: 3px 3px 3px 0px $light-blue;
       border: solid 1px black;
     }
+  }
+  fieldset.checkbox-field
+  {
+    display: flex;
+    justify-content: space-between;
+    label
+    {
+      margin: auto;
+      margin-left:0.26rem;
+      font-size: 0.68rem;
+    }
+    input
+    {
+      width: auto;
+      height: auto;
+    }
+    
   }
   fieldset.textarea
   {

@@ -2,6 +2,15 @@ html
 {
   scroll-behavior: smooth;
 
+  .hidden
+  {
+    display: none;
+  }
+
+  textarea {
+    resize: none;
+  }
+
   body
   {
     margin: 0;
@@ -12,7 +21,7 @@ html
     background-position: center;
     main
     {
-      width: 90%;
+      width: 96%;
       margin: 0 auto;
       #main-header
       {

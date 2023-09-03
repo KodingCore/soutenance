@@ -21,11 +21,11 @@ class ContactController extends AbstractController
             $content = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
     
             //* Validation regex
-            if(!preg_match('/{2,50}$/', $subject))
+            if(!preg_match('/^{2,50}$/', $subject))
             {
                 $error = ["Le sujet doit faire entre 2 et 50 caractères", "subject"];
             }
-            if(!preg_match('/{10,2048}$/', $content))
+            if(!preg_match('/^{10,2048}$/', $content))
             {
                 $error = ["Le message doit faire entre 10 et 2048 caractères", "content"];
             }

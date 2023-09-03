@@ -22,21 +22,40 @@ html{
     h1
     {
         text-align: center;
-        text-decoration: underline;
-        font-size: 2rem;
+        font-size: 1.75rem;
+    }
+    h1::after
+    {
+        content: url("../../images/decorations/take-shape.svg");
+        display:inline-block;
+        opacity: 0.5;
+        width: 90px;
+        height: auto;
     }
     h2
     {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        margin-left: 20px;
     }
     h3
     {
         margin: 0.5rem auto;
-        font-size: 1.35rem;
+        font-size: 1.3rem;
     }
     h4  
     {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
     }
+    #tagline //* ajouter un mediaquery pour le DESKTOP
+    {
+        font-weight: bold;
+        letter-spacing: 3px;
+    }
+    .card-title
+    {
+        font-size: 1rem;
+        text-overflow:ellipsis;
+    }
+
 }
 

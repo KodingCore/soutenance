@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/a2be3c71ec.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
+    <header id="top-header">
         <div class="logo">
             <img src="assets\images\logos\logo-kodingcore-white.png" alt="Logo KodingCore Development">
         </div>
@@ -42,7 +42,7 @@
         <?php
             require $this->template;
         ?>
-    <footer>
+    <footer id="top-footer">
         <?php
             
             if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin

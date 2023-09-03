@@ -14,12 +14,10 @@
       }
     }
   }
-  #presentation
+  #templates-section, #reviews-section
   {
-
-  }
-  #news
-  {
-
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }

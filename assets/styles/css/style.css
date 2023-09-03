@@ -1,36 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-header {
+#top-header {
   min-height: 50px;
   padding: 16px;
   display: flex;
   justify-content: space-between;
   background: linear-gradient(to left, rgb(47, 85, 151), rgb(47, 85, 151), rgb(143, 170, 220));
 }
-header .logo {
+#top-header .logo {
   width: 80%;
   max-width: 300px;
   display: flex;
   align-items: center;
 }
-header .logo img {
+#top-header .logo img {
   width: 100%;
   height: auto;
 }
-header .burger-container {
+#top-header .burger-container {
   width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-header .navbar {
+#top-header .navbar {
   position: absolute;
   height: auto;
   right: 0;
   text-align: center;
   z-index: 1;
 }
-header .navbar #menu {
+#top-header .navbar #menu {
   display: none;
   margin: 0;
   padding: 0;
@@ -39,20 +39,20 @@ header .navbar #menu {
   background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(143, 170, 220));
   border-radius: 0 0 20px 20px;
 }
-header .navbar #menu li {
+#top-header .navbar #menu li {
   padding: 9px;
 }
-header .navbar #menu li a {
+#top-header .navbar #menu li a {
   color: white;
   font-size: 20px;
   text-decoration: none;
 }
-header .navbar #menu li a:hover {
+#top-header .navbar #menu li a:hover {
   color: rgb(255, 150, 81);
   text-decoration: underline;
   font-weight: bold;
 }
-header .navbar #menu.active {
+#top-header .navbar #menu.active {
   display: flex;
   flex-direction: column;
 }
@@ -137,6 +137,12 @@ form fieldset input {
   border-radius: 0 5px 0 5px;
   box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
 }
+form fieldset input[type=checkbox] {
+  width: 96%;
+  margin-top: 8px;
+  border-radius: 0;
+  box-shadow: none;
+}
 form fieldset textarea {
   width: 96%;
   height: 300px;
@@ -145,11 +151,76 @@ form fieldset textarea {
   box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
   border: solid 1px black;
 }
+form fieldset.checkbox-field {
+  display: flex;
+  justify-content: space-between;
+}
+form fieldset.checkbox-field label {
+  margin: auto;
+  margin-left: 0.26rem;
+  font-size: 0.68rem;
+}
+form fieldset.checkbox-field input {
+  width: auto;
+  height: auto;
+}
 form fieldset.textarea {
   height: 200px;
 }
 form fieldset.textarea textarea {
   height: 80%;
+}
+
+.template-card {
+  height: auto;
+  width: 68%;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: solid 2px rgb(143, 170, 220);
+  border-radius: 0 16px 0 16px;
+  text-align: center;
+}
+.template-card header {
+  padding: 0;
+  border-radius: 0 16px 0 16px;
+  background: linear-gradient(to left, rgb(47, 85, 151), rgb(47, 85, 151), rgb(143, 170, 220));
+}
+.template-card header h3 {
+  color: white;
+}
+.template-card img {
+  width: 100%;
+}
+.template-card footer {
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.review-card {
+  height: auto;
+  width: 68%;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: solid 2px rgb(143, 170, 220);
+  border-radius: 0 16px 0 16px;
+  text-align: center;
+}
+.review-card header {
+  padding: 0;
+  border-radius: 0 16px 0 16px;
+  background: linear-gradient(to left, rgb(47, 85, 151), rgb(47, 85, 151), rgb(143, 170, 220));
+}
+.review-card header h3 {
+  color: white;
+}
+.review-card img {
+  width: 100%;
+}
+.review-card footer {
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
 }
 
 .btn, input[type*=submit] {
@@ -174,6 +245,14 @@ form fieldset.textarea textarea {
   color: white;
   box-shadow: 6px 6px 6px 0px rgb(143, 170, 220);
   background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(47, 85, 151), white);
+}
+
+.view-btn {
+  height: 1.25rem;
+  width: 3rem;
+  margin-left: 0.75rem;
+  background-color: green;
+  color: white;
 }
 
 .edit-btn {
@@ -205,6 +284,12 @@ form fieldset.textarea textarea {
 html {
   scroll-behavior: smooth;
 }
+html .hidden {
+  display: none;
+}
+html textarea {
+  resize: none;
+}
 html body {
   margin: 0;
   padding: 0;
@@ -214,7 +299,7 @@ html body {
   background-position: center;
 }
 html body main {
-  width: 90%;
+  width: 96%;
   margin: 0 auto;
 }
 html body main #main-header {
@@ -239,7 +324,7 @@ html body main #main-header #tagline-container #tagline {
   font-size: 3.5vw;
 }
 
-footer {
+#top-footer {
   width: 100%;
   height: 136px;
   margin-top: 2rem;
@@ -247,20 +332,20 @@ footer {
   background: linear-gradient(to bottom, rgb(143, 170, 220) 10%, rgb(47, 85, 151));
   display: flex;
 }
-footer nav {
+#top-footer nav {
   width: 100%;
   height: 100%;
 }
-footer nav ul {
+#top-footer nav ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
-footer nav ul li {
+#top-footer nav ul li {
   margin-left: 1vw;
 }
-footer nav ul li a {
+#top-footer nav ul li a {
   text-decoration: none;
   color: white;
 }
@@ -275,8 +360,12 @@ footer nav ul li a {
 }
 
 [id*=error] {
+  padding: 0.6rem;
+  position: absolute;
+  border-radius: 0 16px 0 16px;
+  background: linear-gradient(to bottom, white, white, rgb(143, 170, 220));
   color: red;
-  font-size: 1rem;
+  font-size: 0.75rem;
 }
 
 html {
@@ -296,18 +385,33 @@ html #tagline {
 }
 html h1 {
   text-align: center;
-  text-decoration: underline;
-  font-size: 2rem;
+  font-size: 1.75rem;
+}
+html h1::after {
+  content: url("../../images/decorations/take-shape.svg");
+  display: inline-block;
+  opacity: 0.5;
+  width: 90px;
+  height: auto;
 }
 html h2 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  margin-left: 20px;
 }
 html h3 {
   margin: 0.5rem auto;
-  font-size: 1.35rem;
+  font-size: 1.3rem;
 }
 html h4 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
+}
+html #tagline {
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+html .card-title {
+  font-size: 1rem;
+  text-overflow: ellipsis;
 }
 
 .homepage-container #main-header {
@@ -319,6 +423,12 @@ html h4 {
 .homepage-container #main-header #tagline-container #tagline {
   color: white;
 }
+.homepage-container #templates-section, .homepage-container #reviews-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .login-container #main-header {
   background-image: url("../../images/backgrounds/login-background.jpg");
 }
@@ -355,20 +465,13 @@ html h4 {
 .shop-container #main-header #tagline-container #tagline {
   color: white;
 }
-.shop-container #templates-section .cards {
-  margin: 2rem auto;
-  padding: 0.5rem;
-  border-radius: 0 20px 0 20px;
-  border: solid rgb(47, 85, 151);
-  width: 75%;
-  display: flex;
-  background-color: white;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+.shop-container #templates-section {
+  width: 100%;
 }
-.shop-container #templates-section .cards p {
-  text-align: center;
+.shop-container #templates-section section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .account-container #main-header {
@@ -399,11 +502,21 @@ html h4 {
   border-color: rgb(47, 85, 151);
   width: 30%;
 }
+.dashboard-container #search-section fieldset:first-child input {
+  width: 100%;
+}
 .dashboard-container #search-section fieldset:last-child {
   margin: 0 auto;
   border-radius: 0 5px 0 5px;
   border-color: rgb(47, 85, 151);
   width: 70%;
+}
+.dashboard-container #search-section fieldset:last-child input {
+  width: 100%;
+}
+.dashboard-container #control-section {
+  overflow-x: auto;
+  width: 100%;
 }
 .dashboard-container #control-section table {
   margin: 0 auto;
@@ -411,10 +524,11 @@ html h4 {
   border: solid 2px rgb(47, 85, 151);
   padding: 1rem;
 }
-.dashboard-container #control-section table tr.hidden {
-  display: none;
+.dashboard-container #control-section table tr:nth-child(even) {
+  background-color: rgb(143, 170, 220);
 }
 .dashboard-container #control-section table td {
+  max-width: 3rem;
   padding-left: 0.5rem;
   border-bottom: solid 1px black;
 }
@@ -423,19 +537,9 @@ html h4 {
   overflow: hidden;
   white-space: nowrap;
 }
-.dashboard-container #control-section table td, .dashboard-container #control-section table th {
-  display: none;
-}
-.dashboard-container #control-section table td:first-child, .dashboard-container #control-section table th:first-child, .dashboard-container #control-section table td:nth-child(2), .dashboard-container #control-section table th:nth-child(2), .dashboard-container #control-section table td:nth-child(3), .dashboard-container #control-section table th:nth-child(3) {
-  display: table-cell;
-}
 .dashboard-container #control-section table .col-id {
   min-width: 0;
   max-width: 2.5rem;
-}
-.dashboard-container #control-section table .col-other {
-  min-width: 0;
-  max-width: 3rem;
 }
 
 .contact-container #main-header {
