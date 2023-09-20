@@ -402,15 +402,15 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
                 info.textContent = cellsRow[i].textContent;
             }
 
-            if(action === "view")
+            if(action === "view" && inputElement)
             {
                 inputElement.setAttribute("readonly", "");
             }
 
-            if(element)
+            if(inputElement)
             {
-                fieldsetElement.appendChild(element);
-                inputsElements.push(element);
+                fieldsetElement.appendChild(inputElement);
+                inputsElements.push(inputElement);
             }
             else
             {
