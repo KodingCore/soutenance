@@ -2,21 +2,16 @@
 
 class QuoteRequestController extends AbstractController
 {
-   private $templateManager;
-   private $categoryManager;
+    private $categoryManager;
 
-   public function __construct()
-   {
-        $this->templateManager = new TemplateManager();
-        $this->categoryManager = new CategoryManager();
-   }
-
-    public function index(int $template_id) : void
+    public function __construct()
     {
-        $template = $this->templateManager->getTemplateByTemplateId($template_id);
-        $category = $this->categoryManager->getCategoryByCategoryId($template->getCategoryId());
+        $this->categoryManager = new CategoryManager();
+    }
 
-        $this->render("views/user/quote-request.phtml", ["template" => $template, "category" => $category]);
+    public function index() : void
+    {
+        $this->render("views/user/quote-request.phtml",["categories" => $this->categoryManager->getCategories()]);
     }
     
 }

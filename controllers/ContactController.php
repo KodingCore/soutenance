@@ -23,17 +23,17 @@ class ContactController extends AbstractController
             //* Validation regex
             if(!preg_match('/^{2,50}$/', $subject))
             {
-                $error = ["Le sujet doit faire entre 2 et 50 caractères", "subject"];
+                $error = ["message" => "Le sujet doit faire entre 2 et 50 caractères", "field" => "subject"];
             }
             if(!preg_match('/^{10,2048}$/', $content))
             {
-                $error = ["Le message doit faire entre 10 et 2048 caractères", "content"];
+                $error = ["message" => "Le message doit faire entre 10 et 2048 caractères", "field" => "content"];
             }
 
             if ($error) //* Si il y a une erreur
             { 
-                //* Afficher l'erreur et rediriger vers le formulaire d'inscription
-                $this->render("views/guest/register.phtml", ["message" => $error]);
+                //* Afficher l'erreur et rediriger vers le formulaire de contact
+                $this->render("views/user/contact.phtml", $error);
 
             } 
             else //* Les champs sont valides

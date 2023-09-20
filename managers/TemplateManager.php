@@ -13,7 +13,7 @@ class TemplateManager extends AbstractManager
             $templatesTab = [];
             foreach($templates as $template)
             {
-                $templateInstance = new Template($template["category_id"], $template["name"], $template["description"], $template["image_path"], $template["price"], $template["created_at"], $template["updated_at"]);
+                $templateInstance = new Template($template["name"], $template["description"], $template["image_path"], $template["created_at"], $template["updated_at"]);
                 $templateInstance->setTemplateId($template["template_id"]);
                 array_push($templatesTab, $templateInstance);
             }
@@ -35,7 +35,7 @@ class TemplateManager extends AbstractManager
         $template = $query->fetch(PDO::FETCH_ASSOC);
         if($template)
         {
-            $templateInstance = new Template($template["category_id"], $template["name"], $template["description"], $template["image_path"], $template["price"], $template["created_at"], $template["updated_at"]);
+            $templateInstance = new Template($template["name"], $template["description"], $template["image_path"], $template["created_at"], $template["updated_at"]);
             $templateInstance->setTemplateId($template["template_id"]);
             return $templateInstance;
         }
@@ -45,24 +45,13 @@ class TemplateManager extends AbstractManager
         }
     }
 
-    public function setCategoryIdToNullByCategoryId($category_id) : void
-    {
-        $query = $this->db->prepare("UPDATE templates SET category_id = null WHERE category_id = :category_id");
-        $parameters = [
-            "category_id" => $category_id
-        ];
-        $query->execute($parameters);
-    }
-
     public function insertTemplate(Template $template) : void
     {
-        $query = $this->db->prepare("INSERT INTO templates (category_id, name, description, image_path, price, created_at, updated_at) VALUES(:category_id, :name, :description, :image_path, :price, :created_at, :updated_at)");
+        $query = $this->db->prepare("INSERT INTO templates (name, description, image_path, created_at, updated_at) VALUES(:name, :description, :image_path, :created_at, :updated_at)");
         $parameters = [
-            "category_id" => $template->getCategoryId(),
             "name" => $template->getName(),
             "description" => $template->getDescription(),
             "image_path" => $template->getImagePath(),
-            "price" => $template->getPrice(),
             "created_at" => $template->getCreatedAt(),
             "updated_at" => $template->getUpdatedAt()
         ];
@@ -81,13 +70,11 @@ class TemplateManager extends AbstractManager
 
     public function editTemplate(Template $template)
     {
-        $query = $this->db->prepare("UPDATE templates SET category_id = :category_id, name = :name, description = :description, image_path = :image_path, price = :price, created_at = :created_at, updated_at = :updated_at WHERE template_id = :template_id");
+        $query = $this->db->prepare("UPDATE templates SET name = :name, description = :description, image_path = :image_path, created_at = :created_at, updated_at = :updated_at WHERE template_id = :template_id");
         $parameters = [
-            "category_id" => $template->getCategoryId(),
             "name" => $template->getName(),
             "description" => $template->getDescription(),
             "image_path" => $template->getImagePath(),
-            "price" => $template->getPrice(),
             "created_at" => $template->getCreatedAt(),
             "updated_at" => $template->getUpdatedAt(),
             "template_id" => $template->getTemplateId()

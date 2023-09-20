@@ -13,7 +13,7 @@ class CategoryManager extends AbstractManager
             $categoriesTab = [];
             foreach($categories as $category)
             {
-                $categoryInstance = new Category($category["name"], $category["description"]);
+                $categoryInstance = new Category($category["name"], $category["description"], $category["average_price"]);
                 $categoryInstance->setCategoryId($category["category_id"]);
                 array_push($categoriesTab, $categoryInstance);
             }
@@ -27,10 +27,11 @@ class CategoryManager extends AbstractManager
 
     public function insertCategory(Category $category)
     {
-        $query = $this->db->prepare("INSERT INTO categories (name, description) VALUES(:name, :description)");
+        $query = $this->db->prepare("INSERT INTO categories (name, description, average_price) VALUES(:name, :description, :average_price)");
         $parameters = [
             "name" => $category->getName(),
-            "description" => $category->getDescription()
+            "description" => $category->getDescription(),
+            "average_price" => $category->getAveragePrice()
         ];
         $query->execute($parameters);
     }
@@ -46,10 +47,11 @@ class CategoryManager extends AbstractManager
 
     public function editCategory(Category $category)
     {
-        $query = $this->db->prepare("UPDATE categories SET name = :name, description = :description WHERE category_id = :category_id");
+        $query = $this->db->prepare("UPDATE categories SET name = :name, description = :description, average_price = :average_price WHERE category_id = :category_id");
         $parameters = [
             "name" => $category->getName(),
             "description" => $category->getDescription(),
+            "average_price" => $category->getAveragePrice(),
             "category_id" => $category->getCategoryId()
         ];
         $query->execute($parameters);
@@ -65,7 +67,7 @@ class CategoryManager extends AbstractManager
         $category = $query->fetch(PDO::FETCH_ASSOC);
         if($category)
         {
-            $categoryInstance = new Category($category["name"], $category["description"]);
+            $categoryInstance = new Category($category["name"], $category["description"], $category["average_price"]);
             $categoryInstance->setCategoryId($category["category_id"]);
             return $categoryInstance;
         }

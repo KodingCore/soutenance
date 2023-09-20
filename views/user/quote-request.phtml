@@ -1,12 +1,3 @@
-
-<?php
-    if(isset($this->data["message"])) //*Si on à un message dans la data
-    {
-        ?>
-        <span class="success"><?=$this->data["message"]; ?></span>
-        <?php
-    }
-?>
 <main class="quote-request-container" id="quote-request-container">
     <header id="main-header">
         <div id="tagline-container">
@@ -16,44 +7,214 @@
         </div>
     </header>
     <h1>Demande de devis</h1>
-    <p>Ce formulaire ne permet q'une simple approche de ce qui tendra vers un rendu final.</p>
-    <p>La relation client qu'offre notre service, affienera votre demande, pour vous offrir un site web sur mesure.</p>
+    <h2>Nos créations comprennent toutes les fonctionnalitées suivantes de base:</h2>
+    <ul>
+        <li>Compatibilité des navigateurs</li>
+        <li>Optimisation du SEO, du référencement</li>
+        <li>Compression des images et optimisation des performances</li>
+        <li>Sécurisation des données et des actions malveillantes</li>
+        <li>Interface et Expérience Utilisateur (UI et UX) optimisé selon les attentes du site web</li>
+    </ul>
+    <p>Le formulaire suivant permet une approche plus précise de ce que vous attendez de notre service.</p>
+    <p>La relation client que nous offront, affienera votre demande, pour vous offrir un site web sur mesure.</p>
     <form action="index.php?route=quote-request" method="POST" id="quoation_form">
         <fieldset>
-            <label for="template_name">Exmple de template</label>
-            <input type="text" name="template_name" id="template_name" readonly value="<?php
-                if(isset($this->data["template"]))
-                {
-                    $template = $this->data["template"];
-                    echo $template->getName();
-                }
-            ?>">
-        </fieldset>
-        <fieldset>
+            <legend>Catégorie du site web :</legend>
             <label for="category">Catégorie</label>
-            <input type="text" name="category" id="category" readonly value="<?php
-                if(isset($this->data["category"]))
+            <select name="category" id="category">
+                <?php
+
+                if(isset($this->data["categories"]))
                 {
-                    $category = $this->data["category"];
-                    echo $category->getName();
+                    $categories = $this->data["categories"];
+                    foreach ($categories as $category) 
+                    {
+                        ?>
+                            <option value="<?=$category->getName();?>"><?=$category->getName();?></option>
+                        <?php
+                    }
                 }
-            ?>">
+
+                ?>
+            </select>
         </fieldset>
+
+        <div class="fieldset-separator"></div>
+
         <fieldset class="checkbox-field">
-            <label for="inscription">Inscription / connexion</label>
-            <input type="checkbox" name="inscription" id="inscription">
+            <legend>Fonctionnalités de base :</legend>
+
+            <label for="cms">Utilisation d'un système de gestion de contenu (CMS)</label>
+            <input type="checkbox" name="cms" id="cms">
+            <span class="input-description">Réduis la personnalisation et les possibilitées fonctionnelles.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Inscription et gestion des utilisateurs</label>
+            <input type="checkbox" name="suscribing" id="suscribing">
+            <span class="input-description">Création de comptes, connexion, gestion de profils.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="reviews">Commentaires</label>
+            <input type="checkbox" name="reviews" id="reviews">
+            <span class="input-description">Possibilité de laisser des commentaires sur le contenu.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="research">Recherche</label>
+            <input type="checkbox" name="research" id="research">
+            <span class="input-description">Fonction de recherche pour trouver rapidement du contenu.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="social">Partage sur les médias sociaux</label>
+            <input type="checkbox" name="social" id="social">
+            <span class="input-description">Permet aux utilisateurs de partager du contenu sur les réseaux sociaux.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="localisation">Géolocalisation</label>
+            <input type="checkbox" name="localisation" id="localisation">
+            <span class="input-description">Intégration de cartes pour afficher des emplacements.</span>
         </fieldset>
+
+        <div class="fieldset-separator"></div>
+
         <fieldset class="checkbox-field">
-            <label for="buy">Achats / ventes</label>
-            <input type="checkbox" name="buy" id="buy">
+            <legend>Fonctionnalités e-commerce :</legend>
+
+            <label for="cms">Gestion des produits</label>
+            <input type="checkbox" name="cms" id="cms">
+            <span class="input-description">Ajout, édition et suppression de produits.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Panier d'achat</label>
+            <input type="checkbox" name="suscribing" id="suscribing">
+            <span class="input-description">Fonctionnalité de panier pour les achats en ligne.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="reviews">Paiement en ligne</label>
+            <input type="checkbox" name="reviews" id="reviews">
+            <span class="input-description">Intégration de passerelles de paiement pour les transactions.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="research">Facturation</label>
+            <input type="checkbox" name="research" id="research">
+            <span class="input-description">Génération automatique de factures pour les commandes.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="social">Système de notation</label>
+            <input type="checkbox" name="social" id="social">
+            <span class="input-description">Permet aux utilisateurs de noter et de commenter les produits.</span>
         </fieldset>
+
+        <div class="fieldset-separator"></div>
+
         <fieldset class="checkbox-field">
-            <label for="frequency">Mises à jour fréquentes des produits / services (plus d'une fois par mois)</label>
-            <input type="checkbox" name="frequency" id="frequency">
+            <legend>Sites de discussion et de communauté :</legend>
+
+            <label for="cms">Forums et discussions</label>
+            <input type="checkbox" name="cms" id="cms">
+            <span class="input-description">Création de forums, discussion de sujets.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Messagerie</label>
+            <input type="checkbox" name="suscribing" id="suscribing">
+            <span class="input-description">Possibilité d'envoyer des messages et des notifications.</span>
         </fieldset>
+
+        <div class="fieldset-separator"></div>
+
+        <fieldset class="checkbox-field">
+            <legend>Sites de réservation et de services :</legend>
+
+            <label for="cms">Système de réservation</label>
+            <input type="checkbox" name="cms" id="cms">
+            <span class="input-description">Réservation de rendez-vous, services, etc.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Calendrier</label>
+            <input type="checkbox" name="suscribing" id="suscribing">
+            <span class="input-description">Affichage des disponibilités et des horaires.</span>
+        </fieldset>
+
+        <div class="fieldset-separator"></div>
+
+        <fieldset class="checkbox-field">
+            <legend>Sites de médias et de divertissement :</legend>
+
+            <label for="cms">Intégration de vidéos</label>
+            <input type="checkbox" name="cms" id="cms">
+            <span class="input-description">Diffusion de vidéos en direct ou à la demande.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Système de notation et de commentaires</label>
+            <input type="checkbox" name="suscribing" id="suscribing">
+            <span class="input-description">Notation et commentaires sur les médias.</span>
+        </fieldset>
+
+        <div class="fieldset-separator"></div>
+
+        <fieldset class="checkbox-field">
+            <legend>Sites d'entreprise et professionnels :</legend>
+
+            <label for="cms">Tableau de bord administrateur</label>
+            <input type="checkbox" name="cms" id="cms">
+            <span class="input-description">Interface pour gérer les utilisateurs, le contenu, etc.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Système de notifications</label>
+            <input type="checkbox" name="suscribing" id="suscribing">
+            <span class="input-description">Envoi de notifications par e-mail ou messages aux utilisateurs.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Multilinguisme</label>
+            <input type="checkbox" name="suscribing" id="suscribing">
+            <span class="input-description">Prise en charge de plusieurs langues pour un public international.</span>
+        </fieldset>
+
+        <div class="fieldset-separator"></div>
+
+        <fieldset class="checkbox-field">
+            <legend>Fonctionnalités de Design :</legend>
+
+            <label for="cms">Design responsive</label>
+            <input type="checkbox" name="cms" id="cms">
+            <span class="input-description">Assure que le site s'adapte correctement à tous les types d'appareils.</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Transmition du contenu</label>
+            <select name="" id="">
+                <option value="">Contenu inexistant</option>
+                <option value="">Contenu partiel</option>
+                <option value="">Contenu complet</option>
+            </select>
+            <span class="input-description">Le contenu de création (logos, images, vidéos, etc.) qui sera transmis à pour le développement</span>
+
+            <div class="input-separator"></div>
+
+            <label for="suscribe">Multilinguisme</label>
+            <input type="checkbox" name="suscribing" id="suscribing">
+            <span class="input-description">Prise en charge de plusieurs langues pour un public international.</span>
+        </fieldset>
+
+        <div class="fieldset-separator"></div>
+
         <fieldset class="textarea">
-            <label for="description">Description du projet (but, design...)</label>
-            <textarea id="description" name="description" placeholder="Votre description ici..." required minlength="10" maxlength="2048"></textarea>
+            <legend>Description et précisions importantes du projet</legend>
+            <label for="description">Description et précisions</label>
+            <textarea id="description" name="description" placeholder="Votre texte ici..." required minlength="10" maxlength="2048"></textarea>
         </fieldset>
         <input type="submit" value="Envoyer">
     </form>

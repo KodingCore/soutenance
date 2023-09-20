@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", function(){
     const title = document.getElementsByTagName("h1")[0];
     const header = document.getElementsByTagName("header")[0];
     const burgerIcon = document.getElementById("burger-icon");
+    const succesSpan = document.getElementsByClassName("succes")[0]; //* On récupère le span de message de succès pour controlé s'il y a eut redirection
     const menu = document.getElementById("menu");
     const url = window.location.href;
     let view = url.split("=")[1];
@@ -14,6 +15,11 @@ window.addEventListener("DOMContentLoaded", function(){
         if(view.includes("#"))
         {
             view = view.split("#")[0];
+        }
+
+        if(view === "login" && succesSpan.textContent != null)
+        {
+            view = "register";
         }
     }
     if(view === undefined || title.textContent === "Accueil")

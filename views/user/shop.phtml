@@ -9,39 +9,23 @@
     <h1>Vitrine</h1>
     <section id="templates-section">
     <?php
-    if(isset($this->data["templates"]) && isset($this->data["categories"]))
+    if(isset($this->data["templates"]))
     {
         $templates = $this->data["templates"];
-        $categories = $this->data["categories"];
-        foreach($categories as $category)
+        foreach($templates as $template)
         {
-            $category_name = $category->getName();
             ?>
-            <h2><?=$category_name?></h2>
-            <section id="section-<?=$category_name?>-section">
-                
-                <?php
-                foreach($templates as $template)
-                {
-                    if($template->getCategoryId() === $category->getCategoryId())
-                    {
-                        ?>
-                        <article class="template-card">
-                            <header>
-                                <h3><?= $template->getName(); ?></h3>
-                            </header>
-                                <img src="<?= $template->getImagePath() ?>" alt="Image du template <?= $template->getName() ?>">
-                            <footer>
-                                <p><?= $template->getDescription() ?></p>
-                                <p><?= $template->getCreatedAt() ?></p>
-                                <a href="index.php?route=quote-request&template_id=<?=$template->getTemplateId();?>"><button class="btn">Demander un devis</button></a>
-                            </footer>
-                        </article>
-                        <?php
-                    }
-                }
-                ?>
-            </section>
+            <article class="template-card">
+                <header>
+                    <h3><?= $template->getName(); ?></h3>
+                </header>
+                    <img src="<?= $template->getImagePath() ?>" alt="Image du template <?= $template->getName() ?>">
+                <footer>
+                    <p><?= $template->getDescription() ?></p>
+                    <p><?= $template->getCreatedAt() ?></p>
+                    <a href="index.php?route=quote-request"><button class="btn">Demander un devis</button></a>
+                </footer>
+            </article>
             <?php
         }
     }

@@ -199,7 +199,6 @@ class APIFetchController extends AbstractController
     public function deleteCategoryById()
     {
         $id = (int)$_GET["id"];
-        $this->templateManager->setCategoryIdToNullByCategoryId($id);
         $this->categoryManager->deleteCategoryByCategoryId($id);
     }
 
@@ -229,11 +228,12 @@ class APIFetchController extends AbstractController
 
     public function addCategory()
     {
-        if(!empty($_GET["name"]) && !empty($_GET["description"]))
+        if(!empty($_GET["name"]) && !empty($_GET["description"]) && !empty($_GET["average_price"]))
         {
             $name = $_GET["name"];
             $description = $_GET["description"];
-            $category = new Category($name, $description);
+            $average_price = $_GET["average_price"];
+            $category = new Category($name, $description, $average_price);
             $this->categoryManager->insertCategory($category);
         }
     }
@@ -243,10 +243,6 @@ class APIFetchController extends AbstractController
         if(!empty($_GET["category_id"]))
         {
             $category_id = (int)$_GET["category_id"];
-        }
-        if(!empty($_GET["price"]))
-        {
-            $price = (float)$_GET["price"];
         }
         if(!empty($_GET["updated_at"]))
         {
@@ -258,21 +254,22 @@ class APIFetchController extends AbstractController
             $description = $_GET["description"];
             $image_path = $_GET["image_path"];
             $created_at = $_GET["created_at"];
-            $template = new Template($category_id, $name, $description, $image_path, $price, $created_at, $updated_at);
+            $template = new Template($category_id, $name, $description, $image_path, $created_at, $updated_at);
             $this->templateManager->insertTemplate($template);
         }
     }
 
     public function addQuotation()
     {
-        if(!empty($_GET["user_id"]) && !empty($_GET["template_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]))
+        if(!empty($_GET["user_id"]) && !empty($_GET["template_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]) && !empty($_GET["price"]))
         {
             $user_id = (int)$_GET["user_id"];
             $template_id = (int)$_GET["template_id"];
             $quotation_date = $_GET["quotation_date"];
             $content = $_GET["content"];
             $expiration_date = $_GET["expiration_date"];
-            $quotation = new Quotation($user_id, $template_id, $quotation_date, $content, $expiration_date);
+            $price = $_GET["price"];
+            $quotation = new Quotation($user_id, $template_id, $quotation_date, $content, $expiration_date, $price);
             $this->quotationManager->insertQuotation($quotation);
         }
     }
@@ -292,12 +289,13 @@ class APIFetchController extends AbstractController
 
     public function editCategory()
     {
-        if(!empty($_GET["id"] && !empty($_GET["name"]) && !empty($_GET["description"])))
+        if(!empty($_GET["id"] && !empty($_GET["name"]) && !empty($_GET["description"])) && !empty($_GET["average_price"]))
         {
             $id = (int)$_GET["id"];
             $name = $_GET["name"];
             $description = $_GET["description"];
-            $category = new Category($name, $description);
+            $average_price = $_GET["average_price"];
+            $category = new Category($name, $description, $average_price);
             $category->setCategoryId($id);
             $this->categoryManager->editCategory($category);
         }
@@ -308,10 +306,6 @@ class APIFetchController extends AbstractController
         if(!empty($_GET["category_id"]))
         {
             $category_id = (int)$_GET["category_id"];
-        }
-        if(!empty($_GET["price"]))
-        {
-            $price = (float)$_GET["price"];
         }
         if(!empty($_GET["updated_at"]))
         {
@@ -324,7 +318,7 @@ class APIFetchController extends AbstractController
             $description = $_GET["description"];
             $image_path = $_GET["image_path"];
             $created_at = $_GET["created_at"];
-            $template = new Template($category_id, $name, $description, $image_path, $price, $created_at, $updated_at);
+            $template = new Template($category_id, $name, $description, $image_path, $created_at, $updated_at);
             $template->setTemplateId($id);
             $this->templateManager->editTemplate($template);
         }
@@ -332,7 +326,7 @@ class APIFetchController extends AbstractController
 
     public function editQuotation()
     {
-        if(!empty($_GET["id"]) && !empty($_GET["user_id"]) && !empty($_GET["template_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]))
+        if(!empty($_GET["id"]) && !empty($_GET["user_id"]) && !empty($_GET["template_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]) && !empty($_GET["price"]))
         {
             $id = (int)$_GET["id"];
             $user_id = $_GET["user_id"];
@@ -340,7 +334,8 @@ class APIFetchController extends AbstractController
             $quotation_date = $_GET["quotation_date"];
             $content = $_GET["content"];
             $expiration_date = $_GET["expiration_date"];
-            $quotation = new Quotation($user_id, $template_id, $quotation_date, $content, $expiration_date);
+            $price = $_GET["price"];
+            $quotation = new Quotation($user_id, $template_id, $quotation_date, $content, $expiration_date, $price);
             $quotation->setQuotationId($id);
             $this->quotationManager->editQuotation($quotation);
         }

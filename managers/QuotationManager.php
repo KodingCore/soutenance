@@ -13,7 +13,7 @@ class QuotationManager extends AbstractManager
             $quotationsTab = [];
             foreach($quotations as $quotation)
             {
-                $quotationInstance = new Quotation($quotation["user_id"], $quotation["template_id"], $quotation["quotation_date"], $quotation["content"], $quotation["expiration_date"]);
+                $quotationInstance = new Quotation($quotation["user_id"], $quotation["template_id"], $quotation["quotation_date"], $quotation["content"], $quotation["expiration_date"], $quotation["price"]);
                 $quotationInstance->setQuotationId($quotation["quotation_id"]);
                 array_push($quotationsTab, $quotationInstance);
             }
@@ -27,13 +27,14 @@ class QuotationManager extends AbstractManager
 
     public function insertQuotation(Quotation $quotation)
     {
-        $query = $this->db->prepare("INSERT INTO quotations (user_id, template_id, quotation_date, content, expiration_date) VALUES(:user_id, :template_id, :quotation_date, :content, :expiration_date)");
+        $query = $this->db->prepare("INSERT INTO quotations (user_id, template_id, quotation_date, content, expiration_date, price) VALUES(:user_id, :template_id, :quotation_date, :content, :expiration_date, :price)");
         $parameters = [
             "user_id" => $quotation->getUserId(),
             "template_id" => $quotation->getTemplateId(),
             "quotation_date" => $quotation->getQuotationDate(),
             "content" => $quotation->getContent(),
-            "expiration_date" => $quotation->getExpirationDate()
+            "expiration_date" => $quotation->getExpirationDate(),
+            "price" => $quotation->getPrice()
         ];
         $query->execute($parameters);
     }
@@ -67,14 +68,15 @@ class QuotationManager extends AbstractManager
 
     public function editQuotation(Quotation $quotation)
     {
-        $query = $this->db->prepare("UPDATE quotations SET user_id = :user_id, template_id = :template_id, quotation_date = :quotation_date, content = :content, expiration_date = :expiration_date WHERE quotation_id = :quotation_id");
+        $query = $this->db->prepare("UPDATE quotations SET user_id = :user_id, template_id = :template_id, quotation_date = :quotation_date, content = :content, expiration_date = :expiration_date, price = :price WHERE quotation_id = :quotation_id");
         $parameters = [
             "user_id" => $quotation->getUserId(),
             "template_id" => $quotation->getTemplateId(),
             "quotation_date" => $quotation->getQuotationDate(),
             "content" => $quotation->getContent(),
             "expiration_date" => $quotation->getExpirationDate(),
-            "quotation_id" => $quotation->getQuotationId()
+            "quotation_id" => $quotation->getQuotationId(),
+            "price" => $quotation->getPrice()
         ];
         $query->execute($parameters);
     }
@@ -89,7 +91,7 @@ class QuotationManager extends AbstractManager
         $quotation = $query->fetch(PDO::FETCH_ASSOC);
         if($quotation)
         {
-            $quotationInstance = new Quotation($quotation["user_id"], $quotation["template_id"], $quotation["quotation_date"], $quotation["content"], $quotation["expiration_date"]);
+            $quotationInstance = new Quotation($quotation["user_id"], $quotation["template_id"], $quotation["quotation_date"], $quotation["content"], $quotation["expiration_date"], $quotation["price"]);
             $quotationInstance->setQuotationId($quotation["quotation_id"]);
             return $quotationInstance;
         }

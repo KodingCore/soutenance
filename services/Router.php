@@ -60,12 +60,7 @@ class Router
         }
         else if($route === "quote-request")
         {
-            if(isset($_GET["template_id"]))
-            {
-                $template_id = $_GET["template_id"];
-                $this->quoteRequestController->index($template_id);
-            }
-            
+            $this->quoteRequestController->index(); 
         }
         else if(isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
         {

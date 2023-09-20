@@ -31,17 +31,37 @@ export function checkUserFields(form)
     //* Control général des champs de saisie
     function globalControl()
     {
+        if(errorUsername.textContent)
+        {
+            errorUsername.classList.add("content-write");
+        }
+        if(errorEmail.textContent)
+        {
+            errorEmail.classList.add("content-write");
+        }
+        if(errorPassword.textContent)
+        {
+            errorPassword.classList.add("content-write");
+        }
+        if(errorConfirmPassword.textContent)
+        {
+            errorConfirmPassword.classList.add("content-write");
+        }
         champUsername.addEventListener("change", function () {
+            errorUsername.classList.remove("content-write");
             checkRegex(champUsername, usernameRegex, "Username", errorUsername);
         });
         champEmail.addEventListener("change", function () {
+            errorEmail.classList.remove("content-write");
             checkRegex(champEmail, emailRegex, "Email", errorEmail);
         });
         champPassword.addEventListener("change", function () {
+            errorPassword.classList.remove("content-write");
             checkRegex(champPassword, passwordRegex, "Password", errorPassword);
             confirmPasswordChecker();
         });
         champConfirmPassword.addEventListener("change", function () {
+            errorConfirmPassword.classList.remove("content-write");
             confirmPasswordChecker();
         });
     }
@@ -56,12 +76,14 @@ export function checkUserFields(form)
         if(champConfirmPassword.value !== champPassword.value && champConfirmPassword.value.length > 0)
         {
             champConfirmPassword.classList.add("error");
-            errorConfirmPassword.textContent = "La confirmation du password doit être identique au password";  
+            errorConfirmPassword.textContent = "La confirmation du password doit être identique au password"; 
+            errorConfirmPassword.classList.add("content-write");
         }
         else
         {
             champConfirmPassword.classList.remove("error");
             errorConfirmPassword.textContent = "";
+            errorConfirmPassword.classList.remove("content-write");
         }
     }
 
@@ -78,20 +100,24 @@ export function checkUserFields(form)
             if(name === "Username")
             {
                 error_field.textContent = "Uniquement lettres, chiffres, '-', '.' et espaces, de 2 à 50 caractères.";
+                error_field.classList.add("content-write");
             }
             else if(name === "Email")
             {
-                error_field.textContent = "Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères.";
+                error_field.textContent = "Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères. Le TLD dois faire 4 caractères maximum.";
+                error_field.classList.add("content-write");
             }
             else if(name === "Password")
             {
                 error_field.textContent = "Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères";
+                error_field.classList.add("content-write");
             }
             error_field.classList.remove("hidden");
         }
         else
         {
             input_field.classList.remove("error");
+            error_field.classList.remove("content-write");
             error_field.textContent = "";
         }
     }

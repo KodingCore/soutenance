@@ -3,7 +3,10 @@
     if(isset($this->data["message"])) //*Si on à un message dans la data
     {
         ?>
-        <span class="success"><?=$this->data["message"]; ?></span>
+        <?php
+        echo $this->data["message"];
+        ?>
+        
         <?php
     }
 ?>
@@ -20,10 +23,24 @@
         <fieldset>
             <label for="subject">Sujet</label>
             <input type="text" name="subject" id="subject" autocomplete="off" required minlength="4" maxlength="50">
+            <?php
+            if(isset($this->data["field"]) && $this->data["field"] === "subject")
+            {
+                ?>
+                <span class="error"><?= $this->data["message"]; ?></span>
+                <?php
+            }?>
         </fieldset>
         <fieldset class="textarea">
             <label for="content">Message</label>
             <textarea id="content" name="content" placeholder="Votre texte ici..." required minlength="10" maxlength="2048"></textarea>
+            <?php
+            if(isset($this->data["field"]) && $this->data["field"] === "content")
+            {
+                ?>
+                <span class="error"><?= $this->data["message"]; ?></span>
+                <?php
+            }?>
         </fieldset>
         <input type="submit" value="Envoyer">
     </form>

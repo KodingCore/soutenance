@@ -5,8 +5,12 @@
 
 .success
 {
-  color: green;
+  padding: 0.5rem;
   font-size: 1rem;
+  color: green;
+  background-color: white;
+  border: solid 1px green;
+  
 }
 .error
 {
@@ -17,7 +21,11 @@
     padding: 0.6rem;
     position: absolute;
     border-radius: 0 16px 0 16px;
-    background: linear-gradient(to bottom, white, white, $light-blue);
     color: red;
     font-size: 0.75rem;
+}
+
+[id*="error"].content-write
+{
+  background: linear-gradient(to bottom, white, white, $light-blue);
 }

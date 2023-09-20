@@ -92,9 +92,11 @@ export function checkInfoFields(form)
             {
                 error_field.textContent = "Uniquement lettres, chiffres, '-' et espaces, de 2 à 50 caractère";
             }
+            error_field.classList.add("content-write");
         }
         else
         {
+            error_field.classList.remove("content-write");
             input_field.classList.remove("error");
             error_field.textContent = "";
         }
