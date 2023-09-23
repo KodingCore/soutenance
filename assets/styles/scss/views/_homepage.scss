@@ -14,10 +14,33 @@
       }
     }
   }
-  #templates-section, #reviews-section
+  #templates-section
   {
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 20px;
+    .template-card
+    {
+      width: 280px;
+    }
+
+    
+  }
+
+  #reviews-section
+  {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    .review-card
+    {
+      width: 280px;
+      height: 200px;
+      overflow: scroll;
+    }
   }
 }

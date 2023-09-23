@@ -8,6 +8,7 @@
     </header>
     <h1>Vitrine</h1>
     <section id="templates-section">
+        <p class="text-center">Voici une présentation des templates déjà créer par nos services. Celà peut vous donner une idée de ce que nous créont visuellement. N'hésitez pas à nous demander un devis qui vous sera transmis par email.</p>
     <?php
     if(isset($this->data["templates"]))
     {
@@ -23,7 +24,7 @@
                 <footer>
                     <p><?= $template->getDescription() ?></p>
                     <p><?= $template->getCreatedAt() ?></p>
-                    <a href="index.php?route=quote-request"><button class="btn">Demander un devis</button></a>
+                    <a href="index.php?route=quote-request"><button class="btn">Votre site sur-mesure</button></a>
                 </footer>
             </article>
             <?php
@@ -40,3 +41,4 @@
         <li><a href="#reviews">Avis-clients</a></li>
     </ul>
 </aside>
+<script type="module" src="assets/js/shopClassesAttribution.js"></script>

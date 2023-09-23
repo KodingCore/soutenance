@@ -17,11 +17,13 @@
   #templates-section
   {
     width: 100%;
-    section
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    .template-card
     {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      width: 280px;
     }
   }
 }

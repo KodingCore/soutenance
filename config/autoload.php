@@ -30,5 +30,6 @@ require "controllers/ContactController.php";
 require "controllers/APIFetchController.php";
 require "controllers/QuoteRequestController.php";
 require "controllers/NotFound.php";
+require "controllers/GnuController.php";
 
 require "services/Router.php";

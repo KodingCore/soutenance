@@ -6,11 +6,24 @@
 //*---------------------------------------------
 //* Boutons en général et inputs de type submit
 //*---------------------------------------------
-.btn, input[type*="submit"]
+.btn
 {
   width: $submit-width;
   margin: $submit-margin;
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 3px 3px 3px 0px $light-blue;
+  background: linear-gradient(to bottom, $light-blue, white, $light-blue);
+  border-radius: 0 5px 0 5px;
+  border: solid 1px black;
+  font-weight: bold;
+  color: $dark-blue;
+}
+input[type*="submit"]
+{
+  width: $submit-width;
+  margin: $submit-margin;
+  margin-top: 1.5rem;
   margin-bottom: 0.5rem;
   box-shadow: 3px 3px 3px 0px $light-blue;
   background: linear-gradient(to bottom, $light-blue, white, $light-blue);
@@ -29,6 +42,31 @@
   color: white;
   box-shadow: 6px 6px 6px 0px $light-blue;
   background: linear-gradient(to bottom, $dark-blue, $dark-blue, white);
+}
+
+//*----------------------------------
+//* Bouton volant de demande de site
+//*----------------------------------
+#float-btn
+{
+  width: 25%; // À modifier en desktop
+  position: fixed;
+  right: 0;
+  top: 60vh;
+  box-shadow: 3px 3px 3px 0px $light-blue;
+  background: linear-gradient(to bottom, $light-blue, white, $light-blue);
+  border-radius: 0 5px 0 5px;
+  border: solid 1px black;
+  font-weight: bold;
+  color: $dark-blue;
+  a{
+    color: $dark-blue;
+  }
+}
+#float-btn:hover, a
+{
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 //*--------------------------------------------

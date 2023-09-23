@@ -30,6 +30,55 @@
     {
         width: 100%;
     }
+
+    // À effectuer seulement sur desktop
+    img.center-picture:hover 
+    {
+        animation: imageZoomCenter 0.75s forwards;
+    }
+    img.left-picture:hover 
+    {
+        animation: imageZoomLeft 0.75s forwards;
+    }
+    img.right-picture:hover 
+    {
+        animation: imageZoomRight 0.75s forwards;
+    }
+
+    @keyframes imageZoomCenter
+    {
+        from
+        {
+            transform: scale(1);
+        }
+        to
+        {
+            transform: scale(2.5);
+        }
+    }
+    @keyframes imageZoomLeft
+    {
+        from
+        {
+            transform: scale(1) translateX(0);
+        }
+        to
+        {
+            transform: scale(2.5) translateX(20%);
+        }
+    }
+    @keyframes imageZoomRight
+    {
+        from
+        {
+            transform: scale(1) translateX(0);
+        }
+        to
+        {
+            transform: scale(2.5) translateX(-20%);
+        }
+    }
+
     footer
     {
         margin: 0;

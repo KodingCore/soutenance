@@ -49,19 +49,23 @@ export function checkUserFields(form)
         }
         champUsername.addEventListener("change", function () {
             errorUsername.classList.remove("content-write");
+            errorUsername.classList.remove("error");
             checkRegex(champUsername, usernameRegex, "Username", errorUsername);
         });
         champEmail.addEventListener("change", function () {
             errorEmail.classList.remove("content-write");
+            errorEmail.classList.remove("error");
             checkRegex(champEmail, emailRegex, "Email", errorEmail);
         });
         champPassword.addEventListener("change", function () {
             errorPassword.classList.remove("content-write");
+            errorPassword.classList.remove("error");
             checkRegex(champPassword, passwordRegex, "Password", errorPassword);
             confirmPasswordChecker();
         });
         champConfirmPassword.addEventListener("change", function () {
             errorConfirmPassword.classList.remove("content-write");
+            errorConfirmPassword.classList.remove("error");
             confirmPasswordChecker();
         });
     }

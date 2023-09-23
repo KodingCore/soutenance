@@ -118,11 +118,11 @@ class UserController extends AbstractController
             //* Validation de doublons
             if($this->userManager->getUserByUsername($username))
             {
-                $error =  ["message" => "Email ou username déjà utilisé", "field" => "email"];
+                $error =  ["message" => "Email ou username déjà utilisé", "field" => "username"];
             }
             if($this->userManager->getUserByEmail($email))
             {
-                $error = ["message" => "Email ou username déjà utilisé", "field" => "email"];
+                $error = ["message" => "Email ou username déjà utilisé", "field" => "username"];
             }
 
             //* Validation de l'égalité des saisies password et confirm_password
@@ -155,9 +155,8 @@ class UserController extends AbstractController
                 $user = $this->userManager->getUserByEmail($email); //* On récupère l'utilisateur dans la BDD pour obtenir son ID
                 $info = new Info($user->getUserId()); //* Instantiation d'une info utilisateur à partir de son ID
                 $this->infoManager->insertInfo($info); //* On insert l'info dans la BDD
-                //header("Location: index.php?route=login"); //* Compte créer, on se rend sur la page de login
-                
-                $this->render("views/guest/login.phtml", ["message" => "Compte créer avec succès", "field" => "general"]);
+        
+                $this->render("views/guest/login.phtml", ["message" => "Compte créer avec succès", "field" => "general"]); //* Compte créer, on se rend sur la page de login
             }
         } 
         else 

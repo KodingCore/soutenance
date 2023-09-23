@@ -10,6 +10,7 @@ class Router
     private APIFetchController $APIFetchController;
     private QuoteRequestController $quoteRequestController;
     private NotFound $notFound;
+    private GnuController $gnuController;
 
     public function __construct()
     {
@@ -20,9 +21,8 @@ class Router
         $this->dashboardController = new DashboardController();
         $this->APIFetchController = new APIFetchController();
         $this->quoteRequestController = new QuoteRequestController();
-
         $this->notFound = new NotFound();
-
+        $this->gnuController = new GnuController();
     }
 
     public function checkRoute($route) : void
@@ -30,6 +30,10 @@ class Router
         if($route === "homepage")
         {
             $this->homepageController->index();
+        }
+        else if($route === "gnu")
+        {
+            $this->gnuController->index();
         }
         else if($route === "login")
         {

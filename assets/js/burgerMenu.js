@@ -2,10 +2,39 @@ window.addEventListener("DOMContentLoaded", function(){
     const title = document.getElementsByTagName("h1")[0];
     const header = document.getElementsByTagName("header")[0];
     const burgerIcon = document.getElementById("burger-icon");
-    const succesSpan = document.getElementsByClassName("succes")[0]; //* On récupère le span de message de succès pour controlé s'il y a eut redirection
     const menu = document.getElementById("menu");
     const url = window.location.href;
     let view = url.split("=")[1];
+
+    if(title.textContent.includes("Accueil"))
+    {
+        view = "homepage";
+    }
+    else if(title.textContent.includes("Connexion"))
+    {
+        view = "login";
+    }
+    else if(title.textContent.includes("Vitrine"))
+    {
+        view = "shop";
+    }
+    else if(title.textContent.includes("Mon compte"))
+    {
+        view = "account";
+    }
+    else if(title.textContent.includes("Dashboard"))
+    {
+        view = "dashboard";
+    }
+    else if(title.textContent.includes("message"))
+    {
+        view = "contact";
+    }
+    else if(title.textContent.includes("Créer un compte"))
+    {
+        view = "register";
+    }
+
     if(view !== undefined)
     {
         if(view.includes("&"))
@@ -16,15 +45,6 @@ window.addEventListener("DOMContentLoaded", function(){
         {
             view = view.split("#")[0];
         }
-
-        if(view === "login" && succesSpan.textContent != null)
-        {
-            view = "register";
-        }
-    }
-    if(view === undefined || title.textContent === "Accueil")
-    {
-        view = "homepage";
     }
 
     const mainContainer = document.getElementsByClassName(`${view}-container`)[0];

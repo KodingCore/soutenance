@@ -8,10 +8,10 @@
     </header>
     <h1>Connexion</h1>
     <?php
-    if(isset($this->data["message"]) && $this->data["message"][1] === "general") //*Si on à un message dans la data
+    if(isset($this->data["message"]) && $this->data["field"] === "general") //*Si on à un message dans la data
     {
         ?>
-        <span class="success"><?=$this->data["message"][0]; ?></span>
+        <span class="success"><?=$this->data["message"]; ?></span>
         <?php
     }
     ?>
@@ -20,9 +20,9 @@
             <label for="username_email">Username / Email</label>
             <input type="text" name="username_email" id="username_email" autocomplete="username" required maxlength="50" onpaste="return false;">
             <span id="error_username_email"><?php
-                if(isset($this->data["message"]) && $this->data["message"][1] === "username_email")
+                if(isset($this->data["message"]) && $this->data["field"] === "username_email")
                 {
-                    echo $this->data["message"][0];
+                    echo $this->data["message"];
                 }
             ?></span>
         </fieldset>
@@ -30,9 +30,9 @@
             <label for="password">Password</label>
             <input type="password" name="password" id="password" autocomplete="current-password" required maxlength="50" onpaste="return false;">
             <span id="error_password"><?php
-                if(isset($this->data["message"]) && $this->data["message"][1] === "password")
+                if(isset($this->data["message"]) && $this->data["field"] === "password")
                 {
-                    echo $this->data["message"][0];
+                    echo $this->data["message"];
                 }
             ?></span>
         </fieldset>
