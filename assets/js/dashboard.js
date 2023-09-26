@@ -241,18 +241,12 @@ function initOptionsSelector()
     {
         columnSelection.removeChild(columnSelection.firstChild);
     }
-    let i = 0;
+
     theadsTab.forEach(function(thead)
     {
-
-        //* Cette partie sera a modifier dans le cas d'un query DESKTOP
-        if(i < 3)
-        {
-            const option = document.createElement("option");
-            option.textContent = thead.textContent;
-            columnSelection.appendChild(option);
-        }
-        i++;
+        const option = document.createElement("option");
+        option.textContent = thead.textContent;
+        columnSelection.appendChild(option);
     })
 }
 
@@ -365,8 +359,14 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
             const fieldsetElement = document.createElement("fieldset");
             addEditForm.appendChild(fieldsetElement);
 
+            const legendElement = document.createElement("legend");
+            
+            legendElement.textContent = attributName;
+            legendElement.setAttribute("for", "input-" + attributName)
+            fieldsetElement.appendChild(legendElement);
+
             const idElement = document.createElement("p");
-            idElement.textContent = attributName + ": " + idCell.textContent;
+            idElement.textContent = idCell.textContent;
             fieldsetElement.appendChild(idElement);
         }
 
@@ -378,11 +378,11 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
             const fieldsetElement = document.createElement("fieldset");
             addEditForm.appendChild(fieldsetElement);
 
-            const labelElement = document.createElement("label");
+            const legendElement = document.createElement("legend");
             
-            labelElement.textContent = attributName;
-            labelElement.setAttribute("for", "input-" + attributName)
-            fieldsetElement.appendChild(labelElement);
+            legendElement.textContent = attributName;
+            legendElement.setAttribute("for", "input-" + attributName)
+            fieldsetElement.appendChild(legendElement);
 
             let inputElement = null;
             let info = null;
@@ -425,12 +425,12 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
             const fieldsetElement = document.createElement("fieldset");
             addEditForm.appendChild(fieldsetElement);
 
-            const labelElement = document.createElement("label");
-            let labelContent = attributName.slice(0, 18);
+            const legendElement = document.createElement("legend");
+            let legendContent = attributName.slice(0, 18);
 
-            labelElement.textContent = labelContent;
-            labelElement.setAttribute("for", "input-" + attributName)
-            fieldsetElement.appendChild(labelElement);
+            legendElement.textContent = legendContent;
+            legendElement.setAttribute("for", "input-" + attributName)
+            fieldsetElement.appendChild(legendElement);
 
             let inputElement = null;
             
@@ -563,11 +563,11 @@ function addEditData(className, inputs, attributsNames, id) //* Si l'id  est dé
             {
                 if(inputs[key].checked)
                 {
-                    stringRoute = stringRoute + `&${attributs[i]}=admin`;
+                    stringRoute = stringRoute + `&role=admin`;
                 }
                 else
                 {
-                    stringRoute = stringRoute + `&${attributs[i]}=user`;
+                    stringRoute = stringRoute + `&role=user`;
                 }
             }
         }

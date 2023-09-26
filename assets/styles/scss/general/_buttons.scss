@@ -49,7 +49,7 @@ input[type*="submit"]
 //*----------------------------------
 #float-btn
 {
-  width: 25%; // À modifier en desktop
+  width: 20%;
   position: fixed;
   right: 0;
   top: 60vh;
@@ -105,4 +105,18 @@ input[type*="submit"]
 {
   background-color: rgb(131, 67, 67);
   cursor: pointer;
+}
+
+@media screen and (min-width: $tabl-brkpnt){ /* TABLETTE */
+  #float-btn
+  {
+    width: 10%;
+  }
+}
+
+@media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
+  #float-btn
+  {
+    width: 6%;
+  }
 }

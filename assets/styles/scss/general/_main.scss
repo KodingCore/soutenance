@@ -1,3 +1,5 @@
+@import '../general/vars.scss';
+
 html
 {
   scroll-behavior: smooth;
@@ -31,7 +33,7 @@ html
 
       #main-header
       {
-        height: 33vw;
+        height: 126px;
         display: flex;
         justify-content: center;
         text-align: center;
@@ -40,8 +42,10 @@ html
         background-size: cover;
         #tagline-container
         {
-          margin-top: 10%;
-          height: 30%;
+          margin: auto;
+          padding: 0.25rem;
+          width: 92%;
+          height: 50%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -58,4 +62,48 @@ html
 }
 
 
+@media screen and (min-width: $tabl-brkpnt){ //TABLETTE
+  html {
+    body{
+      main{
+        #main-header
+        {
+          height: 250px;
+          #tagline-container
+          {
+            width: 75%;
+            height: 30%;
+            #tagline
+            {
+              font-size: 2.75vw;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}
 
+@media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
+  html {
+    body{
+      main{
+        #main-header
+        {
+          height: 360px;
+          #tagline-container
+          {
+            width: 75%;
+            height: 30%;
+            #tagline
+            {
+              font-size: 2.25vw;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}
