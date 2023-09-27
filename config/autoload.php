@@ -6,7 +6,6 @@ require "entities/Info.php";
 require "entities/Message.php";
 require "entities/Quotation.php";
 require "entities/Review.php";
-require "entities/Tag.php";
 require "entities/Template.php";
 require "entities/User.php";
 
@@ -19,7 +18,6 @@ require "managers/ReviewManager.php";
 require "managers/CategoryManager.php";
 require "managers/AppointmentManager.php";
 require "managers/QuotationManager.php";
-require "managers/TagManager.php";
 
 require "controllers/AbstractController.php";
 require "controllers/HomepageController.php";

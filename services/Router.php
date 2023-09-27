@@ -104,10 +104,6 @@ class Router
             {
                 $this->APIFetchController->getAllQuotations();
             }
-            else if($route === "tag-link")
-            {
-                $this->APIFetchController->getAllTags();
-            }
             else if($route === "delete-user")
             {
                 $this->APIFetchController->deleteUserById();
@@ -139,10 +135,6 @@ class Router
             else if($route === "delete-quotation")
             {
                 $this->APIFetchController->deleteQuotationById();
-            }
-            else if($route === "delete-tag")
-            {
-                $this->APIFetchController->deleteTagById();
             }
             else if($route === "add-category")
             {

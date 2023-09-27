@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", function(){
     setClasses();
+    
     function setClasses()
     {
         const templatesSection = document.getElementById("templates-section");
@@ -7,17 +8,27 @@ window.addEventListener("DOMContentLoaded", function(){
         pictures = Array.from(pictures);
         console.log(window.innerWidth);
         pictures.forEach(picture => {
+            
             if(picture.classList.contains("center-picture"))
             {
                 picture.classList.remove("center-picture");
+                picture.addEventListener("onclick", function(){
+                    picture.classList.remove("center-picture");
+                });
             }
             if(picture.classList.contains("left-picture"))
             {
                 picture.classList.remove("left-picture");
+                picture.addEventListener("onclick", function(){
+                    picture.classList.remove("left-picture");
+                });
             }
             if(picture.classList.contains("right-picture"))
             {
                 picture.classList.remove("right-picture");
+                picture.addEventListener("onclick", function(){
+                    picture.classList.remove("right-picture");
+                });
             }
 
             let pictureCenter = picture.offsetLeft + (picture.offsetWidth / 2);
@@ -48,9 +59,6 @@ window.addEventListener("DOMContentLoaded", function(){
         window.addEventListener('resize', function() {
             setClasses();
         }, true);
-    }
-    else {
-        //The browser does not support Javascript event binding
     }
 
 });

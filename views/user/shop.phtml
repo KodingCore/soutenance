@@ -23,7 +23,7 @@
                     <img src="<?= $template->getImagePath() ?>" alt="Image du template <?= $template->getName() ?>">
                 <footer>
                     <p><?= $template->getDescription() ?></p>
-                    <p><?= $template->getCreatedAt() ?></p>
+                    <p><?= "Créer le : {$template->getCreatedAt()}" ?></p>
                     <a href="index.php?route=quote-request"><button class="btn">Votre site sur-mesure</button></a>
                 </footer>
             </article>

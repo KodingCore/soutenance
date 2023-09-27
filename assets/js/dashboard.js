@@ -370,7 +370,7 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
             fieldsetElement.appendChild(idElement);
         }
 
-        //* Affichage des inputs de la classe user
+        //* Affichage les inputs de la classe user
         if(i > 0 && className === "user")
         {
             const cellsRow = row.getElementsByTagName("td");
@@ -389,12 +389,29 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
             
             if(attributName.toLowerCase().includes("role"))
             {
-                inputElement = document.createElement("input");
-                inputElement.setAttribute("type", "checkbox");
-                if(cellsRow[i].textContent === "admin")
+                if(action === "view")
                 {
-                    inputElement.setAttribute("checked", "");
+                    let inputElement = document.createElement("p");
+                    if(cellsRow[i].textContent === "admin")
+                    {
+                        inputElement.textContent = "admin";
+                    }
+                    else
+                    {
+                        inputElement.textContent = "user";
+                    }
                 }
+                else if(action === "edit" || action === "add")
+                {
+                    inputElement = document.createElement("input");
+                    inputElement.setAttribute("type", "checkbox");
+                    if(cellsRow[i].textContent === "admin")
+                    {
+                        inputElement.setAttribute("checked", "");
+                    }
+                }
+                
+                
             }
             else
             {
@@ -406,7 +423,6 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
             {
                 inputElement.setAttribute("readonly", "");
             }
-
             if(inputElement)
             {
                 fieldsetElement.appendChild(inputElement);
@@ -488,6 +504,7 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
         i++;
     }
 
+    //* Ajout du bouton Edit ou Add
     const addEditBtn = document.createElement("button");
 
     if(action !== "view")
@@ -573,6 +590,7 @@ function addEditData(className, inputs, attributsNames, id) //* Si l'id  est dé
         }
         i++;
     }
+    console.log(stringRoute);
     fetch(stringRoute)
         .then(function() 
         {

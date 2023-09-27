@@ -11,7 +11,6 @@ class APIFetchController extends AbstractController
     private $reviewManager;
     private $appointmentManager;
     private $quotationManager;
-    private $tagManager;
 
     public function __construct()
     {
@@ -23,7 +22,6 @@ class APIFetchController extends AbstractController
         $this->reviewManager = new ReviewManager();
         $this->appointmentManager = new AppointmentManager();
         $this->quotationManager = new QuotationManager();
-        $this->tagManager = new TagManager();
     }
 
     public function getAllUsers()
@@ -145,20 +143,6 @@ class APIFetchController extends AbstractController
         echo json_encode($response);
     }
 
-    public function getAllTags()
-    {
-        $tags = $this->tagManager->getTags();
-        $tagsJsons = [];
-        foreach($tags as $tag)
-        {
-            array_push($tagsJsons, $tag->jsonSerialize());
-        }
-        $response = [
-            'tags' => $tagsJsons
-        ];
-        
-        echo json_encode($response);
-    }
 
     public function deleteUserById()
     {
@@ -168,7 +152,6 @@ class APIFetchController extends AbstractController
         $this->messageManager->deleteMessageByUserId($id);
         $this->quotationManager->deleteQuotationByUserId($id);
         $this->reviewManager->deleteReviewByUserId($id);
-        $this->tagManager->deleteTagByUserId($id);
         $this->userManager->deleteUserByUserId($id);
     }
 
@@ -192,7 +175,6 @@ class APIFetchController extends AbstractController
         $id = (int)$_GET["id"];
         $this->quotationManager->deleteQuotationByTemplateId($id);
         $this->reviewManager->deleteReviewByTemplateId($id);
-        $this->tagManager->deleteTagByTemplateId($id);
         $this->templateManager->deleteTemplateByTemplateId($id);
     }
 
@@ -218,12 +200,6 @@ class APIFetchController extends AbstractController
     {
         $id = $_GET["id"];
         $this->quotationManager->deleteQuotationByQuotationId($id);
-    }
-
-    public function deleteTagById()
-    {
-        $id = $_GET["id"];
-        $this->tagManager->deleteTagByTagId($id);
     }
 
     public function addCategory()
