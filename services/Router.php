@@ -8,7 +8,7 @@ class Router
     private ContactController $contactController;
     private DashboardController $dashboardController;
     private APIFetchController $APIFetchController;
-    private QuoteRequestController $quoteRequestController;
+    private RequestController $requestController;
     private NotFound $notFound;
     private GnuController $gnuController;
 
@@ -20,7 +20,7 @@ class Router
         $this->contactController = new ContactController();
         $this->dashboardController = new DashboardController();
         $this->APIFetchController = new APIFetchController();
-        $this->quoteRequestController = new QuoteRequestController();
+        $this->requestController = new RequestController();
         $this->notFound = new NotFound();
         $this->gnuController = new GnuController();
     }
@@ -62,9 +62,9 @@ class Router
         {
             $this->shopController->index();
         }
-        else if($route === "quote-request")
+        else if($route === "request")
         {
-            $this->quoteRequestController->index(); 
+            $this->requestController->index(); 
         }
         else if(isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
         {
@@ -133,6 +133,10 @@ class Router
                 $this->APIFetchController->deleteAppointmentById();
             }
             else if($route === "delete-quotation")
+            {
+                $this->APIFetchController->deleteQuotationById();
+            }
+            else if($route === "delete-request")
             {
                 $this->APIFetchController->deleteQuotationById();
             }

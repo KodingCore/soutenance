@@ -197,7 +197,7 @@ form fieldset legend {
   text-decoration: underline;
 }
 form fieldset label {
-  width: calc(auto - 25%);
+  width: 75%;
   color: white;
   margin: 8px 10px 0 16px;
 }
@@ -257,12 +257,14 @@ form fieldset.textarea textarea {
   height: 80%;
 }
 
-@media screen and (min-width: 768px) { /* TABLETTE */
+@media screen and (min-width: 768px) {
+  /* TABLETTE */
   html form {
     width: 60%;
   }
 }
-@media screen and (min-width: 1020px) { /* DESKTOP */
+@media screen and (min-width: 1020px) {
+  /* DESKTOP */
   html form {
     width: 44%;
   }
@@ -660,179 +662,182 @@ html .card-title {
     width: 5rem;
   }
 }
-.homepage-container #main-header {
+#homepage-container #main-header {
   background-image: url("../../images/backgrounds/homepage-background.jpg");
 }
-.homepage-container #main-header #tagline-container {
+#homepage-container #main-header #tagline-container {
   background-color: rgba(47, 85, 151, 0.9);
 }
-.homepage-container #main-header #tagline-container #tagline {
+#homepage-container #main-header #tagline-container #tagline {
   color: white;
 }
-.homepage-container #templates-section {
+#homepage-container #templates-section {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
 }
-.homepage-container #templates-section .template-card {
+#homepage-container #templates-section .template-card {
   width: 280px;
 }
-.homepage-container #reviews-section {
+#homepage-container #reviews-section {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
 }
-.homepage-container #reviews-section .review-card {
+#homepage-container #reviews-section .review-card {
   width: 280px;
   height: 200px;
   overflow: scroll;
 }
 
-.login-container #main-header {
+#login-container #main-header {
   background-image: url("../../images/backgrounds/login-background.jpg");
 }
-.login-container #main-header #tagline-container {
+#login-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.login-container #main-header #tagline-container #tagline {
+#login-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
-.login-container #left-aside-access {
+#login-container #left-aside-access {
   display: none;
 }
 
-.register-container #main-header {
+#register-container #main-header {
   background-image: url("../../images/backgrounds/register-background.jpg");
   background-size: contain;
 }
-.register-container #main-header #tagline-container {
+#register-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.register-container #main-header #tagline-container #tagline {
+#register-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
-.register-container #left-aside-access {
+#register-container #left-aside-access {
   display: none;
 }
 
-.shop-container #main-header {
+#shop-container #main-header {
   background-image: url("../../images/backgrounds/shop-background.jpg");
 }
-.shop-container #main-header #tagline-container {
+#shop-container #main-header #tagline-container {
   background-color: rgba(47, 85, 151, 0.9);
 }
-.shop-container #main-header #tagline-container #tagline {
+#shop-container #main-header #tagline-container #tagline {
   color: white;
 }
-.shop-container #templates-section {
+#shop-container #templates-section {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
 }
-.shop-container #templates-section .template-card {
+#shop-container #templates-section p:first-child {
+  width: 100%;
+}
+#shop-container #templates-section .template-card {
   width: 280px;
 }
 
-.account-container #main-header {
+#account-container #main-header {
   background-image: url("../../images/backgrounds/account-background.jpg");
 }
-.account-container #main-header #tagline-container {
+#account-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.account-container #main-header #tagline-container #tagline {
+#account-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
 
-.dashboard-container #main-header {
+#dashboard-container #main-header {
   background-image: url("../../images/backgrounds/dashboard-background.jpg");
 }
-.dashboard-container #main-header #tagline-container {
+#dashboard-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.dashboard-container #main-header #tagline-container #tagline {
+#dashboard-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
-.dashboard-container #search-section {
+#dashboard-container #search-section {
   display: flex;
 }
-.dashboard-container #search-section fieldset:first-child {
+#dashboard-container #search-section fieldset:first-child {
   margin: 0 auto;
   border-radius: 0 5px 0 5px;
   border-color: rgb(47, 85, 151);
-  width: 30%;
-}
-.dashboard-container #search-section fieldset:first-child input {
   width: 100%;
 }
-.dashboard-container #search-section fieldset:last-child {
+#dashboard-container #search-section fieldset:first-child input {
+  width: 100%;
+}
+#dashboard-container #search-section fieldset:last-child {
   margin: 0 auto;
   border-radius: 0 5px 0 5px;
   border-color: rgb(47, 85, 151);
-  width: 70%;
-}
-.dashboard-container #search-section fieldset:last-child input {
   width: 100%;
 }
-.dashboard-container #control-section {
+#dashboard-container #search-section fieldset:last-child input {
+  width: 100%;
+}
+#dashboard-container #control-section {
   overflow-x: auto;
   width: 100%;
 }
-.dashboard-container #control-section table {
+#dashboard-container #control-section table {
   margin: 0 auto;
   border-radius: 0 16px 0 16px;
   border: solid 2px rgb(47, 85, 151);
   padding: 1rem;
 }
-.dashboard-container #control-section table tr:nth-child(even) {
+#dashboard-container #control-section table tr:nth-child(even) {
   background-color: rgb(143, 170, 220);
 }
-.dashboard-container #control-section table td {
-  max-width: 3rem;
+#dashboard-container #control-section table td {
   padding-left: 0.5rem;
   border-bottom: solid 1px black;
 }
-.dashboard-container #control-section table tr, .dashboard-container #control-section table td, .dashboard-container #control-section table th {
+#dashboard-container #control-section table tr,
+#dashboard-container #control-section table td,
+#dashboard-container #control-section table th {
   height: 1.25rem;
   overflow: hidden;
   white-space: nowrap;
 }
-.dashboard-container #control-section table .col-id {
+#dashboard-container #control-section table .col-id {
   min-width: 0;
-  max-width: 2.5rem;
 }
 
-.contact-container #main-header {
+#contact-container #main-header {
   background-image: url("../../images/backgrounds/contact-background.jpg");
 }
-.contact-container #main-header #tagline-container {
+#contact-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.contact-container #main-header #tagline-container #tagline {
+#contact-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
-.contact-container #left-aside-access {
+#contact-container #left-aside-access {
   display: none;
 }
 
-.quote-request-container p {
+#request-container p {
   text-align: center;
 }
-.quote-request-container #main-header {
-  background-image: url("../../images/backgrounds/quote-request-background.jpg");
+#request-container #main-header {
+  background-image: url("../../images/backgrounds/request-background.jpg");
 }
-.quote-request-container #main-header #tagline-container {
+#request-container #main-header #tagline-container {
   background-color: rgba(255, 255, 255, 0.9);
 }
-.quote-request-container #main-header #tagline-container #tagline {
+#request-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
-.quote-request-container #left-aside-access {
+#request-container #left-aside-access {
   display: none;
 }
 
@@ -844,4 +849,6 @@ html .card-title {
 }
 #gnu-container p, #gnu-container ul {
   margin-left: 1.75rem;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */

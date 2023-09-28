@@ -302,16 +302,16 @@ class APIFetchController extends AbstractController
 
     public function editQuotation()
     {
-        if(!empty($_GET["id"]) && !empty($_GET["user_id"]) && !empty($_GET["template_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]) && !empty($_GET["price"]))
+        if(!empty($_GET["id"]) && !empty($_GET["user_id"]) && !empty($_GET["category_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]) && !empty($_GET["price"]))
         {
             $id = (int)$_GET["id"];
             $user_id = $_GET["user_id"];
-            $template_id = $_GET["template_id"];
+            $category_id = $_GET["category_id"];
             $quotation_date = $_GET["quotation_date"];
             $content = $_GET["content"];
             $expiration_date = $_GET["expiration_date"];
             $price = $_GET["price"];
-            $quotation = new Quotation($user_id, $template_id, $quotation_date, $content, $expiration_date, $price);
+            $quotation = new Quotation($user_id, $category_id, $quotation_date, $content, $expiration_date, $price);
             $quotation->setQuotationId($id);
             $this->quotationManager->editQuotation($quotation);
         }

@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("DOMContentLoaded", function() {
     const title = document.getElementsByTagName("h1")[0];
     const header = document.getElementsByTagName("header")[0];
     const burgerIcon = document.getElementById("burger-icon");
@@ -6,50 +6,43 @@ window.addEventListener("DOMContentLoaded", function(){
     const url = window.location.href;
     let view = url.split("=")[1];
 
-    if(title.textContent.includes("Accueil"))
-    {
+    if (title.textContent.includes("Accueil")) {
         view = "homepage";
     }
-    else if(title.textContent.includes("Connexion"))
-    {
+    else if (title.textContent.includes("Connexion")) {
         view = "login";
     }
-    else if(title.textContent.includes("Vitrine"))
-    {
+    else if (title.textContent.includes("Vitrine")) {
         view = "shop";
     }
-    else if(title.textContent.includes("Mon compte"))
-    {
+    else if (title.textContent.includes("Mon compte")) {
         view = "account";
     }
-    else if(title.textContent.includes("Dashboard"))
-    {
+    else if (title.textContent.includes("Dashboard")) {
         view = "dashboard";
     }
-    else if(title.textContent.includes("message"))
-    {
+    else if (title.textContent.includes("Envoyer un message")) {
         view = "contact";
     }
-    else if(title.textContent.includes("Créer un compte"))
-    {
+    else if (title.textContent.includes("Créer un compte")) {
         view = "register";
     }
+    else if (title.textContent.includes("Politique de confidentialité")) {
+        view = "gnu";
+    }
 
-    if(view !== undefined)
-    {
-        if(view.includes("&"))
-        {
+    if (view !== undefined) {
+        if (view.includes("&")) {
             view = view.split("&")[0];
         }
-        if(view.includes("#"))
-        {
+        if (view.includes("#")) {
             view = view.split("#")[0];
         }
     }
 
-    const mainContainer = document.getElementsByClassName(`${view}-container`)[0];
+    const mainContainer = document.getElementById(`${view}-container`);
     const navbar = document.getElementsByClassName("navbar")[0];
-    
+
     navbar.style.cssText = `top: ${header.offsetHeight}px`;
 
     burgerIcon.addEventListener("click", () => {

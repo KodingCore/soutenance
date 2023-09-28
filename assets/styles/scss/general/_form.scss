@@ -3,44 +3,38 @@
 //*----------------------
 @import '../general/vars';
 
-form
-{
+form {
   margin: 0 auto;
   padding: 0.5rem;
   width: 94%;
   background: linear-gradient(to bottom, $dark-blue, $dark-blue, $light-blue);
   border-radius: 0 16px 0 16px;
-  h2
-  {
+  h2 {
     font-size: 1.75rem !important;
     color: white !important;
     text-align: center;
   }
-  p
-  {
+  p {
     color: white;
     font-weight: bold;
     margin-left: 16px;
   }
 
-  div.fieldset-separator
-  {
+  div.fieldset-separator {
     margin: 1rem;
     margin-left: 0;
     width: 100%;
     height: 2px;
     background-color: white;
   }
-  fieldset
-  {
+  fieldset {
     width: calc(100% - 0.75rem);
     margin-top: 0.25rem;
     padding: 0.25rem;
     border: none;
     display: flex;
     flex-wrap: wrap;
-    legend
-    {
+    legend {
       width: 100%;
       margin-top: 2rem;
       font-size: 1.25rem;
@@ -50,15 +44,13 @@ form
       text-decoration: underline;
     }
 
-    label
-    {
-      width: calc(auto - 25%);
+    label {
+      width: 75%;
       color: white;
       margin: 8px 10px 0 16px;
     }
 
-    input
-    {
+    input {
       width: 100%;
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;
@@ -66,15 +58,13 @@ form
       box-shadow: 3px 3px 3px 0px $light-blue;
     }
 
-    select
-    {
+    select {
       width: 100%;
       height: 1rem;
       margin: 0.25rem auto 0.15rem 0.25rem;
     }
 
-    textarea
-    {
+    textarea {
       width: 100%;
       height: 300px;
       margin-top: 0.5rem;
@@ -83,69 +73,61 @@ form
       border: solid 1px black;
     }
 
-    span.input-description
-    {
+    span.input-description {
       width: calc(100% - 1rem);
       font-size: 0.75rem;
       color: white;
     }
 
-    span.input-description:last-child
-    {
+    span.input-description:last-child {
       margin-bottom: 2rem;
     }
 
-    div.input-separator
-    {
+    div.input-separator {
       margin: 1rem;
       width: calc(100% - 1rem);
       height: 1px;
       background-color: cyan;
     }
   }
-  fieldset.checkbox-field
-  {
+  fieldset.checkbox-field {
     display: flex;
     justify-content: space-between;
-    label
-    {
+    label {
       width: 75%; //auto en desktop
       margin-right: 0;
-      margin-left:0.25rem;
+      margin-left: 0.25rem;
       font-size: 1rem;
     }
-    input
-    {
+    input {
       width: auto;
       height: auto;
       margin: 0.5rem 1rem 0.5rem auto;
     }
-    
+
   }
-  fieldset.textarea
-  {
+  fieldset.textarea {
     height: 16rem;
-    textarea
-    {
+    textarea {
       height: 80%;
     }
   }
 }
 
-@media screen and (min-width: $tabl-brkpnt){ /* TABLETTE */
+@media screen and (min-width: $tabl-brkpnt) {
+  /* TABLETTE */
   html {
-    form
-    {
+    form {
       width: 60%;
     }
   }
-  
+
 }
 
-@media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
+@media screen and (min-width: $desk-brkpnt) {
+  /* DESKTOP */
   html {
-    form
-    {
+    form {
       width: 44%;
     }
   }

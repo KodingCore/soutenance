@@ -1,4 +1,4 @@
-<main id="shop-container" class="shop-container">
+<main id="shop-container">
     <header id="main-header">
         <div id="tagline-container">
             <p id="tagline">
@@ -8,7 +8,7 @@
     </header>
     <h1>Vitrine</h1>
     <section id="templates-section">
-        <p class="text-center">Voici une présentation des templates déjà créer par nos services. Celà peut vous donner une idée de ce que nous créont visuellement. N'hésitez pas à nous demander un devis qui vous sera transmis par email.</p>
+        <p class="text-center">Voici une présentation des templates déjà créer par nos services. Celà peut vous donner une idée de ce que nous créont visuellement.</p>
     <?php
     if(isset($this->data["templates"]))
     {
@@ -24,7 +24,7 @@
                 <footer>
                     <p><?= $template->getDescription() ?></p>
                     <p><?= "Créer le : {$template->getCreatedAt()}" ?></p>
-                    <a href="index.php?route=quote-request"><button class="btn">Votre site sur-mesure</button></a>
+                    <a href="index.php?route=request"><button class="btn">Votre site sur-mesure</button></a>
                 </footer>
             </article>
             <?php

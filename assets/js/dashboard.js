@@ -23,6 +23,7 @@ function initDashboard()
         document.getElementById("review-link"),
         document.getElementById("appointment-link"),
         document.getElementById("quotation-link"),
+        document.getElementById("request-link"),
         document.getElementById("tag-link")
     ];
 
@@ -98,7 +99,7 @@ function setControlTitle(section, title)
 function createAddBtns(attributsNames, controlSection, className)
 {
     if(className === "template" || className === "category" || 
-        className === "appointment" || className === "quotation")
+        className === "appointment" || className === "request")
     {
         const addBtn = document.createElement("button");
         addBtn.classList.add("btn");
@@ -200,6 +201,7 @@ function createControlBtns(attributsNames, className, row)
         displayAddEditForm(attributsNames, className, "view", row);
     })
 
+    
     if(className === "template" || className === "category" || className === "appointment" || className === "quotation" || className === "user")
     {
         const editBtn = document.createElement("button");
@@ -207,9 +209,9 @@ function createControlBtns(attributsNames, className, row)
         editBtn.id = "edit" + row.firstChild.textContent;
         row.appendChild(editBtn);
         editBtn.textContent = "Edit";
-        editBtn.addEventListener("click", function(){
-            //* Affichage de la section d'ajout / d'édition
-            displayAddEditForm(attributsNames, className, "edit", row);
+        
+        editBtn.addEventListener("click", function(){ //* Event listener click
+            displayAddEditForm(attributsNames, className, "edit", row); //* Affichage de la section d'édition
         })
     }
     

@@ -1,10 +1,8 @@
-window.addEventListener("DOMContentLoaded", function()
-{
+window.addEventListener("DOMContentLoaded", function() {
     leftAside();
 })
 
-function leftAside()
-{
+function leftAside() {
     const leftAsideBtn = document.getElementById("left-aside-access");
     const leftAside = document.getElementById("left-aside");
     const arrowLeftAsideBtn = leftAsideBtn.getElementsByTagName("i")[0];
@@ -14,41 +12,34 @@ function leftAside()
         "shop",
         "login",
         "register",
-        "quote-request"
+        "request"
     ]
     const url = window.location.href;
     let view = url.split("=")[1];
-    
-    if(view !== undefined)
-    {
-        if(view.includes("&"))
-        {
+
+    if (view !== undefined) {
+        if (view.includes("&")) {
             view = view.split("&")[0];
         }
-        if(view.includes("#"))
-        {
+        if (view.includes("#")) {
             view = view.split("#")[0];
         }
     }
-    if(view === undefined || view === "disconnect")
-    {
+    if (view === undefined || view === "disconnect") {
         view = "homepage";
     }
 
-    if(!noLeftAsideViews.includes(view))
-    {
-        const mainContainer = document.getElementsByClassName(`${view}-container`)[0];
+    if (!noLeftAsideViews.includes(view)) {
+        const mainContainer = document.getElementById(`${view}-container`);
 
         leftAsideBtn.addEventListener("click", () => {
 
             leftAside.classList.toggle("active");
             leftAsideBtn.style.cssText = `left: ${leftAside.offsetWidth}px`;
-            if(arrowLeftAsideBtn.classList.contains("fa-caret-right"))
-            {
+            if (arrowLeftAsideBtn.classList.contains("fa-caret-right")) {
                 arrowLeftAsideBtn.classList.replace("fa-caret-right", "fa-caret-left");
             }
-            else
-            {
+            else {
                 arrowLeftAsideBtn.classList.replace("fa-caret-left", "fa-caret-right");
             }
         })
@@ -59,8 +50,7 @@ function leftAside()
             arrowLeftAsideBtn.classList.replace("fa-caret-left", "fa-caret-right");
         })
     }
-    else
-    {
+    else {
         leftAsideBtn.classList.add("hidden");
     }
 }

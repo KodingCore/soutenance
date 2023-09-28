@@ -1,6 +1,6 @@
 <?php
 
-class QuoteRequestController extends AbstractController
+class RequestController extends AbstractController
 {
     private $categoryManager;
 
@@ -11,7 +11,7 @@ class QuoteRequestController extends AbstractController
 
     public function index() : void
     {
-        $this->render("views/user/quote-request.phtml",["categories" => $this->categoryManager->getCategories()]);
+        $this->render("views/user/request.phtml",["categories" => $this->categoryManager->getCategories()]);
     }
     
 }
