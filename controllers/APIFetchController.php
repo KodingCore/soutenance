@@ -11,6 +11,7 @@ class APIFetchController extends AbstractController
     private $reviewManager;
     private $appointmentManager;
     private $quotationManager;
+    private $requestManager;
 
     public function __construct()
     {
@@ -22,8 +23,12 @@ class APIFetchController extends AbstractController
         $this->reviewManager = new ReviewManager();
         $this->appointmentManager = new AppointmentManager();
         $this->quotationManager = new QuotationManager();
+        $this->requestManager = new RequestManager();
     }
 
+    /********************/
+    /* FONCTIONS de GET */
+    /********************/
     public function getAllUsers()
     {
         $users = $this->userManager->getUsers();
@@ -142,8 +147,24 @@ class APIFetchController extends AbstractController
         ];
         echo json_encode($response);
     }
+    
+    public function getAllRequests()
+    {
+        $requests = $this->requestManager->getRequests();
+        $requestsJsons = [];
+        foreach($requests as $request)
+        {
+            array_push($requestsJsons, $request->jsonSerialize());
+        }
+        $response = [
+            'requests' => $requestsJsons
+        ];
+        echo json_encode($response);
+    }
 
-
+    /***********************/
+    /* FONCTIONS de DELETE */
+    /***********************/
     public function deleteUserById()
     {
         $id = $_GET["id"];
@@ -201,7 +222,16 @@ class APIFetchController extends AbstractController
         $id = $_GET["id"];
         $this->quotationManager->deleteQuotationByQuotationId($id);
     }
-
+    
+    public function deleteRequestById()
+    {
+        $id = $_GET["id"];
+        $this->requestManager->deleteRequestByRequestId($id);
+    }
+    
+    /********************/
+    /* FONCTIONS de ADD */
+    /********************/
     public function addCategory()
     {
         if(!empty($_GET["name"]) && !empty($_GET["description"]) && !empty($_GET["average_price"]))
@@ -237,10 +267,10 @@ class APIFetchController extends AbstractController
 
     public function addQuotation()
     {
-        if(!empty($_GET["user_id"]) && !empty($_GET["template_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]) && !empty($_GET["price"]))
+        if(!empty($_GET["user_id"]) && !empty($_GET["category_id"]) && !empty($_GET["quotation_date"]) && !empty($_GET["content"]) && !empty($_GET["expiration_date"]) && !empty($_GET["price"]))
         {
             $user_id = (int)$_GET["user_id"];
-            $template_id = (int)$_GET["template_id"];
+            $template_id = (int)$_GET["category_id"];
             $quotation_date = $_GET["quotation_date"];
             $content = $_GET["content"];
             $expiration_date = $_GET["expiration_date"];
@@ -262,7 +292,10 @@ class APIFetchController extends AbstractController
             $this->appointmentManager->insertAppointment($appointment);
         }
     }
-
+    
+    /********************/
+    /* FONCTIONS d'EDIT */
+    /********************/
     public function editCategory()
     {
         if(!empty($_GET["id"] && !empty($_GET["name"]) && !empty($_GET["description"])) && !empty($_GET["average_price"]))

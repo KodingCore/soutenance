@@ -104,6 +104,10 @@ class Router
             {
                 $this->APIFetchController->getAllQuotations();
             }
+            else if($route === "request-link")
+            {
+                $this->APIFetchController->getAllRequests();
+            }
             else if($route === "delete-user")
             {
                 $this->APIFetchController->deleteUserById();

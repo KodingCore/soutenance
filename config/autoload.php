@@ -8,6 +8,7 @@ require "entities/Quotation.php";
 require "entities/Review.php";
 require "entities/Template.php";
 require "entities/User.php";
+require "entities/Request.php";
 
 require "managers/AbstractManager.php";
 require "managers/UserManager.php";
@@ -18,6 +19,7 @@ require "managers/ReviewManager.php";
 require "managers/CategoryManager.php";
 require "managers/AppointmentManager.php";
 require "managers/QuotationManager.php";
+require "managers/RequestManager.php";
 
 require "controllers/AbstractController.php";
 require "controllers/HomepageController.php";

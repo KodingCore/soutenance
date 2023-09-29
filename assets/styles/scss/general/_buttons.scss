@@ -6,8 +6,7 @@
 //*---------------------------------------------
 //* Boutons en général et inputs de type submit
 //*---------------------------------------------
-.btn
-{
+.btn {
   width: $submit-width;
   margin: $submit-margin;
   margin-top: 0.5rem;
@@ -19,8 +18,8 @@
   font-weight: bold;
   color: $dark-blue;
 }
-input[type*="submit"]
-{
+
+input[type*="submit"] {
   width: $submit-width;
   margin: $submit-margin;
   margin-top: 1.5rem;
@@ -32,13 +31,15 @@ input[type*="submit"]
   font-weight: bold;
   color: $dark-blue;
 }
-.btn:hover, input[type*="submit"]:hover
-{
+
+.btn:hover,
+input[type*="submit"]:hover {
   cursor: pointer;
   background: linear-gradient(to bottom, $light-blue, white, $dark-blue);
 }
-.btn:active, input[type*="submit"]:active
-{
+
+.btn:active,
+input[type*="submit"]:active {
   color: white;
   box-shadow: 6px 6px 6px 0px $light-blue;
   background: linear-gradient(to bottom, $dark-blue, $dark-blue, white);
@@ -47,8 +48,7 @@ input[type*="submit"]
 //*----------------------------------
 //* Bouton volant de demande de site
 //*----------------------------------
-#float-btn
-{
+#float-btn {
   width: 20%;
   position: fixed;
   right: 0;
@@ -59,12 +59,13 @@ input[type*="submit"]
   border: solid 1px black;
   font-weight: bold;
   color: $dark-blue;
-  a{
+  a {
     color: $dark-blue;
   }
 }
-#float-btn:hover, a
-{
+
+#float-btn:hover,
+a {
   cursor: pointer;
   text-decoration: underline;
 }
@@ -72,51 +73,54 @@ input[type*="submit"]
 //*--------------------------------------------
 //* Boutons d'édition/suppression du dashboard
 //*--------------------------------------------
-.view-btn
-{
+.add-btn {
+  margin-left: 0.5rem;
+}
+
+.view-btn {
   height: 1.25rem;
   width: 3rem;
   margin-left: 0.75rem;
   background-color: green;
   color: white;
 }
-.edit-btn
-{
+
+.edit-btn {
   height: 1.25rem;
   width: 3rem;
   margin-left: 0.75rem;
   background-color: blue;
   color: white;
 }
-.remove-btn
-{
+
+.remove-btn {
   height: 1.25rem;
   width: 3rem;
   margin-left: 0.75rem;
   background-color: red;
   color: white;
 }
-.edit-btn:hover
-{
+
+.edit-btn:hover {
   background-color: rgb(56, 56, 107);
   cursor: pointer;
 }
-.remove-btn:hover
-{
+
+.remove-btn:hover {
   background-color: rgb(131, 67, 67);
   cursor: pointer;
 }
 
-@media screen and (min-width: $tabl-brkpnt){ /* TABLETTE */
-  #float-btn
-  {
+@media screen and (min-width: $tabl-brkpnt) {
+  /* TABLETTE */
+  #float-btn {
     width: 10%;
   }
 }
 
-@media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
-  #float-btn
-  {
+@media screen and (min-width: $desk-brkpnt) {
+  /* DESKTOP */
+  #float-btn {
     width: 6%;
   }
 }

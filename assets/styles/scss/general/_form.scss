@@ -57,6 +57,10 @@ form {
       border-radius: 0 5px 0 5px;
       box-shadow: 3px 3px 3px 0px $light-blue;
     }
+    
+    input[type="checkbox"] {
+      width: auto;
+    }
 
     select {
       width: 100%;

@@ -208,6 +208,9 @@ form fieldset input {
   border-radius: 0 5px 0 5px;
   box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
 }
+form fieldset input[type=checkbox] {
+  width: auto;
+}
 form fieldset select {
   width: 100%;
   height: 1rem;
@@ -380,12 +383,14 @@ input[type*=submit] {
   color: rgb(47, 85, 151);
 }
 
-.btn:hover, input[type*=submit]:hover {
+.btn:hover,
+input[type*=submit]:hover {
   cursor: pointer;
   background: linear-gradient(to bottom, rgb(143, 170, 220), white, rgb(47, 85, 151));
 }
 
-.btn:active, input[type*=submit]:active {
+.btn:active,
+input[type*=submit]:active {
   color: white;
   box-shadow: 6px 6px 6px 0px rgb(143, 170, 220);
   background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(47, 85, 151), white);
@@ -407,9 +412,14 @@ input[type*=submit] {
   color: rgb(47, 85, 151);
 }
 
-#float-btn:hover, a {
+#float-btn:hover,
+a {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.add-btn {
+  margin-left: 0.5rem;
 }
 
 .view-btn {
@@ -446,12 +456,14 @@ input[type*=submit] {
   cursor: pointer;
 }
 
-@media screen and (min-width: 768px) { /* TABLETTE */
+@media screen and (min-width: 768px) {
+  /* TABLETTE */
   #float-btn {
     width: 10%;
   }
 }
-@media screen and (min-width: 1020px) { /* DESKTOP */
+@media screen and (min-width: 1020px) {
+  /* DESKTOP */
   #float-btn {
     width: 6%;
   }
