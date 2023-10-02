@@ -5,8 +5,12 @@
 
 .success
 {
-  padding: 0.5rem;
-  font-size: 1rem;
+  width: 25%;
+  position: absolute;
+  margin: 0 30vw;
+  text-align: center;
+  padding: 0.25rem;
+  font-size: 0.75rem;
   color: green;
   background-color: white;
   border: solid 1px green;
@@ -16,16 +20,18 @@
 {
     outline: solid 2px red;
 }
-[id*="error"]
+[id*="error"]//, [class*="error"]
 {
-    padding: 0.6rem;
+    padding: 0.25rem;
     position: absolute;
+    margin-left: 10%;
+    margin-right: 0;
     border-radius: 0 16px 0 16px;
     color: red;
     font-size: 0.75rem;
 }
 
-[id*="error"].content-write
+[id*="error"].content-write//, [class*="error"].content-write
 {
   background: linear-gradient(to bottom, white, white, $light-blue);
 }

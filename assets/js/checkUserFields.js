@@ -31,36 +31,20 @@ export function checkUserFields(form)
     //* Control général des champs de saisie
     function globalControl()
     {
-        if(errorUsername.textContent)
-        {
-            errorUsername.classList.add("content-write");
-        }
-        if(errorEmail.textContent)
-        {
-            errorEmail.classList.add("content-write");
-        }
-        if(errorPassword.textContent)
-        {
-            errorPassword.classList.add("content-write");
-        }
-        if(errorConfirmPassword.textContent)
-        {
-            errorConfirmPassword.classList.add("content-write");
-        }
         champUsername.addEventListener("change", function () {
             errorUsername.classList.remove("content-write");
             errorUsername.classList.remove("error");
-            checkRegex(champUsername, usernameRegex, "Username", errorUsername);
+            checkRegex(champUsername, usernameRegex, "username", errorUsername);
         });
         champEmail.addEventListener("change", function () {
             errorEmail.classList.remove("content-write");
             errorEmail.classList.remove("error");
-            checkRegex(champEmail, emailRegex, "Email", errorEmail);
+            checkRegex(champEmail, emailRegex, "email", errorEmail);
         });
         champPassword.addEventListener("change", function () {
             errorPassword.classList.remove("content-write");
             errorPassword.classList.remove("error");
-            checkRegex(champPassword, passwordRegex, "Password", errorPassword);
+            checkRegex(champPassword, passwordRegex, "password", errorPassword);
             confirmPasswordChecker();
         });
         champConfirmPassword.addEventListener("change", function () {
@@ -101,17 +85,17 @@ export function checkUserFields(form)
         if(!reg.exec(input_field.value))
         {
             input_field.classList.add("error");
-            if(name === "Username")
+            if(name === "username")
             {
                 error_field.textContent = "Uniquement lettres, chiffres, '-', '.' et espaces, de 2 à 50 caractères.";
                 error_field.classList.add("content-write");
             }
-            else if(name === "Email")
+            else if(name === "email")
             {
                 error_field.textContent = "Uniquement lettres, chiffres, '-' et '.', de 2 à 50 caractères. Le TLD dois faire 4 caractères maximum.";
                 error_field.classList.add("content-write");
             }
-            else if(name === "Password")
+            else if(name === "password")
             {
                 error_field.textContent = "Doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial, au moins 12 caractères";
                 error_field.classList.add("content-write");
@@ -129,6 +113,10 @@ export function checkUserFields(form)
     //* Empêche la soumition du formulaire s'il y a une erreur
     form.addEventListener("submit", function(event)
     {
+        errorUsername.textContent = errorUsername.textContent.replace(/\s/g, "");
+        errorEmail.textContent = errorEmail.textContent.replace(/\s/g, "");
+        errorPassword.textContent = errorPassword.textContent.replace(/\s/g, "");
+        errorConfirmPassword.textContent = errorConfirmPassword.textContent.replace(/\s/g, "");
         if(errorUsername.textContent || errorEmail.textContent || errorPassword.textContent || errorConfirmPassword.textContent)
         {
             event.preventDefault();

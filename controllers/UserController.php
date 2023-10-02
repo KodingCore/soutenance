@@ -179,7 +179,6 @@ class UserController extends AbstractController
 
         if (!empty($_POST["username"])) //* Si on édite le username
         {
-            
             $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8'); //* Contre-mesure d'injection de code
 
             //* Test regex

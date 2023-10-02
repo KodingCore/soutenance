@@ -52,8 +52,7 @@ form {
 
     input {
       width: 100%;
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
+      margin: 0.5rem 1rem 0.5rem auto;
       border-radius: 0 5px 0 5px;
       box-shadow: 3px 3px 3px 0px $light-blue;
     }
@@ -115,6 +114,11 @@ form {
     textarea {
       height: 80%;
     }
+  }
+  
+  .notation:hover
+  {
+    cursor: pointer;
   }
 }
 

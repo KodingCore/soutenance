@@ -7,6 +7,14 @@
         </div>
     </header>
     <h1>Demandez votre site sur-mesure</h1>
+    <?php
+    if(isset($this->data["message"]) && $this->data["field"] === "general") //*Si on à un message dans la data
+    {
+        ?>
+        <span class="success"><?=$this->data["message"]; ?></span>
+        <?php
+    }
+    ?>
     <h2>Nos créations comprennent toutes les fonctionnalitées suivantes de base:</h2>
     <ul>
         <li>Compatibilité des navigateurs</li>
@@ -32,7 +40,7 @@
                     foreach ($categories as $category) 
                     {
                         ?>
-                            <option value="<?=$category->getName();?>"><?=$category->getName();?></option>
+                            <option value="<?=$category->getCategoryId();?>"><?=$category->getName();?></option>
                         <?php
                     }
                 }
@@ -165,11 +173,11 @@
 
         <div class="fieldset-separator"></div>
 
-        <fieldset class="checkbox-field">
+        <fieldset class="checkbox_field">
             <legend>Sites d'entreprise et professionnels :</legend>
 
-            <label for="admin-dashboard">Tableau de bord administrateur</label>
-            <input type="checkbox" name="admin-dashboard" id="admin-dashboard">
+            <label for="admin_dashboard">Tableau de bord administrateur</label>
+            <input type="checkbox" name="admin-dashboard" id="admin_dashboard">
             <span class="input-description">Interface pour gérer les utilisateurs, le contenu, etc.</span>
 
             <div class="input-separator"></div>
@@ -195,7 +203,6 @@
             <span class="input-description">Assure que le site s'adapte correctement à tous les types d'appareils.</span>
 
             <div class="input-separator"></div>
-
             <label for="content-transmition">Transmition du contenu</label>
             <select name="content-transmition" id="content-transmition">
                 <option value="no">Contenu inexistant</option>

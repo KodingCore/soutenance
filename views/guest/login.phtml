@@ -19,20 +19,22 @@
         <fieldset>
             <label for="username_email">Username / Email</label>
             <input type="text" name="username_email" id="username_email" autocomplete="username" required maxlength="50" onpaste="return false;">
-            <span id="error_username_email"><?php
+            <span id="error_username_email"<?php
                 if(isset($this->data["message"]) && $this->data["field"] === "username_email")
                 {
-                    echo $this->data["message"];
+                    ?> class="content-write">
+                    <?= $this->data["message"];
                 }
             ?></span>
         </fieldset>
         <fieldset>
             <label for="password">Password</label>
             <input type="password" name="password" id="password" autocomplete="current-password" required maxlength="50" onpaste="return false;">
-            <span id="error_password"><?php
+            <span id="error_password"<?php
                 if(isset($this->data["message"]) && $this->data["field"] === "password")
                 {
-                    echo $this->data["message"];
+                    ?> class="content-write">
+                    <?= $this->data["message"];
                 }
             ?></span>
         </fieldset>

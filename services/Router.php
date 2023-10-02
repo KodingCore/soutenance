@@ -31,6 +31,10 @@ class Router
         {
             $this->homepageController->index();
         }
+        else if($route === "homepage-review-send")
+        {
+            $this->homepageController->sendReview();
+        }
         else if($route === "gnu")
         {
             $this->gnuController->index();

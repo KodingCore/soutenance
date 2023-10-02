@@ -23,19 +23,36 @@ class HomepageController extends AbstractController
         $templates = $this->templateManager->getTemplatesOrderedByDate();
         $templates = array_slice($templates, 0, $nbr_templates);
 
-        $reviews = $this->reviewManager->getReviewsOrderedByDate();
+        $reviews = $this->reviewManager->getReviewsOrderedByNotation();
         $reviews = array_slice($reviews, 0, $nbr_reviews);
 
-        $users_reviews = [];
+        $users = [];
 
         foreach($reviews as $review)
         {
             $user = $this->userManager->getUserByUserId($review->getUserId());
-            array_push($users_reviews, $user);
+            array_push($users, $user);
         }
 
 
-        $this->render("views/homepage.phtml", ["users_reviews" => $users_reviews, "templates" => $templates, "reviews" => $reviews]);
+        $this->render("views/homepage.phtml", ["users" => $users, "templates" => $templates, "reviews" => $reviews]);
     }
+    
+    public function sendReview()
+    {
+        if(!empty($_POST["content"]))
+        {
+            $user_id = (int)$_SESSION["user_id"];
+            $content = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
+            $timezone = new DateTimeZone('Europe/Paris');
+            $dateTime = new DateTime('now', $timezone);
+            $sqlDateTime = $dateTime->format('Y-m-d');
+            $notation = (int)5;
+            $review = new Review($user_id, $content, $sqlDateTime, $notation);
+            $this->reviewManager->insertReview($review);
+        }
+        $this->index();
+    }
+    
     
 }

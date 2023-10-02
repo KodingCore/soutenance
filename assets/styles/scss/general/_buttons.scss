@@ -56,7 +56,7 @@ input[type*="submit"]:active {
   box-shadow: 3px 3px 3px 0px $light-blue;
   background: linear-gradient(to bottom, $light-blue, white, $light-blue);
   border-radius: 0 5px 0 5px;
-  border: solid 1px black;
+  border: solid 3px $dark-blue;
   font-weight: bold;
   color: $dark-blue;
   a {
@@ -101,13 +101,18 @@ a {
   color: white;
 }
 
+.view-btn:hover {
+  background-color: rgb(56, 107, 56);
+  cursor: pointer;
+}
+
 .edit-btn:hover {
   background-color: rgb(56, 56, 107);
   cursor: pointer;
 }
 
 .remove-btn:hover {
-  background-color: rgb(131, 67, 67);
+  background-color: rgb(107, 56, 56);
   cursor: pointer;
 }
 

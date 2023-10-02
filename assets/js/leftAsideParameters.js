@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", function() {
     leftAside();
+    succesDown();
 })
 
 function leftAside() {
@@ -53,4 +54,17 @@ function leftAside() {
     else {
         leftAsideBtn.classList.add("hidden");
     }
+}
+
+
+function succesDown()
+{
+    setTimeout(function() {
+        const succesElement = document.getElementsByClassName("success")[0];
+        console.log(succesElement);
+        if(succesElement)
+        {
+            succesElement.remove();
+        }
+    }, 2500); 
 }

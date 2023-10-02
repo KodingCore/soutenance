@@ -8,43 +8,42 @@
     </header>
     <h1>Envoyer un message</h1>
     <?php
-    if(isset($this->data["message"]) && isset($this->data["field"])) //*Si on à un message dans la data
+    if(isset($this->data["message"]) && $this->data["field"] === "general") //*Si on à un message dans la data
     {
         ?>
-        <?php
-        if($this->data["field"] === "general")
-        {
-            echo $this->data["message"];
-        }
-        ?>
+        <span class="success"><?=$this->data["message"]; ?></span>
         <?php
     }
     ?>
     <form action="index.php?route=contact" method="POST" id="contact_form">
         <fieldset>
             <label for="subject">Sujet</label>
-            <input type="text" name="subject" id="subject" autocomplete="off" required minlength="4" maxlength="50">
+            <input type="text" name="subject" id="subject" placeholder="Votre sujet ici..." required minlength="4" maxlength="50">
+            <span id="error_subject"
             <?php
-            if(isset($this->data["field"]) && $this->data["field"] === "subject")
+            if(isset($this->data["message"]) && $this->data["field"] === "subject")
             {
-                ?>
-                <span class="error"><?= $this->data["message"]; ?></span>
-                <?php
+                ?> class="content-write">
+                <?= $this->data["message"];
             }?>
+            </span>
         </fieldset>
         
         <fieldset class="textarea">
             <div class="input-separator"></div>
             <label for="content">Message</label>
             <textarea id="content" name="content" placeholder="Votre texte ici..." required minlength="10" maxlength="2048"></textarea>
+            <span id="error_content"
             <?php
-            if(isset($this->data["field"]) && $this->data["field"] === "content")
+            if(isset($this->data["message"]) && $this->data["field"] === "content")
             {
-                ?>
-                <span class="error"><?= $this->data["message"]; ?></span>
-                <?php
+                ?> class="content-write">
+                <?= $this->data["message"];
             }?>
+            </span>
         </fieldset>
         <input type="submit" value="Envoyer">
     </form>
+    
+    <script type="module" src="assets/js/checkMessageFields.js"></script>
 </main>

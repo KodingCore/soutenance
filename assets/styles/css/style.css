@@ -203,8 +203,7 @@ form fieldset label {
 }
 form fieldset input {
   width: 100%;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 1rem 0.5rem auto;
   border-radius: 0 5px 0 5px;
   box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
 }
@@ -258,6 +257,9 @@ form fieldset.textarea {
 }
 form fieldset.textarea textarea {
   height: 80%;
+}
+form .notation:hover {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
@@ -404,7 +406,7 @@ input[type*=submit]:active {
   box-shadow: 3px 3px 3px 0px rgb(143, 170, 220);
   background: linear-gradient(to bottom, rgb(143, 170, 220), white, rgb(143, 170, 220));
   border-radius: 0 5px 0 5px;
-  border: solid 1px black;
+  border: solid 3px rgb(47, 85, 151);
   font-weight: bold;
   color: rgb(47, 85, 151);
 }
@@ -446,13 +448,18 @@ a {
   color: white;
 }
 
+.view-btn:hover {
+  background-color: rgb(56, 107, 56);
+  cursor: pointer;
+}
+
 .edit-btn:hover {
   background-color: rgb(56, 56, 107);
   cursor: pointer;
 }
 
 .remove-btn:hover {
-  background-color: rgb(131, 67, 67);
+  background-color: rgb(107, 56, 56);
   cursor: pointer;
 }
 
@@ -581,8 +588,12 @@ html body main #main-header #tagline-container #tagline {
 }
 
 .success {
-  padding: 0.5rem;
-  font-size: 1rem;
+  width: 25%;
+  position: absolute;
+  margin: 0 30vw;
+  text-align: center;
+  padding: 0.25rem;
+  font-size: 0.75rem;
   color: green;
   background-color: white;
   border: solid 1px green;
@@ -593,8 +604,10 @@ html body main #main-header #tagline-container #tagline {
 }
 
 [id*=error] {
-  padding: 0.6rem;
+  padding: 0.25rem;
   position: absolute;
+  margin-left: 10%;
+  margin-right: 0;
   border-radius: 0 16px 0 16px;
   color: red;
   font-size: 0.75rem;
@@ -705,6 +718,11 @@ html .card-title {
   height: 200px;
   overflow: scroll;
 }
+#homepage-container #make-review-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
 #login-container #main-header {
   background-image: url("../../images/backgrounds/login-background.jpg");
@@ -756,6 +774,11 @@ html .card-title {
   width: 280px;
 }
 
+#account-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 100%;
+}
 #account-container #main-header {
   background-image: url("../../images/backgrounds/account-background.jpg");
 }
@@ -765,7 +788,14 @@ html .card-title {
 #account-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
-
+@media screen and (min-width: 768px) {
+  /* TABLETTE */
+  #account-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 50% 50%;
+  }
+}
 #dashboard-container #main-header {
   background-image: url("../../images/backgrounds/dashboard-background.jpg");
 }
@@ -776,25 +806,31 @@ html .card-title {
   color: rgb(47, 85, 151);
 }
 #dashboard-container #search-section {
-  display: flex;
+  display: grid;
+  grid-template-columns: 90vw;
+  grid-template-rows: 5vh 5vh;
 }
 #dashboard-container #search-section fieldset:first-child {
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   border-radius: 0 5px 0 5px;
   border-color: rgb(47, 85, 151);
-  width: 100%;
+  width: 95%;
 }
 #dashboard-container #search-section fieldset:first-child input {
-  width: 100%;
+  width: 75%;
 }
 #dashboard-container #search-section fieldset:last-child {
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   border-radius: 0 5px 0 5px;
   border-color: rgb(47, 85, 151);
-  width: 100%;
+  width: 95%;
 }
 #dashboard-container #search-section fieldset:last-child input {
-  width: 100%;
+  width: 75%;
 }
 #dashboard-container #control-section {
   overflow-x: auto;
@@ -824,6 +860,19 @@ html .card-title {
   min-width: 0;
 }
 
+@media screen and (min-width: 768px) {
+  /* TABLETTE */
+  #search-section {
+    display: flex !important;
+    justify-content: space-evenly;
+  }
+  #search-section fieldset:first-child {
+    width: 25% !important;
+  }
+  #search-section fieldset:last-child {
+    width: 60% !important;
+  }
+}
 #contact-container #main-header {
   background-image: url("../../images/backgrounds/contact-background.jpg");
 }

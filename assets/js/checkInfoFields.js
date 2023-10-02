@@ -105,8 +105,16 @@ export function checkInfoFields(form)
     //* Empêche la soumition du formulaire s'il y a une erreur
     form.addEventListener("submit", function(event)
     {
+        console.log(error_first_name.textContent);
+        error_first_name.textContent = error_first_name.textContent.replace(/\s/g, "");
+        error_last_name.textContent = error_last_name.textContent.replace(/\s/g, "");
+        error_tel.textContent = error_tel.textContent.replace(/\s/g, "");
+        error_address.textContent = error_address.textContent.replace(/\s/g, "");
+        error_zip.textContent = error_zip.textContent.replace(/\s/g, "");
+        error_city.textContent = error_city.textContent.replace(/\s/g, "");
         if(error_first_name.textContent || error_last_name.textContent || error_tel.textContent || error_address.textContent || error_zip.textContent || error_city.textContent)
         {
+            console.log("lolinfos");
             event.preventDefault();
         }
     })

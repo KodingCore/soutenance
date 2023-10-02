@@ -1,6 +1,9 @@
 @import '../general/vars.scss';
 
 #account-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 100%;
   #main-header {
     background-image: url("../../images/backgrounds/account-background.jpg");
     #tagline-container {
@@ -9,5 +12,22 @@
         color: $dark-blue;
       }
     }
+  }
+  #edit-account
+  {
+    
+  }
+  #view-requests
+  {
+      
+  }
+}
+
+@media screen and (min-width: $tabl-brkpnt) {
+  /* TABLETTE */
+  #account-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 50% 50%;
   }
 }

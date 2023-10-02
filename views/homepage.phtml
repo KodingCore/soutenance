@@ -49,33 +49,82 @@
     <h2>Avis clients</h2>
     <section id="reviews-section">
     <?php
-    if(isset($this->data["reviews"]) && isset($this->data["templates"]))
+    if(isset($this->data["reviews"]))
     {
         $reviews = $this->data["reviews"];
-        $i = 0;
         foreach ($reviews as $key => $review) 
         {   
         ?>
 
         <article class="review-card">
         <?php
-            if(isset($this->data["users_reviews"]))
+            if(isset($this->data["users"]))
             {
-                $users_reviews = $this->data["users_reviews"];
-                ?><p><?= $users_reviews[$i]->getUsername(); ?></p><?php
+                $users = $this->data["users"];
+                ?><p><?= $users[$key]->getUsername(); ?></p><?php
             }
             ?>
-            <p><?= $template->getName(); ?></p>
             <p><?= $review->getSendDate(); ?></p>
             <p><?= $review->getContent(); ?></p>
+            <div class="review-notation">
+            <?php
+            for($i = 0; $i < 5; $i++)
+            {
+                
+                if($i < $review->getNotation())
+                {
+                    ?><i class="fa-solid fa-star" style="color: #ff9651;"></i><?php
+                }
+                else
+                {
+                    ?><i class="fa-regular fa-star" style="color: #ff9651;"></i><?php
+                }
+                
+            }
+            ?>
+            </div>
         </article>
         <?php
-        $i++;
         }   
     }
     ?>
     </section>
+    
+    <h2>Laissez un commentaire</h2>
+    <section id="make-review-section">
+    <?php
+    if(isset($this->data["message"]) && $this->data["field"] === "general") //*Si on à un message dans la data
+    {
+        ?>
+        <span class="success"><?=$this->data["message"]; ?></span>
+        <?php
+    }
+    ?>
+        <form action="index.php?route=homepage-review-send" method="POST" id="review_form">
+            <fieldset class="textarea">
+                <label for="content">Laissez un commentaire</label>
+                <textarea id="content" name="content" placeholder="Votre texte ici..." required minlength="10" maxlength="2048"></textarea>
+                <span id="error_content"
+                <?php
+                if(isset($this->data["message"]) && $this->data["field"] === "content")
+                {
+                    ?> class="content-write">
+                    <?= $this->data["message"];
+                }?>
+                </span>
+            </fieldset>
+            <div class="notation">
+                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+            </div>
+            <input type="submit" value="Envoyer">
+        </form>
+    </section>
 </main>
+<script type="module" src="assets/js/notation.js"></script>
 <!-- ------------------------------------------------------------------------------------- -->
 <!-- ------------------------PANNEAU GAUCHE LES ANCRES DE LA PAGE------------------------- -->
 <!-- ------------------------------------------------------------------------------------- -->
@@ -86,3 +135,4 @@
         <li><a href="#reviews-section">Avis-clients</a></li>
     </ul>
 </aside>
+
