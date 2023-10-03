@@ -177,6 +177,7 @@ function completeBodyTable(objectForCellsValues) {
 //** ------------------------------------ */
 function createControlBtns(attributsNames, className, row) {
 
+    //* View
     const viewBtn = document.createElement("button");
     viewBtn.classList.add("view-btn");
     viewBtn.id = "view" + row.firstChild.textContent;
@@ -186,7 +187,7 @@ function createControlBtns(attributsNames, className, row) {
         displayAddEditForm(attributsNames, className, "view", row);
     })
 
-
+    //* Edit
     if (className === "template" || className === "category" || className === "appointment" || className === "quotation" || className === "user") {
         const editBtn = document.createElement("button");
         editBtn.classList.add("edit-btn");
@@ -199,6 +200,7 @@ function createControlBtns(attributsNames, className, row) {
         })
     }
 
+    //* Remove
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("remove-btn");
     removeBtn.id = "remove" + row.firstChild.textContent;
@@ -335,7 +337,6 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
         
         //* Affichage de l'id si nous sommes en edit ou view
         if (i === 0 && action === "edit" || i === 0 && action === "view") {
-            const cellsRow = row.getElementsByTagName("td");
             const idCell = row.getElementsByTagName("td")[0];
             const fieldsetElement = document.createElement("fieldset");
             addEditForm.appendChild(fieldsetElement);
@@ -423,7 +424,12 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
             if (attributName.includes("checkboxes_binaries")) 
             {
                 const cellsRow = row.getElementsByTagName("td");
-                const labelsNames = ["CMS", "suscribing", "feedback", "research", "social share", "localisation", "products gestion", "buy kart", "link payment", "auto-billing", "product rating", "forum", "messaging", "reservation", "calender", "videos integration", "media rating", "dashboard", "notification", "multi language", "responsive design"]
+                const labelsNames = ["CMS", "suscribing", "feedback", "research", 
+                                    "social share", "localisation", "products gestion", 
+                                    "buy kart", "link payment", "auto-billing", 
+                                    "product rating", "forum", "messaging", "reservation", 
+                                    "calender", "videos integration", "media rating", "dashboard", 
+                                    "notification", "multi language", "responsive design"]
                 const binariesTab = cellsRow[i].textContent.split('');
                 const fieldsetElement = document.createElement("fieldset");
                 addEditForm.appendChild(fieldsetElement);
@@ -513,24 +519,19 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
 
         i++;
     }
-    
-    
-    
 
-    
-
-    //* Ajout du bouton Edit ou Add
+    //* Ajout du bouton "Edit" ou du bouton "Add"
     const addEditBtn = document.createElement("button");
 
     if (action !== "view") 
     {
         if (action === "add") 
         {
-            addEditBtn.textContent = "Add";
+            addEditBtn.textContent = "Ajouter";
         }
         else if (action === "edit") 
         {
-            addEditBtn.textContent = "Edit";
+            addEditBtn.textContent = "Éditer";
         }
         addEditBtn.classList.add("btn");
         addEditForm.appendChild(addEditBtn);

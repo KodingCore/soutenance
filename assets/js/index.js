@@ -1,6 +1,7 @@
 window.addEventListener("DOMContentLoaded", function() {
     leftAside();
     succesDown();
+    cookies();
 })
 
 function leftAside() {
@@ -26,8 +27,11 @@ function leftAside() {
             view = view.split("#")[0];
         }
     }
-    if (view === undefined || view === "disconnect") {
+    if (view === undefined || view === "disconnect" || view.includes("homepage")) {
         view = "homepage";
+    }
+    if (view.includes("request")) {
+        view = "request";
     }
 
     if (!noLeftAsideViews.includes(view)) {
@@ -56,7 +60,6 @@ function leftAside() {
     }
 }
 
-
 function succesDown()
 {
     setTimeout(function() {
@@ -67,4 +70,20 @@ function succesDown()
             succesElement.remove();
         }
     }, 2500); 
+}
+
+
+
+function cookies()
+{
+const btnSuccess = document.querySelector('.btn-success');
+console.log(btnSuccess);
+
+const cookies = document.querySelector('.cookies');
+console.log(cookies);
+
+btnSuccess.addEventListener('click', function(){
+    console.log('bouton cliqué !');
+    cookies.style.opacity ="0";
+});
 }

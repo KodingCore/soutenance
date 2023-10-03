@@ -12,29 +12,31 @@
 </head>
 <body>
     <header id="top-header">
-        <div class="logo">
-            <img src="assets\images\logos\logo-kodingcore-white.png" alt="Logo KodingCore Development">
-        </div>
-        <div class="burger-container">
-            <a href="#" id="burger-icon"><i class="fa-solid fa-bars fa-2x" style="color: #ffffff;"></i></a>
-        </div>
-        <?php
-            if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
-            {
-                if($_SESSION["role"] === "admin") //* Accès admin
+        <div id="header-container">
+            <div class="logo">
+                <img src="assets\images\logos\logo-kodingcore-white.png" alt="Logo KodingCore Development">
+            </div>
+            <div class="burger-container">
+                <a href="#" id="burger-icon"><i class="fa-solid fa-bars fa-2x" style="color: #ffffff;"></i></a>
+            </div>
+            <?php
+                if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
                 {
-                    require 'admin/_header.phtml';
+                    if($_SESSION["role"] === "admin") //* Accès admin
+                    {
+                        require 'admin/_header.phtml';
+                    }
+                    else //* accès users
+                    {
+                        require 'user/_header.phtml';
+                    }   
                 }
-                else //* accès users
+                else //* accès visiteurs
                 {
-                    require 'user/_header.phtml';
-                }   
-            }
-            else //* accès visiteurs
-            {
-                require 'guest/_header.phtml';
-            }
-        ?>
+                    require 'guest/_header.phtml';
+                }
+            ?>
+        </div>
     </header>
     <div id="left-aside-access">
         <i class="fa-solid fa-caret-right" style="color: #ffffff;"></i>
@@ -63,6 +65,22 @@
             }
         ?>
     </footer>
+    <section class="cookies">
+        <div class="cookies-texte">
+            <p>En pousuivant, vous acceptez l'utilisation des cookies par le 
+            site afin de vous proposer des contenus adaptés et réaliser des 
+            statistiques.
+            </p>
+        </div>
+        <div class="cookies-btn">
+            <button class="btn-success">
+                Accepter les cookies
+            </button>
+            <button class="btn-deny">
+                paramètres des coookies
+            </button>
+        </div>
+    </section>
 </body>
-<script type="module" src="assets/js/leftAsideParameters.js"></script>
+<script type="module" src="assets/js/index.js"></script>
 </html>

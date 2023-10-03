@@ -5,122 +5,60 @@
 
 #top-header
 {
-  min-height: 50px;
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  background: linear-gradient(to left, $dark-blue, $dark-blue, $light-blue);
-  .logo
-  {
-    width: 80%;
-    max-width: 300px;
-    display: flex;
-    align-items: center;
-    img
-    {
-      width: 100%;
-      height: auto;
-    }
-  }
-  .burger-container
-  {
-    // position: absolute;
-    // right: 15px;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .navbar
-  {
-    position: absolute;
-    height: auto;
-    right: 0;
-    text-align: center;
-    z-index: 1;
-    #menu
-    {
-      display: none;
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-      width: 100%;
-      background: linear-gradient(to bottom, $dark-blue, $light-blue);
-      border-radius: 0 0 20px 20px;
-      li
-      {
-        padding: 9px;
-        a
-        {
-          color: white;
-          font-size: 1.25rem;
-          text-decoration: none;
-        }
-        a:hover
-        {
-          color: $alt-color;
-          text-decoration: underline;
-          font-weight: bold;
-        }
-      }
-    }
-    #menu.active
-    {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-}
-
-@media screen and (min-width: $tabl-brkpnt){ /* TABLETTE */
-  #top-header
-  {
-    .navbar
-    {
-      #menu
-      {
-        
-      }
-    }
-  }
-}
-
-@media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
   
-  #top-header
+  #header-container
   {
-    flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+    position: fixed;
+    width: calc(100% - 32px);
+    min-height: 50px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to left, $dark-blue, $dark-blue, $light-blue);
     .logo
     {
-      width: 28%;
+      width: 80%;
+      max-width: 300px;
+      display: flex;
+      align-items: center;
+      img
+      {
+        width: 100%;
+        height: auto;
+      }
     }
     .burger-container
     {
-      display: none;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .navbar
     {
-      position: relative;
-      top: inherit !important;
+      position: absolute;
+      height: auto;
+      margin-top: 80px;
       right: 0;
+      text-align: center;
+      z-index: 1;
       #menu
       {
+        display: none;
+        margin: 0;
+        
+        padding: 0;
+        list-style-type: none;
         width: 100%;
-        right: 0;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        background:none;
-        justify-content:flex-end;
+        background: linear-gradient(to bottom, $dark-blue, $light-blue);
+        border-radius: 0 0 20px 20px;
         li
         {
           padding: 9px;
           a
           {
             color: white;
-            font-size: 0.75rem;
+            font-size: 1.25rem;
             text-decoration: none;
           }
           a:hover
@@ -130,9 +68,91 @@
             font-weight: bold;
           }
         }
-        li
+      }
+      #menu.active
+      {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $tabl-brkpnt){ /* TABLETTE */
+  #top-header
+  {
+    #header-container
+    {
+      .navbar
+      {
+        margin-top: 75px;
+        #menu
         {
-          margin: auto 1vw;
+          li
+          {
+            a
+            {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
+  
+  #top-header
+  {
+    #header-container
+    {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .logo
+      {
+        width: 28%;
+      }
+      .burger-container
+      {
+        display: none;
+      }
+      .navbar
+      {
+        position: relative;
+        top: inherit !important;
+        right: 0;
+        margin-top: 0;
+        #menu
+        {
+          width: 100%;
+          right: 0;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          background:none;
+          justify-content:flex-end;
+          li
+          {
+            padding: 9px;
+            a
+            {
+              color: white;
+              font-size: 0.75rem;
+              text-decoration: none;
+            }
+            a:hover
+            {
+              color: $alt-color;
+              text-decoration: underline;
+              font-weight: bold;
+            }
+          }
+          li
+          {
+            margin: auto 1vw;
+          }
         }
       }
     }

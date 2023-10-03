@@ -15,6 +15,7 @@
                 Les reglages, c'est ici!
             </p>
         </div>
+        
     </header>
     <h1>Mon compte</h1>
     <?php
@@ -26,6 +27,8 @@
         }
     ?>
     <section id="edit-account">
+        
+        <h2>Votre profil</h2>
         <form action="index.php?route=account" method="POST" id="account_form">
             <fieldset>
                 <label for="username">Nom d'utilisateur</label>
@@ -48,7 +51,7 @@
                     }?></span>
             </fieldset>
             <fieldset>
-                <label for="password">Password</label>
+                <label for="password">Nouveau password</label>
                 <input type="password" name="password" id="password" autocomplete="new-password" minlength="8" maxlength="50" onpaste="return false;">
                 <span id="error_password"<?php
                     if(isset($this->data["field"]) && $this->data["field"] === "password")
@@ -192,7 +195,27 @@
         </form>
     </section>
     <section id="view-requests">
-        
+        <h2>Vos demandes de sites</h2>
+        <?php
+        if(isset($this->data["requests"]) && isset($this->data["categories"]))
+        {
+            $requests = $this->data["requests"];
+            $categories = $this->data["categories"];
+            for($i=0; $i<count($requests); $i++)
+            {
+                ?> 
+                <article class="request-card">
+                    <h3><?= $categories[$i]->getName(); ?></h3>
+                    <p><?= $requests[$i]->getDescription(); ?></p>
+                </article>
+                <?php
+            }
+        }
+        else
+        {
+            ?> <p>Aucune demande de site éffectuée</p> <?php
+        }
+        ?>
     </section>
     
 </main>

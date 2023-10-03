@@ -5,12 +5,16 @@ class UserController extends AbstractController
 
     private UserManager $userManager;
     private InfoManager $infoManager;
+    private RequestManager $requestManager;
+    private CategoryManager $categoryManager;
     private int $minCharPswrd;
 
     public function __construct()
     {
         $this->userManager = new UserManager();
         $this->infoManager = new InfoManager();
+        $this->requestManager = new RequestManager();
+        $this->categoryManager = new CategoryManager();
         $this->minCharPswrd = 12;
     }
 
@@ -359,7 +363,14 @@ class UserController extends AbstractController
         }
         else
         {
-            $this->render("views/user/account.phtml", ["user" => $user, "info" => $info]);
+            $requests = $this->requestManager->getRequestsByUserId($_SESSION["user_id"]);
+            $categories = [];
+            foreach($requests as $request)
+            {
+                $category = $this->categoryManager->getCategoryByCategoryId($request->getCategoryId());
+                array_push($categories, $category);
+            }
+            $this->render("views/user/account.phtml", ["categories" => $categories, "user" => $user, "info" => $info, "requests" => $requests]);
         }
     }
 }

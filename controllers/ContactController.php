@@ -4,10 +4,12 @@ class ContactController extends AbstractController
 {
    
     private $messageManager;
+    private $makeRedirection;
 
     public function __construct()
     {
         $this->messageManager = new MessageManager();
+        $this->makeRedirection = false;
     }
 
     public function sendMessage()

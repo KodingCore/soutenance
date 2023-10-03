@@ -1,51 +1,68 @@
 window.addEventListener("DOMContentLoaded", function(){
     
     const makeReviewElement = document.getElementById("make-review-section");
-    
     const starsElements = makeReviewElement.getElementsByClassName("fa-star");
-    let locked = false;
     const stars = Array.from(starsElements);
     
-    stars.forEach(function(star)
-    {
-        star.classList.remove("fa-solid");
-        star.classList.add("fa-regular");
-    })
+    const rating = document.getElementById("rating");
     
-    for (let index = 0; index < stars.length; index++)
+    let value = 0;
+
+    
+    //* Pour toutes les étoiles
+    for (let i = 0; i < stars.length; i++)
     {
-        stars[index].addEventListener("mouseover", function() 
+        stars[i].addEventListener("mouseover", function() 
         {
-            stars.forEach(function(star)
+            //* Remplie toutes les étoiles qui précèdent celle survolé ainsi qu'elle-même
+            for (let j = 0; j < stars.length; j++)
             {
-                star.classList.add("fa-regular");
-                star.classList.remove("fa-solid");
-            });
-            console.log("L'élément " + index + " est survolé !");
-            for(let i = 0; i <= index; i++)
-            {
-                stars[i].classList.remove("fa-regular");
-                stars[i].classList.add("fa-solid");
-            }
-        });
-        stars[index].addEventListener("mouseleave", function() {
-            stars.forEach(function(star)
-            {
-                if(!locked)
+                if(j <= i)
                 {
-                    star.classList.add("fa-regular");
-                    star.classList.remove("fa-solid");
+                    stars[j].classList.remove("fa-regular");
+                    stars[j].classList.add("fa-solid");
+                }
+                else
+                {
+                    stars[j].classList.remove("fa-solid");
+                    stars[j].classList.add("fa-regular");
                 }
                 
-            });
-            console.log("La souris a quitté l'élément " + index + " !");
+            }
         });
-        stars[index].addEventListener("click", function() {
-            stars.forEach(function(star)
-            {
-                locked = true;
-            });
-            console.log("La souris a quitté l'élément " + index + " !");
+        stars[i].addEventListener("mouseleave", function() 
+        {
+            //*Toutes les étoiles sont vides, sauf si on a sauvegarder un nombre d'étoiles
+            
+                for (let i = 0; i < stars.length; i++)
+                {
+                    if(value > 0)
+                    {
+                        if(i <= value)
+                        {
+                            stars[i].classList.remove("fa-regular");
+                            stars[i].classList.add("fa-solid");
+                        }
+                        else
+                        {
+                            stars[i].classList.remove("fa-solid");
+                            stars[i].classList.add("fa-regular");
+                        }
+                    }
+                    else
+                    {
+                        stars[i].classList.remove("fa-solid");
+                        stars[i].classList.add("fa-regular");
+                    }
+            }
+        });
+        stars[i].addEventListener("click", function() 
+        {
+            //* Sauvegarde du nombre d'étoiles remplies
+            //* Ajout de l'attribut "value" pour la sauvegarde
+            value = i;
+            rating.setAttribute("value", value + 1);
+            
         });
     }
 })

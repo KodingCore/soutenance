@@ -30,6 +30,9 @@ window.addEventListener("DOMContentLoaded", function() {
     else if (title.textContent.includes("Politique de confidentialité")) {
         view = "gnu";
     }
+    else if (title.textContent.includes("Demandez votre site sur-mesure")) {
+        view = "request";
+    }
 
     if (view !== undefined) {
         if (view.includes("&")) {

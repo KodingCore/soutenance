@@ -1,3 +1,10 @@
+<?php
+// Désactiver le cache
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+?>
+
 <main id="homepage-container">
     <!-- --------------------------- -->
     <!-- -----HEADER-----HEADER----- -->
@@ -13,6 +20,14 @@
     <!-- -----HEADER-----HEADER----- -->
     <!-- --------------------------- -->
     <h1>Accueil</h1>
+    <?php
+    if(isset($this->data["message"]) && $this->data["field"] === "general") //*Si on à un message dans la data
+    {
+        ?>
+        <span class="success"><?=$this->data["message"]; ?></span>
+        <?php
+    }
+    ?>
     <section id="presentation">
         <h2>Qui sommes nous?</h2>
         <p class="text-center">
@@ -64,8 +79,6 @@
                 ?><p><?= $users[$key]->getUsername(); ?></p><?php
             }
             ?>
-            <p><?= $review->getSendDate(); ?></p>
-            <p><?= $review->getContent(); ?></p>
             <div class="review-notation">
             <?php
             for($i = 0; $i < 5; $i++)
@@ -83,46 +96,47 @@
             }
             ?>
             </div>
+            <p><?= $review->getSendDate(); ?></p>
+            <p><?= $review->getContent(); ?></p>
         </article>
         <?php
         }   
     }
     ?>
     </section>
-    
-    <h2>Laissez un commentaire</h2>
-    <section id="make-review-section">
     <?php
-    if(isset($this->data["message"]) && $this->data["field"] === "general") //*Si on à un message dans la data
-    {
-        ?>
-        <span class="success"><?=$this->data["message"]; ?></span>
-        <?php
-    }
+        if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
+        {
+            ?>
+            <h2>Laissez un commentaire</h2>
+            <section id="make-review-section">
+            <form action="index.php?route=homepage-review-send" method="POST" id="review_form">
+                <fieldset class="textarea">
+                    <label for="content">Laissez un commentaire</label>
+                    <textarea id="content" name="content" placeholder="Votre texte ici..." required minlength="10" maxlength="2048"></textarea>
+                    <span id="error_content"
+                    <?php
+                    if(isset($this->data["message"]) && $this->data["field"] === "content")
+                    {
+                        ?> class="content-write">
+                        <?= $this->data["message"];
+                    }?>
+                    </span>
+                </fieldset>
+                <div class="notation">
+                    <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                    <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                    <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                    <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                    <i class="fa-regular fa-star" style="color: #ff9651;"></i>
+                </div>
+                <input type="hidden" name="rating" id="rating"/>
+                <input type="submit" value="Envoyer"/>
+            </form>
+    </section> <?php
+        }
     ?>
-        <form action="index.php?route=homepage-review-send" method="POST" id="review_form">
-            <fieldset class="textarea">
-                <label for="content">Laissez un commentaire</label>
-                <textarea id="content" name="content" placeholder="Votre texte ici..." required minlength="10" maxlength="2048"></textarea>
-                <span id="error_content"
-                <?php
-                if(isset($this->data["message"]) && $this->data["field"] === "content")
-                {
-                    ?> class="content-write">
-                    <?= $this->data["message"];
-                }?>
-                </span>
-            </fieldset>
-            <div class="notation">
-                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
-                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
-                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
-                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
-                <i class="fa-regular fa-star" style="color: #ff9651;"></i>
-            </div>
-            <input type="submit" value="Envoyer">
-        </form>
-    </section>
+    
 </main>
 <script type="module" src="assets/js/notation.js"></script>
 <!-- ------------------------------------------------------------------------------------- -->
@@ -133,6 +147,14 @@
         <li><a href="#presentation">Présentation</a></li>
         <li><a href="#templates-section">Dernières templates</a></li>
         <li><a href="#reviews-section">Avis-clients</a></li>
+        <?php
+        if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
+        {
+            ?>
+                <li><a href="#make-review-section">Laissez un commentaire</a></li>
+            <?php
+        }
+    ?>
     </ul>
 </aside>
 

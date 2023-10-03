@@ -1,0 +1,37 @@
+.cookies
+{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-color: grey;
+    display: flex;
+    justify-content: space-between; /*positionner les DIV enfants*/
+    align-items: center; /*centrer verticalement*/
+    padding: 3rem;
+    opacity: 1; /*modification de cette valeur en JavaScript*/
+    transition: 0.5s;
+}
+
+.cookies-btn
+{
+    display: flex;
+}
+
+.btn-success, .btn-deny
+{
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-success
+{
+    background-color: #1e2337;
+}
+
+.btn-deny
+{
+    background-color: grey;
+}

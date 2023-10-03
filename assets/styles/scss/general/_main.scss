@@ -25,6 +25,7 @@ html
     background-position: center;
     main
     {
+      
       width: 96%;
       margin: 0 auto;
 
@@ -35,6 +36,7 @@ html
 
       #main-header
       {
+        padding-top: 66px;
         height: 126px;
         display: flex;
         justify-content: center;
@@ -55,7 +57,7 @@ html
           #tagline
           {
             margin: 0 2rem;
-            font-size: 3.5vw;
+            font-size: 1.2rem;
           }
         }
       }

@@ -1,9 +1,7 @@
 @import '../general/vars.scss';
 
 #account-container {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 100%;
+  
   #main-header {
     background-image: url("../../images/backgrounds/account-background.jpg");
     #tagline-container {
@@ -13,21 +11,34 @@
       }
     }
   }
-  #edit-account
-  {
-    
-  }
-  #view-requests
-  {
-      
-  }
 }
 
 @media screen and (min-width: $tabl-brkpnt) {
   /* TABLETTE */
   #account-container {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header header"
+      "title title"
+      "account request";
+  
+    h1
+    {
+      grid-area: title;
+    }
+    
+    #main-header {
+      grid-area: header;
+    }
+  
+    #edit-account {
+      grid-area: account;
+    }
+  
+    #view-requests {
+      grid-area: request;
+      text-align: center;
+    }
   }
 }

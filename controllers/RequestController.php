@@ -4,19 +4,43 @@ class RequestController extends AbstractController
 {
     private $requestManager;
     private $categoryManager;
+    private $makeRedirection;
 
     public function __construct()
     {
         $this->requestManager = new RequestManager();
         $this->categoryManager = new CategoryManager();
+        $this->makeRedirection = false;
     }
 
-    public function index() : void
-    {
 
-        if (!empty($_POST["description"]))
+    public function index()
+    {
+        if($this->makeRedirection)
         {
+            header("Location: index.php?route=homepage&message=Demande envoyée avec succes&field=general");
+            exit;
+        }
+        else if(isset($_GET["message"], $_GET["field"]))
+        {
+            $message = $_GET["message"];
+            $field = $_GET["field"];
+            $this->render("views/user/request.phtml",["message" => $message, "field" => $field, "categories" => $this->categoryManager->getCategories()]);
             
+        }
+        else
+        {
+            $this->render("views/user/request.phtml",["categories" => $this->categoryManager->getCategories()]);
+        }
+        
+    }
+    
+    public function addRequest(?string $description) : void
+    {
+        echo $description;
+        if($description !== "")
+        {
+                
             
             //* Variable de récolte d'erreur
             $error = null;
@@ -25,8 +49,6 @@ class RequestController extends AbstractController
             
             $category_id = (int)$_POST["category"];
             
-            //* Contre-mesure d'injection de code
-            $description = htmlspecialchars($_POST["description"], ENT_QUOTES, 'UTF-8');
             $content_share = htmlspecialchars($_POST["content-transmition"], ENT_QUOTES, 'UTF-8');
             
             
@@ -61,14 +83,14 @@ class RequestController extends AbstractController
             
             if(!$error)
             {
-                $request = new Request($user_id, $category_id, $checkboxes_binaries, $content_share, $description);
+                $timezone = new DateTimeZone('Europe/Paris');
+                $dateTime = new DateTime('now', $timezone);
+                $sqlDate = $dateTime->format('Y-m-d');
+                $request = new Request($user_id, $category_id, $checkboxes_binaries, $content_share, $description, $sqlDate);
                 $this->requestManager->insertRequest($request);
-                $this->render("views/user/request.phtml",["categories" => $this->categoryManager->getCategories(), "message" => "Demande envoyée avec succès!", "field" => "general"]);
+                $this->makeRedirection = true;
             }
         }
-        else
-        {
-            $this->render("views/user/request.phtml",["categories" => $this->categoryManager->getCategories()]);
-        }
+        $this->index();
     }
 }

@@ -6,6 +6,7 @@ class HomepageController extends AbstractController
     private $reviewManager;
     private $templateManager;
     private $userManager;
+    private $makeRedirection;
 
 
     public function __construct()
@@ -13,10 +14,13 @@ class HomepageController extends AbstractController
         $this->reviewManager = new ReviewManager();
         $this->templateManager = new TemplateManager();
         $this->userManager = new UserManager();
+        $this->makeRedirection = false;
     }
    
     public function index()
     {
+        
+        
         $nbr_templates = 3;
         $nbr_reviews = 9;
 
@@ -33,24 +37,34 @@ class HomepageController extends AbstractController
             $user = $this->userManager->getUserByUserId($review->getUserId());
             array_push($users, $user);
         }
-
-
-        $this->render("views/homepage.phtml", ["users" => $users, "templates" => $templates, "reviews" => $reviews]);
+        if($this->makeRedirection)
+        {
+            header("Location: index.php?route=homepage&message=Avis enregistre avec succes&field=general");
+            exit;
+        }
+        if(isset($_GET["message"], $_GET["field"]))
+        {
+            $message = $_GET["message"];
+            $field = $_GET["field"];
+            $this->render("views/homepage.phtml", ["message" => $message, "field" => $field, "users" => $users, "templates" => $templates, "reviews" => $reviews]);
+        }
+        else
+        {
+            $this->render("views/homepage.phtml", ["users" => $users, "templates" => $templates, "reviews" => $reviews]);
+        }
+        
     }
     
-    public function sendReview()
+    public function sendReview(string $content)
     {
-        if(!empty($_POST["content"]))
-        {
-            $user_id = (int)$_SESSION["user_id"];
-            $content = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
-            $timezone = new DateTimeZone('Europe/Paris');
-            $dateTime = new DateTime('now', $timezone);
-            $sqlDateTime = $dateTime->format('Y-m-d');
-            $notation = (int)5;
-            $review = new Review($user_id, $content, $sqlDateTime, $notation);
-            $this->reviewManager->insertReview($review);
-        }
+        $user_id = (int)$_SESSION["user_id"];
+        $timezone = new DateTimeZone('Europe/Paris');
+        $dateTime = new DateTime('now', $timezone);
+        $sqlDateTime = $dateTime->format('Y-m-d');
+        $notation = (int)$_POST["rating"];
+        $review = new Review($user_id, $content, $sqlDateTime, $notation);
+        $this->reviewManager->insertReview($review);
+        $this->makeRedirection = true;
         $this->index();
     }
     

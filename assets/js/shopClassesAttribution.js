@@ -6,22 +6,22 @@ window.addEventListener("DOMContentLoaded", function() {
         let pictures = templatesSection.getElementsByTagName("img");
         pictures = Array.from(pictures);
         pictures.forEach(picture => {
-
+            
             if (picture.classList.contains("center-picture")) {
                 picture.classList.remove("center-picture");
-                picture.addEventListener("onclick", function() {
+                picture.addEventListener("click", function() {
                     picture.classList.remove("center-picture");
                 });
             }
             if (picture.classList.contains("left-picture")) {
                 picture.classList.remove("left-picture");
-                picture.addEventListener("onclick", function() {
+                picture.addEventListener("click", function() {
                     picture.classList.remove("left-picture");
                 });
             }
             if (picture.classList.contains("right-picture")) {
                 picture.classList.remove("right-picture");
-                picture.addEventListener("onclick", function() {
+                picture.addEventListener("click", function() {
                     picture.classList.remove("right-picture");
                 });
             }
@@ -38,15 +38,11 @@ window.addEventListener("DOMContentLoaded", function() {
             else if (positionDifference < -50) {
                 picture.classList.add("left-picture");
             }
+            
         });
     }
 
-    if (window.attachEvent) {
-        window.attachEvent('onresize', function() {
-            alert('attachEvent - resize');
-        });
-    }
-    else if (window.addEventListener) {
+    if (window.addEventListener) {
         window.addEventListener('resize', function() {
             setClasses();
         }, true);

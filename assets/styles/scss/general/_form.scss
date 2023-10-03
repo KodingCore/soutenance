@@ -128,6 +128,10 @@ form {
     form {
       width: 60%;
     }
+    #account_form
+    {
+      width: 80%;
+    }
   }
 
 }
@@ -136,7 +140,11 @@ form {
   /* DESKTOP */
   html {
     form {
-      width: 44%;
+      width: 30%;
+    }
+    #account_form
+    {
+      width: 70%;
     }
   }
 }

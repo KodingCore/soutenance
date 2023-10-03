@@ -1,36 +1,39 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-#top-header {
+#top-header #header-container {
+  position: fixed;
+  width: calc(100% - 32px);
   min-height: 50px;
   padding: 16px;
   display: flex;
   justify-content: space-between;
   background: linear-gradient(to left, rgb(47, 85, 151), rgb(47, 85, 151), rgb(143, 170, 220));
 }
-#top-header .logo {
+#top-header #header-container .logo {
   width: 80%;
   max-width: 300px;
   display: flex;
   align-items: center;
 }
-#top-header .logo img {
+#top-header #header-container .logo img {
   width: 100%;
   height: auto;
 }
-#top-header .burger-container {
+#top-header #header-container .burger-container {
   width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#top-header .navbar {
+#top-header #header-container .navbar {
   position: absolute;
   height: auto;
+  margin-top: 80px;
   right: 0;
   text-align: center;
   z-index: 1;
 }
-#top-header .navbar #menu {
+#top-header #header-container .navbar #menu {
   display: none;
   margin: 0;
   padding: 0;
@@ -39,43 +42,51 @@
   background: linear-gradient(to bottom, rgb(47, 85, 151), rgb(143, 170, 220));
   border-radius: 0 0 20px 20px;
 }
-#top-header .navbar #menu li {
+#top-header #header-container .navbar #menu li {
   padding: 9px;
 }
-#top-header .navbar #menu li a {
+#top-header #header-container .navbar #menu li a {
   color: white;
   font-size: 1.25rem;
   text-decoration: none;
 }
-#top-header .navbar #menu li a:hover {
+#top-header #header-container .navbar #menu li a:hover {
   color: rgb(255, 150, 81);
   text-decoration: underline;
   font-weight: bold;
 }
-#top-header .navbar #menu.active {
+#top-header #header-container .navbar #menu.active {
   display: flex;
   flex-direction: column;
 }
 
-@media screen and (min-width: 768px) { /* TABLETTE */ }
+@media screen and (min-width: 768px) { /* TABLETTE */
+  #top-header #header-container .navbar {
+    margin-top: 75px;
+  }
+  #top-header #header-container .navbar #menu li a {
+    font-size: 1rem;
+  }
+}
 @media screen and (min-width: 1020px) { /* DESKTOP */
-  #top-header {
+  #top-header #header-container {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
-  #top-header .logo {
+  #top-header #header-container .logo {
     width: 28%;
   }
-  #top-header .burger-container {
+  #top-header #header-container .burger-container {
     display: none;
   }
-  #top-header .navbar {
+  #top-header #header-container .navbar {
     position: relative;
     top: inherit !important;
     right: 0;
+    margin-top: 0;
   }
-  #top-header .navbar #menu {
+  #top-header #header-container .navbar #menu {
     width: 100%;
     right: 0;
     display: flex;
@@ -84,20 +95,20 @@
     background: none;
     justify-content: flex-end;
   }
-  #top-header .navbar #menu li {
+  #top-header #header-container .navbar #menu li {
     padding: 9px;
   }
-  #top-header .navbar #menu li a {
+  #top-header #header-container .navbar #menu li a {
     color: white;
     font-size: 0.75rem;
     text-decoration: none;
   }
-  #top-header .navbar #menu li a:hover {
+  #top-header #header-container .navbar #menu li a:hover {
     color: rgb(255, 150, 81);
     text-decoration: underline;
     font-weight: bold;
   }
-  #top-header .navbar #menu li {
+  #top-header #header-container .navbar #menu li {
     margin: auto 1vw;
   }
 }
@@ -267,11 +278,17 @@ form .notation:hover {
   html form {
     width: 60%;
   }
+  html #account_form {
+    width: 80%;
+  }
 }
 @media screen and (min-width: 1020px) {
   /* DESKTOP */
   html form {
-    width: 44%;
+    width: 30%;
+  }
+  html #account_form {
+    width: 70%;
   }
 }
 .template-card {
@@ -333,14 +350,28 @@ form .notation:hover {
   font-size: 0.75rem;
 }
 
+.request-card {
+  display: inline-block;
+  height: 200px;
+  min-width: 220px;
+  width: calc(50% - 20px);
+  margin: 1rem 0;
+  padding: 0.25rem;
+  border: solid 2px rgb(143, 170, 220);
+  border-radius: 0 16px 0 16px;
+  text-align: center;
+  overflow-x: hidden;
+}
+
 .review-card {
-  height: auto;
-  width: 68%;
+  height: 200px;
+  width: 280px;
   margin: 1rem 0;
   padding: 0.5rem;
   border: solid 2px rgb(143, 170, 220);
   border-radius: 0 16px 0 16px;
   text-align: center;
+  overflow-x: hidden;
 }
 .review-card header {
   padding: 0;
@@ -500,6 +531,7 @@ html body main .text-center {
   text-align: center;
 }
 html body main #main-header {
+  padding-top: 66px;
   height: 126px;
   display: flex;
   justify-content: center;
@@ -520,7 +552,7 @@ html body main #main-header #tagline-container {
 }
 html body main #main-header #tagline-container #tagline {
   margin: 0 2rem;
-  font-size: 3.5vw;
+  font-size: 1.2rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -617,8 +649,44 @@ html body main #main-header #tagline-container #tagline {
   background: linear-gradient(to bottom, white, white, rgb(143, 170, 220));
 }
 
+.cookies {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background-color: grey;
+  display: flex;
+  justify-content: space-between; /*positionner les DIV enfants*/
+  align-items: center; /*centrer verticalement*/
+  padding: 3rem;
+  opacity: 1; /*modification de cette valeur en JavaScript*/
+  transition: 0.5s;
+}
+
+.cookies-btn {
+  display: flex;
+}
+
+.btn-success, .btn-deny {
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn-success {
+  background-color: #1e2337;
+}
+
+.btn-deny {
+  background-color: grey;
+}
+
+:root {
+  font-size: 18px;
+}
+
 html {
-  font-size: 16px;
   font-family: "Roboto", sans-serif;
 }
 html h1, html h2, html h3 {
@@ -630,7 +698,11 @@ html h1, html h2, html h3 {
 html #tagline {
   font-family: "Kanit", sans-serif;
   font-style: italic;
-  font-weight: 200;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+html p {
+  font-size: 0.8rem;
 }
 html h1 {
   text-align: center;
@@ -645,18 +717,15 @@ html h1::after {
 }
 html h2 {
   font-size: 1.25rem;
-  margin-left: 20px;
+  margin-left: 5%;
 }
 html h3 {
   margin: 0.5rem auto;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 html h4 {
   font-size: 1.15rem;
-}
-html #tagline {
-  font-weight: bold;
-  letter-spacing: 3px;
 }
 html .card-title {
   font-size: 1rem;
@@ -664,27 +733,19 @@ html .card-title {
 }
 
 @media screen and (min-width: 768px) {
-  html {
+  :root {
     font-size: 20px;
+  }
+  html {
     background-color: #ccc;
-  }
-  html h1 {
-    font-size: 2rem;
-  }
-  html h2 {
-    font-size: 1.4rem;
-  }
-  html h1::after {
-    width: 4.25rem;
   }
 }
 @media screen and (min-width: 1020px) { /* DESKTOP */
-  html {
-    font-size: 24px;
-    background-color: #ccc;
+  :root {
+    font-size: 22px;
   }
-  html h1::after {
-    width: 5rem;
+  html {
+    background-color: #ccc;
   }
 }
 #homepage-container #main-header {
@@ -712,11 +773,6 @@ html .card-title {
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-}
-#homepage-container #reviews-section .review-card {
-  width: 280px;
-  height: 200px;
-  overflow: scroll;
 }
 #homepage-container #make-review-section {
   width: 100%;
@@ -774,11 +830,6 @@ html .card-title {
   width: 280px;
 }
 
-#account-container {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 100%;
-}
 #account-container #main-header {
   background-image: url("../../images/backgrounds/account-background.jpg");
 }
@@ -788,12 +839,26 @@ html .card-title {
 #account-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
+
 @media screen and (min-width: 768px) {
   /* TABLETTE */
   #account-container {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "header header" "title title" "account request";
+  }
+  #account-container h1 {
+    grid-area: title;
+  }
+  #account-container #main-header {
+    grid-area: header;
+  }
+  #account-container #edit-account {
+    grid-area: account;
+  }
+  #account-container #view-requests {
+    grid-area: request;
+    text-align: center;
   }
 }
 #dashboard-container #main-header {

@@ -31,7 +31,6 @@
         width: 100%;
     }
 
-    // À effectuer seulement sur desktop?
     img.center-picture:hover 
     {
         animation: imageZoomCenter 0.75s forwards;
@@ -88,10 +87,28 @@
     }
 }
 
+.request-card
+{
+    display: inline-block;
+    
+    height: 200px;
+    min-width: 220px;
+    width: calc(50% - 20px);
+
+    margin: 1rem 0;
+    padding: 0.25rem;
+    
+    border: solid 2px $light-blue;
+    border-radius: 0 16px 0 16px;
+
+    text-align: center;
+    overflow-x: hidden;
+}
+
 .review-card
 {
-    height: auto;
-    width: 68%;
+    height: 200px;
+    width: 280px;
 
     margin: 1rem 0;
     padding: 0.5rem;
@@ -100,6 +117,7 @@
     border-radius: 0 16px 0 16px;
 
     text-align: center;
+    overflow-x: hidden;
 
     header
     {
