@@ -21,9 +21,11 @@ Site web pour passer des commandes de créations de sites web, et entrer en rela
 
 ## Fonctionnalitées:
 
-* Inscription
+* Inscriptions
   
-* Commentaire
+* Completion du profil utilisateur
+  
+* Commentaires
   
 * Messagerie
   
