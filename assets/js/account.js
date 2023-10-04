@@ -1,6 +1,6 @@
 /********************************************************************
 Ce script est chargé dans la page account
-Il fait appel aux deux script de vérifications d'entrées utilisateurs
+Il fait appel aux deux scripts de vérifications d'entrées utilisateurs
 *********************************************************************/
 
 import { checkUserFields } from './checkUserFields.js';
