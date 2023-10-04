@@ -1,37 +1,75 @@
+@import '../general/vars.scss';
+
 .cookies
 {
     position: fixed;
-    bottom: 0;
     left: 0;
-    width: 100vw;
-    background-color: grey;
+    bottom: 0;
+    z-index: 2;
+    width: calc(100% - 1.5rem * 2);
+    background-color: white;
+    border-top: 3px solid $dark-blue;
     display: flex;
     justify-content: space-between; /*positionner les DIV enfants*/
     align-items: center; /*centrer verticalement*/
-    padding: 3rem;
+    padding: 1.5rem;
     opacity: 1; /*modification de cette valeur en JavaScript*/
     transition: 0.5s;
+    
+    .cookies-btn
+    {
+        display: flex;
+        flex-direction: column;
+    }
+    .btn-success, .btn-deny
+    {
+        color: white;
+        padding: 0.25rem;
+        border: 3px solid $dark-blue;
+        border-radius: 10px;
+    }
+
+    .btn-success
+    {
+        background-color: white;
+        color: $dark-blue;
+    }
+
+    .btn-deny
+    {
+        margin-top: 0.25rem;
+        background-color: white;
+        color: $dark-blue;
+    }
+    
+    .btn-success:hover
+    {
+        background-color: $alt-color;
+    }
+
+    .btn-deny:hover
+    {
+        margin-top: 0.25rem;
+        background-color: $alt-color;
+    }
+    
+    .btn-success:active
+    {
+        background-color: rgb(196, 90, 16);
+        color: white;
+    }
+
+    .btn-deny:active
+    {
+        background-color: rgb(196, 90, 16);
+        color: white;
+    }
+    
+    .btn-success:hover, .btn-deny:hover
+    {
+        cursor: pointer;
+    }
 }
 
-.cookies-btn
-{
-    display: flex;
-}
 
-.btn-success, .btn-deny
-{
-    color: white;
-    padding: 1rem;
-    border: none;
-    border-radius: 10px;
-}
 
-.btn-success
-{
-    background-color: #1e2337;
-}
-
-.btn-deny
-{
-    background-color: grey;
-}

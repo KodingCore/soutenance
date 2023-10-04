@@ -29,7 +29,8 @@ require "controllers/DashboardController.php";
 require "controllers/ContactController.php";
 require "controllers/APIFetchController.php";
 require "controllers/RequestController.php";
-require "controllers/NotFound.php";
+require "controllers/NotFoundController.php";
 require "controllers/GnuController.php";
+require "controllers/AboutController.php";
 
 require "services/Router.php";

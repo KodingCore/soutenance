@@ -1,23 +1,59 @@
 window.addEventListener("DOMContentLoaded", function() {
     leftAside();
     succesDown();
-    cookies();
+    //cookies();
 })
 
 function leftAside() {
+    const title = document.getElementsByTagName("h1")[0];
     const leftAsideBtn = document.getElementById("left-aside-access");
     const leftAside = document.getElementById("left-aside");
     const arrowLeftAsideBtn = leftAsideBtn.getElementsByTagName("i")[0];
+    const url = window.location.href;
+    let view = url.split("=")[1];
     const noLeftAsideViews = [
         "contact",
         "account",
         "shop",
         "login",
         "register",
-        "request"
+        "request",
+        "not-found",
+        "about"
     ]
-    const url = window.location.href;
-    let view = url.split("=")[1];
+    if (title.textContent.includes("Accueil")) {
+        view = "homepage";
+    }
+    else if (title.textContent.includes("Connexion")) {
+        view = "login";
+    }
+    else if (title.textContent.includes("Vitrine")) {
+        view = "shop";
+    }
+    else if (title.textContent.includes("Mon compte")) {
+        view = "account";
+    }
+    else if (title.textContent.includes("Dashboard")) {
+        view = "dashboard";
+    }
+    else if (title.textContent.includes("Envoyer un message")) {
+        view = "contact";
+    }
+    else if (title.textContent.includes("À propos de moi")) {
+        view = "about";
+    }
+    else if (title.textContent.includes("Créer un compte")) {
+        view = "register";
+    }
+    else if (title.textContent.includes("Politique de confidentialité")) {
+        view = "gnu";
+    }
+    else if (title.textContent.includes("Demandez votre site sur-mesure")) {
+        view = "request";
+    }
+    else if (title.textContent.includes("Erreur 404!")) {
+        view = "not-found";
+    }
 
     if (view !== undefined) {
         if (view.includes("&")) {
@@ -27,6 +63,7 @@ function leftAside() {
             view = view.split("#")[0];
         }
     }
+
     if (view === undefined || view === "disconnect" || view.includes("homepage")) {
         view = "homepage";
     }
@@ -76,14 +113,42 @@ function succesDown()
 
 function cookies()
 {
-const btnSuccess = document.querySelector('.btn-success');
-console.log(btnSuccess);
+    const btnSuccess = document.querySelector('.btn-success');
+    const btnDeny = document.querySelector('.btn-deny');
+    
+    const cookies = document.querySelector('.cookies');
+    
+    // Vérifier si l'utilisateur a déjà accepté ou refusé les cookies
+    const cookiesAccepted = getCookie('cookiesAccepted');
+    const cookiesDenied = getCookie('cookiesDenied');
 
-const cookies = document.querySelector('.cookies');
-console.log(cookies);
-
-btnSuccess.addEventListener('click', function(){
-    console.log('bouton cliqué !');
-    cookies.style.opacity ="0";
-});
+    // Afficher ou masquer la section des cookies en conséquence
+    if (!cookiesAccepted && !cookiesDenied) {
+        cookies.style.display = 'block';
+    } else {
+        cookies.style.display = 'none';
+    }
+    
+    btnSuccess.addEventListener('click', function(){
+        setCookie('cookiesAccepted', 'true', 365); // Valable pendant 1 an
+        cookies.style.display = 'none';
+        cookies.style.opacity ="0";
+    });
+    btnDeny.addEventListener('click', function(){
+        setCookie('cookiesDenied', 'true', 365); // Valable pendant 1 an
+        cookies.style.display = 'none';
+        cookies.style.opacity ="0";
+    });
 }
+
+// Fonctions pour gérer les cookies
+    function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = name + '=' + value + ';expires=' + expires.toUTCString();
+    }
+
+    function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) return match[2];
+    }

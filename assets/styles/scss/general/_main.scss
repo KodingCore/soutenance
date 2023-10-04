@@ -3,9 +3,6 @@
 html
 {
   scroll-behavior: smooth;
-
-  
-
   .hidden
   {
     display: none;
@@ -17,17 +14,22 @@ html
 
   body
   {
+    
+    min-height: 100vh;
     margin: 0;
-    padding: 0;
     background-image: url("../../images/backgrounds/views-back.svg");
     background-color: rgba(255,255,255,1);
     background-size: cover;
     background-position: center;
     main
     {
-      
+      min-height: 100vh;
       width: 96%;
       margin: 0 auto;
+      ul
+      {
+        margin-left: 8%;
+      }
 
       .text-center
       {
@@ -36,7 +38,7 @@ html
 
       #main-header
       {
-        padding-top: 66px;
+        padding-top: 72px;
         height: 126px;
         display: flex;
         justify-content: center;
@@ -57,11 +59,22 @@ html
           #tagline
           {
             margin: 0 2rem;
-            font-size: 1.2rem;
           }
         }
       }
     }
+    #about-container, #gnu-container, #not-found-container
+      {
+        #main-header
+        {
+          padding-top: 0;
+          height: 72px;
+          #tagline-container
+          {
+            display: none;
+          }
+        }
+      }
   }
 }
 
@@ -86,7 +99,6 @@ html
       }
     }
   }
-  
 }
 
 @media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
@@ -107,7 +119,13 @@ html
           }
         }
       }
+      #about-container, #gnu-container, #not-found-container
+      {
+        #main-header
+        {
+          height: 100px;
+        }
+      }
     }
   }
-  
 }

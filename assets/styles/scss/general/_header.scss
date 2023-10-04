@@ -6,6 +6,7 @@
 #top-header
 {
   
+  z-index: 2;
   #header-container
   {
     position: fixed;
@@ -58,7 +59,7 @@
           a
           {
             color: white;
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             text-decoration: none;
           }
           a:hover
@@ -86,16 +87,6 @@
       .navbar
       {
         margin-top: 75px;
-        #menu
-        {
-          li
-          {
-            a
-            {
-              font-size: 1rem;
-            }
-          }
-        }
       }
     }
   }
@@ -110,13 +101,14 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      .logo
-      {
-        width: 28%;
-      }
       .burger-container
       {
         display: none;
+      }
+      .logo
+      {
+        width: 28%;
+        // display: none;
       }
       .navbar
       {

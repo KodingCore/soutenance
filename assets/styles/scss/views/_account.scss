@@ -34,11 +34,20 @@
   
     #edit-account {
       grid-area: account;
+      h2
+      {
+        text-align: center;
+        margin-left: 0;
+      }
     }
   
     #view-requests {
       grid-area: request;
       text-align: center;
+      h2
+      {
+        margin-left: 0;
+      }
     }
   }
 }

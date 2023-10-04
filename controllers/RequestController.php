@@ -35,10 +35,9 @@ class RequestController extends AbstractController
         
     }
     
-    public function addRequest(?string $description) : void
+    public function addRequest() : void
     {
-        echo $description;
-        if($description !== "")
+        if(isset($_POST["description"]))
         {
                 
             
@@ -50,7 +49,7 @@ class RequestController extends AbstractController
             $category_id = (int)$_POST["category"];
             
             $content_share = htmlspecialchars($_POST["content-transmition"], ENT_QUOTES, 'UTF-8');
-            
+            $description = htmlspecialchars($_POST["description"], ENT_QUOTES, 'UTF-8');
             
             //* Transformation des inputs checkbox en chaine binaire
             $checkboxes_binaries = "";

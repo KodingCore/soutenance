@@ -33,6 +33,9 @@ window.addEventListener("DOMContentLoaded", function() {
     else if (title.textContent.includes("Demandez votre site sur-mesure")) {
         view = "request";
     }
+    else if (title.textContent.includes("Erreur 404!")) {
+        view = "not-found";
+    }
 
     if (view !== undefined) {
         if (view.includes("&")) {

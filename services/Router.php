@@ -9,8 +9,9 @@ class Router
     private DashboardController $dashboardController;
     private APIFetchController $APIFetchController;
     private RequestController $requestController;
-    private NotFound $notFound;
+    private NotFoundController $notFoundController;
     private GnuController $gnuController;
+    private AboutController $aboutController;
 
     public function __construct()
     {
@@ -21,15 +22,16 @@ class Router
         $this->dashboardController = new DashboardController();
         $this->APIFetchController = new APIFetchController();
         $this->requestController = new RequestController();
-        $this->notFound = new NotFound();
+        $this->notFoundController = new NotFoundController();
         $this->gnuController = new GnuController();
+        $this->aboutController = new AboutController();
     }
 
     public function checkRoute($route) : void
     {
         
         //*GUEST--------------GUEST-----------GUEST--------
-        if($route === "homepage")
+        if($route === "homepage" || $route === "")
         {
             $this->homepageController->index();
         }
@@ -45,16 +47,13 @@ class Router
         {
             $this->userController->register();
         }
-        else if($route === "disconnect")
-        {
-            unset($_SESSION["user_id"]);
-            unset($_SESSION["role"]);
-            session_destroy();
-            $this->homepageController->index();
-        }
         else if($route === "shop")
         {
             $this->shopController->index();
+        }
+        else if($route === "about")
+        {
+            $this->aboutController->index();
         }
         
         else if(isset($_SESSION["role"]))
@@ -62,18 +61,7 @@ class Router
             //*USER--------------USER-----------USER--------
             if($route === "homepage-review-send")
             {
-                if(isset($_POST["content"]))
-                {
-                    $content = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
-                    unset($_POST["content"]);
-                    echo $_POST["content"];
-                    $this->homepageController->sendReview($content);
-                }
-                else
-                {
-                    $this->homepageController->index();
-                }
-                
+                $this->homepageController->sendReview();
             }
             else if($route === "contact")
             {
@@ -89,20 +77,26 @@ class Router
             }
             else if($route === "add-request")
             {
-                if(isset($_POST["description"]))
+
+                $this->requestController->addRequest($description);
+
+            }
+            else if($route === "disconnect")
+            {
+                if(isset($_SESSION["user_id"]))
                 {
-                    $description = htmlspecialchars($_POST["description"], ENT_QUOTES, 'UTF-8');
-                    unset($_POST["description"]);
-                    $this->requestController->addRequest($description);
+                    unset($_SESSION["user_id"]);
                 }
-                else
+                if(isset($_SESSION["role"]))
                 {
-                    $this->requestController->index();
+                    unset($_SESSION["role"]);
                 }
+                session_destroy();
+                $this->homepageController->index();
             }
         
             //*ADMIN--------------ADMIN-----------ADMIN--------
-            if($_SESSION["role"] === "admin")
+            if(isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
             {
                 if($route === "dashboard")
                 {
@@ -221,7 +215,7 @@ class Router
         }
         else
         {
-            $this->notFound->index();
+            $this->notFoundController->index();
         }
     }
 }

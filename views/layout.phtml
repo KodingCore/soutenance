@@ -43,8 +43,12 @@
     </div>
         <?php
             require $this->template;
+            if(isset($_SESSION["user_id"], $_SESSION["role"])) //* Control des variables de sessions pour l'acces users et admin
+            {
+                ?> <a href="index.php?route=request"><button id="float-btn">Votre site sur-mesure</button></a> <?php
+            }
         ?>
-    <a href="index.php?route=request"><button id="float-btn">Votre site sur-mesure</button></a>
+    
     <footer id="top-footer">
         <?php
             
@@ -65,22 +69,22 @@
             }
         ?>
     </footer>
-    <section class="cookies">
-        <div class="cookies-texte">
-            <p>En pousuivant, vous acceptez l'utilisation des cookies par le 
-            site afin de vous proposer des contenus adaptés et réaliser des 
-            statistiques.
-            </p>
-        </div>
-        <div class="cookies-btn">
-            <button class="btn-success">
-                Accepter les cookies
-            </button>
-            <button class="btn-deny">
-                paramètres des coookies
-            </button>
-        </div>
-    </section>
+    <!--<section class="cookies">-->
+    <!--    <div class="cookies-texte">-->
+    <!--        <p>En pousuivant, vous acceptez l'utilisation des cookies par le -->
+    <!--        site afin de vous proposer des contenus adaptés et réaliser des -->
+    <!--        statistiques.-->
+    <!--        </p>-->
+    <!--    </div>-->
+    <!--    <div class="cookies-btn">-->
+    <!--        <button class="btn-success">-->
+    <!--            Accepter les cookies-->
+    <!--        </button>-->
+    <!--        <button class="btn-deny">-->
+    <!--            Refuser les cookies-->
+    <!--        </button>-->
+    <!--    </div>-->
+    <!--</section>-->
 </body>
 <script type="module" src="assets/js/index.js"></script>
 </html>

@@ -349,6 +349,7 @@ class UserController extends AbstractController
                 //* On édite le profil
                 $this->userManager->editUser($user);
                 $this->infoManager->editInfo($info);
+                //if(count($requests))
                 //* On retourne à la page account avec le message de confirmation
                 $this->render("views/user/account.phtml", ["message" => "Le profil à bien été mis à jour", "field" => "general", "user" => $user, "info" => $info]);
             }
@@ -365,12 +366,20 @@ class UserController extends AbstractController
         {
             $requests = $this->requestManager->getRequestsByUserId($_SESSION["user_id"]);
             $categories = [];
-            foreach($requests as $request)
+            if($requests)
             {
-                $category = $this->categoryManager->getCategoryByCategoryId($request->getCategoryId());
-                array_push($categories, $category);
+                foreach($requests as $request)
+                {
+                    $category = $this->categoryManager->getCategoryByCategoryId($request->getCategoryId());
+                    array_push($categories, $category);
+                }
+                $this->render("views/user/account.phtml", ["categories" => $categories, "user" => $user, "info" => $info, "requests" => $requests]);
             }
-            $this->render("views/user/account.phtml", ["categories" => $categories, "user" => $user, "info" => $info, "requests" => $requests]);
+            else
+            {
+                $this->render("views/user/account.phtml", ["user" => $user, "info" => $info]);
+            }
+            
         }
     }
 }

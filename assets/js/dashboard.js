@@ -386,6 +386,7 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
                 {
                     inputElement = document.createElement("input");
                     inputElement.setAttribute("type", "checkbox");
+                    inputElement.id = "checkbox-role-dashbaord";
                     if (cellsRow[i].textContent === "admin") 
                     {
                         inputElement.setAttribute("checked", "");

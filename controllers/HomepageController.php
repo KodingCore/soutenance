@@ -21,8 +21,8 @@ class HomepageController extends AbstractController
     {
         
         
-        $nbr_templates = 3;
-        $nbr_reviews = 9;
+        $nbr_templates = 4;
+        $nbr_reviews = 6;
 
         $templates = $this->templateManager->getTemplatesOrderedByDate();
         $templates = array_slice($templates, 0, $nbr_templates);
@@ -55,18 +55,20 @@ class HomepageController extends AbstractController
         
     }
     
-    public function sendReview(string $content)
+    public function sendReview()
     {
-        $user_id = (int)$_SESSION["user_id"];
-        $timezone = new DateTimeZone('Europe/Paris');
-        $dateTime = new DateTime('now', $timezone);
-        $sqlDateTime = $dateTime->format('Y-m-d');
-        $notation = (int)$_POST["rating"];
-        $review = new Review($user_id, $content, $sqlDateTime, $notation);
-        $this->reviewManager->insertReview($review);
-        $this->makeRedirection = true;
+        if(isset($_POST["content"]))
+        {
+            $content = htmlspecialchars($_POST["content"], ENT_QUOTES, 'UTF-8');
+            $user_id = (int)$_SESSION["user_id"];
+            $timezone = new DateTimeZone('Europe/Paris');
+            $dateTime = new DateTime('now', $timezone);
+            $sqlDateTime = $dateTime->format('Y-m-d');
+            $notation = (int)$_POST["rating"];
+            $review = new Review($user_id, $content, $sqlDateTime, $notation);
+            $this->reviewManager->insertReview($review);
+            $this->makeRedirection = true;
+        }
         $this->index();
     }
-    
-    
 }
