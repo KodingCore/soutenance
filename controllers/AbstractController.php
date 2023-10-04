@@ -1,5 +1,11 @@
 <?php
 
+//********************************
+// Cette classe abstraite est appelée en fin
+// de chaque fonction des controllers pour 
+// afficher une view et/ou transmettre des données 
+// d'une page à l'autre
+//*******************************/
 abstract class AbstractController
 {
     protected string $template;

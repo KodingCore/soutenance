@@ -34,22 +34,26 @@ export function checkUserFields(form)
         champUsername.addEventListener("change", function () {
             errorUsername.classList.remove("content-write");
             errorUsername.classList.remove("error");
+            errorUsername.textContent = "";
             checkRegex(champUsername, usernameRegex, "username", errorUsername);
         });
         champEmail.addEventListener("change", function () {
             errorEmail.classList.remove("content-write");
             errorEmail.classList.remove("error");
+            errorEmail.textContent = "";
             checkRegex(champEmail, emailRegex, "email", errorEmail);
         });
         champPassword.addEventListener("change", function () {
             errorPassword.classList.remove("content-write");
             errorPassword.classList.remove("error");
+            errorPassword.textContent = "";
             checkRegex(champPassword, passwordRegex, "password", errorPassword);
             confirmPasswordChecker();
         });
         champConfirmPassword.addEventListener("change", function () {
             errorConfirmPassword.classList.remove("content-write");
             errorConfirmPassword.classList.remove("error");
+            errorConfirmPassword.textContent = "";
             confirmPasswordChecker();
         });
     }
@@ -70,8 +74,8 @@ export function checkUserFields(form)
         else
         {
             champConfirmPassword.classList.remove("error");
-            errorConfirmPassword.textContent = "";
             errorConfirmPassword.classList.remove("content-write");
+            errorConfirmPassword.textContent = "";
         }
     }
 
@@ -113,10 +117,12 @@ export function checkUserFields(form)
     //* Empêche la soumition du formulaire s'il y a une erreur
     form.addEventListener("submit", function(event)
     {
+        //* Remplacement des espaces par une chaine vide
         errorUsername.textContent = errorUsername.textContent.replace(/\s/g, "");
         errorEmail.textContent = errorEmail.textContent.replace(/\s/g, "");
         errorPassword.textContent = errorPassword.textContent.replace(/\s/g, "");
         errorConfirmPassword.textContent = errorConfirmPassword.textContent.replace(/\s/g, "");
+        
         if(errorUsername.textContent || errorEmail.textContent || errorPassword.textContent || errorConfirmPassword.textContent)
         {
             event.preventDefault();

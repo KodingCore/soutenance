@@ -6,9 +6,10 @@
 #top-header
 {
   
-  z-index: 2;
+  
   #header-container
   {
+    z-index: 4;
     position: fixed;
     width: calc(100% - 32px);
     min-height: 50px;
@@ -79,7 +80,9 @@
   }
 }
 
-@media screen and (min-width: $tabl-brkpnt){ /* TABLETTE */
+@media screen and (min-width: $tabl-brkpnt)
+{ 
+  /* TABLETTE */
   #top-header
   {
     #header-container
@@ -92,7 +95,9 @@
   }
 }
 
-@media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
+@media screen and (min-width: $desk-brkpnt)
+{ 
+  /* DESKTOP */
   
   #top-header
   {
@@ -108,7 +113,6 @@
       .logo
       {
         width: 28%;
-        // display: none;
       }
       .navbar
       {

@@ -76,6 +76,10 @@ function checkMessageFields(form)
     //* Empêche la soumition du formulaire s'il y a une erreur
     form.addEventListener("submit", function(event)
     {
+        //* Remplacement des espaces par une chaine vide
+        error_subject.textContent = error_subject.textContent.replace(/\s/g, "");
+        error_content.textContent = error_content.textContent.replace(/\s/g, "");
+        
         if(error_subject.textContent || error_content.textContent)
         {
             event.preventDefault();

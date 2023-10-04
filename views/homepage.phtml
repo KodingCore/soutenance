@@ -10,7 +10,6 @@
         </div>
     </header>
     <!-- --------------------------- -->
-    <!-- -----HEADER-----HEADER----- -->
     <!-- --------------------------- -->
     <h1>Accueil</h1>
     <?php
@@ -21,14 +20,18 @@
         <?php
     }
     ?>
+    <h2>Qui sommes nous?</h2>
     <section id="presentation">
-        <h2>Qui sommes nous?</h2>
         <p class="text-center">
             La passion pour la technologie et un engagement fort dans les domaines de l'informatique
             sont à la base de la création de "KodingCore Development" avec un objectif clair : fournir aux
             professionnels des solutions de Développement web et logiciel innovantes et sur mesure.
         </p>
+        <p class="text-center">
+            Inscrivez-vous pour profiter de la vitrine et commencer votre projet avec nous!
+        </p>
     </section>
+    
     <h2>Dernières créations</h2>
     <section id="templates-section">   
     <?php
@@ -42,10 +45,10 @@
             <header>
                 <h3><?= $template->getName(); ?></h3>
             </header>
-                <img src="<?= $template->getImagePath() ?>" alt="Image du template <?= $template->getName() ?>">
+                <img src="<?= $template->getImagePath() ?>" alt="<?= $template->getImageDescription() ?>">
             <footer>
                 <p><?= $template->getDescription() ?></p>
-                <p><?= $template->getCreatedAt() ?></p>
+                <p>Créer le: <?= $template->getCreatedAt() ?></p>
             </footer>
         </article>
     <?php
@@ -86,7 +89,6 @@
                     {
                         ?><i class="fa-regular fa-star" style="color: #ff9651;"></i><?php
                     }
-                    
                 }
                 ?>
                 </div>

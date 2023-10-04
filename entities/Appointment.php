@@ -30,6 +30,7 @@ class Appointment implements JsonSerializable
     public function setAppointmentTime(string $appointment_time): void { $this->appointment_time = $appointment_time; }
     public function setCommunicationPreference(string $communication_preference): void { $this->communication_preference = $communication_preference; }
 
+    // fonction pour les requetes API
     public function jsonSerialize() {
         return [
             "appointment_id" => $this->appointment_id,

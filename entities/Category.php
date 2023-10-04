@@ -26,6 +26,7 @@ class Category implements JsonSerializable
     public function setDescription(string $description): void { $this->description = $description; }
     public function setAveragePrice(string $average_price): void { $this->average_price = $average_price; }
 
+    // fonction pour les requetes API
     public function jsonSerialize() {
         return [
             "category_id" => $this->category_id,

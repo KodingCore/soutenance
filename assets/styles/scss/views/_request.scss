@@ -1,19 +1,24 @@
 @import '../general/vars.scss';
 
-#request-container {
+#request-container 
+{
   p {
     text-align: center;
   }
-  #main-header {
+  #main-header 
+  {
     background-image: url("../../images/backgrounds/request-background.jpg");
-    #tagline-container {
+    #tagline-container 
+    {
       background-color: rgba(255, 255, 255, 0.9);
-      #tagline {
+      #tagline 
+      {
         color: $dark-blue;
       }
     }
   }
-  #left-aside-access {
+  #left-aside-access 
+  {
     display: none;
   }
 }

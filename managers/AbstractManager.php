@@ -1,5 +1,8 @@
 <?php
-
+//********************************
+// Cette classe abstraite est appelée pour 
+// se connecter à la base de donnée dans les managers
+//*******************************/
 abstract class AbstractManager
 {
     protected PDO $db;

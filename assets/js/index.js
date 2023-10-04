@@ -1,14 +1,30 @@
+//** ---------------------------------------------- */
+//*  Ce comprends une gestion du "left-aside"
+//*  De suppression visuel des messages de succès
+//*  Ainsi qu'une gestion "prévisionnel" de cookies
+//** ---------------------------------------------- */
+
 window.addEventListener("DOMContentLoaded", function() {
     leftAside();
     succesDown();
     //cookies();
 })
 
+
+//** ---------------------------------------------- */
+//*  Cette fonction permet l'affichage du left-aside
+//*  seulement sur certaines pages
+//*  (Prend le formulaire en paramètre)
+//** ---------------------------------------------- */
 function leftAside() {
+    
+    //* Récupération des éléments du DOM
     const title = document.getElementsByTagName("h1")[0];
     const leftAsideBtn = document.getElementById("left-aside-access");
     const leftAside = document.getElementById("left-aside");
     const arrowLeftAsideBtn = leftAsideBtn.getElementsByTagName("i")[0];
+    
+    //* Association des vues
     const url = window.location.href;
     let view = url.split("=")[1];
     const noLeftAsideViews = [
@@ -71,9 +87,10 @@ function leftAside() {
         view = "request";
     }
 
+    //* Si la page inclue une barre latérale gauche
     if (!noLeftAsideViews.includes(view)) {
-        const mainContainer = document.getElementById(`${view}-container`);
-
+        const mainContainer = document.getElementsByTagName("main")[0];
+        //* Gestion de la barre latérale gauche (leftAside)
         leftAsideBtn.addEventListener("click", () => {
 
             leftAside.classList.toggle("active");
@@ -85,18 +102,25 @@ function leftAside() {
                 arrowLeftAsideBtn.classList.replace("fa-caret-left", "fa-caret-right");
             }
         })
-
+        //* Nettoyage de la vue
         mainContainer.addEventListener("click", () => {
             leftAside.classList.remove("active");
             leftAsideBtn.style.cssText = `left: ${leftAside.offsetWidth}px`;
             arrowLeftAsideBtn.classList.replace("fa-caret-left", "fa-caret-right");
         })
     }
-    else {
+    //* Si la page n'inclue pas de barre latérale gauche
+    else 
+    {
+        //* On cache le bouton du leftAside
         leftAsideBtn.classList.add("hidden");
     }
 }
 
+//** ---------------------------------------------- */
+//*  Cette fonction supprime les messages de succès
+//*  Après un certain temps
+//** ---------------------------------------------- */
 function succesDown()
 {
     setTimeout(function() {
@@ -110,7 +134,10 @@ function succesDown()
 }
 
 
-
+//** ---------------------------------------------- */
+//*  Fonction en stand-by, car pas d'utilisation 
+//*  de cookies sur ce site
+//** ---------------------------------------------- */
 function cookies()
 {
     const btnSuccess = document.querySelector('.btn-success');
@@ -142,13 +169,15 @@ function cookies()
 }
 
 // Fonctions pour gérer les cookies
-    function setCookie(name, value, days) {
-        const expires = new Date();
-        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-        document.cookie = name + '=' + value + ';expires=' + expires.toUTCString();
-    }
+function setCookie(name, value, days) 
+{
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = name + '=' + value + ';expires=' + expires.toUTCString();
+}    
 
-    function getCookie(name) {
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        if (match) return match[2];
-    }
+function getCookie(name) 
+{
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) return match[2];
+}

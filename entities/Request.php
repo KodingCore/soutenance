@@ -42,6 +42,7 @@ class Request implements JsonSerializable
     public function setCreatedAt(string $created_at): void { $this->created_at = $created_at; }
     public function setUpdatedAt(string $updated_at): void { $this->updated_at = $updated_at; }
 
+    // fonction pour les requetes API
     public function jsonSerialize() {
         return [
             "request_id" => $this->request_id,

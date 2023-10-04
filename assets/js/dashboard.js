@@ -184,10 +184,11 @@ function createControlBtns(attributsNames, className, row) {
     row.appendChild(viewBtn);
     viewBtn.textContent = "View";
     viewBtn.addEventListener("click", function() {
-        displayAddEditForm(attributsNames, className, "view", row);
+        displayAddEditForm(attributsNames, className, "view", row); //* Affichage du formulaire de visualisation
     })
 
     //* Edit
+    //* Ici se trouve la liste des classes qui sont concernées par l'édition
     if (className === "template" || className === "category" || className === "appointment" || className === "quotation" || className === "user") {
         const editBtn = document.createElement("button");
         editBtn.classList.add("edit-btn");
@@ -195,8 +196,8 @@ function createControlBtns(attributsNames, className, row) {
         row.appendChild(editBtn);
         editBtn.textContent = "Edit";
 
-        editBtn.addEventListener("click", function() { //* Event listener click
-            displayAddEditForm(attributsNames, className, "edit", row); //* Affichage de la section d'édition
+        editBtn.addEventListener("click", function() {
+            displayAddEditForm(attributsNames, className, "edit", row); //* Affichage du formulaire d'édition
         })
     }
 
@@ -208,7 +209,7 @@ function createControlBtns(attributsNames, className, row) {
     removeBtn.textContent = "Suppr";
     removeBtn.addEventListener("click", function() {
         const idRow = row.getElementsByTagName("td")[0].textContent;
-        removeData(className, idRow);
+        removeData(className, idRow); //* Appel la fonction de suppression de data
     })
 }
 
@@ -294,13 +295,12 @@ function displayLine(table, colIndex, content) {
 }
 
 //* -----------------------------------------------------------------------------
-//* -------------------------AJOUT/EDITION/SUPPRESSION---------------------------
+//* -------------------------AJOUT/EDITION/VISUALISATION---------------------------
 //* -----------------------------------------------------------------------------
 
 //** ---------------------------------------- */
-//*  Génère le formulaire d'ajout
-//*  en récuperant en paramètres
-//*  les attributs de la classe par le fetch
+//*  Génère le formulaire d'ajout, d'édition
+//*  ou de visualisation
 //** ---------------------------------------- */
 function displayAddEditForm(attributsNames, className, action, row = null) //* action >>> "view", edit" ou "add"
 {
@@ -318,7 +318,7 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
         addEditFormTitle.textContent = "Éditer un(e) "; //* On set le text du titre pour l'édition
     }
     else {
-        addEditFormTitle.textContent = "Visualiser un(e) "; //* On set le text du titre pour la visu
+        addEditFormTitle.textContent = "Visualiser un(e) "; //* On set le text du titre pour la visualisation
     }
 
     addEditFormTitle.textContent = addEditFormTitle.textContent + className; //* Ajout du nom de la classe au titre de la section
@@ -330,12 +330,10 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
     let i = 0; //* itération
     let inputsElements = []; //* Tableau vide qui contiendra les inputs du formulaire
     
-    
-
     for (let attributName in attributsNames) //* Pour chaque attributs de la classe
     {
         
-        //* Affichage de l'id si nous sommes en edit ou view
+        //* Affiche l'id si nous sommes en edit ou view
         if (i === 0 && action === "edit" || i === 0 && action === "view") {
             const idCell = row.getElementsByTagName("td")[0];
             const fieldsetElement = document.createElement("fieldset");
@@ -352,7 +350,7 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
             fieldsetElement.appendChild(idElement);
         }
 
-        //* Affichage les inputs de la classe user
+        //* Affiche les inputs de la classe user
         if (i > 0 && className === "user") {
             
             const cellsRow = row.getElementsByTagName("td");
@@ -392,8 +390,6 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
                         inputElement.setAttribute("checked", "");
                     }
                 }
-
-
             }
             else 
             {
@@ -416,31 +412,41 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
 
         }
 
-        //* Affichage des inputs des autres classes
+        //* Affiche les inputs des autres classes que user
         if (i > 0 && className !== "user") 
         {
             
             let inputElement = null; // On set un input sur null
-
+            
+            //* Affichage des fieldsets pour les checkboxes qui concernent la demande de site
             if (attributName.includes("checkboxes_binaries")) 
             {
-                const cellsRow = row.getElementsByTagName("td");
+                
+                //* Liste des noms de label pour le formulaire
                 const labelsNames = ["CMS", "suscribing", "feedback", "research", 
                                     "social share", "localisation", "products gestion", 
                                     "buy kart", "link payment", "auto-billing", 
                                     "product rating", "forum", "messaging", "reservation", 
                                     "calender", "videos integration", "media rating", "dashboard", 
-                                    "notification", "multi language", "responsive design"]
+                                    "notification", "multi language", "responsive design"];
+                                    
+                //* Récupération de la chaine de binaires qui représente lea valeur des checkboxes
+                const cellsRow = row.getElementsByTagName("td");
                 const binariesTab = cellsRow[i].textContent.split('');
+                
+                //* Création du fieldset
                 const fieldsetElement = document.createElement("fieldset");
                 addEditForm.appendChild(fieldsetElement);
                 
 
                 for(let j = 0; j < binariesTab.length; j++)
                 {
+                    //* Création du label
                     const labelElement = document.createElement("label");
                     fieldsetElement.appendChild(labelElement);
                     labelElement.textContent = labelsNames[j];
+                    
+                    //* Création de l'input
                     inputElement = document.createElement("input");
                     inputElement.setAttribute("type", "checkbox");
                     if(binariesTab[j] === '1')
@@ -450,24 +456,27 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
                     fieldsetElement.appendChild(inputElement);
                     inputsElements.push(inputElement);
                     
+                    //* On ajoute un séparateur entre les fieldsets
                     let separator = document.createElement("div");
                     separator.classList.add("input-separator");
                     fieldsetElement.appendChild(separator);
                 }
             }
+            //* Affichage des inputs du reste des classes
             else 
             {
-                
-                
+                //* Création du fieldset
                 const fieldsetElement = document.createElement("fieldset");
                 addEditForm.appendChild(fieldsetElement);
 
+                //* Création d'une légende
                 const legendElement = document.createElement("legend");
                 let legendContent = attributName.slice(0, 19);
-
                 legendElement.textContent = legendContent;
                 legendElement.setAttribute("for", "input-" + attributName)
                 fieldsetElement.appendChild(legendElement);
+                
+                //* 
                 if (attributName.includes("content") && !attributName.includes("share") || attributName.includes("description")) 
                 {
                     inputElement = document.createElement("textarea");
@@ -512,6 +521,8 @@ function displayAddEditForm(attributsNames, className, action, row = null) //* a
 
                 inputsElements.push(inputElement);
             }
+            
+            //* Si on est action "view", on passe tout les attributs en lecture seul
             if (action === "view") 
             {
                 inputElement.setAttribute("readonly", "");

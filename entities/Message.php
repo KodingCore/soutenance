@@ -27,7 +27,8 @@ class Message implements JsonSerializable
     public function setSubject(string $subject): void { $this->subject = $subject; }
     public function setContent(string $content): void { $this->content = $content; }
     public function setSendDateTime(string $send_date_time): void { $this->send_date_time = $send_date_time; }
-
+    
+    // fonction pour les requetes API
     public function jsonSerialize() {
         return [
             "message_id" => $this->message_id,

@@ -1,5 +1,9 @@
 <?php
-
+//****************************************/
+/*  Contrôleur d'insertion de nouveaux   */
+/*  messages dans la base de données      */
+/*  et d'affichage de la page de contact */
+//****************************************/
 class ContactController extends AbstractController
 {
    

@@ -1,4 +1,0 @@
-background header : https://i.postimg.cc/hjzmRt1v/web-lumi-compressed.webp
-koding-core-mark-white : https://i.postimg.cc/CLdMj3BN/Koding-Core-dev-mark-white.png
-
-mail ico : <i class="fa-regular fa-envelope" style="color: #c55a11;"></i>

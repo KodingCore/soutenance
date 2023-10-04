@@ -74,7 +74,8 @@ class UserController extends AbstractController
                 }
                 $_SESSION["user_id"] = $user->getUserId(); //* On set la variable de session user_id
                 $_SESSION["role"] = $user->getRole(); //* On set la variable de session role
-                header("Location: index.php?route=homepage"); //* Retour sur la homepage
+                header("Location: index.php?route=homepage&message=Vous vous êtes connecté(e) avec succès!&field=general"); //* Retour sur la homepage
+                
             }
         } 
         else 
@@ -159,7 +160,7 @@ class UserController extends AbstractController
                 $user = $this->userManager->getUserByEmail($email); //* On récupère l'utilisateur dans la BDD pour obtenir son ID
                 $info = new Info($user->getUserId()); //* Instantiation d'une info utilisateur à partir de son ID
                 $this->infoManager->insertInfo($info); //* On insert l'info dans la BDD
-                $this->render("views/guest/login.phtml", ["message" => "Compte créer avec succès", "field" => "general"]); //* Compte créer, on se rend sur la page de login
+                header("Location: index.php?route=homepage&message=Compte créer avec succès!&field=general"); //* Compte créer, on se rend sur la page de login
             }
         } 
         else 

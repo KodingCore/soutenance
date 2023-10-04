@@ -96,6 +96,7 @@ class Router
             }
         
             //*ADMIN--------------ADMIN-----------ADMIN--------
+            //*REQUETES API-------REQUETES API-------REQUETES API-------
             if(isset($_SESSION["role"]) && $_SESSION["role"] === "admin")
             {
                 if($route === "dashboard")
@@ -211,11 +212,10 @@ class Router
                     $this->APIFetchController->editUser();
                 }
             }
-            
         }
         else
         {
-            $this->notFoundController->index();
+            $this->notFoundController->index(); // Page 404
         }
     }
 }

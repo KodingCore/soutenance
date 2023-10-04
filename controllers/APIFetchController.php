@@ -1,5 +1,9 @@
 <?php
 
+//********************************
+// Contrôleur pour les requêtes d'API
+//*******************************/
+
 class APIFetchController extends AbstractController
 {
    

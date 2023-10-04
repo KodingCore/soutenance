@@ -1,17 +1,23 @@
 @import '../general/vars.scss';
 
-#shop-container {
-  #main-header {
+#shop-container 
+{
+  #main-header 
+  {
     background-image: url("../../images/backgrounds/shop-background.jpg");
-    #tagline-container {
+    #tagline-container 
+    {
       background-color: rgba(47, 85, 151, 0.9);
-      #tagline {
+      #tagline 
+      {
         color: white;
       }
     }
   }
-  #templates-section {
-    p:first-child {
+  #templates-section 
+  {
+    p:first-child 
+    {
       width: 100%;
     }
     width: 100%;
@@ -19,7 +25,8 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    .template-card {
+    .template-card 
+    {
       width: 280px;
     }
   }

@@ -6,21 +6,21 @@
 .success
 {
   width: 25%;
-  position: absolute;
-  margin: 50vh auto;
+  position: fixed;
+  margin: 0 calc(50vw - 25% / 1.5);
   text-align: center;
   padding: 0.25rem;
   font-size: 0.75rem;
   color: green;
   background-color: white;
   border: solid 3px green;
-  
+  z-index: 3;
 }
 .error
 {
     outline: solid 2px red;
 }
-[id*="error"]//, [class*="error"]
+[id*="error"]
 {
     padding: 0.25rem;
     position: absolute;
@@ -31,7 +31,7 @@
     font-size: 0.75rem;
 }
 
-[id*="error"].content-write//, [class*="error"].content-write
+[id*="error"].content-write
 {
   background: linear-gradient(to bottom, white, white, $light-blue);
 }

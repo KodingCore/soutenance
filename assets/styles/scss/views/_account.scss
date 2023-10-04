@@ -1,7 +1,6 @@
 @import '../general/vars.scss';
 
 #account-container {
-  
   #main-header {
     background-image: url("../../images/backgrounds/account-background.jpg");
     #tagline-container {
@@ -10,6 +9,12 @@
         color: $dark-blue;
       }
     }
+  }
+  #view-requests {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
 }
 
@@ -42,6 +47,7 @@
     }
   
     #view-requests {
+      display: block;
       grid-area: request;
       text-align: center;
       h2

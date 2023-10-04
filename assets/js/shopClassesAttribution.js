@@ -1,3 +1,9 @@
+/***************************************************
+Ce script est chargé dans la page shop
+Il fait appel à checkUserFields.js pour controller 
+les entrées utilisateurs d'enrégistrement de compte
+***************************************************/
+
 window.addEventListener("DOMContentLoaded", function() {
     setClasses();
 

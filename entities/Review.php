@@ -29,6 +29,7 @@ class Review implements JsonSerializable
     public function setSendDate(string $send_date): void { $this->send_date = $send_date; }
     public function setNotation(int $notation): void { $this->notation = $notation; }
 
+    // fonction pour les requetes API
     public function jsonSerialize() {
         return [
             "review_id" => $this->review_id,

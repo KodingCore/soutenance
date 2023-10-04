@@ -15,7 +15,7 @@ html{
 
 .template-card
 {
-    height: 450px;
+    height: 400px;
     width: 68%;
 
     margin: 1rem 0;
@@ -25,12 +25,13 @@ html{
     border-radius: 0 16px 0 16px;
 
     display: grid;
-    grid-template-rows: 15% 60% 15%;
+    grid-template-rows: 10% 53% 15% 10%;
     text-align: center;
     gap: 1rem;
 
     header
     {
+        grid-row: 1 / 2;
         padding: 0;
         border-radius: 0 16px 0 16px;
         background: linear-gradient(to left, $dark-blue, $dark-blue, $light-blue);
@@ -41,20 +42,25 @@ html{
     }
     img
     {
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
+        grid-row: 2 / 3;
     }
 
     img.center-picture:hover 
     {
         animation: imageZoomCenter 0.75s forwards;
+        z-index: 5;
     }
     img.left-picture:hover 
     {
         animation: imageZoomLeft 0.75s forwards;
+        z-index: 5;
     }
     img.right-picture:hover 
     {
         animation: imageZoomRight 0.75s forwards;
+        z-index: 5;
     }
 
     @keyframes imageZoomCenter
@@ -94,11 +100,36 @@ html{
     footer
     {
         position: relative;
+        grid-row: 3 / 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
         margin: 0;
+        padding: 1rem;
         text-align: center;
         font-size: 0.75rem;
     }
+    
 }
+html{
+    #shop-container
+    {
+        .template-card
+        {
+            height: 450px;
+            footer
+            {
+                grid-row: 3 / 4;
+                padding: 0.25rem;
+            }
+            a
+            {
+                grid-row: 4 / 5;
+            }
+        }
+    }
+}
+
 
 .request-card
 {

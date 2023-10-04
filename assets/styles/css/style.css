@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-#top-header {
-  z-index: 2;
-}
 #top-header #header-container {
+  z-index: 4;
   position: fixed;
   width: calc(100% - 32px);
   min-height: 50px;
@@ -63,12 +61,14 @@
   flex-direction: column;
 }
 
-@media screen and (min-width: 768px) { /* TABLETTE */
+@media screen and (min-width: 768px) {
+  /* TABLETTE */
   #top-header #header-container .navbar {
     margin-top: 75px;
   }
 }
-@media screen and (min-width: 1020px) { /* DESKTOP */
+@media screen and (min-width: 1020px) {
+  /* DESKTOP */
   #top-header #header-container {
     flex-direction: row;
     align-items: center;
@@ -291,7 +291,7 @@ form #checkbox-role-dashbaord {
 @media screen and (min-width: 1020px) {
   /* DESKTOP */
   html form {
-    width: 30%;
+    width: 40%;
   }
   html #account_form {
     width: 70%;
@@ -302,18 +302,19 @@ html article p {
 }
 
 .template-card {
-  height: 450px;
+  height: 400px;
   width: 68%;
   margin: 1rem 0;
   padding: 0.5rem;
   border: solid 2px rgb(143, 170, 220);
   border-radius: 0 16px 0 16px;
   display: grid;
-  grid-template-rows: 15% 60% 15%;
+  grid-template-rows: 10% 53% 15% 10%;
   text-align: center;
   gap: 1rem;
 }
 .template-card header {
+  grid-row: 1/2;
   padding: 0;
   border-radius: 0 16px 0 16px;
   background: linear-gradient(to left, rgb(47, 85, 151), rgb(47, 85, 151), rgb(143, 170, 220));
@@ -322,16 +323,21 @@ html article p {
   color: white;
 }
 .template-card img {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  grid-row: 2/3;
 }
 .template-card img.center-picture:hover {
   animation: imageZoomCenter 0.75s forwards;
+  z-index: 5;
 }
 .template-card img.left-picture:hover {
   animation: imageZoomLeft 0.75s forwards;
+  z-index: 5;
 }
 .template-card img.right-picture:hover {
   animation: imageZoomRight 0.75s forwards;
+  z-index: 5;
 }
 @keyframes imageZoomCenter {
   from {
@@ -359,9 +365,25 @@ html article p {
 }
 .template-card footer {
   position: relative;
+  grid-row: 3/5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   margin: 0;
+  padding: 1rem;
   text-align: center;
   font-size: 0.75rem;
+}
+
+html #shop-container .template-card {
+  height: 450px;
+}
+html #shop-container .template-card footer {
+  grid-row: 3/4;
+  padding: 0.25rem;
+}
+html #shop-container .template-card a {
+  grid-row: 4/5;
 }
 
 .request-card {
@@ -586,7 +608,8 @@ html body #about-container #main-header #tagline-container, html body #gnu-conta
     font-size: 2.75vw;
   }
 }
-@media screen and (min-width: 1020px) { /* DESKTOP */
+@media screen and (min-width: 1020px) {
+  /* DESKTOP */
   html body main #main-header {
     height: 360px;
   }
@@ -633,7 +656,7 @@ html body #about-container #main-header #tagline-container, html body #gnu-conta
 }
 #top-footer nav ul a:hover {
   text-decoration: underline;
-  color: rgb(197, 90, 17);
+  color: rgb(255, 150, 81);
 }
 #top-footer nav ul li {
   margin-top: 0.15rem;
@@ -647,21 +670,22 @@ html body #about-container #main-header #tagline-container, html body #gnu-conta
   }
 }
 @media screen and (min-width: 1020px) {
-  /* TABLETTE */
+  /* DESKTOP */
   #top-footer nav ul {
     height: 100px;
   }
 }
 .success {
   width: 25%;
-  position: absolute;
-  margin: 50vh auto;
+  position: fixed;
+  margin: 0 calc(50vw - 16.6666666667%);
   text-align: center;
   padding: 0.25rem;
   font-size: 0.75rem;
   color: green;
   background-color: white;
   border: solid 3px green;
+  z-index: 3;
 }
 
 .error {
@@ -691,10 +715,9 @@ html body #about-container #main-header #tagline-container, html body #gnu-conta
   background-color: white;
   border-top: 3px solid rgb(47, 85, 151);
   display: flex;
-  justify-content: space-between; /*positionner les DIV enfants*/
-  align-items: center; /*centrer verticalement*/
+  justify-content: space-between;
+  align-items: center;
   padding: 1.5rem;
-  opacity: 1; /*modification de cette valeur en JavaScript*/
   transition: 0.5s;
 }
 .cookies .cookies-btn {
@@ -780,8 +803,8 @@ html h2 {
 }
 html h3 {
   margin: 0.5rem auto;
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: semi-bold;
 }
 html h4 {
   font-size: 1.15rem;
@@ -802,7 +825,7 @@ html footer {
     background-color: #ccc;
   }
 }
-@media screen and (min-width: 1020px) { /* DESKTOP */
+@media screen and (min-width: 1020px) {
   :root {
     font-size: 22px;
   }
@@ -818,6 +841,9 @@ html footer {
 }
 #homepage-container #main-header #tagline-container #tagline {
   color: white;
+}
+#homepage-container #presentation p {
+  margin-top: 1.5rem;
 }
 #homepage-container #templates-section {
   width: 100%;
@@ -901,6 +927,12 @@ html footer {
 #account-container #main-header #tagline-container #tagline {
   color: rgb(47, 85, 151);
 }
+#account-container #view-requests {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 @media screen and (min-width: 768px) {
   /* TABLETTE */
@@ -923,6 +955,7 @@ html footer {
     margin-left: 0;
   }
   #account-container #view-requests {
+    display: block;
     grid-area: request;
     text-align: center;
   }
@@ -976,16 +1009,14 @@ html footer {
   border: solid 2px rgb(47, 85, 151);
   padding: 1rem;
 }
-#dashboard-container #control-section table tr:nth-child(even) {
-  background-color: rgb(143, 170, 220);
+#dashboard-container #control-section table tr:nth-child(odd) {
+  background-color: rgba(143, 170, 220, 0.5);
 }
 #dashboard-container #control-section table td {
   padding-left: 0.5rem;
   border-bottom: solid 1px black;
 }
-#dashboard-container #control-section table tr,
-#dashboard-container #control-section table td,
-#dashboard-container #control-section table th {
+#dashboard-container #control-section table tr, #dashboard-container #control-section table td, #dashboard-container #control-section table th {
   height: 1.25rem;
   overflow: hidden;
   white-space: nowrap;

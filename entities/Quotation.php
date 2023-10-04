@@ -37,7 +37,8 @@ class Quotation implements JsonSerializable
     public function setContent(string $content): void { $this->content = $content; }
     public function setExpirationDate(string $expiration_date): void { $this->expiration_date = $expiration_date; }
     public function setPrice(): int { return $this->price; }
-
+    
+    // fonction pour les requetes API
     public function jsonSerialize() {
         return [
             "quotation_id" => $this->quotation_id,

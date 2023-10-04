@@ -1,15 +1,20 @@
+/************************************************************/
+/* Ce script permet le dynamisme des étoiles pour
+/* La notation dans le formulaire de reviews sur la homepage
+/************************************************************/
+
 window.addEventListener("DOMContentLoaded", function(){
     
     const makeReviewElement = document.getElementById("make-review-section");
     if(makeReviewElement)
     {
+        //* Récupération des éléments du DOM
         const starsElements = makeReviewElement.getElementsByClassName("fa-star");
         const stars = Array.from(starsElements);
-        
         const rating = document.getElementById("rating");
         
+        //* Valeur de la notation
         let value = 0;
-    
         
         //* Pour toutes les étoiles
         for (let i = 0; i < stars.length; i++)

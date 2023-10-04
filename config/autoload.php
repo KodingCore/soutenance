@@ -1,5 +1,6 @@
 <?php
 
+// require des entities
 require "entities/Appointment.php";
 require "entities/Category.php";
 require "entities/Info.php";
@@ -10,6 +11,7 @@ require "entities/Template.php";
 require "entities/User.php";
 require "entities/Request.php";
 
+// require des managers
 require "managers/AbstractManager.php";
 require "managers/UserManager.php";
 require "managers/InfoManager.php";
@@ -21,6 +23,7 @@ require "managers/AppointmentManager.php";
 require "managers/QuotationManager.php";
 require "managers/RequestManager.php";
 
+// require des controllers
 require "controllers/AbstractController.php";
 require "controllers/HomepageController.php";
 require "controllers/ShopController.php";
@@ -33,4 +36,5 @@ require "controllers/NotFoundController.php";
 require "controllers/GnuController.php";
 require "controllers/AboutController.php";
 
+// require du router
 require "services/Router.php";

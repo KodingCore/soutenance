@@ -1,27 +1,41 @@
 @import '../general/vars.scss';
 
-#homepage-container {
-  #main-header {
+#homepage-container 
+{
+  #main-header 
+  {
     background-image: url("../../images/backgrounds/homepage-background.jpg");
-    #tagline-container {
+    #tagline-container 
+    {
       background-color: rgba(47, 85, 151, 0.9);
-      #tagline {
+      #tagline 
+      {
         color: white;
       }
     }
   }
-  #templates-section {
+  #presentation
+  {
+    p
+    {
+      margin-top: 1.5rem;
+    }
+  }
+  #templates-section 
+  {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    .template-card {
+    .template-card 
+    {
       width: 280px;
     }
   }
 
-  #reviews-section {
+  #reviews-section 
+  {
     width: 100%;
     display: flex;
     justify-content: center;

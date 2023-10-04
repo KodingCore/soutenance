@@ -10,10 +10,9 @@
     background-color: white;
     border-top: 3px solid $dark-blue;
     display: flex;
-    justify-content: space-between; /*positionner les DIV enfants*/
-    align-items: center; /*centrer verticalement*/
+    justify-content: space-between;
+    align-items: center;
     padding: 1.5rem;
-    opacity: 1; /*modification de cette valeur en JavaScript*/
     transition: 0.5s;
     
     .cookies-btn

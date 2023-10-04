@@ -8,8 +8,10 @@
     font-size: 18px;
 }
 
-html{
+html
+{
     font-family: 'Roboto', sans-serif;
+    
     h1,h2,h3 
     {
         font-family: 'Kanit', sans-serif;
@@ -28,15 +30,13 @@ html{
     p
     {
         margin: 0 6%;
-        //text-align: center;
         font-size: 0.8rem;
     }
     
-    
-    
     ul
     {
-        li{
+        li
+        {
             font-size: 0.75rem;
         }
     }
@@ -62,8 +62,8 @@ html{
     h3
     {
         margin: 0.5rem auto;
-        font-size: 1.1rem;
-        font-weight: bold;
+        font-size: 1rem;
+        font-weight: semi-bold;
     }
     h4  
     {
@@ -82,7 +82,8 @@ html{
 
 }
 
-@media screen and (min-width: $tabl-brkpnt){ //TABLETTE
+@media screen and (min-width: $tabl-brkpnt){ 
+    //TABLETTE
     :root
     {
         font-size: 20px;
@@ -93,7 +94,8 @@ html{
     }
   }
 
-  @media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
+  @media screen and (min-width: $desk-brkpnt){ 
+    //DESKTOP
     :root
     {
         font-size: 22px;

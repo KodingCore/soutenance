@@ -22,6 +22,7 @@ class Info implements JsonSerializable
         $this->city = $city;
     }
 
+    // Getters
     public function getInfoId(): ? int { return $this->info_id; }
     public function getUserId(): ? int { return $this->user_id; }
     public function getFirstName(): ? string { return $this->first_name; }
@@ -30,7 +31,8 @@ class Info implements JsonSerializable
     public function getAddress(): ? string { return $this->address; }
     public function getZip(): ? string { return $this->zip; }
     public function getCity(): ? string { return $this->city; }
-
+    
+    // Setters
     public function setInfoId(int $info_id): void { $this->info_id = $info_id; }
     public function setUserId(int $user_id): void { $this->user_id = $user_id; }
     public function setFirstName(string $first_name): void { $this->first_name = $first_name; }
@@ -39,7 +41,8 @@ class Info implements JsonSerializable
     public function setAddress(string $address): void { $this->address = $address; }
     public function setZip(string $zip): void { $this->zip = $zip; }
     public function setCity(string $city): void { $this->city = $city; }
-
+    
+    // fonction pour les requetes API
     public function jsonSerialize() {
         return [
             "info_id" => $this->info_id,

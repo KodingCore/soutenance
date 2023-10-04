@@ -79,10 +79,15 @@ html
 }
 
 
-@media screen and (min-width: $tabl-brkpnt){ //TABLETTE
-  html {
-    body{
-      main{
+@media screen and (min-width: $tabl-brkpnt)
+{ 
+  //TABLETTE
+  html 
+  {
+    body
+    {
+      main
+      {
         #main-header
         {
           height: 250px;
@@ -101,10 +106,14 @@ html
   }
 }
 
-@media screen and (min-width: $desk-brkpnt){ /* DESKTOP */
-  html {
-    body{
-      main{
+@media screen and (min-width: $desk-brkpnt){ 
+  /* DESKTOP */
+  html 
+  {
+    body
+    {
+      main
+      {
         #main-header
         {
           height: 360px;

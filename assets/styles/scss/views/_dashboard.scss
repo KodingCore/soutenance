@@ -1,21 +1,27 @@
 @import '../general/vars.scss';
 
-#dashboard-container {
-  #main-header {
+#dashboard-container 
+{
+  #main-header 
+  {
     background-image: url("../../images/backgrounds/dashboard-background.jpg");
-    #tagline-container {
+    #tagline-container 
+    {
       background-color: rgba(255, 255, 255, 0.9);
-      #tagline {
+      #tagline 
+      {
         color: $dark-blue;
       }
     }
   }
-  #search-section {
+  #search-section 
+  {
     display: grid;
     grid-template-columns: 90vw;
     grid-template-rows: 5vh 5vh;
     
-    fieldset:first-child {
+    fieldset:first-child 
+    {
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -26,62 +32,70 @@
         width: 75%;
       }
     }
-    fieldset:last-child {
+    fieldset:last-child 
+    {
       display: flex;
       align-items: center;
       justify-content: space-around;
       border-radius: 0 5px 0 5px;
       border-color: $dark-blue;
       width: 95%;
-      input {
+      input 
+      {
         width: 75%;
       }
     }
   }
-  #control-section {
+  #control-section 
+  {
     overflow-x: auto;
     width: 100%;
 
-    table {
+    table 
+    {
       margin: 0 auto;
       border-radius: 0 16px 0 16px;
       border: solid 2px $dark-blue;
 
       padding: 1rem;
-      tr:nth-child(even) {
-        background-color: $light-blue;
+      tr:nth-child(odd) 
+      {
+        background-color: rgba(143,170,220,0.5);
       }
 
-      td {
-        // max-width: 3rem;
+      td 
+      {
         padding-left: 0.5rem;
         border-bottom: solid 1px black;
       }
-      tr,
-      td,
-      th {
+      tr,td,th 
+      {
         height: 1.25rem;
         overflow: hidden;
         white-space: nowrap;
       }
-      .col-id {
-        min-width: 0; // max-width: 2.5rem;
+      .col-id 
+      {
+        min-width: 0;
       }
     }
   }
 }
 
-@media screen and (min-width: $tabl-brkpnt) {
+@media screen and (min-width: $tabl-brkpnt) 
+{
   /* TABLETTE */
     #search-section 
     {
       display: flex !important;
       justify-content: space-evenly;
       
-      fieldset:first-child {
+      fieldset:first-child 
+      {
         width: 25% !important;
       }
-      fieldset:last-child {
+      fieldset:last-child 
+      {
         width: 60% !important;
       }
     }

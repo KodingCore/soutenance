@@ -1,3 +1,8 @@
+/********************************************************************
+Ce script est chargé dans la page account
+Il fait appel aux deux script de vérifications d'entrées utilisateurs
+*********************************************************************/
+
 import { checkUserFields } from './checkUserFields.js';
 import { checkInfoFields } from './checkInfoFields.js';
 
@@ -7,5 +12,7 @@ window.addEventListener("DOMContentLoaded", function(){
     
     checkUserFields(form);
     checkInfoFields(form);
+    
+})orm);
     
 })

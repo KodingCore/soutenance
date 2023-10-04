@@ -43,7 +43,7 @@ class HomepageController extends AbstractController
             exit;
         }
         if(isset($_GET["message"], $_GET["field"]))
-        {
+        {   
             $message = $_GET["message"];
             $field = $_GET["field"];
             $this->render("views/homepage.phtml", ["message" => $message, "field" => $field, "users" => $users, "templates" => $templates, "reviews" => $reviews]);
@@ -69,6 +69,6 @@ class HomepageController extends AbstractController
             $this->reviewManager->insertReview($review);
             $this->makeRedirection = true;
         }
-        $this->index();
+        $this->index("");
     }
 }
