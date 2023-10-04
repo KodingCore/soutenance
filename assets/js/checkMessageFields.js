@@ -19,9 +19,6 @@ function checkMessageFields(form)
     //* Initialisation des elements d'affichages d'erreur
     const error_subject = document.getElementById("error_subject");
     const error_content = document.getElementById("error_content");
-    
-    console.log(form);
-    console.log(error_content);
 
     //* Initialisation des regex
     const subjectRegex = new RegExp(`^[a-zA-Z0-9.,!?&;:()<>\"'\\s]{4,50}$`);

@@ -13,6 +13,4 @@ window.addEventListener("DOMContentLoaded", function(){
     checkUserFields(form);
     checkInfoFields(form);
     
-})orm);
-    
-})
+});

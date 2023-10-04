@@ -45,7 +45,6 @@ function initDashboard() {
 //** ------------------------------------------------------ */
 function fetchingControlDatas(className) {
     const controlSection = document.getElementById("control-section");
-    console.log(`index.php?route=${className}-link`);
     fetch(`index.php?route=${className}-link`)
         .then(response =>
             response.json()
@@ -617,7 +616,6 @@ function addEditData(className, inputs, attributsNames, id) //* Si l'id  est dé
         }
         i++;
     }
-    console.log(stringRoute);
     fetch(stringRoute)
         .then(function() {
             fetchingControlDatas(className);

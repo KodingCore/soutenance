@@ -125,7 +125,6 @@ function succesDown()
 {
     setTimeout(function() {
         const succesElement = document.getElementsByClassName("success")[0];
-        console.log(succesElement);
         if(succesElement)
         {
             succesElement.remove();
