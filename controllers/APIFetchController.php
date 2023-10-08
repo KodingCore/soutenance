@@ -198,8 +198,6 @@ class APIFetchController extends AbstractController
     public function deleteTemplateById()
     {
         $id = (int)$_GET["id"];
-        $this->quotationManager->deleteQuotationByTemplateId($id);
-        $this->reviewManager->deleteReviewByTemplateId($id);
         $this->templateManager->deleteTemplateByTemplateId($id);
     }
 
